@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".GestionDeRutas"
+            android:label="@string/title_activity_gestion_de_rutas" >
+        </activity>
     </application>
 
 </manifest>
