@@ -11,6 +11,15 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example"></string>
-    <string name="title_activity_gestion_de_rutas">GestionDeRutas</string>
 
+    <!-- JD:  Strings de Gestion de rutas -->
+    <string name="title_activity_gestion_de_rutas">GestionDeRutas</string>
+    <string name="Spinner">Vehiculo</string>
+    <string name="Origen">Origen</string>
+    <string name="Destino">Destino</string>
+    <string name="Fecha">Fecha</string>
+    <string name="textoOrigen">Introduce el Origen</string>
+    <string name="textoDestino">Introduce el Destino</string>
+    <string name="formatoFecha">dd/mm/yyyy</string>
+    <string name="Hora">Hora</string>
 </resources>

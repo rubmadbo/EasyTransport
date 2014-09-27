@@ -1,5 +1,6 @@
 package com.example.ruben.easytransport;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -84,6 +85,7 @@ public class NavigationDrawerFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         // Indicate that this fragment would like to influence the set of actions in the action bar.
         setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -199,6 +201,12 @@ public class NavigationDrawerFragment extends Fragment {
         if (mCallbacks != null) {
             mCallbacks.onNavigationDrawerItemSelected(position);
         }
+        //JD: Aqui he metido un IF para que si es el 0 el que esta selecionado me abra gestion de rutas, pero desaparece el menu solo si le das a atras va
+            //si descomentas el IF se puede ejecutar la activity de gestionar rutas (falta recojer los valores del .java)
+        /*if(mCurrentSelectedPosition == 0){
+            Intent in = new Intent(NavigationDrawerFragment.this.getActivity(),GestionDeRutas.class);
+           startActivity(in);
+       }*/
     }
 
     @Override

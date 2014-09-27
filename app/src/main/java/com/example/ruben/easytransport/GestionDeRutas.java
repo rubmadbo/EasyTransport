@@ -4,14 +4,24 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 
 public class GestionDeRutas extends ActionBarActivity {
-
+    Spinner lista;
+    String[] datos= {"Ferrari","Coupe","Lamborginhi"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gestion_de_rutas);
+
+        lista= (Spinner)findViewById(R.id.lista1);
+        ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,datos);
+        lista.setAdapter(adapt);
+
+
+
     }
 
 
