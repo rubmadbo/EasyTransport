@@ -1,22 +1,18 @@
 package com.example.ruben.easytransport;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 
 public class MenuPrincipal extends ActionBarActivity
@@ -60,6 +56,10 @@ public class MenuPrincipal extends ActionBarActivity
         switch (number) {
             case 1:
                 mTitle = getString(R.string.title_section1);
+                Intent i = new Intent(this,GestionDeRutas.class);
+                startActivity(i);
+
+
                 break;
             case 2:
                 mTitle = getString(R.string.title_section2);
@@ -131,8 +131,12 @@ public class MenuPrincipal extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_menu_principal, container, false);
+            //Adrian: demomento hago que llame a la actividad por default la de gestion de rutas...
+            View rootView = inflater.inflate(R.layout.activity_gestion_de_rutas, container, false);
             return rootView;
+            /*
+            *  Intent i = new Intent(this,GestionDeRutas.class);
+                startActivity(i);*/
         }
 
         @Override
