@@ -13,7 +13,8 @@
 
   <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+      android:id="@+id/scrollView">
 
    <LinearLayout
             android:layout_width="fill_parent"
@@ -31,7 +32,7 @@
         android:layout_below="@+id/textView"
         android:layout_alignLeft="@+id/textView"
         android:layout_marginTop="13dp"
-        android:background="#ffffffff" />
+         />
     <TextView
         android:text="@string/Origen"
         android:layout_width="wrap_content"
@@ -88,11 +89,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/datePicker"
-        android:layout_marginTop="15dp"
         android:spinnersShown="true"
         android:calendarViewShown="false"
-        android:layout_below="@+id/textFecha"
-        android:clickable="true" />
+        android:clickable="true"
+        android:scaleY="0.8"
+        android:scaleX="0.8"/>
 
     <TextView
         android:text="@string/Hora"
@@ -104,6 +105,46 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-</LinearLayout>
+       <TimePicker
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/timePicker"
+
+           />
+
+       <TextView
+           android:text="@string/Comentario"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:id="@+id/textComentario"
+           android:layout_marginTop="15dp"
+           android:layout_below="@+id/timePicker"
+           android:layout_alignParentLeft="true"
+           android:layout_alignParentStart="true" />
+
+       <EditText
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:id="@+id/editTComentario"
+           android:layout_below="@+id/textComentario"
+           android:layout_alignParentLeft="true"
+           android:layout_alignParentStart="true"
+           android:layout_marginTop="15dp"
+           android:background="#ffffffff" />
+
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Añadir ruta"
+           android:layout_below="@+id/editTComentario"
+           android:id="@+id/button"
+           android:layout_marginTop="15dp"
+           android:layout_alignParentTop="true"
+           android:layout_gravity="center_horizontal"
+           android:onClick="buttonOnClick" />
+
+   </LinearLayout>
 </ScrollView>
+
+
 </RelativeLayout>

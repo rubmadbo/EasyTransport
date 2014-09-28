@@ -22,4 +22,5 @@
     <string name="textoDestino">Introduce el Destino</string>
     <string name="formatoFecha">dd/mm/yyyy</string>
     <string name="Hora">Hora</string>
+    <string name="Comentario">Comentarios adicionales</string>
 </resources>

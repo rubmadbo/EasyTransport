@@ -1,16 +1,39 @@
 package com.example.ruben.easytransport;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TimePicker;
+
+import java.util.Date;
 
 
 public class GestionDeRutas extends ActionBarActivity {
-    Spinner lista;
-    String[] datos= {"Ferrari","Coupe","Lamborginhi"};
+    private Spinner lista;
+    private String[] datos= {"Ferrari","Coupe","Lamborginhi"};
+    private EditText origen;
+    private EditText destino;
+    private DatePicker dP;
+    private TimePicker tP;
+
+    /*private int year;
+    private int mes;
+    private int dia;
+    private int hora;
+    private String d;
+    private String o;
+    private int minutos;
+    private String vehiculo;*/
+    EditText comentario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,10 +43,37 @@ public class GestionDeRutas extends ActionBarActivity {
         ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,datos);
         lista.setAdapter(adapt);
 
-
-
     }
 
+    public void buttonOnClick(View v){
+
+        Button btAceptar = (Button) v;
+        ((Button) v).setText("Clicked");
+
+        String vehiculo = datos [lista.getSelectedItemPosition()];
+
+        destino = (EditText)findViewById(R.id.editTDestino);
+        origen = (EditText)findViewById(R.id.editTOrigen);
+        String d = destino.getText().toString();
+        String o = origen.getText().toString();
+
+        dP= (DatePicker)findViewById(R.id.datePicker);
+        int mes = dP.getMonth();
+        int year= dP.getYear();
+        int dia = dP.getDayOfMonth();
+
+        tP = (TimePicker)findViewById(R.id.timePicker);
+        int hora = tP.getCurrentHour();
+        int minutos =tP.getCurrentMinute();
+
+        comentario =(EditText)findViewById(R.id.editTComentario);
+        String com = comentario.getText().toString();
+        //simplemente para saber si ha cogido bien las variables
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage(" Vehiculo: "+vehiculo+" Origen: "+o+" Destino: "+d+" Fecha: "+dia+"/"+mes+"/"+year+" Hora: "+hora+":"+minutos+" Comentario: "+com);
+        dialog.setCancelable(true);
+        dialog.show();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
