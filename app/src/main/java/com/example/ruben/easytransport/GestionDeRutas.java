@@ -2,6 +2,7 @@ package com.example.ruben.easytransport;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -46,6 +47,7 @@ public class GestionDeRutas extends ActionBarActivity {
     }
 
     public void buttonOnClick(View v){
+
 
         Button btAceptar = (Button) v;
         ((Button) v).setText("Clicked");
