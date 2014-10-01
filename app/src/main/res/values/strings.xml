@@ -23,4 +23,9 @@
     <string name="formatoFecha">dd/mm/yyyy</string>
     <string name="Hora">Hora</string>
     <string name="Comentario">Comentarios adicionales</string>
+    <string name="title_activity_vista_rutas">vistaRutas</string>
+
+    <!-- Fran: Strings de VistaRutas -->
+    <string name="Anyadir">Añadir ruta</string>
+
 </resources>
