@@ -27,5 +27,6 @@
 
     <!-- Fran: Strings de VistaRutas -->
     <string name="Anyadir">Añadir ruta</string>
+    <string name="title_activity_anadir_acuerdo">anadir_acuerdo</string>
 
 </resources>

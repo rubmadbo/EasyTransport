@@ -66,6 +66,8 @@ public class MenuPrincipal extends ActionBarActivity
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
+                Intent j = new Intent(this,anadir_acuerdo.class);
+                startActivity(j);
                 break;
         }
     }

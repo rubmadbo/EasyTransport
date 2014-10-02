@@ -24,6 +24,10 @@
             android:name=".VistaRutas"
             android:label="@string/title_activity_vista_rutas" >
         </activity>
+        <activity
+            android:name=".anadir_acuerdo"
+            android:label="@string/title_activity_anadir_acuerdo" >
+        </activity>
     </application>
 
 </manifest>
