@@ -1,18 +1,16 @@
 package com.example.ruben.easytransport;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+
 
 //cambio
 public class MenuPrincipal extends ActionBarActivity
@@ -47,8 +45,24 @@ public class MenuPrincipal extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = null;
+        switch (position){
+            case 0:
+                //Gestión de rutas (VistaRutas)
+                fragment = new VistaRutas();
+                break;
+            case 1:
+                //Listado de rutas
+                fragment = new VistaRutas();
+                break;
+            case 2:
+                //Añadir acuerdo
+                fragment = new AnadirAcuerdo();
+                break;
+
+        }
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, fragment)
                 .commit();
     }
 
@@ -56,18 +70,12 @@ public class MenuPrincipal extends ActionBarActivity
         switch (number) {
             case 1:
                 mTitle = getString(R.string.title_section1);
-                Intent i = new Intent(this,VistaRutas.class);
-                startActivity(i);
-
-
                 break;
             case 2:
                 mTitle = getString(R.string.title_section2);
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
-                Intent j = new Intent(this,anadir_acuerdo.class);
-                startActivity(j);
                 break;
         }
     }
@@ -108,45 +116,6 @@ public class MenuPrincipal extends ActionBarActivity
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            //Adrian: demomento hago que llame a la actividad por default la de gestion de rutas...
-            View rootView = inflater.inflate(R.layout.activity_gestion_de_rutas, container, false);
-            return rootView;
-            /*
-            *  Intent i = new Intent(this,GestionDeRutas.class);
-                startActivity(i);*/
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MenuPrincipal) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
-    }
 
 }

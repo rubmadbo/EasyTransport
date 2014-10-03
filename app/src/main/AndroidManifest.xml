@@ -20,14 +20,14 @@
             android:name=".GestionDeRutas"
             android:label="@string/title_activity_gestion_de_rutas" >
         </activity>
-        <activity
+        <fragment
             android:name=".VistaRutas"
             android:label="@string/title_activity_vista_rutas" >
-        </activity>
-        <activity
-            android:name=".anadir_acuerdo"
+        </fragment>
+        <fragment
+            android:name="AnadirAcuerdo"
             android:label="@string/title_activity_anadir_acuerdo" >
-        </activity>
+        </fragment>
     </application>
 
 </manifest>
