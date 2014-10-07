@@ -193,7 +193,7 @@
             android:textColor="#610B0B"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:background="#F5A9A9"
+            android:background="@drawable/border_button"
             />
 
         <EditText
