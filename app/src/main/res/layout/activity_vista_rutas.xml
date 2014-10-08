@@ -24,7 +24,8 @@
         android:layout_below="@+id/buttonAnyadir"
         android:stretchColumns="*"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:id="@+id/tablaLayout">
 
         <TableRow
             android:layout_width="fill_parent"

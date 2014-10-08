@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TableLayout;
 
 
 public class VistaRutas extends Fragment {
@@ -16,6 +17,7 @@ public class VistaRutas extends Fragment {
 
         View rootView = inflater.inflate(R.layout.activity_vista_rutas, container, false);
         Button boton = (Button) rootView.findViewById(R.id.buttonAnyadir);
+
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(VistaRutas.this.getActivity(),GestionDeRutas.class);
