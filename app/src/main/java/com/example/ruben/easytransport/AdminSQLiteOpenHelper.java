@@ -16,17 +16,20 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL("create table Acuerdo(idAcuerdo integer primary key, usuarioTransportista integer, " +
-                "usuarioCliente integer, ruta integer, precio integer, comentario text)");
+                "usuarioCliente integer, ruta integer, precio integer, comentario text, FOREIGN KEY(usuarioTransportista) " +
+                "REFERENCES Usuarios(DNI),FOREIGN KEY(usuarioCliente) REFERENCES Usuarios(DNI), " +
+                "FOREIGN KEY(ruta) REFERENCES Ruta(idRuta))");
 
         db.execSQL("create table Ruta(idRuta integer primary key, inicio text, final text, horaInicio text, horaFinal text," +
-                "fecha text, comentarios text, transportista integer)");
+                "fecha text, comentarios text, transportista integer, FOREIGN KEY(transportista) REFERENCES Usuarios(DNI))");
 
         db.execSQL("create table TipoUsuario(idTipoUsuario integer primary key, nombre text, descripcion text)");
 
-        db.execSQL("create table Usuarios(DNI integer primary key, nombre text, apellidos text, direccion text, telefono integer, " +
-                "alias text, contrasenya text, tipoUsuario integer, vehiculo integer)");
-
         db.execSQL("create table Vehiculo(matricula text primary key, marca text, modelo text)");
+
+        db.execSQL("create table Usuarios(DNI integer primary key, nombre text, apellidos text, direccion text, telefono integer, " +
+                "alias text, contrasenya text, tipoUsuario integer, vehiculo integer, FOREIGN KEY(tipoUsuario) " +
+                "REFERENCES TipoUsuario(idTipoUsuario),FOREIGN KEY(vehiculo) REFERENCES Vehiculo(matricula))");
     }
 
     //borrar la tabla y crear la nueva tabla
@@ -39,16 +42,19 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists Vehiculo");
 
         db.execSQL("create table Acuerdo(idAcuerdo integer primary key, usuarioTransportista integer, " +
-                "usuarioCliente integer, ruta integer, precio integer, comentario text)");
+                "usuarioCliente integer, ruta integer, precio integer, comentario text, FOREIGN KEY(usuarioTransportista) " +
+                "REFERENCES Usuarios(DNI),FOREIGN KEY(usuarioCliente) REFERENCES Usuarios(DNI), " +
+                "FOREIGN KEY(ruta) REFERENCES Ruta(idRuta))");
 
         db.execSQL("create table Ruta(idRuta integer primary key, inicio text, final text, horaInicio text, horaFinal text," +
-                "fecha text, comentarios text, transportista integer)");
+                "fecha text, comentarios text, transportista integer, FOREIGN KEY(transportista) REFERENCES Usuarios(DNI))");
 
         db.execSQL("create table TipoUsuario(idTipoUsuario integer primary key, nombre text, descripcion text)");
 
-        db.execSQL("create table Usuarios(DNI integer primary key, nombre text, apellidos text, direccion text, telefono integer, " +
-                "alias text, contrasenya text, tipoUsuario integer, vehiculo integer)");
-
         db.execSQL("create table Vehiculo(matricula text primary key, marca text, modelo text)");
+
+        db.execSQL("create table Usuarios(DNI integer primary key, nombre text, apellidos text, direccion text, telefono integer, " +
+                "alias text, contrasenya text, tipoUsuario integer, vehiculo integer, FOREIGN KEY(tipoUsuario) " +
+                "REFERENCES TipoUsuario(idTipoUsuario),FOREIGN KEY(vehiculo) REFERENCES Vehiculo(matricula))");
     }
 }
