@@ -18,7 +18,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL("create table Acuerdo(idAcuerdo integer primary key, usuarioTransportista integer, " +
                 "usuarioCliente integer, ruta integer, precio integer, comentario text)");
 
-        db.execSQL("create table Ruta(idRuta integer primary key, inicio text, final text, horaInicio text, horaFinal text" +
+        db.execSQL("create table Ruta(idRuta integer primary key, inicio text, final text, horaInicio text, horaFinal text," +
                 "fecha text, comentarios text, transportista integer)");
 
         db.execSQL("create table TipoUsuario(idTipoUsuario integer primary key, nombre text, descripcion text)");
@@ -41,7 +41,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL("create table Acuerdo(idAcuerdo integer primary key, usuarioTransportista integer, " +
                 "usuarioCliente integer, ruta integer, precio integer, comentario text)");
 
-        db.execSQL("create table Ruta(idRuta integer primary key, inicio text, final text, horaInicio text, horaFinal text" +
+        db.execSQL("create table Ruta(idRuta integer primary key, inicio text, final text, horaInicio text, horaFinal text," +
                 "fecha text, comentarios text, transportista integer)");
 
         db.execSQL("create table TipoUsuario(idTipoUsuario integer primary key, nombre text, descripcion text)");
