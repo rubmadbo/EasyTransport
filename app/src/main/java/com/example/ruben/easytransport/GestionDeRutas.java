@@ -1,28 +1,28 @@
 package com.example.ruben.easytransport;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 
 public class GestionDeRutas extends ActionBarActivity {
     private Spinner lista;
     private String[] datos= {"Ferrari","Coupe","Lamborginhi"};
+    private ArrayList<String> listaVehiculos;
     private EditText origen;
     private EditText destino;
     private DatePicker dP;
@@ -45,7 +45,27 @@ public class GestionDeRutas extends ActionBarActivity {
         lista= (Spinner)findViewById(R.id.lista1);
         ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,datos);
         lista.setAdapter(adapt);
+        /*try {
+            System.out.println("Estoy al inicio del try");
 
+            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "", null, 1);
+            SQLiteDatabase bd = admin.getWritableDatabase();
+
+            System.out.println("Estoy al inicio del try.2");
+
+            Cursor fila = bd.rawQuery("select * from Vehiculo", null);
+            lista = (Spinner) findViewById(R.id.lista1);
+
+            ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaVehiculos);
+            lista.setAdapter(adapt);
+
+            while (fila.moveToNext()) {
+                listaVehiculos.add(fila.getString(1) + " " + fila.getString(2));
+            }
+        }catch (Exception e){
+            Toast.makeText(this, "Aaaaaaaaaaaaaaaaaaaaaaaaaaaaalgo falla",
+                    Toast.LENGTH_SHORT).show();
+        }*/
     }
 
     public void buttonOnClick(View v){
