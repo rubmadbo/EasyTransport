@@ -32,27 +32,11 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
                 "alias text, contrasenya text, tipoUsuario integer, vehiculo integer, FOREIGN KEY(tipoUsuario) " +
                 "REFERENCES TipoUsuario(idTipoUsuario),FOREIGN KEY(vehiculo) REFERENCES Vehiculo(matricula))");
 
-        db = getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("matricula", "1122FFF");
-        values.put("marca", "Opel");
-        values.put("modelo", "Astra");
-        db.insert("Vehiculo", null, values);
 
-        values.put("matricula", "2233HHH");
-        values.put("marca", "Seat");
-        values.put("modelo", "Panda");
-        db.insert("Vehiculo", null, values);
-
-        values.put("matricula", "3344ZZZ");
-        values.put("marca", "Ford");
-        values.put("modelo", "Fiesta");
-        db.insert("Vehiculo", null, values);
-
-        values.put("matricula", "4455GHQ");
-        values.put("marca", "Seat");
-        values.put("modelo", "Ibiza");
-        db.insert("Vehiculo", null, values);
+        db.execSQL("insert into Vehiculo values('1122FFF','Opel','Astra')");
+        db.execSQL("insert into Vehiculo values('2233HHH','Seat','Panda')");
+        db.execSQL("insert into Vehiculo values('3344ZZZ','Seat','Ibiza')");
+        db.execSQL("insert into Vehiculo values('4455GHQ','Ford','Fiesta')");
 
     }
 

@@ -51,12 +51,13 @@ public class GestionDeRutas extends ActionBarActivity {
             SQLiteDatabase bd = admin.getWritableDatabase();
             spinner = (Spinner) findViewById(R.id.lista1);
             Cursor consulta = bd.rawQuery("select * from Vehiculo", null);
+
             while (consulta.moveToNext()) {
-                listaVehiculos.add(consulta.getString(1) + " " + consulta.getString(2));
-                System.out.println("El del arrayList " + listaVehiculos.get(0));
+                System.out.println("Elementos de la base de datos -> " + consulta.getString(1) + " " + consulta.getString(2));
+                //listaVehiculos.add(consulta.getString(1) + " " + consulta.getString(2));
             }
-            ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaVehiculos);
-            spinner.setAdapter(adapt);
+            //ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaVehiculos);
+            //spinner.setAdapter(adapt);
 
         }catch (Exception e){
             System.out.println("MENSAJE DE ERROR ----------------------------------------> ");
