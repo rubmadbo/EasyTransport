@@ -24,7 +24,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
                 "usuarioCliente integer, ruta integer, precio integer, comentario text, FOREIGN KEY(usuarioTransportista) " +
                 "REFERENCES Usuarios(DNI),FOREIGN KEY(usuarioCliente) REFERENCES Usuarios(DNI), " +
                 "FOREIGN KEY(ruta) REFERENCES Ruta(idRuta))");
-
+//las horas y fechas en text? o cambiamos formato
         db.execSQL("create table Ruta(idRuta integer primary key, inicio text, final text, horaInicio text, horaFinal text," +
                 "fecha text, comentarios text, transportista integer, FOREIGN KEY(transportista) REFERENCES Usuarios(DNI))");
 
@@ -70,6 +70,8 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
                 "alias text, contrasenya text, tipoUsuario integer, vehiculo integer, FOREIGN KEY(tipoUsuario) " +
                 "REFERENCES TipoUsuario(idTipoUsuario),FOREIGN KEY(vehiculo) REFERENCES Vehiculo(matricula))");
 
+        //JD: habría que hacer db.close(); ??¿
+
     }
     public List<String> getVehiculos(){
 
@@ -82,12 +84,34 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 vehiculos.add(cursor.getString(1)+ " " +cursor.getString(2));
-                System.out.println("Elementos de la base de datos -> " + cursor.getString(1)+" "+cursor.getString(2));
+                //System.out.println("Elementos de la base de datos -> " + cursor.getString(1)+" "+cursor.getString(2));
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
         return vehiculos;
+    }
+
+    //JD: MEJORABLE SI ME TRAIGO UN OBJETO TIPO RUTA--metodo que devuelta una lista, donde cada elemento contiene una String con todos los datos de la ruta separados por un espaccio
+
+    public List<String> getRutas(){
+
+        List<String> rutas = new ArrayList<String>();
+
+        String selectQuery = "SELECT * FROM Ruta";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        //se mete todos los datos de cada columna en cada posicion de la lista como String muy a piñon
+        if (cursor.moveToFirst()) {
+            do {
+                rutas.add(cursor.getString(0)+" "+cursor.getString(1)+" "+cursor.getString(2)+
+               " "+cursor.getString(3)+" "+cursor.getString(4)+" "+cursor.getString(5)+" "+cursor.getString(6)+" "+cursor.getString(7));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return rutas;
     }
 
 }

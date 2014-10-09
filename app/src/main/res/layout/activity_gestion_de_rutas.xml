@@ -101,7 +101,7 @@
            android:clickable="true"
            android:scaleY="0.8"
            android:scaleX="0.8"
-           android:background="#F5A9A9" />
+            />
 
        <TextView
            android:text="@string/Hora"
@@ -121,7 +121,6 @@
               android:id="@+id/timePicker"
               android:scaleY="0.8"
               android:scaleX="0.8"
-              android:background="#F5A9A9"
               />
 
           <TextView

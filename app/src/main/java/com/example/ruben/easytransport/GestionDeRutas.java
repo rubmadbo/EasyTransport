@@ -29,6 +29,7 @@ public class GestionDeRutas extends ActionBarActivity {
     private EditText destino;
     private DatePicker dP;
     private TimePicker tP;
+    private EditText comentario;
 
 
     @Override
@@ -52,12 +53,14 @@ public class GestionDeRutas extends ActionBarActivity {
         }
     }
     public void buttonOnClick(View v){
-        Toast.makeText(this, "Has pulsado el botón",Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "Has pulsado el botón",Toast.LENGTH_SHORT).show();
 
-        /*Button btAceptar = (Button) v;
+        Button btAceptar = (Button) v;
         ((Button) v).setText("Clicked");
-
-        String vehiculo = datos [spinner.getSelectedItemPosition()];
+        //JD: siguientes 2 lineas ,codigo duplicado mejor ponerlo explicitamente ne el onCreate
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
+        List<String> vehiculos = admin.getVehiculos();
+        String vehiculo = vehiculos.get(spinner.getSelectedItemPosition());
 
         destino = (EditText)findViewById(R.id.editTDestino);
         origen = (EditText)findViewById(R.id.editTOrigen);
@@ -68,19 +71,37 @@ public class GestionDeRutas extends ActionBarActivity {
         int mes = dP.getMonth();
         int year= dP.getYear();
         int dia = dP.getDayOfMonth();
+        String fecha = String.format("%d/%d/%d", dia, mes, year);
 
         tP = (TimePicker)findViewById(R.id.timePicker);
         int hora = tP.getCurrentHour();
         int minutos =tP.getCurrentMinute();
+        String horaInicio = String.format("%d:%d", hora, minutos);
 
         comentario =(EditText)findViewById(R.id.editTComentario);
         String com = comentario.getText().toString();
-        //simplemente para saber si ha cogido bien las variables
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setMessage(" Vehiculo: "+vehiculo+" Origen: "+o+" Destino: "+d+" Fecha: "+dia+"/"+mes+"/"+year+" Hora: "+hora+":"+minutos+" Comentario: "+com);
-        dialog.setCancelable(true);
-        dialog.show();*/
+
+        // meterlos a la BBDD
+        SQLiteDatabase db = admin.getWritableDatabase();
+
+        //el id de Ruta deberia de aumentar con dada ruta
+        String selectQuery = "SELECT * FROM Ruta";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        int id=1;
+        if (cursor.moveToFirst()){
+        id =cursor.getCount()+1;}
+        //db.delete("Ruta",null,null); //JD:se carga SOLO el contenido de la tabla
+        //JD:Ruta no guarda el vehiculo .. Donde lo inserto? horaFIN que cojones¿?¿? he puesto el comntario por no dejarlo vacio
+        db.execSQL("INSERT INTO Ruta VALUES('"+id+"','"+o+"','"+d+"','"+horaInicio+"','"+com+"','"+fecha+"','"+com+"','"+id+"')");
+
+       //JD:consulta a base de datos para saber que valores se han guardado. sale mensajito rapido y printa en la consola tb
+        List<String> rutas = admin.getRutas();
+        String texto = rutas.toString();
+        System.out.println(texto);
+        Toast.makeText(this, texto,Toast.LENGTH_LONG).show();
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
