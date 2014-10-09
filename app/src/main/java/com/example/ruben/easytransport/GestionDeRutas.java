@@ -1,8 +1,10 @@
 package com.example.ruben.easytransport;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,10 +22,8 @@ import java.util.ArrayList;
 
 
 public class GestionDeRutas extends ActionBarActivity {
-    private Spinner lista;
-    private String[] datos= {"Ferrari","Coupe","Lamborginhi"};
-    private ArrayList<String> listaVehiculos;
-    private EditText origen;
+    private Spinner spinner;
+    private String[] datos= {"Ferrari","Coupe","Lamborginhi"};private EditText origen;
     private EditText destino;
     private DatePicker dP;
     private TimePicker tP;
@@ -42,39 +42,34 @@ public class GestionDeRutas extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gestion_de_rutas);
 
-        lista= (Spinner)findViewById(R.id.lista1);
-        ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,datos);
-        lista.setAdapter(adapt);
-        /*try {
-            System.out.println("Estoy al inicio del try");
-
-            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "", null, 1);
-            SQLiteDatabase bd = admin.getWritableDatabase();
-
-            System.out.println("Estoy al inicio del try.2");
-
-            Cursor fila = bd.rawQuery("select * from Vehiculo", null);
-            lista = (Spinner) findViewById(R.id.lista1);
-
-            ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaVehiculos);
-            lista.setAdapter(adapt);
-
-            while (fila.moveToNext()) {
-                listaVehiculos.add(fila.getString(1) + " " + fila.getString(2));
-            }
-        }catch (Exception e){
-            Toast.makeText(this, "Aaaaaaaaaaaaaaaaaaaaaaaaaaaaalgo falla",
-                    Toast.LENGTH_SHORT).show();
-        }*/
+        rellenarSpinner();
     }
+    public void rellenarSpinner(){
+        try {
+            ArrayList<String> listaVehiculos = null;
+            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
+            SQLiteDatabase bd = admin.getWritableDatabase();
+            spinner = (Spinner) findViewById(R.id.lista1);
+            Cursor consulta = bd.rawQuery("select * from Vehiculo", null);
+            while (consulta.moveToNext()) {
+                listaVehiculos.add(consulta.getString(1) + " " + consulta.getString(2));
+                System.out.println("El del arrayList " + listaVehiculos.get(0));
+            }
+            ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaVehiculos);
+            spinner.setAdapter(adapt);
 
+        }catch (Exception e){
+            System.out.println("MENSAJE DE ERROR ----------------------------------------> ");
+            e.printStackTrace();
+        }
+    }
     public void buttonOnClick(View v){
+        Toast.makeText(this, "Has pulsado el botón",Toast.LENGTH_SHORT).show();
 
-
-        Button btAceptar = (Button) v;
+        /*Button btAceptar = (Button) v;
         ((Button) v).setText("Clicked");
 
-        String vehiculo = datos [lista.getSelectedItemPosition()];
+        String vehiculo = datos [spinner.getSelectedItemPosition()];
 
         destino = (EditText)findViewById(R.id.editTDestino);
         origen = (EditText)findViewById(R.id.editTOrigen);
@@ -96,7 +91,7 @@ public class GestionDeRutas extends ActionBarActivity {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setMessage(" Vehiculo: "+vehiculo+" Origen: "+o+" Destino: "+d+" Fecha: "+dia+"/"+mes+"/"+year+" Hora: "+hora+":"+minutos+" Comentario: "+com);
         dialog.setCancelable(true);
-        dialog.show();
+        dialog.show();*/
     }
 
     @Override
