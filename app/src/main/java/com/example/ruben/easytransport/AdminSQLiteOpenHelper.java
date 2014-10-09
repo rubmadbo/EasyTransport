@@ -1,9 +1,13 @@
 package com.example.ruben.easytransport;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
@@ -26,7 +30,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
         db.execSQL("create table TipoUsuario(idTipoUsuario integer primary key, nombre text, descripcion text)");
 
-        db.execSQL("create table Vehiculo(matricula text primary key, marca text, modelo text)");
+        db.execSQL("create table Vehiculo(matricula text primary key, marca String, modelo String)");
 
         db.execSQL("create table Usuarios(DNI integer primary key, nombre text, apellidos text, direccion text, telefono integer, " +
                 "alias text, contrasenya text, tipoUsuario integer, vehiculo integer, FOREIGN KEY(tipoUsuario) " +
@@ -60,11 +64,30 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
         db.execSQL("create table TipoUsuario(idTipoUsuario integer primary key, nombre text, descripcion text)");
 
-        db.execSQL("create table Vehiculo(matricula text primary key, marca text, modelo text)");
+        db.execSQL("create table Vehiculo(matricula text primary key, marca String, modelo String)");
 
         db.execSQL("create table Usuarios(DNI integer primary key, nombre text, apellidos text, direccion text, telefono integer, " +
                 "alias text, contrasenya text, tipoUsuario integer, vehiculo integer, FOREIGN KEY(tipoUsuario) " +
                 "REFERENCES TipoUsuario(idTipoUsuario),FOREIGN KEY(vehiculo) REFERENCES Vehiculo(matricula))");
 
     }
+    public List<String> getVehiculos(){
+
+        List<String> vehiculos = new ArrayList<String>();
+        String selectQuery = "SELECT * FROM Vehiculo";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                vehiculos.add(cursor.getString(1)+ " " +cursor.getString(2));
+                System.out.println("Elementos de la base de datos -> " + cursor.getString(1)+" "+cursor.getString(2));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return vehiculos;
+    }
+
 }

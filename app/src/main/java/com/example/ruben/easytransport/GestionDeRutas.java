@@ -19,24 +19,18 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class GestionDeRutas extends ActionBarActivity {
     private Spinner spinner;
-    private String[] datos= {"Ferrari","Coupe","Lamborginhi"};private EditText origen;
+    private String[] datos; //= {"Ferrari","Coupe","Lamborginhi"};
+    private EditText origen;
     private EditText destino;
     private DatePicker dP;
     private TimePicker tP;
 
-    /*private int year;
-    private int mes;
-    private int dia;
-    private int hora;
-    private String d;
-    private String o;
-    private int minutos;
-    private String vehiculo;*/
-    EditText comentario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,18 +40,11 @@ public class GestionDeRutas extends ActionBarActivity {
     }
     public void rellenarSpinner(){
         try {
-            ArrayList<String> listaVehiculos = null;
-            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
-            SQLiteDatabase bd = admin.getWritableDatabase();
             spinner = (Spinner) findViewById(R.id.lista1);
-            Cursor consulta = bd.rawQuery("select * from Vehiculo", null);
-
-            while (consulta.moveToNext()) {
-                System.out.println("Elementos de la base de datos -> " + consulta.getString(1) + " " + consulta.getString(2));
-                //listaVehiculos.add(consulta.getString(1) + " " + consulta.getString(2));
-            }
-            //ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaVehiculos);
-            //spinner.setAdapter(adapt);
+            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
+            List<String> vehiculos = admin.getVehiculos();
+            ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, vehiculos);
+            spinner.setAdapter(adapt);
 
         }catch (Exception e){
             System.out.println("MENSAJE DE ERROR ----------------------------------------> ");
