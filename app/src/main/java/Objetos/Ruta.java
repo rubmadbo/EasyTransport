@@ -14,12 +14,13 @@ public class Ruta {
     private String horaInicio;
     private String horaFin;
     private String comentario;
-    private Usuario transportista;
+    //private Usuario transportista;
+    int idU;
 
     //aunque no creo que tenga sentido crear una ruta sin TODOS los atributos.solo con el set y get suficiente
-    public void Ruta(int id, Usuario t){
+    public void Ruta(int id/*, Usuario t*/){
         this.id = id;
-        transportista = t;
+        //transportista = t;
         origen = "";
         destino = "";
         fecha = "";
@@ -28,7 +29,7 @@ public class Ruta {
         comentario = "";
     }
 
-    public void setRuta(int id, String o, String d, String f,String h1,String h2 ,String com, Usuario t ){
+    public void setRuta(int id, String o, String d, String f,String h1,String h2 ,String com, /*Usuario t*/int idU ){
         this.id = id;
         origen = o;
         destino = d;
@@ -36,9 +37,89 @@ public class Ruta {
         horaInicio = h1;
         horaFin = h2;
         comentario = com;
-        transportista = t;
+        //transportista = t;
+        this.idU=idU;
+
 
     }
     public Ruta getRuta(){ return this;}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(String origen) {
+        this.origen = origen;
+    }
+
+    public String getDestino() {
+        return destino;
+    }
+
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public String getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(String horaFin) {
+        this.horaFin = horaFin;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public int getIdU() {
+        return idU;
+    }
+
+    public void setIdU(int idU) {
+        this.idU = idU;
+    }
+
+    @Override
+    public String toString() {
+        return "Ruta{" +
+                "id=" + id +
+                ", origen='" + origen + '\'' +
+                ", destino='" + destino + '\'' +
+                ", fecha='" + fecha + '\'' +
+                ", horaInicio='" + horaInicio + '\'' +
+                ", horaFin='" + horaFin + '\'' +
+                ", comentario='" + comentario + '\'' +
+                ", idU=" + idU +
+                '}';
+    }
 
 }

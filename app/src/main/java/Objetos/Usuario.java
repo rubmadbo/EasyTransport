@@ -39,4 +39,91 @@ public class Usuario {
         this.tipo = tipo;
         this.vehiculo = vehiculo;
     }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public int getTelf() {
+        return telf;
+    }
+
+    public void setTelf(int telf) {
+        this.telf = telf;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public String getPss() {
+        return pss;
+    }
+
+    public void setPss(String pss) {
+        this.pss = pss;
+    }
+
+    public tipoUsuario getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(tipoUsuario tipo) {
+        this.tipo = tipo;
+    }
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "dni='" + dni + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", telf=" + telf +
+                ", alias='" + alias + '\'' +
+                ", pss='" + pss + '\'' +
+                ", tipo=" + tipo +
+                ", vehiculo=" + vehiculo +
+                '}';
+    }
 }

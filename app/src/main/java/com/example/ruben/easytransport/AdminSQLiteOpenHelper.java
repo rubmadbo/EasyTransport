@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import Objetos.Ruta;
+
 public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     //llamamos al constructor
@@ -73,7 +75,8 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         //JD: habría que hacer db.close(); ??¿
 
     }
-    public List<String> getVehiculos(){
+
+    public List<String> getVehiculos() {
 
         List<String> vehiculos = new ArrayList<String>();
         String selectQuery = "SELECT * FROM Vehiculo";
@@ -83,7 +86,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                vehiculos.add(cursor.getString(1)+ " " +cursor.getString(2));
+                vehiculos.add(cursor.getString(1) + " " + cursor.getString(2));
                 //System.out.println("Elementos de la base de datos -> " + cursor.getString(1)+" "+cursor.getString(2));
             } while (cursor.moveToNext());
         }
@@ -92,12 +95,10 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         return vehiculos;
     }
 
-    //JD: MEJORABLE SI ME TRAIGO UN OBJETO TIPO RUTA--metodo que devuelta una lista, donde cada elemento contiene una String con todos los datos de la ruta separados por un espaccio
 
-    public List<String> getRutas(){
+    public List<Ruta> getRutas() {
 
-        List<String> rutas = new ArrayList<String>();
-
+        List<Ruta> rutas = new ArrayList<Ruta>();
         String selectQuery = "SELECT * FROM Ruta";
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -105,13 +106,16 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         //se mete todos los datos de cada columna en cada posicion de la lista como String muy a piñon
         if (cursor.moveToFirst()) {
             do {
-                rutas.add(cursor.getString(0)+" "+cursor.getString(1)+" "+cursor.getString(2)+
-               " "+cursor.getString(3)+" "+cursor.getString(4)+" "+cursor.getString(5)+" "+cursor.getString(6)+" "+cursor.getString(7));
+               Ruta ruta= new Ruta();
+               ruta.setRuta(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                        cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7));
+                rutas.add(ruta);
+
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
         return rutas;
-    }
 
+    }
 }

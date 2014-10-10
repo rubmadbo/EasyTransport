@@ -21,6 +21,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import Objetos.Ruta;
 import Objetos.Usuario;
 
 
@@ -90,18 +91,20 @@ public class GestionDeRutas extends ActionBarActivity {
         String selectQuery = "SELECT * FROM Ruta";
         Cursor cursor = db.rawQuery(selectQuery, null);
         int id=1;
+        int idTransportista=1; //esto de momento hasta q tengamos usuario sino seria =u.getUsuario().id;
         if (cursor.moveToFirst()){
         id =cursor.getCount()+1;}
+
+
         //db.delete("Ruta",null,null); //JD:se carga SOLO el contenido de la tabla
         //JD:Ruta no guarda el vehiculo .. Donde lo inserto? horaFIN que cojones¿?¿? he puesto el comntario por no dejarlo vacio
-        db.execSQL("INSERT INTO Ruta VALUES('"+id+"','"+o+"','"+d+"','"+horaInicio+"','"+com+"','"+fecha+"','"+com+"','"+id+"')");
+        db.execSQL("INSERT INTO Ruta VALUES('"+id+"','"+o+"','"+d+"','"+fecha+"','"+horaInicio+"','¿NUSE?','"+com+"','"+idTransportista+"')");
 
-       //JD:consulta a base de datos para saber que valores se han guardado. sale mensajito rapido y printa en la consola tb
-        List<String> rutas = admin.getRutas();
-        String texto = rutas.toString();
-        System.out.println(texto);
-        Toast.makeText(this, texto,Toast.LENGTH_LONG).show();
 
+        //JD:printa todas las rutas guardas en el log
+        List<Ruta> rutas= admin.getRutas();
+        for (int i=0; i<rutas.size();i++){
+        System.out.println(rutas.get(i).toString());}
     }
 
 

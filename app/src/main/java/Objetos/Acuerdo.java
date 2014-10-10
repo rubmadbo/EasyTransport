@@ -5,12 +5,12 @@ package Objetos;
  */
 public class Acuerdo {
 
-    int id;
-    Usuario transportista;
-    Usuario cliente;
-    Ruta ruta;
-    double precio;
-    String comentario;
+    private int id;
+    private Usuario transportista;
+    private Usuario cliente;
+    private Ruta ruta;
+    private double precio;
+    private String comentario;
 
     public void Acuerdo(int id, Usuario t, Usuario c, Ruta r, double p, String com){
         id = id;
@@ -30,5 +30,65 @@ public class Acuerdo {
         ruta = r;
         precio = p;
         comentario = com;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Usuario getTransportista() {
+        return transportista;
+    }
+
+    public void setTransportista(Usuario transportista) {
+        this.transportista = transportista;
+    }
+
+    public Usuario getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Usuario cliente) {
+        this.cliente = cliente;
+    }
+
+    public Ruta getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(Ruta ruta) {
+        this.ruta = ruta;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    @Override
+    public String toString() {
+        return "Acuerdo{" +
+                "id=" + id +
+                ", transportista=" + transportista +
+                ", cliente=" + cliente +
+                ", ruta=" + ruta +
+                ", precio=" + precio +
+                ", comentario='" + comentario + '\'' +
+                '}';
     }
 }
