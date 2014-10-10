@@ -21,6 +21,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import Objetos.Usuario;
+
 
 public class GestionDeRutas extends ActionBarActivity {
     private Spinner spinner;
