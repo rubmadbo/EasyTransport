@@ -47,7 +47,7 @@
            android:textSize="20dp" />
 
        <EditText
-           android:layout_width="wrap_content"
+           android:layout_width="327dp"
            android:hint="@string/textoOrigen"
            android:layout_height="wrap_content"
            android:id="@+id/editTOrigen"
@@ -70,7 +70,7 @@
            android:textColor="#610B0B" />
 
        <EditText
-           android:layout_width="wrap_content"
+           android:layout_width="327dp"
            android:layout_height="wrap_content"
            android:hint="@string/textoDestino"
            android:id="@+id/editTDestino"
@@ -143,7 +143,8 @@
               android:layout_alignParentLeft="true"
               android:layout_alignParentStart="true"
               android:layout_marginTop="15dp"
-              android:background="#ffffffff" />
+              android:background="#ffffffff"
+              android:layout_marginBottom="30dp"/>
 
           <Button
               android:layout_width="wrap_content"
