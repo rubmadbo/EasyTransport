@@ -1,28 +1,24 @@
 package com.example.ruben.easytransport;
 
-import android.app.AlertDialog;
-import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import Objetos.Ruta;
-import Objetos.Usuario;
 
 
 public class GestionDeRutas extends ActionBarActivity {
@@ -58,9 +54,10 @@ public class GestionDeRutas extends ActionBarActivity {
     public void buttonOnClick(View v){
        // Toast.makeText(this, "Has pulsado el botón",Toast.LENGTH_SHORT).show();
 
-        Button btAceptar = (Button) v;
-        ((Button) v).setText("Clicked");
+        //Button btAceptar = (Button) v;
+       // ((Button) v).setText("Clicked");
         //JD: siguientes 2 lineas ,codigo duplicado mejor ponerlo explicitamente ne el onCreate
+        //Fran: No, es mejor hacerlo solo donde toca
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
         List<String> vehiculos = admin.getVehiculos();
         String vehiculo = vehiculos.get(spinner.getSelectedItemPosition());
@@ -84,27 +81,38 @@ public class GestionDeRutas extends ActionBarActivity {
         comentario =(EditText)findViewById(R.id.editTComentario);
         String com = comentario.getText().toString();
 
-        // meterlos a la BBDD
-        SQLiteDatabase db = admin.getWritableDatabase();
+        if(!d.equals("") && !o.equals("") && !com.equals("")){
+            // meterlos a la BBDD
+            SQLiteDatabase db = admin.getWritableDatabase();
 
-        //el id de Ruta deberia de aumentar con dada ruta
-        String selectQuery = "SELECT * FROM Ruta";
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        int id=1;
-        int idTransportista=1; //esto de momento hasta q tengamos usuario sino seria =u.getUsuario().id;
-        if (cursor.moveToFirst()){
-        id =cursor.getCount()+1;}
-
-
-        //db.delete("Ruta",null,null); //JD:se carga SOLO el contenido de la tabla
-        //JD:Ruta no guarda el vehiculo .. Donde lo inserto? horaFIN que cojones¿?¿? he puesto el comntario por no dejarlo vacio
-        db.execSQL("INSERT INTO Ruta VALUES('"+id+"','"+o+"','"+d+"','"+fecha+"','"+horaInicio+"','¿NUSE?','"+com+"','"+idTransportista+"')");
+            //el id de Ruta deberia de aumentar con dada ruta
+            String selectQuery = "SELECT * FROM Ruta";
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            int id=1;
+            int idTransportista=1; //esto de momento hasta q tengamos usuario sino seria =u.getUsuario().id;
+            if (cursor.moveToFirst()){
+                id =cursor.getCount()+1;}
 
 
-        //JD:printa todas las rutas guardas en el log
-        List<Ruta> rutas= admin.getRutas();
-        for (int i=0; i<rutas.size();i++){
-        System.out.println(rutas.get(i).toString());}
+            //db.delete("Ruta",null,null); //JD:se carga SOLO el contenido de la tabla
+            //JD:Ruta no guarda el vehiculo .. Donde lo inserto? horaFIN que cojones¿?¿? he puesto el comntario por no dejarlo vacio
+            db.execSQL("INSERT INTO Ruta VALUES('"+id+"','"+o+"','"+d+"','"+fecha+"','"+horaInicio+"','¿NUSE?','"+com+"','"+idTransportista+"')");
+
+            //JD:printa todas las rutas guardas en el log
+            /*List<Ruta> rutas= admin.getRutas();
+            for (int i=0; i<rutas.size();i++){
+                System.out.println(rutas.get(i).toString());
+            }*/
+
+            //Fran: Justo antes del toast de deberia de hacer la actualización del ListView de VistaRutas, pero no consigo que vaya
+            //sin de un error.
+            Toast.makeText(this, "La ruta se ha insertado correctamente", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        else{
+            Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 

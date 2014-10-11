@@ -39,8 +39,16 @@ public class Ruta {
         comentario = com;
         //transportista = t;
         this.idU=idU;
-
-
+    }
+    public Ruta(int id, String origen, String destino, String fecha,String h1,String h2 ,String coment, int idU){
+        this.id = id;
+        this.origen = origen;
+        this.destino = destino;
+        this.fecha = fecha;
+        this.horaInicio = h1;
+        this.horaFin = h2;
+        this.comentario = coment;
+        this.idU = idU;
     }
     public Ruta getRuta(){ return this;}
 
@@ -110,16 +118,10 @@ public class Ruta {
 
     @Override
     public String toString() {
-        return "Ruta{" +
-                "id=" + id +
-                ", origen='" + origen + '\'' +
-                ", destino='" + destino + '\'' +
-                ", fecha='" + fecha + '\'' +
-                ", horaInicio='" + horaInicio + '\'' +
-                ", horaFin='" + horaFin + '\'' +
-                ", comentario='" + comentario + '\'' +
-                ", idU=" + idU +
-                '}';
+       return "\nOrigen:\t\t" + getOrigen() +"\n"+
+                "Destino:\t" + getDestino() + "\n"+
+                "Fecha:\t" + getFecha() + "\n" +
+                "Hora:\t" + getHoraInicio()+ "\n";
     }
 
 }

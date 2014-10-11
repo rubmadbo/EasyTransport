@@ -106,10 +106,9 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         //se mete todos los datos de cada columna en cada posicion de la lista como String muy a piñon
         if (cursor.moveToFirst()) {
             do {
-               Ruta ruta= new Ruta();
-               ruta.setRuta(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),
-                        cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7));
-                rutas.add(ruta);
+               Ruta ruta= new Ruta(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                       cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7));
+               rutas.add(ruta);
 
             } while (cursor.moveToNext());
         }
