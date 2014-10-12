@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MenuPrincipal"
+            android:name="com.example.ruben.easytransport.MenuPrincipal"
             android:label="@string/title_activity_menu_principal" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,9 +17,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GestionDeRutas"
+            android:name="com.example.ruben.easytransport.GestionDeRutas"
             android:label="@string/title_activity_gestion_de_rutas" >
         </activity>
+
         <fragment
             android:name=".VistaRutas"
             android:label="@string/title_activity_vista_rutas" >
@@ -28,6 +29,17 @@
             android:name="AnadirAcuerdo"
             android:label="@string/title_activity_anadir_acuerdo" >
         </fragment>
+
+        <activity
+            android:name="com.example.ruben.easytransport.BusquedaRuta"
+            android:label="@string/title_activity_busqueda_ruta" >
+        </activity>
+        <activity
+            android:name="com.example.ruben.easytransport.ListarRuta"
+            android:label="@string/title_activity_listar_ruta"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

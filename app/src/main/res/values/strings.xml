@@ -29,5 +29,17 @@
     <string name="Anyadir">Añadir ruta</string>
     <string name="title_activity_anadir_acuerdo">anadir_acuerdo</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_busqueda_ruta">BusquedaRuta</string>
+    <!-- Adr:Strings busqueda y listado -->
+    <string name="FechaIni">A partir de </string>
+    <string name="FechaFin">Hasta</string>
+    <string name="BotonBuscar">Buscar</string>
+    <string name="DesvioOrigen">Desvío del Origen</string>
+    <string name="DesvioFin">Desvío de la llegada</string>
+    <string name="BotonNuevaRuta">Nueva Búsqueda</string>
+    <string name="title_activity_listar_rutas">ListarRutas</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_listar_ruta">ListarRuta</string>
 
 </resources>
