@@ -30,4 +30,18 @@
     <string name="title_activity_anadir_acuerdo">anadir_acuerdo</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- String Añadir acuerdo -->
+    <string name="Remitente">Remitente</string>
+    <string name="textoRemitente">Introduce el Remitente</string>
+    <string name="Transportista">Transportista</string>
+    <string name="textoTransportista">Introduce el Transportista</string>
+    <string name="Entrega">Punto de Entrega</string>
+    <string name="textoEntrega">Introduce el punto Entrega</string>
+    <string name="Recogida">Punto de Recogida</string>
+    <string name="textoRecogida">Introduce el punto Recogida</string>
+    <string name="Dinero">Dinero</string>
+    <string name="textoDinero">Introduce la cantidad de dinero</string>
+
+
+
 </resources>

@@ -18,7 +18,7 @@ public class Ruta {
     int idU;
 
     //aunque no creo que tenga sentido crear una ruta sin TODOS los atributos.solo con el set y get suficiente
-    public void Ruta(int id/*, Usuario t*/){
+    public  Ruta(int id/*, Usuario t*/){
         this.id = id;
         //transportista = t;
         origen = "";

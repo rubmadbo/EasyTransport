@@ -10,7 +10,7 @@ public class tipoUsuario {
     private String descripcion;
 
 
-    public void tipoUsuario (int i){
+    public tipoUsuario (int i){
         this.id= i;
         nombre="";
         descripcion= "";

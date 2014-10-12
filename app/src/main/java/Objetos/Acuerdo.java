@@ -6,14 +6,20 @@ package Objetos;
 public class Acuerdo {
 
     private int id;
-    private Usuario transportista;
-    private Usuario cliente;
-    private Ruta ruta;
-    private double precio;
+    //private Usuario transportista;
+    //private Usuario cliente;
+    //private Ruta ruta;
+    private String transportista;
+    private String cliente;
+    private int ruta;
+    //private double precio; para el 1er Sprint es String
+    private String precio;
     private String comentario;
 
-    public void Acuerdo(int id, Usuario t, Usuario c, Ruta r, double p, String com){
-        id = id;
+
+
+    public Acuerdo(int id, String t, String c, int r, String p, String com){
+        this.id = id;
         transportista= t;
         cliente = c;
         ruta = r;
@@ -23,7 +29,7 @@ public class Acuerdo {
     }
 
     public Acuerdo getAcuerdo(){return this;}
-    public void setAcuerdo(int id, Usuario t, Usuario c, Ruta r, double p, String com){
+    public void setAcuerdo(int id, String t, String c, int r, String p, String com){
         id = id;
         transportista= t;
         cliente = c;
@@ -40,35 +46,35 @@ public class Acuerdo {
         this.id = id;
     }
 
-    public Usuario getTransportista() {
+    public String getTransportista() {
         return transportista;
     }
 
-    public void setTransportista(Usuario transportista) {
+    public void setTransportista(String transportista) {
         this.transportista = transportista;
     }
 
-    public Usuario getCliente() {
+    public String getCliente() {
         return cliente;
     }
 
-    public void setCliente(Usuario cliente) {
+    public void setCliente(String cliente) {
         this.cliente = cliente;
     }
 
-    public Ruta getRuta() {
+    public int getRuta() {
         return ruta;
     }
 
-    public void setRuta(Ruta ruta) {
+    public void setRuta(int ruta) {
         this.ruta = ruta;
     }
 
-    public double getPrecio() {
+    public String getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(String precio) {
         this.precio = precio;
     }
 

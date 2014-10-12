@@ -9,7 +9,7 @@ public class Vehiculo {
     private String marca;
     private String modelo;
 
-    public void Vehiculo(String matricula){//matricula es PK en la bbdd
+    public Vehiculo(String matricula){//matricula es PK en la bbdd
         this.matricula = matricula;
         marca="";
         modelo="";
