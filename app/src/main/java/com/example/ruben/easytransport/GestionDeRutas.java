@@ -1,6 +1,5 @@
 package com.example.ruben.easytransport;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
@@ -11,14 +10,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.List;
-
-import Objetos.Ruta;
 
 
 public class GestionDeRutas extends ActionBarActivity {
@@ -62,8 +58,8 @@ public class GestionDeRutas extends ActionBarActivity {
         List<String> vehiculos = admin.getVehiculos();
         String vehiculo = vehiculos.get(spinner.getSelectedItemPosition());
 
-        destino = (EditText)findViewById(R.id.editTDestino);
-        origen = (EditText)findViewById(R.id.editTOrigen);
+        destino = (EditText)findViewById(R.id.TextDestino);
+        origen = (EditText)findViewById(R.id.TextOrigen);
         String d = destino.getText().toString();
         String o = origen.getText().toString();
 
@@ -129,9 +125,7 @@ public class GestionDeRutas extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
         return super.onOptionsItemSelected(item);
     }
 

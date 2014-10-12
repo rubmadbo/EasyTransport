@@ -1,9 +1,7 @@
 package com.example.ruben.easytransport;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -53,7 +51,7 @@ public class MenuPrincipal extends ActionBarActivity
                 break;
             case 1:
                 //Listado de rutas
-                fragment = new VistaRutas();
+                fragment = new BusquedaRuta();
                 break;
             case 2:
                 //Añadir acuerdo
@@ -107,9 +105,7 @@ public class MenuPrincipal extends ActionBarActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
         return super.onOptionsItemSelected(item);
     }
 

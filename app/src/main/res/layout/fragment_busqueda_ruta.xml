@@ -1,0 +1,169 @@
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#03fffa8c"
+    tools:context="com.example.ruben.easytransport.GestionDeRutas">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:text="@string/Origen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textOrigen"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/lista1"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="#610B0B"
+                android:textSize="20dp" />
+
+            <EditText
+                android:layout_width="327dp"
+                android:hint="@string/textoOrigen"
+                android:layout_height="wrap_content"
+                android:id="@+id/TextOrigen"
+                android:layout_below="@+id/textOrigen"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="15dp"
+                android:background="#172993ff" />
+
+            <TextView
+                android:text="@string/Destino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textDestino"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/TextOrigen"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="20dp"
+                android:textColor="#610B0B" />
+
+            <EditText
+                android:layout_width="327dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/textoDestino"
+                android:id="@+id/TextDestino"
+                android:layout_below="@+id/textDestino"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="15dp"
+                android:background="#172993ff"
+                android:autoText="false" />
+
+            <TextView
+                android:text="@string/DesvioOrigen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_destino"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/TextOrigen"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="20dp"
+                android:textColor="#ff4d5861"
+                android:textStyle="italic" />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="61dp"
+                android:id="@+id/listView2"
+                android:scrollingCache="true"
+                android:smoothScrollbar="true" />
+
+            <TextView
+                android:text="@string/DesvioFin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/TextOrigen"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="20dp"
+                android:textColor="#ff4d5861"
+                android:textStyle="italic" />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:id="@+id/listView3" />
+
+            <TextView
+                android:text="@string/FechaIni"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textFecha"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/TextDestino"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="#ff606160"
+                android:textSize="20dp" />
+
+            <DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/datePicker"
+                android:spinnersShown="true"
+                android:calendarViewShown="false"
+                android:clickable="true"
+                android:scaleY="0.8"
+                android:scaleX="0.8"
+                />
+
+            <TextView
+                android:text="@string/FechaFin"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textHora"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/datePicker"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="#ff606160"
+                android:textSize="20dp" />
+
+            <DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/datePicker2"
+                android:spinnersShown="true"
+                android:calendarViewShown="false"
+                android:clickable="true"
+                android:scaleY="0.8"
+                android:scaleX="0.8" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editTComentario"
+                android:id="@+id/button_Busqueda"
+                android:layout_marginTop="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_horizontal"
+                android:background="#ff4d5861"
+                android:text="@string/BotonBuscar"
+                android:onClick="buttonOnClick"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

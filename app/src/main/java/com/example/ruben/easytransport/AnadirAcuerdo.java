@@ -17,7 +17,7 @@ public class AnadirAcuerdo extends Fragment {
         View rootView = inflater.inflate(R.layout.activity_anadir_acuerdo, container, false);
 
 
-        Button botonAnadirAcuerdo = (Button) rootView.findViewById(R.id.button);
+        Button botonAnadirAcuerdo = (Button) rootView.findViewById(R.id.button_volver);
         botonAnadirAcuerdo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
