@@ -105,6 +105,8 @@ public class GestionDeRutas extends ActionBarActivity {
             Toast.makeText(this, "La ruta se ha insertado correctamente", Toast.LENGTH_SHORT).show();
             finish();
         }
+        else if(o.equals(d)){   Toast.makeText(this, "El origen no puede ser igual al destino", Toast.LENGTH_SHORT).show();
+        }
         else{
             Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
         }

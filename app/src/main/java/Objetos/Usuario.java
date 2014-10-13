@@ -15,7 +15,7 @@ public class Usuario {
     private tipoUsuario tipo;
     private Vehiculo vehiculo;
 
-    public void Usuario (String dni, String pss, tipoUsuario tipo, Vehiculo vehiculo){ //son PK y FKs, pss no lo es pero deberia
+    public Usuario (String dni, String pss, tipoUsuario tipo, Vehiculo vehiculo){ //son PK y FKs, pss no lo es pero deberia
         this.dni = dni;
         this.tipo = tipo;
         this.vehiculo = vehiculo;
