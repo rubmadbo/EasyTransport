@@ -7,15 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import static com.example.ruben.easytransport.R.id.spinner;
-import static com.example.ruben.easytransport.R.id.spinner2;
-
 
 public class BusquedaRuta extends Fragment {
 
@@ -34,7 +29,7 @@ public class BusquedaRuta extends Fragment {
                 Bundle savedInstanceState) {
             final View rootView = inflater.inflate(R.layout.fragment_busqueda_ruta, container, false);
             boton=(Button)rootView.findViewById(R.id.button_Busqueda);
-            lista=(Spinner)rootView.findViewById(spinner);
+            /*lista=(Spinner)rootView.findViewById(spinner);
             lista1=(Spinner)rootView.findViewById(spinner2);
 
               //listViewInicializado
@@ -42,7 +37,7 @@ public class BusquedaRuta extends Fragment {
 
             ArrayAdapter<String> adapt = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,items);
             lista.setAdapter(adapt);
-            lista1.setAdapter(adapt);
+            lista1.setAdapter(adapt);*/
 
             boton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
