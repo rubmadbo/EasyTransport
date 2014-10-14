@@ -69,43 +69,6 @@
                 android:autoText="false" />
 
             <TextView
-                android:text="@string/DesvioOrigen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView_destino"
-                android:layout_marginTop="15dp"
-                android:layout_below="@+id/TextOrigen"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:textSize="20dp"
-                android:textColor="#ff4d5861"
-                android:textStyle="italic" />
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinner" />
-
-            <TextView
-                android:text="@string/DesvioFin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView2"
-                android:layout_marginTop="15dp"
-                android:layout_below="@+id/TextOrigen"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:textSize="20dp"
-                android:textColor="#ff4d5861"
-                android:textStyle="italic" />
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinner2"
-                android:layout_gravity="center_horizontal" />
-
-            <TextView
                 android:text="@string/FechaIni"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
