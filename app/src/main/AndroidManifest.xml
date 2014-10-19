@@ -37,8 +37,11 @@
         <activity
             android:name="com.example.ruben.easytransport.ListarRuta"
             android:label="@string/title_activity_listar_ruta"
-            android:screenOrientation="portrait">
-
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ruben.easytransport.Anadir_acuerdo"
+            android:label="@string/title_activity_anadir_acuerdo" >
         </activity>
     </application>
 

@@ -84,7 +84,7 @@ public class ListarRuta extends Activity {
 
 
                 Ruta rutaSelected = listaRuta.get(position);
-                Intent intent = new Intent(ListarRuta.this, AnadirAcuerdo.class);
+                Intent intent = new Intent(ListarRuta.this, Anadir_acuerdo.class);
                 String origen_ruta = rutaSelected.getOrigen();
                 intent.putExtra("Origen", origen_ruta);
                 String destino_ruta = rutaSelected.getDestino();
