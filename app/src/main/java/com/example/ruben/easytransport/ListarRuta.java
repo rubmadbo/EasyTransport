@@ -1,10 +1,10 @@
 package com.example.ruben.easytransport;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import Objetos.Ruta;
 
 
-public class ListarRuta extends Activity {
+public class ListarRuta extends ActionBarActivity {
 
 
     private Button boton;
@@ -82,22 +82,18 @@ public class ListarRuta extends Activity {
                                     int position, long id) {
 
 
-            Ruta rutaSelected = listaRuta.get(position);
 
-
-                Bundle bundle = new Bundle();
+                Ruta rutaSelected = listaRuta.get(position);
+                Intent intent = new Intent(ListarRuta.this, AnadirAcuerdo.class);
                 String origen_ruta = rutaSelected.getOrigen();
-                bundle.putString("Origen", origen_ruta);
+                intent.putExtra("Origen", origen_ruta);
                 String destino_ruta = rutaSelected.getDestino();
-                bundle.putString("Destino", destino_ruta);
+                intent.putExtra("Destino", destino_ruta);
                 int Id_ruta = rutaSelected.getId();
-                bundle.putInt("IdRuta", Id_ruta);
-                GestionDeRutas fragInfo = new GestionDeRutas();
-                AnadirAcuerdo fragobj = new AnadirAcuerdo();
-                fragobj.setArguments(bundle);
-                //No peta pero asi no creo que se haga en el intent en proceso....
-               // Intent a = new Intent(this,AnadirAcuerdo.class);
-               // startActivity(a);
+                intent.putExtra("IdRuta", Id_ruta);
+                startActivity(intent);
+
+
 
 
             }

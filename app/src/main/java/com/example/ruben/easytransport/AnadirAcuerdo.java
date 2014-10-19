@@ -1,11 +1,12 @@
 package com.example.ruben.easytransport;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import java.util.List;
 import Objetos.Acuerdo;
 
 
-public class AnadirAcuerdo extends Fragment {
+public class AnadirAcuerdo extends Activity {
 
     private EditText origen;
     private EditText destino;
@@ -37,12 +38,11 @@ public class AnadirAcuerdo extends Fragment {
        Button botonAnadirAcuerdo = (Button) rootView.findViewById(R.id.buttonAnyadirAcuerdo);
         botonAnadirAcuerdo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                ///////////////////////////////////////////////////////////////////////
-                String strtext = getArguments().getString("edttext");
+                Intent intent = getIntent();
                 //cogemos información de la ruta a la que hemos clicado
-                String d = getArguments().getString("Origen");
-                String o = getArguments().getString("Destino");
-                int rutaId = getArguments().getInt("IdRuta");
+                String dest_ = intent.getStringExtra("Origen");
+                String orig_ = intent.getStringExtra("Destino");
+                String rutaId= intent.getStringExtra("IdRuta");
 
                // System.out.println("Eso es lo que recibe AnadirAcuerdo Origen: "+o+" Destino: "+d+" IdRuta: "+rutaId);
                 ///////////////////////////////////////////////////////////////////////
@@ -58,8 +58,9 @@ public class AnadirAcuerdo extends Fragment {
                 dinero = (EditText)rootView.findViewById(R.id.editTDinero);
                 comentario = (EditText)rootView.findViewById(R.id.editTComentarioAcuerdo);
                 recogida = (EditText)rootView.findViewById(R.id.editTRecogida);
-                //String d = destino.getText().toString();
-                //String o = origen.getText().toString();
+                destino.setText(dest_);
+                origen.setText(orig_);
+                origen.getText().toString();
                 String r = remitente.getText().toString();
                 String t = transportista.getText().toString();
                 String e = entrega.getText().toString();
@@ -74,7 +75,7 @@ public class AnadirAcuerdo extends Fragment {
                 String fecha = String.format("%d/%d/%d", dia, mes, year);
 
             //conexion a bbdd
-                AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(AnadirAcuerdo.this.getActivity(), "administracion", null, 1);
+                AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(AnadirAcuerdo.this, "administracion", null, 1);
                 SQLiteDatabase db = admin.getWritableDatabase();
             //sacamos el id que le corresponde a este acuerdo
                 String selectQuery = "SELECT * FROM Acuerdo";
