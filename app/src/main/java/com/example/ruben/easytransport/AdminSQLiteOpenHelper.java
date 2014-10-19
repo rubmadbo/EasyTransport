@@ -140,7 +140,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     }
     ///////////////////////////////////////////////////////////////////////////////////////
-    private void borrarAcuerdo(int rutaid) {
+    private void borrarRuta(int rutaid) {
 
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM Acuerdo WHERE ruta=");
