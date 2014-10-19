@@ -7,8 +7,7 @@
     <string name="title_activity_menu_principal">EasyTransport</string>
     <string name="title_section1">Gestión de rutas</string>
     <string name="title_section2">Listado de rutas</string>
-    <string name="title_section3">Añadir acuerdo</string>
-    <string name="title_section4">Listar acuerdo</string>
+    <string name="title_section3">Ver Acuerdos</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example"></string>
