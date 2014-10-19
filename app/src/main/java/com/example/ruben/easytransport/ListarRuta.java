@@ -55,16 +55,17 @@ public class ListarRuta extends ActionBarActivity {
 
         //Sacamos todo a pelo y luego se mejora
         Cursor cur = db.rawQuery("SELECT * FROM Ruta", null);
-
+        String _fecha_acutal="";
         if(cur.moveToFirst()){
             do{
                 ruta = new Ruta(cur.getInt(0),cur.getString(1),cur.getString(2),cur.getString(3),cur.getString(4),
                         cur.getString(5),cur.getString(6),cur.getInt(7));
                 dest= ruta.getDestino();
                 orig= ruta.getOrigen();
-                fecha=ruta.getFecha();
-                //faltacomparaFechas No con compareto...
-                if(dest.equalsIgnoreCase(message) &&orig.equalsIgnoreCase(message1)){
+                _fecha_acutal=ruta.getFecha();
+
+
+                if(dest.equalsIgnoreCase(message) &&orig.equalsIgnoreCase(message1)&&_fecha_acutal.compareTo(data1)>=0 && _fecha_acutal.compareTo(data2)<=0){
                 listaRuta.add(ruta);
                 }
 

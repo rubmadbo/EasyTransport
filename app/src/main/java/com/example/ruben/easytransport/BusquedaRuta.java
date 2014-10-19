@@ -29,15 +29,6 @@ public class BusquedaRuta extends Fragment {
                 Bundle savedInstanceState) {
             final View rootView = inflater.inflate(R.layout.fragment_busqueda_ruta, container, false);
             boton=(Button)rootView.findViewById(R.id.button_Busqueda);
-            /*lista=(Spinner)rootView.findViewById(spinner);
-            lista1=(Spinner)rootView.findViewById(spinner2);
-
-              //listViewInicializado
-                String[] items={"0 Km","10 Km","20 Km","30 Km","40 Km"};
-
-            ArrayAdapter<String> adapt = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,items);
-            lista.setAdapter(adapt);
-            lista1.setAdapter(adapt);*/
 
             boton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -63,7 +54,10 @@ public class BusquedaRuta extends Fragment {
                     String _fecha2 = String.format("%d/%d/%d", dia_2, mes_2, year_2);
 
 
-                    if(_date!=null && _date2!=null && _fecha .compareTo(_fecha2)<=0 && _dest.length()>0 && _orig.length()>0) {
+
+
+
+                    if(_date!=null && _date2!=null && _fecha.compareTo(_fecha2)<=0 && _dest.length()>0 && _orig.length()>0) {
                         //Toast.makeText(this, "Realizando la búsqueda", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(getActivity().getBaseContext(),ListarRuta.class);
@@ -83,7 +77,7 @@ public class BusquedaRuta extends Fragment {
 
 
                     }
-                    if(_date!=null && _date2!=null &&  _fecha .compareTo(_fecha2)>0 && _dest.length()>0 && _orig.length()>0) {
+                    if(_date!=null && _date2!=null && _fecha.compareTo(_fecha2)>0 && _dest.length()>0 && _orig.length()>0) {
 
                         AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
                         dialog.setMessage("La fecha de inicio no puede ser mayor que la final");
