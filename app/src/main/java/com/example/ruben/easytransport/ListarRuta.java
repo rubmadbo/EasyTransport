@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -46,7 +49,7 @@ public class ListarRuta extends ActionBarActivity {
 
         //Insercion de las rutas en el listView
         ListView li = (ListView)findViewById(R.id.listView_rutas);
-        ArrayList<Ruta> listaRuta = new ArrayList();
+        final ArrayList<Ruta> listaRuta = new ArrayList();
         Ruta ruta;
 
         //Conexión a la base de datos
@@ -74,14 +77,35 @@ public class ListarRuta extends ActionBarActivity {
         ArrayAdapter<Ruta> adap = new ArrayAdapter<Ruta>(ListarRuta.this,android.R.layout.simple_list_item_1, listaRuta);
         adap.notifyDataSetChanged();
         li.setAdapter(adap);
+        ///////////////////////////////////////////////////////////////////////
+        //JD: A partir de aqui es lo nuevo no consigo que en Intent Anadir_acuerdo .... pase de una pantalla a otra
+        //TODO: falta además crear un metodo que se llame borrarRuta y que borre solo la ruta si no tiene un acuerdo asociado
+        li.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+            //obtenemos la ruta seleccionada
+            Ruta rutaSelected = listaRuta.get(position);
+
+                Intent intent = new Intent(ListarRuta.this.getBaseContext(),AnadirAcuerdo.class);
+                intent.putExtra("Origen", rutaSelected.getOrigen());
+                intent.putExtra("Destino", rutaSelected.getDestino());
+                intent.putExtra("IdRuta", rutaSelected.getId());
+
+                startActivity(intent);
+
+                System.out.println("Eso es lo qu eenvia lita ruta Origen: "+rutaSelected.getOrigen()+" Destino: "+rutaSelected.getDestino()+" IdRuta: "+rutaSelected.getId());
+                // Empieza la activity
+                startActivity(intent);
+
+
+            }
+            ////////////////////////////////////////////////////////////////////
+        });
 
         cur.close();
         admin.close();
-
-
-
-
-
 
     }
 

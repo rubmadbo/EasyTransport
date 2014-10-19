@@ -41,8 +41,6 @@ public class VistaRutas extends Fragment {
         Cursor cur = db.rawQuery("SELECT * FROM Ruta", null);
 
 
-        //en vez de duplicar codigo llama aqui a getRuta()
-       // listaRuta = admin.getRutas();
         if(cur.moveToFirst()){
             do{
                 ruta = new Ruta(cur.getInt(0),cur.getString(1),cur.getString(2),cur.getString(3),cur.getString(4),

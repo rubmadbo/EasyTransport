@@ -2,6 +2,7 @@ package com.example.ruben.easytransport;
 
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -32,12 +33,25 @@ public class AnadirAcuerdo extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+
        final View rootView = inflater.inflate(R.layout.activity_anadir_acuerdo, container, false);
        Button botonAnadirAcuerdo = (Button) rootView.findViewById(R.id.buttonAnyadirAcuerdo);
         botonAnadirAcuerdo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                ///////////////////////////////////////////////////////////////////////
 
-            //JD:recogemos datos del formulario
+                //cogemos información de la ruta a la que hemos clicado
+                Intent intent = getActivity().getIntent();
+                String d = intent.getStringExtra("Des");
+                String o = intent.getStringExtra("Ori");
+                String rutaId = intent.getStringExtra("IdRuta");
+
+                System.out.println("Eso es lo que recibe AnadirAcuerdo Origen: "+o+" Destino: "+d+" IdRuta: "+rutaId);
+                ///////////////////////////////////////////////////////////////////////
+
+
+
+                //JD:recogemos datos del formulario
                 destino = (EditText)rootView.findViewById(R.id.editTDestinoAcuerdo);
                 origen = (EditText)rootView.findViewById(R.id.editTOrigenAcuerdo);
                 remitente = (EditText)rootView.findViewById(R.id.editTRemitente);
@@ -46,8 +60,8 @@ public class AnadirAcuerdo extends Fragment {
                 dinero = (EditText)rootView.findViewById(R.id.editTDinero);
                 comentario = (EditText)rootView.findViewById(R.id.editTComentarioAcuerdo);
                 recogida = (EditText)rootView.findViewById(R.id.editTRecogida);
-                String d = destino.getText().toString();
-                String o = origen.getText().toString();
+                //String d = destino.getText().toString();
+                //String o = origen.getText().toString();
                 String r = remitente.getText().toString();
                 String t = transportista.getText().toString();
                 String e = entrega.getText().toString();
@@ -71,7 +85,8 @@ public class AnadirAcuerdo extends Fragment {
                 if (cursor.moveToFirst()){
                     id =cursor.getCount()+1;}
             //insertamos datos
-                db.execSQL("INSERT INTO Acuerdo VALUES('"+id+"','"+t+"','"+r+"','1','"+din+"','"+com+"')");
+                // añadido rutaId, ahora se añaden con el Id de la ruta
+                db.execSQL("INSERT INTO Acuerdo VALUES('"+id+"','"+t+"','"+r+"','"+rutaId+"','"+din+"','"+com+"')");
 
                 List<Acuerdo> acuerdos= admin.getAcuerdos();
                 for (int i=0; i<acuerdos.size();i++){
@@ -82,7 +97,7 @@ public class AnadirAcuerdo extends Fragment {
                 dialog.setCancelable(true);
                 dialog.show();
 
-                //finish(); JD:NOSE QUE HACE ESTO pero estaba en getstion de rutas creo q lo puso fran lo ponemos?
+                //finish();
             }
         });
         return rootView;
