@@ -8,6 +8,7 @@
     <string name="title_section1">Gestión de rutas</string>
     <string name="title_section2">Listado de rutas</string>
     <string name="title_section3">Añadir acuerdo</string>
+    <string name="title_section4">Listar acuerdo</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example"></string>
@@ -37,7 +38,6 @@
     <string name="DesvioOrigen">Desvío del Origen</string>
     <string name="DesvioFin">Desvío de la llegada</string>
     <string name="BotonNuevaRuta">Nueva Búsqueda</string>
-    <string name="title_activity_listar_rutas">ListarRutas</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_listar_ruta">ListarRuta</string>

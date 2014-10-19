@@ -8,7 +8,8 @@
     <ListView
         android:id="@+id/listViewAcuerdos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="#49fffa8c" />
 
 
 </FrameLayout>

@@ -57,7 +57,7 @@ public class BusquedaRuta extends Fragment {
 
 
 
-                    if(_date!=null && _date2!=null && _fecha.compareTo(_fecha2)<=0 && _dest.length()>0 && _orig.length()>0) {
+                    if(_date!=null && _date2!=null && _fecha.compareTo(_fecha2)<=0 && _dest.length()>0 && _orig.length()>0 && year<=year_2) {
                         //Toast.makeText(this, "Realizando la búsqueda", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(getActivity().getBaseContext(),ListarRuta.class);
@@ -77,7 +77,7 @@ public class BusquedaRuta extends Fragment {
 
 
                     }
-                    if(_date!=null && _date2!=null && _fecha.compareTo(_fecha2)>0 && _dest.length()>0 && _orig.length()>0) {
+                    if(_date!=null && _date2!=null && _fecha.compareTo(_fecha2)>0 && _dest.length()>0 && _orig.length()>0 && year>year_2) {
 
                         AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
                         dialog.setMessage("La fecha de inicio no puede ser mayor que la final");

@@ -2,15 +2,14 @@ package com.example.ruben.easytransport;
 
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.support.v4.app.Fragment;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
@@ -39,14 +38,13 @@ public class AnadirAcuerdo extends Fragment {
         botonAnadirAcuerdo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ///////////////////////////////////////////////////////////////////////
-
+                String strtext = getArguments().getString("edttext");
                 //cogemos información de la ruta a la que hemos clicado
-                Intent intent = getActivity().getIntent();
-                String d = intent.getStringExtra("Des");
-                String o = intent.getStringExtra("Ori");
-                String rutaId = intent.getStringExtra("IdRuta");
+                String d = getArguments().getString("Origen");
+                String o = getArguments().getString("Destino");
+                int rutaId = getArguments().getInt("IdRuta");
 
-                System.out.println("Eso es lo que recibe AnadirAcuerdo Origen: "+o+" Destino: "+d+" IdRuta: "+rutaId);
+               // System.out.println("Eso es lo que recibe AnadirAcuerdo Origen: "+o+" Destino: "+d+" IdRuta: "+rutaId);
                 ///////////////////////////////////////////////////////////////////////
 
 

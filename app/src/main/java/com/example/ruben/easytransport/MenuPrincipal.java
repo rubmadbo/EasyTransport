@@ -53,10 +53,10 @@ public class MenuPrincipal extends ActionBarActivity
                 //Listado de rutas
                 fragment = new BusquedaRuta();
                 break;
-           /* case 2:
-                //Añadir acuerdo
-                fragment = new AnadirAcuerdo();
-                break;*/
+            case 2:
+                //Listar acuerdo
+                fragment = new ListarAcuerdos();
+                break;
 
         }
         fragmentManager.beginTransaction()
@@ -72,9 +72,9 @@ public class MenuPrincipal extends ActionBarActivity
             case 2:
                 mTitle = getString(R.string.title_section2);
                 break;
-         /*   case 3:
-                mTitle = getString(R.string.title_section3);
-                break;*/
+            case 3:
+                mTitle = getString(R.string.title_section4);
+                break;
         }
     }
 
