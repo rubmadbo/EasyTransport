@@ -67,7 +67,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/editTOrigenAcuerdo"
             android:layout_marginTop="15dp"
-            android:background="#ffffffff" />
+            android:background="#ffffffff"
+            android:editable="false"
+            android:enabled="true" />
 
         <TextView
             android:text="@string/Destino"
@@ -84,7 +86,8 @@
             android:hint="@string/textoDestino"
             android:id="@+id/editTDestinoAcuerdo"
             android:layout_marginTop="15dp"
-            android:background="#ffffffff" />
+            android:background="#ffffffff"
+            android:enabled="true" />
 
         <TextView
             android:text="@string/Entrega"

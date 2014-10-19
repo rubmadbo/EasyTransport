@@ -44,11 +44,6 @@ public class AnadirAcuerdo extends Activity {
                 String orig_ = intent.getStringExtra("Destino");
                 String rutaId= intent.getStringExtra("IdRuta");
 
-               // System.out.println("Eso es lo que recibe AnadirAcuerdo Origen: "+o+" Destino: "+d+" IdRuta: "+rutaId);
-                ///////////////////////////////////////////////////////////////////////
-
-
-
                 //JD:recogemos datos del formulario
                 destino = (EditText)rootView.findViewById(R.id.editTDestinoAcuerdo);
                 origen = (EditText)rootView.findViewById(R.id.editTOrigenAcuerdo);

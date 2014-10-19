@@ -1,10 +1,10 @@
 package com.example.ruben.easytransport;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import Objetos.Ruta;
 
 
-public class ListarRuta extends ActionBarActivity {
+public class ListarRuta extends Activity {
 
 
     private Button boton;
