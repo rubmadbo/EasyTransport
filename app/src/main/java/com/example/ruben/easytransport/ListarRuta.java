@@ -1,6 +1,8 @@
 package com.example.ruben.easytransport;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -82,7 +85,6 @@ public class ListarRuta extends Activity {
                                     int position, long id) {
 
 
-
                 Ruta rutaSelected = listaRuta.get(position);
                 Intent intent = new Intent(ListarRuta.this, Anadir_acuerdo.class);
                 String origen_ruta = rutaSelected.getOrigen();
@@ -94,11 +96,35 @@ public class ListarRuta extends Activity {
                 startActivity(intent);
 
 
-
-
             }
 
         });
+
+        li.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                final AlertDialog.Builder b = new AlertDialog.Builder(ListarRuta.this);
+                b.setIcon(android.R.drawable.ic_dialog_alert);
+                b.setMessage("¿Desea borrar la ruta seleccionada?");
+                b.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(ListarRuta.this, "administracion", null, 1);
+                        Ruta rutaSelected = listaRuta.get(position);
+                        admin.borrarRuta(rutaSelected.getId());
+                        Toast.makeText(ListarRuta.this, "La ruta ha sido borrada", Toast.LENGTH_LONG).show();
+                    }
+                });
+                b.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+
+                b.show();
+                return true;
+
+            }
+        });
+
 
         cur.close();
         admin.close();
