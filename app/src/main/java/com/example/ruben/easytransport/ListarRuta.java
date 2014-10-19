@@ -1,10 +1,13 @@
 package com.example.ruben.easytransport;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -52,7 +56,7 @@ public class ListarRuta extends Activity {
         Ruta ruta;
 
         //Conexión a la base de datos
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(ListarRuta.this, "administracion", null, 1);
+        final AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(ListarRuta.this, "administracion", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
 
         //Sacamos todo a pelo y luego se mejora
@@ -103,6 +107,32 @@ public class ListarRuta extends Activity {
             }
 
         });
+
+        li.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                final AlertDialog.Builder b = new AlertDialog.Builder(ListarRuta.this);
+                b.setIcon(android.R.drawable.ic_dialog_alert);
+                b.setMessage("¿Desea borrar la ruta seleccionada?");
+                b.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(ListarRuta.this, "administracion", null, 1);
+                        Ruta rutaSelected = listaRuta.get(position);
+                        admin.borrarRuta(rutaSelected.getId());
+                        Toast.makeText(ListarRuta.this,"La ruta ha sido borrada",Toast.LENGTH_LONG).show();
+                    }
+                });
+                b.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+
+                b.show();
+                return true;
+
+            }
+        });
+
 
         cur.close();
         admin.close();
