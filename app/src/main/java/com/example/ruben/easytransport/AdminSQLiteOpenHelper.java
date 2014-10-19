@@ -140,10 +140,20 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     }
     ///////////////////////////////////////////////////////////////////////////////////////
-    private void borrarRuta(int rutaid) {
+    public void borrarRuta(int rutaid) {
 
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM Acuerdo WHERE ruta=");
+        String selectQuery = "SELECT * FROM Acuerdo WHERE ruta="+rutaid+"";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        //devuelve false si no hay ninguno que cumple la query
+        if (cursor.moveToFirst()){
+            //mensaje de error
+            System.out.println("No se puede eliminar la ruta, existe un acuerdo asociado");
+
+        }
+        //borrar la ruta
+        db.execSQL("DELETE FROM Ruta WHERE idRuta="+rutaid+"");
+
 
     }
     //////////////////////////////////////////////////////////////////////////////////////
