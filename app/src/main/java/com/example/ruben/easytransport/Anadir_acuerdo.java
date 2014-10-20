@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -33,26 +34,28 @@ public class Anadir_acuerdo extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anadir_acuerdo2);
+
+        destino = (EditText)findViewById(R.id.editTDestinoAcuerdo);
+        origen = (EditText)findViewById(R.id.editTOrigenAcuerdo);
+        remitente = (EditText)findViewById(R.id.editTRemitente);
+        transportista = (EditText)findViewById(R.id.editTTransportista);
+        entrega = (EditText)findViewById(R.id.editTEntrega);
+        dinero = (EditText)findViewById(R.id.editTDinero);
+        comentario = (EditText)findViewById(R.id.editTComentarioAcuerdo);
+        recogida = (EditText)findViewById(R.id.editTRecogida);
+
+        Intent intent = getIntent();
+        String dest_ = intent.getStringExtra("Origen");
+        String orig_ = intent.getStringExtra("Destino");
+        final int rutaId= intent.getIntExtra("IdRuta",0);
+        destino.setText(dest_);
+        origen.setText(orig_);
+
         Button botonAnadirAcuerdo = (Button)findViewById(R.id.buttonAnyadirAcuerdo);
         botonAnadirAcuerdo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = getIntent();
-                String dest_ = intent.getStringExtra("Origen");
-                String orig_ = intent.getStringExtra("Destino");
-                String rutaId= intent.getStringExtra("IdRuta");
 
                 //JD:recogemos datos del formulario
-                destino = (EditText)findViewById(R.id.editTDestinoAcuerdo);
-                origen = (EditText)findViewById(R.id.editTOrigenAcuerdo);
-                remitente = (EditText)findViewById(R.id.editTRemitente);
-                transportista = (EditText)findViewById(R.id.editTTransportista);
-                entrega = (EditText)findViewById(R.id.editTEntrega);
-                dinero = (EditText)findViewById(R.id.editTDinero);
-                comentario = (EditText)findViewById(R.id.editTComentarioAcuerdo);
-                recogida = (EditText)findViewById(R.id.editTRecogida);
-                destino.setText(dest_);
-                origen.setText(orig_);
-                origen.getText().toString();
                 String r = remitente.getText().toString();
                 String t = transportista.getText().toString();
                 String e = entrega.getText().toString();
@@ -79,16 +82,13 @@ public class Anadir_acuerdo extends ActionBarActivity {
                 // añadido rutaId, ahora se añaden con el Id de la ruta
                 db.execSQL("INSERT INTO Acuerdo VALUES('"+id+"','"+t+"','"+r+"','"+rutaId+"','"+din+"','"+com+"')");
 
-                List<Acuerdo> acuerdos= admin.getAcuerdos();
+                /*List<Acuerdo> acuerdos= admin.getAcuerdos();
                 for (int i=0; i<acuerdos.size();i++){
                     System.out.println(acuerdos.get(i).toString());
-                }
-                AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
-                dialog.setMessage("Se ha enviado el acuerdo");
-                dialog.setCancelable(true);
-                dialog.show();
+                }*/
+                Toast.makeText(Anadir_acuerdo.this, "Se ha enviado el acuerdo", Toast.LENGTH_LONG).show();
 
-                //finish();
+               finish();
             }
         });
 

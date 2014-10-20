@@ -88,13 +88,11 @@ public class Acuerdo {
 
     @Override
     public String toString() {
-        return "Acuerdo{" +
-                "id=" + id +
-                ", transportista=" + transportista +
-                ", cliente=" + cliente +
-                ", ruta=" + ruta +
-                ", precio=" + precio +
-                ", comentario='" + comentario + '\'' +
-                '}';
+        return "\nIdAcuerdo: " + getId() + "\n"+
+                 "Transportista:  " + getTransportista() +"\n"+
+                 "Cliente: " + getCliente() + "\n"+
+                 "IdRutaAsociada: " + getRuta() + "\n" +
+                 "Precio: " + getPrecio()+ "€\n"+
+                 "Comentario: " + getComentario()+ "\n";
     }
 }

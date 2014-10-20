@@ -60,17 +60,17 @@ public class ListarRuta extends Activity {
 
         //Sacamos todo a pelo y luego se mejora
         Cursor cur = db.rawQuery("SELECT * FROM Ruta", null);
-        String _fecha_acutal="";
+        String _fecha_actual="";
         if(cur.moveToFirst()){
             do{
                 ruta = new Ruta(cur.getInt(0),cur.getString(1),cur.getString(2),cur.getString(3),cur.getString(4),
                         cur.getString(5),cur.getString(6),cur.getInt(7));
                 dest= ruta.getDestino();
                 orig= ruta.getOrigen();
-                _fecha_acutal=ruta.getFecha();
+                _fecha_actual=ruta.getFecha();
 
 
-                if(dest.equalsIgnoreCase(message) &&orig.equalsIgnoreCase(message1)&&_fecha_acutal.compareTo(data1)>=0 && _fecha_acutal.compareTo(data2)<=0){
+                if(dest.equalsIgnoreCase(message) &&orig.equalsIgnoreCase(message1)&&_fecha_actual.compareTo(data1)>=0 && _fecha_acutal.compareTo(data2)<=0){
                 listaRuta.add(ruta);
                 }
 
@@ -110,8 +110,7 @@ public class ListarRuta extends Activity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(ListarRuta.this, "administracion", null, 1);
                         Ruta rutaSelected = listaRuta.get(position);
-                        admin.borrarRuta(rutaSelected.getId());
-                        Toast.makeText(ListarRuta.this, "La ruta ha sido borrada", Toast.LENGTH_LONG).show();
+                        borrarRuta(rutaSelected.getId());
                     }
                 });
                 b.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -128,6 +127,23 @@ public class ListarRuta extends Activity {
 
         cur.close();
         admin.close();
+
+    }
+
+    public void borrarRuta(int rutaid) {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(ListarRuta.this, "administracion", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();
+        String selectQuery = "SELECT * FROM Acuerdo WHERE ruta="+rutaid+"";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        //devuelve false si no hay ninguno que cumple la query
+        if (cursor.moveToFirst()){
+            Toast.makeText(ListarRuta.this, "No se puede borrar una ruta asociada a un Acuerdo", Toast.LENGTH_LONG).show();
+
+        }else {db.execSQL("DELETE FROM Ruta WHERE idRuta="+rutaid+"");
+            Toast.makeText(ListarRuta.this, "La ruta ha sido borrada", Toast.LENGTH_LONG).show();
+
+        }
+
 
     }
 

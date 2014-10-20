@@ -63,7 +63,6 @@
 
             <EditText
                 android:layout_width="327dp"
-                android:hint="@string/textoOrigen"
                 android:layout_height="wrap_content"
                 android:id="@+id/editTOrigenAcuerdo"
                 android:layout_marginTop="15dp"
@@ -83,11 +82,12 @@
             <EditText
                 android:layout_width="327dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/textoDestino"
                 android:id="@+id/editTDestinoAcuerdo"
                 android:layout_marginTop="15dp"
                 android:background="#ffffffff"
-                android:enabled="true" />
+                android:enabled="true"
+                android:editable="false"
+                />
 
             <TextView
                 android:text="@string/Entrega"

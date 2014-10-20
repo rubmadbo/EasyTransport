@@ -1,5 +1,6 @@
 package com.example.ruben.easytransport;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
@@ -15,6 +16,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.List;
+
+import Objetos.Ruta;
 
 
 public class GestionDeRutas extends ActionBarActivity {
@@ -91,6 +94,7 @@ public class GestionDeRutas extends ActionBarActivity {
 
 
             //db.delete("Ruta",null,null); //JD:se carga SOLO el contenido de la tabla
+            //db.delete("Acuerdo",null,null);
             //JD:Ruta no guarda el vehiculo .. Donde lo inserto? horaFIN que cojones¿?¿? he puesto el comntario por no dejarlo vacio
             db.execSQL("INSERT INTO Ruta VALUES('"+id+"','"+o+"','"+d+"','"+fecha+"','"+horaInicio+"','¿NUSE?','"+com+"','"+idTransportista+"')");
 
@@ -104,6 +108,7 @@ public class GestionDeRutas extends ActionBarActivity {
             //sin de un error.
             Toast.makeText(this, "La ruta se ha insertado correctamente", Toast.LENGTH_SHORT).show();
             finish();
+
         }
         else if(o.equals(d)){   Toast.makeText(this, "El origen no puede ser igual al destino", Toast.LENGTH_SHORT).show();
         }
