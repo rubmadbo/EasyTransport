@@ -46,12 +46,12 @@ public class BusquedaRuta extends Fragment {
                     int mes = _date.getMonth();
                     int year= _date.getYear();
                     int dia = _date.getDayOfMonth();
-                    String _fecha = String.format("%d/%d/%d", dia, mes, year);
+                    String _fecha = String.format("%d/%d/%d", dia, mes+1, year);
 
                     int mes_2 = _date2.getMonth();
                     int year_2= _date2.getYear();
                     int dia_2 = _date2.getDayOfMonth();
-                    String _fecha2 = String.format("%d/%d/%d", dia_2, mes_2, year_2);
+                    String _fecha2 = String.format("%d/%d/%d", dia_2, mes_2+1, year_2);
 
 
 

@@ -70,7 +70,7 @@ public class ListarRuta extends Activity {
                 _fecha_actual=ruta.getFecha();
 
 
-                if(dest.equalsIgnoreCase(message) &&orig.equalsIgnoreCase(message1)&&_fecha_actual.compareTo(data1)>=0 && _fecha_acutal.compareTo(data2)<=0){
+                if(dest.equalsIgnoreCase(message) &&orig.equalsIgnoreCase(message1)&&_fecha_actual.compareTo(data1)>=0 && _fecha_actual.compareTo(data2)<=0){
                 listaRuta.add(ruta);
                 }
 

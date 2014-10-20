@@ -64,7 +64,7 @@ public class Anadir_acuerdo extends ActionBarActivity {
                 String rec = recogida.getText().toString();
 
                 dP= (DatePicker)findViewById(R.id.datePickerAcuerdo);
-                int mes = dP.getMonth();
+                int mes = dP.getMonth()+1;
                 int year= dP.getYear();
                 int dia = dP.getDayOfMonth();
                 String fecha = String.format("%d/%d/%d", dia, mes, year);

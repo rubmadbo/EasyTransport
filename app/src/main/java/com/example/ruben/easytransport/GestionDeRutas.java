@@ -70,7 +70,7 @@ public class GestionDeRutas extends ActionBarActivity {
         int mes = dP.getMonth();
         int year= dP.getYear();
         int dia = dP.getDayOfMonth();
-        String fecha = String.format("%d/%d/%d", dia, mes, year);
+        String fecha = String.format("%d/%d/%d", dia, mes+1, year);
 
         tP = (TimePicker)findViewById(R.id.timePicker);
         int hora = tP.getCurrentHour();
@@ -94,7 +94,7 @@ public class GestionDeRutas extends ActionBarActivity {
 
 
             //db.delete("Ruta",null,null); //JD:se carga SOLO el contenido de la tabla
-            //db.delete("Acuerdo",null,null);
+           // db.delete("Acuerdo",null,null);
             //JD:Ruta no guarda el vehiculo .. Donde lo inserto? horaFIN que cojones¿?¿? he puesto el comntario por no dejarlo vacio
             db.execSQL("INSERT INTO Ruta VALUES('"+id+"','"+o+"','"+d+"','"+fecha+"','"+horaInicio+"','¿NUSE?','"+com+"','"+idTransportista+"')");
 
