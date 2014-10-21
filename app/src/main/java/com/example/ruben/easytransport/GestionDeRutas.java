@@ -1,5 +1,7 @@
 package com.example.ruben.easytransport;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,9 +10,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -34,9 +38,9 @@ public class GestionDeRutas extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gestion_de_rutas);
-
         rellenarSpinner();
     }
+
     public void rellenarSpinner(){
         try {
             spinner = (Spinner) findViewById(R.id.lista1);
@@ -80,7 +84,7 @@ public class GestionDeRutas extends ActionBarActivity {
         comentario =(EditText)findViewById(R.id.editTComentario);
         String com = comentario.getText().toString();
 
-        if(!d.equals("") && !o.equals("") && !com.equals("")){
+        if(!d.equals("") && !o.equals("")){
             // meterlos a la BBDD
             SQLiteDatabase db = admin.getWritableDatabase();
 
@@ -117,6 +121,8 @@ public class GestionDeRutas extends ActionBarActivity {
         }
 
     }
+
+
 
 
     @Override

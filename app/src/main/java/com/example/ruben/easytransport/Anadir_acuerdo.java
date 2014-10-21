@@ -44,9 +44,10 @@ public class Anadir_acuerdo extends ActionBarActivity {
         comentario = (EditText)findViewById(R.id.editTComentarioAcuerdo);
         recogida = (EditText)findViewById(R.id.editTRecogida);
 
+
         Intent intent = getIntent();
-        String dest_ = intent.getStringExtra("Origen");
-        String orig_ = intent.getStringExtra("Destino");
+        String dest_ = intent.getStringExtra("Destino");
+        String orig_ = intent.getStringExtra("Origen");
         final int rutaId= intent.getIntExtra("IdRuta",0);
         destino.setText(dest_);
         origen.setText(orig_);
@@ -63,32 +64,39 @@ public class Anadir_acuerdo extends ActionBarActivity {
                 String com = comentario.getText().toString();
                 String rec = recogida.getText().toString();
 
-                dP= (DatePicker)findViewById(R.id.datePickerAcuerdo);
-                int mes = dP.getMonth()+1;
-                int year= dP.getYear();
-                int dia = dP.getDayOfMonth();
-                String fecha = String.format("%d/%d/%d", dia, mes, year);
+                if(!r.equals("") && !t.equals("") && !e.equals("") && !rec.equals("") && !din.equals("")){
+                    dP= (DatePicker)findViewById(R.id.datePickerAcuerdo);
+                    int mes = dP.getMonth()+1;
+                    int year= dP.getYear();
+                    int dia = dP.getDayOfMonth();
+                    String fecha = String.format("%d/%d/%d", dia, mes, year);
 
-                //conexion a bbdd
-                AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(Anadir_acuerdo.this, "administracion", null, 1);
-                SQLiteDatabase db = admin.getWritableDatabase();
-                //sacamos el id que le corresponde a este acuerdo
-                String selectQuery = "SELECT * FROM Acuerdo";
-                Cursor cursor = db.rawQuery(selectQuery, null);
-                int id=1;
-                if (cursor.moveToFirst()){
-                    id =cursor.getCount()+1;}
-                //insertamos datos
-                // añadido rutaId, ahora se añaden con el Id de la ruta
-                db.execSQL("INSERT INTO Acuerdo VALUES('"+id+"','"+t+"','"+r+"','"+rutaId+"','"+din+"','"+com+"')");
+                    //conexion a bbdd
+                    AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(Anadir_acuerdo.this, "administracion", null, 1);
+                    SQLiteDatabase db = admin.getWritableDatabase();
+                    //sacamos el id que le corresponde a este acuerdo
+                    String selectQuery = "SELECT * FROM Acuerdo";
+                    Cursor cursor = db.rawQuery(selectQuery, null);
+                    int id=1;
+                    if (cursor.moveToFirst()){
+                        id =cursor.getCount()+1;}
+                    //insertamos datos
+                    // añadido rutaId, ahora se añaden con el Id de la ruta
+                    db.execSQL("INSERT INTO Acuerdo VALUES('"+id+"','"+t+"','"+r+"','"+rutaId+"','"+din+"','"+com+"')");
 
                 /*List<Acuerdo> acuerdos= admin.getAcuerdos();
                 for (int i=0; i<acuerdos.size();i++){
                     System.out.println(acuerdos.get(i).toString());
                 }*/
-                Toast.makeText(Anadir_acuerdo.this, "Se ha enviado el acuerdo", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Anadir_acuerdo.this, "Se ha enviado el acuerdo", Toast.LENGTH_LONG).show();
 
-               finish();
+                    finish();
+                }
+                else{
+                    Toast.makeText(Anadir_acuerdo.this, "Rellene todos los campos", Toast.LENGTH_LONG).show();
+                }
+
+
             }
         });
 

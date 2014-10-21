@@ -1,6 +1,8 @@
 package com.example.ruben.easytransport;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,10 +11,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TableLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +29,12 @@ public class VistaRutas extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.activity_vista_rutas, container, false);
+        final View rootView = inflater.inflate(R.layout.activity_vista_rutas, container, false);
         Button boton = (Button) rootView.findViewById(R.id.buttonAnyadir);
 
         //Insercion de las rutas en el listView
         ListView li = (ListView) rootView.findViewById(R.id.listViewRutas);
-        ArrayList<Ruta> listaRuta = new ArrayList();
+        final ArrayList<Ruta> listaRuta = new ArrayList();
         Ruta ruta;
 
         //Conexión a la base de datos
@@ -54,6 +58,30 @@ public class VistaRutas extends Fragment {
         adap.notifyDataSetChanged();
         li.setAdapter(adap);
 
+        li.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
+                final AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
+                b.setIcon(android.R.drawable.ic_dialog_alert);
+                b.setMessage("¿Desea borrar la ruta seleccionada?");
+                b.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(view.getContext(), "administracion", null, 1);
+                        Ruta rutaSelected = listaRuta.get(position);
+                        borrarRuta(rutaSelected.getId());
+                    }
+                });
+                b.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+
+                b.show();
+                return true;
+
+            }
+        });
+
         //Cerramos la conexion
         cur.close();
         admin.close();
@@ -65,6 +93,21 @@ public class VistaRutas extends Fragment {
             }
         });
     return rootView;
+    }
+
+    public void borrarRuta(int rutaid) {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(VistaRutas.this.getActivity(), "administracion", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();
+        String selectQuery = "SELECT * FROM Acuerdo WHERE ruta="+rutaid+"";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        //devuelve false si no hay ninguno que cumple la query
+        if (cursor.moveToFirst()){
+            Toast.makeText(VistaRutas.this.getActivity(), "No se puede borrar una ruta asociada a un Acuerdo", Toast.LENGTH_LONG).show();
+
+        }else {db.execSQL("DELETE FROM Ruta WHERE idRuta="+rutaid+"");
+            Toast.makeText(VistaRutas.this.getActivity(), "La ruta ha sido borrada", Toast.LENGTH_LONG).show();
+
+        }
     }
 
 

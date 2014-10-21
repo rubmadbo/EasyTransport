@@ -99,7 +99,7 @@ public class ListarRuta extends Activity {
             }
 
         });
-
+        /*
         li.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -122,14 +122,14 @@ public class ListarRuta extends Activity {
                 return true;
 
             }
-        });
+        });*/
 
 
         cur.close();
         admin.close();
 
     }
-
+    /*
     public void borrarRuta(int rutaid) {
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(ListarRuta.this, "administracion", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
@@ -143,10 +143,8 @@ public class ListarRuta extends Activity {
             Toast.makeText(ListarRuta.this, "La ruta ha sido borrada", Toast.LENGTH_LONG).show();
 
         }
-
-
     }
-
+*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
