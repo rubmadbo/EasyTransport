@@ -118,8 +118,7 @@ public class Ruta {
 
     @Override
     public String toString() {
-       return "\nIdRuta:\t" + getId() + "\n"+
-               "Origen:\t\t" + getOrigen() +"\n"+
+       return   "\nOrigen:\t\t" + getOrigen() +"\n"+
                 "Destino:\t" + getDestino() + "\n"+
                 "Fecha:\t" + getFecha() + "\n" +
                 "Hora:\t" + getHoraInicio()+ "\n";

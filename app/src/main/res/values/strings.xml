@@ -4,6 +4,12 @@
     <string name="app_name">Menu</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_menu_principal">EasyTransport</string>
+    <string name="title_activity_listar_ruta">Ver acuerdos</string>
+    <string name="title_activity_gestion_de_rutas">Añadir ruta</string>
+    <string name="title_activity_vista_rutas">vistaRutas</string>
+    <string name="title_activity_anadir_acuerdo">anadir_acuerdo</string>
+    <string name="title_activity_busqueda_ruta">BusquedaRuta</string>
+
     <string name="title_section1">Gestión de rutas</string>
     <string name="title_section2">Listado de rutas</string>
     <string name="title_section4">Ver Acuerdos</string>
@@ -12,7 +18,7 @@
     <string name="action_example"></string>
 
     <!-- JD:  Strings de Gestion de rutas -->
-    <string name="title_activity_gestion_de_rutas">Añadir ruta</string>
+
     <string name="Spinner">Vehiculo</string>
     <string name="Origen">Origen</string>
     <string name="Destino">Destino</string>
@@ -22,13 +28,13 @@
     <string name="formatoFecha">dd/mm/yyyy</string>
     <string name="Hora">Hora</string>
     <string name="Comentario">Comentarios adicionales</string>
-    <string name="title_activity_vista_rutas">vistaRutas</string>
+
 
     <!-- Fran: Strings de VistaRutas -->
     <string name="Anyadir">Añadir ruta</string>
-    <string name="title_activity_anadir_acuerdo">anadir_acuerdo</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_busqueda_ruta">BusquedaRuta</string>
+
     <!-- Adr:Strings busqueda y listado -->
     <string name="FechaIni">A partir de </string>
     <string name="FechaFin">Hasta</string>
@@ -38,7 +44,7 @@
     <string name="BotonNuevaRuta">Nueva Búsqueda</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_activity_listar_ruta">Ver acuerdos</string>
+
 
     <!-- String Añadir acuerdo -->
     <string name="Remitente">Remitente</string>

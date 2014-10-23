@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.List;
 
 import Objetos.Ruta;
@@ -100,8 +101,13 @@ public class GestionDeRutas extends ActionBarActivity {
             //db.delete("Ruta",null,null); //JD:se carga SOLO el contenido de la tabla
            // db.delete("Acuerdo",null,null);
             //JD:Ruta no guarda el vehiculo .. Donde lo inserto? horaFIN que cojones¿?¿? he puesto el comntario por no dejarlo vacio
-            db.execSQL("INSERT INTO Ruta VALUES('"+id+"','"+o+"','"+d+"','"+fecha+"','"+horaInicio+"','¿NUSE?','"+com+"','"+idTransportista+"')");
+           try {
+               db.execSQL("INSERT INTO Ruta VALUES('" + id + "','" + o + "','" + d + "','" + fecha + "','" + horaInicio + "','¿NUSE?','" + com + "','" + idTransportista + "')");
+           }catch (Exception e){
+               id += 10;
+               db.execSQL("INSERT INTO Ruta VALUES('" + id + "','" + o + "','" + d + "','" + fecha + "','" + horaInicio + "','¿NUSE?','" + com + "','" + idTransportista + "')");
 
+           }
             //JD:printa todas las rutas guardas en el log
             /*List<Ruta> rutas= admin.getRutas();
             for (int i=0; i<rutas.size();i++){
