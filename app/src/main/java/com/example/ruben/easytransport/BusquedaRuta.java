@@ -12,6 +12,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.Calendar;
+
 public class BusquedaRuta extends Fragment {
 
 
@@ -54,7 +56,12 @@ public class BusquedaRuta extends Fragment {
                     String _fecha2 = String.format("%d/%d/%d", dia_2, mes_2+1, year_2);
 
 
+                    Calendar calendar = Calendar.getInstance();
+                    _date.setMinDate(calendar.getTimeInMillis());
+                    _date2.setMinDate(calendar.getTimeInMillis());
 
+
+                    _date.showContextMenu();
 
 
                     if(_date!=null && _date2!=null && _fecha.compareTo(_fecha2)<=0 && _dest.length()>0 && _orig.length()>0 && year<=year_2) {

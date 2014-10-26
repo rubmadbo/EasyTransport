@@ -99,8 +99,7 @@
            android:spinnersShown="true"
            android:calendarViewShown="false"
            android:layout_gravity="center"
-           android:clickable="true"
-            />
+           android:clickable="true" />
 
        <TextView
            android:text="@string/Hora"

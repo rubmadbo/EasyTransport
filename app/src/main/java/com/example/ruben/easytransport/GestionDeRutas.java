@@ -1,28 +1,21 @@
 package com.example.ruben.easytransport;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
-
-import Objetos.Ruta;
 
 
 public class GestionDeRutas extends ActionBarActivity {
@@ -39,8 +32,12 @@ public class GestionDeRutas extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gestion_de_rutas);
+
         rellenarSpinner();
     }
+
+
+
 
     public void rellenarSpinner(){
         try {
@@ -52,10 +49,10 @@ public class GestionDeRutas extends ActionBarActivity {
 
         }catch (Exception e){
             System.out.println("MENSAJE DE ERROR ----------------------------------------> ");
-            e.printStackTrace();
+
         }
     }
-    public void buttonOnClick(View v){
+   public void buttonOnClick(View v){
        // Toast.makeText(this, "Has pulsado el botón",Toast.LENGTH_SHORT).show();
 
         //Button btAceptar = (Button) v;
@@ -71,21 +68,35 @@ public class GestionDeRutas extends ActionBarActivity {
         String d = destino.getText().toString();
         String o = origen.getText().toString();
 
+
+
+
+
         dP= (DatePicker)findViewById(R.id.datePicker);
+
+
         int mes = dP.getMonth();
         int year= dP.getYear();
         int dia = dP.getDayOfMonth();
-        String fecha = String.format("%d/%d/%d", dia, mes+1, year);
+        String fecha = String.format("%d/%d/%d", dia, mes + 1, year);
 
         tP = (TimePicker)findViewById(R.id.timePicker);
         int hora = tP.getCurrentHour();
         int minutos =tP.getCurrentMinute();
+
         String horaInicio = String.format("%d:%d", hora, minutos);
+
+       dP= (DatePicker)findViewById(R.id.datePicker);
+       Calendar calendar = Calendar.getInstance();
+       dP.setMinDate(calendar.getTimeInMillis());
 
         comentario =(EditText)findViewById(R.id.editTComentario);
         String com = comentario.getText().toString();
 
-        if(!d.equals("") && !o.equals("")){
+
+
+
+        if(!d.equals("") && !o.equals("") && !com.equals("")){
             // meterlos a la BBDD
             SQLiteDatabase db = admin.getWritableDatabase();
 
@@ -101,13 +112,8 @@ public class GestionDeRutas extends ActionBarActivity {
             //db.delete("Ruta",null,null); //JD:se carga SOLO el contenido de la tabla
            // db.delete("Acuerdo",null,null);
             //JD:Ruta no guarda el vehiculo .. Donde lo inserto? horaFIN que cojones¿?¿? he puesto el comntario por no dejarlo vacio
-           try {
-               db.execSQL("INSERT INTO Ruta VALUES('" + id + "','" + o + "','" + d + "','" + fecha + "','" + horaInicio + "','¿NUSE?','" + com + "','" + idTransportista + "')");
-           }catch (Exception e){
-               id += 10;
-               db.execSQL("INSERT INTO Ruta VALUES('" + id + "','" + o + "','" + d + "','" + fecha + "','" + horaInicio + "','¿NUSE?','" + com + "','" + idTransportista + "')");
+            db.execSQL("INSERT INTO Ruta VALUES('"+id+"','"+o+"','"+d+"','"+fecha+"','"+horaInicio+"','¿NUSE?','"+com+"','"+idTransportista+"')");
 
-           }
             //JD:printa todas las rutas guardas en el log
             /*List<Ruta> rutas= admin.getRutas();
             for (int i=0; i<rutas.size();i++){
@@ -120,15 +126,21 @@ public class GestionDeRutas extends ActionBarActivity {
             finish();
 
         }
-        else if(o.equals(d)){   Toast.makeText(this, "El origen no puede ser igual al destino", Toast.LENGTH_SHORT).show();
+        //crack aqui no se mete nunca a no ser que sean en blanco las dos
+        else if(o.equals(d)){
+            if(o.equals(""))
+                Toast.makeText(this, "Debe de completar el origen y el destino", Toast.LENGTH_SHORT).show();
+            else
+            Toast.makeText(this, "El origen no puede ser igual al destino", Toast.LENGTH_SHORT).show();
         }
-        else{
-            Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
+        else {
+            if(d.equals("") && o.equals("") && com.equals(""))
+                Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "Fecha anterior no permitida", Toast.LENGTH_SHORT).show();
         }
 
     }
-
-
 
 
     @Override

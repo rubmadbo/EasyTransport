@@ -1,11 +1,10 @@
 package com.example.ruben.easytransport;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,10 +12,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.util.List;
-
-import Objetos.Acuerdo;
 
 
 public class Anadir_acuerdo extends ActionBarActivity {
@@ -65,11 +60,11 @@ public class Anadir_acuerdo extends ActionBarActivity {
                 String rec = recogida.getText().toString();
 
                 if(!r.equals("") && !t.equals("") && !e.equals("") && !rec.equals("") && !din.equals("")){
-                    dP= (DatePicker)findViewById(R.id.datePickerAcuerdo);
+                   /* dP= (DatePicker)findViewById(R.id.datePickerAcuerdo);
                     int mes = dP.getMonth()+1;
                     int year= dP.getYear();
                     int dia = dP.getDayOfMonth();
-                    String fecha = String.format("%d/%d/%d", dia, mes, year);
+                    String fecha = String.format("%d/%d/%d", dia, mes, year);*/
 
                     //conexion a bbdd
                     AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(Anadir_acuerdo.this, "administracion", null, 1);

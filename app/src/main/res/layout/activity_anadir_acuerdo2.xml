@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editTOrigenAcuerdo"
                 android:layout_marginTop="15dp"
-                android:background="#ffffffff"
+                android:background="#d600af91"
                 android:editable="false"
                 android:enabled="true" />
 
@@ -84,10 +84,10 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editTDestinoAcuerdo"
                 android:layout_marginTop="15dp"
-                android:background="#ffffffff"
+                android:background="#d600af91"
                 android:enabled="true"
                 android:editable="false"
-                />
+                android:clickable="true" />
 
             <TextView
                 android:text="@string/Entrega"
@@ -149,15 +149,6 @@
                 android:layout_marginTop="15dp"
                 android:textColor="#610B0B"
                 android:textSize="20sp" />
-
-            <DatePicker
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/datePickerAcuerdo"
-                android:layout_gravity="center"
-                android:calendarViewShown="false"
-                android:clickable="true"
-                />
 
 
             <TextView
