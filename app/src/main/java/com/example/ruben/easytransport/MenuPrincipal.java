@@ -74,7 +74,7 @@ public class MenuPrincipal extends ActionBarActivity
                 break;
             case 3:
                 //mTitle = getString(R.string.title_section4);
-                mTitle = "Ver Acuerdos";
+                mTitle = getString(R.string.title_section3);
                 break;
         }
     }

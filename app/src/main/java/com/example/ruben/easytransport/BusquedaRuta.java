@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -64,16 +65,28 @@ public class BusquedaRuta extends Fragment {
                 Calendar calendar = Calendar.getInstance();
 
 
-                int mes = _date.getMonth();
+                int mes = _date.getMonth()+1;
                 int year = _date.getYear();
                 int dia = _date.getDayOfMonth();
                 String _fecha = String.format("%d/%d/%d", dia, mes + 1, year);
+                if (year<2014 || (year>=2014 && mes<10 ) || (year>=2014 && mes>=10 && dia<28)){//supermierda de xapuza
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
+                    dialog.setMessage("No se puede insertar una fecha anterior al día de hoy");
+                    dialog.setCancelable(true);
+                    dialog.show();
+                }
 
-                int mes_2 = _date2.getMonth();
+                int mes_2 = _date2.getMonth()+1;
                 int year_2 = _date2.getYear();
                 int dia_2 = _date2.getDayOfMonth();
                 String _fecha2 = String.format("%d/%d/%d", dia_2, mes_2 + 1, year_2);
+                if (year_2<2014 || (year_2>=2014 && mes_2<10 ) || (year_2>=2014 && mes_2>=10 && dia_2<28)){//supermierda de xapuza
 
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
+                    dialog.setMessage("No se puede insertar una fecha anterior al día de hoy");
+                    dialog.setCancelable(true);
+                    dialog.show();
+                }
 
                 final Calendar c = Calendar.getInstance();
                 pYear = c.get(Calendar.YEAR);
@@ -130,7 +143,7 @@ public class BusquedaRuta extends Fragment {
 
         //hacerlo asi o parecido para como lo otro la movida de el busqueda esque va sorpresa es por los fragments habra algo...
     // Date picker
-    public Dialog onCreateDialog(int id) {
+   /* public Dialog onCreateDialog(int id) {
         switch (id) {
             case DATE_DIALOG_ID:
 
@@ -165,7 +178,7 @@ public class BusquedaRuta extends Fragment {
 
         }
         return null;
-    }
+    }*/
 
 }
 
