@@ -79,56 +79,58 @@ public class GestionDeRutas extends ActionBarActivity {
         if (year<2014 || (year>=2014 && mes<10 ) || (year>=2014 && mes>=10 && dia<28)){//supermierda de xapuza
 
             Toast.makeText(this, "No se puede insertar una fecha anterior al día de hoy", Toast.LENGTH_SHORT).show();
-        }
+            finish();
+        }else {
 
-        tP = (TimePicker)findViewById(R.id.timePicker);
-        int hora = tP.getCurrentHour();
-        int minutos =tP.getCurrentMinute();
-        String horaInicio = String.format("%d:%d", hora, minutos);
+            tP = (TimePicker) findViewById(R.id.timePicker);
+            int hora = tP.getCurrentHour();
+            int minutos = tP.getCurrentMinute();
+            String horaInicio = String.format("%d:%d", hora, minutos);
 
-        comentario =(EditText)findViewById(R.id.editTComentario);
-        String com = comentario.getText().toString();
+            comentario = (EditText) findViewById(R.id.editTComentario);
+            String com = comentario.getText().toString();
 
-        if(!d.equals("") && !o.equals("")){
-            // meterlos a la BBDD
-            SQLiteDatabase db = admin.getWritableDatabase();
+            if (!d.equals("") && !o.equals("")) {
+                // meterlos a la BBDD
+                SQLiteDatabase db = admin.getWritableDatabase();
 
-            //el id de Ruta deberia de aumentar con dada ruta
-            String selectQuery = "SELECT * FROM Ruta";
-            Cursor cursor = db.rawQuery(selectQuery, null);
-            int id=1;
-            int idTransportista=1; //esto de momento hasta q tengamos usuario sino seria =u.getUsuario().id;
-            if (cursor.moveToFirst()){
-                id =cursor.getCount()+1;}
+                //el id de Ruta deberia de aumentar con dada ruta
+                String selectQuery = "SELECT * FROM Ruta";
+                Cursor cursor = db.rawQuery(selectQuery, null);
+                int id = 1;
+                int idTransportista = 1; //esto de momento hasta q tengamos usuario sino seria =u.getUsuario().id;
+                if (cursor.moveToFirst()) {
+                    id = cursor.getCount() + 1;
+                }
 
 
-            //db.delete("Ruta",null,null); //JD:se carga SOLO el contenido de la tabla
-            // db.delete("Acuerdo",null,null);
-            //JD:Ruta no guarda el vehiculo .. Donde lo inserto? horaFIN que cojones¿?¿? he puesto el comntario por no dejarlo vacio
-            try {
-                db.execSQL("INSERT INTO Ruta VALUES('" + id + "','" + o + "','" + d + "','" + fecha + "','" + horaInicio + "','¿NUSE?','" + com + "','" + idTransportista + "')");
-            }catch (Exception e){
-                id += 10;
-                db.execSQL("INSERT INTO Ruta VALUES('" + id + "','" + o + "','" + d + "','" + fecha + "','" + horaInicio + "','¿NUSE?','" + com + "','" + idTransportista + "')");
+                //db.delete("Ruta",null,null); //JD:se carga SOLO el contenido de la tabla
+                // db.delete("Acuerdo",null,null);
+                //JD:Ruta no guarda el vehiculo .. Donde lo inserto? horaFIN que cojones¿?¿? he puesto el comntario por no dejarlo vacio
+                try {
+                    db.execSQL("INSERT INTO Ruta VALUES('" + id + "','" + o + "','" + d + "','" + fecha + "','" + horaInicio + "','¿NUSE?','" + com + "','" + idTransportista + "')");
+                } catch (Exception e) {
+                    id += 10;
+                    db.execSQL("INSERT INTO Ruta VALUES('" + id + "','" + o + "','" + d + "','" + fecha + "','" + horaInicio + "','¿NUSE?','" + com + "','" + idTransportista + "')");
 
-            }
-            //JD:printa todas las rutas guardas en el log
+                }
+                //JD:printa todas las rutas guardas en el log
             /*List<Ruta> rutas= admin.getRutas();
             for (int i=0; i<rutas.size();i++){
                 System.out.println(rutas.get(i).toString());
             }*/
 
-            //Fran: Justo antes del toast de deberia de hacer la actualización del ListView de VistaRutas, pero no consigo que vaya
-            //sin de un error.
-            Toast.makeText(this, "La ruta se ha insertado correctamente", Toast.LENGTH_SHORT).show();
-            finish();
+                //Fran: Justo antes del toast de deberia de hacer la actualización del ListView de VistaRutas, pero no consigo que vaya
+                //sin de un error.
+                Toast.makeText(this, "La ruta se ha insertado correctamente", Toast.LENGTH_SHORT).show();
+                finish();
 
-        }
-        else if(o.equals(d)){   Toast.makeText(this, "El origen no puede ser igual al destino", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
-        }
+            } else if (o.equals(d)) {
+                Toast.makeText(this, "El origen no puede ser igual al destino", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
+            }
+        }//este borrarlo es de la xapuza supermierda
 
     }
 

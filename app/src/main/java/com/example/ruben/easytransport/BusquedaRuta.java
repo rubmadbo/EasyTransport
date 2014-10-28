@@ -65,77 +65,80 @@ public class BusquedaRuta extends Fragment {
                 Calendar calendar = Calendar.getInstance();
 
 
-                int mes = _date.getMonth()+1;
+                int mes = _date.getMonth() + 1;
                 int year = _date.getYear();
                 int dia = _date.getDayOfMonth();
                 String _fecha = String.format("%d/%d/%d", dia, mes + 1, year);
-                if (year<2014 || (year>=2014 && mes<10 ) || (year>=2014 && mes>=10 && dia<28)){//supermierda de xapuza
+                if (year < 2014 || (year >= 2014 && mes < 10) || (year >= 2014 && mes >= 10 && dia < 28)) {//supermierda de xapuza
                     AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
                     dialog.setMessage("No se puede insertar una fecha anterior al día de hoy");
                     dialog.setCancelable(true);
                     dialog.show();
+                } else {
+
+                    int mes_2 = _date2.getMonth() + 1;
+                    int year_2 = _date2.getYear();
+                    int dia_2 = _date2.getDayOfMonth();
+                    String _fecha2 = String.format("%d/%d/%d", dia_2, mes_2 + 1, year_2);
+                    if (year_2 < 2014 || (year_2 >= 2014 && mes_2 < 10) || (year_2 >= 2014 && mes_2 >= 10 && dia_2 < 28)) {//supermierda de xapuza
+
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
+                        dialog.setMessage("No se puede insertar una fecha anterior al día de hoy");
+                        dialog.setCancelable(true);
+                        dialog.show();
+                    }else{
+
+                    final Calendar c = Calendar.getInstance();
+                    pYear = c.get(Calendar.YEAR);
+                    pMonth = c.get(Calendar.MONTH);
+                    pDay = c.get(Calendar.DAY_OF_MONTH);
+                    String anyYear = String.format("%d", pYear);
+                    String anyMon = String.format("%d", pMonth);
+                    String anyoPda = String.format("%d", pDay);
+
+                    _date.showContextMenu();
+
+
+                    if (_date != null && _date2 != null && _fecha.compareTo(_fecha2) <= 0 && _dest.length() > 0 && _orig.length() > 0 && year <= year_2) {
+                        //Toast.makeText(this, "Realizando la búsqueda", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(getActivity().getBaseContext(), ListarRuta.class);
+                        intent.putExtra("Des", _dest);
+                        intent.putExtra("Ori", _orig);
+                        intent.putExtra("Dat1", _fecha);
+                        intent.putExtra("Dat2", _fecha2);
+                        getActivity().startActivity(intent);
+
+                    }
+                    if (_date == null || _date2 == null || _fecha == null || _fecha2 == null || _dest.length() <= 0 || _orig.length() <= 0) {
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
+                        dialog.setMessage("Completa todos los campos");
+                        dialog.setCancelable(true);
+                        dialog.show();
+
+
+                    }
+                    if (_date != null && _date2 != null && _fecha.compareTo(_fecha2) > 0 && _dest.length() > 0 && _orig.length() > 0 && year > year_2) {
+
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
+                        dialog.setMessage("La fecha de inicio no puede ser mayor que la final");
+                        dialog.setCancelable(true);
+                        dialog.show();
+                    }
+                    if (_date != null && _date2 != null && _fecha.compareTo(_fecha2) > 0 && _dest.length() > 0 && _orig.length() > 0 && year > year_2) {
+
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
+                        dialog.setMessage("La fecha de inicio no puede ser menor que la de hoy");
+                        dialog.setCancelable(true);
+                        dialog.show();
+                    }
                 }
-
-                int mes_2 = _date2.getMonth()+1;
-                int year_2 = _date2.getYear();
-                int dia_2 = _date2.getDayOfMonth();
-                String _fecha2 = String.format("%d/%d/%d", dia_2, mes_2 + 1, year_2);
-                if (year_2<2014 || (year_2>=2014 && mes_2<10 ) || (year_2>=2014 && mes_2>=10 && dia_2<28)){//supermierda de xapuza
-
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
-                    dialog.setMessage("No se puede insertar una fecha anterior al día de hoy");
-                    dialog.setCancelable(true);
-                    dialog.show();
-                }
-
-                final Calendar c = Calendar.getInstance();
-                pYear = c.get(Calendar.YEAR);
-                pMonth = c.get(Calendar.MONTH);
-                pDay = c.get(Calendar.DAY_OF_MONTH);
-                String anyYear = String.format("%d", pYear);
-                String anyMon = String.format("%d", pMonth);
-                String anyoPda = String.format("%d", pDay);
-
-                _date.showContextMenu();
-
-
-                if (_date != null && _date2 != null && _fecha.compareTo(_fecha2) <= 0 && _dest.length() > 0 && _orig.length() > 0 && year <= year_2) {
-                    //Toast.makeText(this, "Realizando la búsqueda", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(getActivity().getBaseContext(), ListarRuta.class);
-                    intent.putExtra("Des", _dest);
-                    intent.putExtra("Ori", _orig);
-                    intent.putExtra("Dat1", _fecha);
-                    intent.putExtra("Dat2", _fecha2);
-                    getActivity().startActivity(intent);
-
-                }
-                if (_date == null || _date2 == null || _fecha == null || _fecha2 == null || _dest.length() <= 0 || _orig.length() <= 0) {
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
-                    dialog.setMessage("Completa todos los campos");
-                    dialog.setCancelable(true);
-                    dialog.show();
-
-
-                }
-                if (_date != null && _date2 != null && _fecha.compareTo(_fecha2) > 0 && _dest.length() > 0 && _orig.length() > 0 && year > year_2) {
-
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
-                    dialog.setMessage("La fecha de inicio no puede ser mayor que la final");
-                    dialog.setCancelable(true);
-                    dialog.show();
-                }
-                if (_date != null && _date2 != null && _fecha.compareTo(_fecha2) > 0 && _dest.length() > 0 && _orig.length() > 0 && year > year_2) {
-
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
-                    dialog.setMessage("La fecha de inicio no puede ser menor que la de hoy");
-                    dialog.setCancelable(true);
-                    dialog.show();
-                }
-            }
+            }//borrar este mierda
+        }//borrar este mierda
 
 
         });
+
         return rootView;
 
     }
