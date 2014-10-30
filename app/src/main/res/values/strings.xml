@@ -57,7 +57,7 @@
     <string name="textoRecogida">Introduce el punto Recogida</string>
     <string name="Dinero">Dinero</string>
     <string name="textoDinero">Introduce la cantidad de dinero</string>
-
+    <string name="historicoRutas">Histórico Rutas</string>
 
 
 </resources>
