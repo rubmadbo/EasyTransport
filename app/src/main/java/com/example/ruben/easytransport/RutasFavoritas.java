@@ -1,71 +1,97 @@
 package com.example.ruben.easytransport;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+
+import Objetos.Ruta;
 
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link RutasFavoritas.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link RutasFavoritas#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
 public class RutasFavoritas extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RutasFavoritas.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RutasFavoritas newInstance(String param1, String param2) {
-        RutasFavoritas fragment = new RutasFavoritas();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-    public RutasFavoritas() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rutas_favoritas, container, false);
+        final View rootView = inflater.inflate(R.layout.activity_vista_rutas, container, false);
+        Button boton = (Button) rootView.findViewById(R.id.buttonAnyadir);
+
+        //Insercion de las rutas en el listView
+        ListView li = (ListView) rootView.findViewById(R.id.listViewRutas);
+        final ArrayList<Ruta> listaRuta = new ArrayList();
+        Ruta ruta;
+
+        //Conexión a la base de datos
+        /*AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(VistaRutas.this.getActivity(), "administracion", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();*/
+
+        //Consulta a la base de datos
+        /*Cursor cur = db.rawQuery("SELECT * FROM Ruta", null);*/
+
+        //Crear una lista de rutas con el resultado de la consulta
+        /*if(cur.moveToFirst()){
+            do{
+                ruta = new Ruta(cur.getInt(0),cur.getString(1),cur.getString(2),cur.getString(3),cur.getString(4),
+                        cur.getString(5),cur.getString(6),cur.getInt(7));
+                listaRuta.add(ruta);
+            }while(cur.moveToNext());
+        }*/
+
+        //Inserción en el ListView
+        ArrayAdapter<Ruta> adap = new ArrayAdapter<Ruta>(RutasFavoritas.this.getActivity(),android.R.layout.simple_list_item_1, listaRuta);
+        adap.notifyDataSetChanged();
+        li.setAdapter(adap);
+
+        li.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
+                final AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
+                b.setIcon(android.R.drawable.ic_dialog_alert);
+                b.setMessage("¿Desea borrar la ruta seleccionada?");
+                b.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(view.getContext(), "administracion", null, 1);
+                        Ruta rutaSelected = listaRuta.get(position);
+                        borrarRuta(rutaSelected.getId());
+                    }
+                });
+                b.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+
+                b.show();
+                return true;
+
+            }
+        });
+
+        //Cerramos la conexion
+        /*cur.close();
+        admin.close();*/
+
+        boton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(RutasFavoritas.this.getActivity(),HistoricoDeRutas.class);//Historico de rutas por crear
+                startActivity(intent);
+            }
+        });
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -92,16 +118,6 @@ public class RutasFavoritas extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
