@@ -40,6 +40,7 @@ public class GestionDeRutas extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gestion_de_rutas);
         rellenarSpinner();
+
     }
 
     public void rellenarSpinner(){

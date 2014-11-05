@@ -67,7 +67,7 @@ public class RutasFavoritas extends Fragment {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(view.getContext(), "administracion", null, 1);
                         Ruta rutaSelected = listaRuta.get(position);
-                        borrarRuta(rutaSelected.getId());
+                       // borrarRuta(rutaSelected.getId());
                     }
                 });
                 b.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -87,8 +87,8 @@ public class RutasFavoritas extends Fragment {
 
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(RutasFavoritas.this.getActivity(),HistoricoDeRutas.class);//Historico de rutas por crear
-                startActivity(intent);
+             //   Intent intent = new Intent(RutasFavoritas.this.getActivity(),HistoricoDeRutas.class);//Historico de rutas por crear
+              //  startActivity(intent);
             }
         });
         return rootView;

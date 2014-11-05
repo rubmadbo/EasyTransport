@@ -37,6 +37,7 @@ public class ListarRuta extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_ruta);
+        //BOTON VOLVER?? JDCC
         boton=(Button)findViewById(R.id.button_volver);
         origen=(EditText)findViewById(R.id.editText);
         destino=(EditText)findViewById(R.id.editText2);

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,8 @@ import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +31,9 @@ public class VistaRutas extends Fragment {
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //si te sale error aqui ir a buil.gradle el de la carpera mas externa y donde pone minSdkVersion pones 9
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         final View rootView = inflater.inflate(R.layout.activity_vista_rutas, container, false);
         Button boton = (Button) rootView.findViewById(R.id.buttonAnyadir);
@@ -88,6 +94,17 @@ public class VistaRutas extends Fragment {
 
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //jdcc pa probar insertar en bbdd
+               /* try {
+                    JavaPHPMySQL insertarRuta = new JavaPHPMySQL();
+                    insertarRuta.sendPost();
+                    //insertarRuta.sendGet();
+                } catch (Exception e2) {
+
+                    e2.printStackTrace();
+                }
+
+                Toast.makeText(VistaRutas.this.getActivity(), "Se acaba de enviar POST enviarRuta",Toast.LENGTH_LONG).show();*/
                 Intent intent = new Intent(VistaRutas.this.getActivity(),GestionDeRutas.class);
                 startActivity(intent);
             }
