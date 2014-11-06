@@ -6,36 +6,21 @@ package Objetos;
 public class Acuerdo {
 
     private int id;
-    //private Usuario transportista;
-    //private Usuario cliente;
-    //private Ruta ruta;
-    private String transportista;
-    private String cliente;
-    private int ruta;
-    //private double precio; para el 1er Sprint es String
-    private String precio;
-    private String comentario;
+    private Usuario transporstista;
+    private Usuario cliente;
+    private Ruta ruta;
+    private Double precio;
+    private String comentario; //puede ser null
+    private String estado; //pendiente , aceptado, rechazado
 
-
-
-    public Acuerdo(int id, String t, String c, int r, String p, String com){
+    public Acuerdo(int id, Usuario transporstista, Usuario cliente, Ruta ruta, Double precio, String comentario, String estado) {
         this.id = id;
-        transportista= t;
-        cliente = c;
-        ruta = r;
-        precio = p;
-        comentario = com;
-
-    }
-
-    public Acuerdo getAcuerdo(){return this;}
-    public void setAcuerdo(int id, String t, String c, int r, String p, String com){
-        id = id;
-        transportista= t;
-        cliente = c;
-        ruta = r;
-        precio = p;
-        comentario = com;
+        this.transporstista = transporstista;
+        this.cliente = cliente;
+        this.ruta = ruta;
+        this.precio = precio;
+        this.comentario = comentario;
+        this.estado = estado;
     }
 
     public int getId() {
@@ -46,35 +31,35 @@ public class Acuerdo {
         this.id = id;
     }
 
-    public String getTransportista() {
-        return transportista;
+    public Usuario getTransporstista() {
+        return transporstista;
     }
 
-    public void setTransportista(String transportista) {
-        this.transportista = transportista;
+    public void setTransporstista(Usuario transporstista) {
+        this.transporstista = transporstista;
     }
 
-    public String getCliente() {
+    public Usuario getCliente() {
         return cliente;
     }
 
-    public void setCliente(String cliente) {
+    public void setCliente(Usuario cliente) {
         this.cliente = cliente;
     }
 
-    public int getRuta() {
+    public Ruta getRuta() {
         return ruta;
     }
 
-    public void setRuta(int ruta) {
+    public void setRuta(Ruta ruta) {
         this.ruta = ruta;
     }
 
-    public String getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(String precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
@@ -86,13 +71,24 @@ public class Acuerdo {
         this.comentario = comentario;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     @Override
     public String toString() {
-        return "\nIdAcuerdo: " + getId() + "\n"+
-                 "Transportista:  " + getTransportista() +"\n"+
-                 "Cliente: " + getCliente() + "\n"+
-                 "IdRutaAsociada: " + getRuta() + "\n" +
-                 "Precio: " + getPrecio()+ "€\n"+
-                 "Comentario: " + getComentario()+ "\n";
+        return "Acuerdo{" +
+                "id=" + id +
+                ", transporstista=" + transporstista +
+                ", cliente=" + cliente +
+                ", ruta=" + ruta +
+                ", precio=" + precio +
+                ", comentario='" + comentario + '\'' +
+                ", estado='" + estado + '\'' +
+                '}';
     }
 }

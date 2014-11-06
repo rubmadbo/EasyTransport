@@ -9,48 +9,34 @@ public class Ruta {
     private int id;
     private String origen;
     private String destino;
-    //private Date fecha; de momento es una String
-    private String fecha;
+    private String recogida;
+    private String entrega;
     private String horaInicio;
-    private String horaFin;
+    private String horaFin;  //revisar formato DATETIME y DATE
+    private String fecha;
     private String comentario;
-    //private Usuario transportista;
-    int idU;
 
-    //aunque no creo que tenga sentido crear una ruta sin TODOS los atributos.solo con el set y get suficiente
-    public  Ruta(int id/*, Usuario t*/){
-        this.id = id;
-        //transportista = t;
-        origen = "";
-        destino = "";
-        fecha = "";
-        horaInicio = "";
-        horaFin = "";
-        comentario = "";
-    }
+    private Usuario transportista;
+    //en la base de datos la columna idACuerdo se pone a 0 si no se le pasa acuerdo porque no tiene
 
-    public void setRuta(int id, String o, String d, String f,String h1,String h2 ,String com, /*Usuario t*/int idU ){
-        this.id = id;
-        origen = o;
-        destino = d;
-        fecha = f;
-        horaInicio = h1;
-        horaFin = h2;
-        comentario = com;
-        //transportista = t;
-        this.idU=idU;
-    }
-    public Ruta(int id, String origen, String destino, String fecha,String h1,String h2 ,String coment, int idU){
+    private int idTransportista ;
+
+    public Ruta(int id, String origen, String destino, String recogida, String entrega, String horaInicio, String horaFin, String fecha, String comentario, Usuario transportista, Acuerdo acuerdo) {
         this.id = id;
         this.origen = origen;
         this.destino = destino;
+        this.recogida = recogida;
+        this.entrega = entrega;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
         this.fecha = fecha;
-        this.horaInicio = h1;
-        this.horaFin = h2;
-        this.comentario = coment;
-        this.idU = idU;
+        this.comentario = comentario;
+        this.transportista = transportista;
+        this.idAcuerdo = idAcuerdo;
+        this.idTransportista = idTransportista;
+        idAcuerdo= acuerdo.getId();
+        idTransportista = transportista.getIdUsuario() ;
     }
-    public Ruta getRuta(){ return this;}
 
     public int getId() {
         return id;
@@ -76,12 +62,20 @@ public class Ruta {
         this.destino = destino;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getRecogida() {
+        return recogida;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setRecogida(String recogida) {
+        this.recogida = recogida;
+    }
+
+    public String getEntrega() {
+        return entrega;
+    }
+
+    public void setEntrega(String entrega) {
+        this.entrega = entrega;
     }
 
     public String getHoraInicio() {
@@ -100,6 +94,14 @@ public class Ruta {
         this.horaFin = horaFin;
     }
 
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
     public String getComentario() {
         return comentario;
     }
@@ -108,20 +110,28 @@ public class Ruta {
         this.comentario = comentario;
     }
 
-    public int getIdU() {
-        return idU;
+    public Usuario getTransportista() {
+        return transportista;
     }
 
-    public void setIdU(int idU) {
-        this.idU = idU;
+    public void setTransportista(Usuario transportista) {
+        this.transportista = transportista;
     }
 
-    @Override
-    public String toString() {
-       return   "\nOrigen:\t\t" + getOrigen() +"\n"+
-                "Destino:\t" + getDestino() + "\n"+
-                "Fecha:\t" + getFecha() + "\n" +
-                "Hora:\t" + getHoraInicio()+ "\n";
+    public int getIdAcuerdo() {
+        return idAcuerdo;
+    }
+
+    public void setIdAcuerdo(int idAcuerdo) {
+        this.idAcuerdo = idAcuerdo;
+    }
+
+    public int getIdTransportista() {
+        return idTransportista;
+    }
+
+    public void setIdTransportista(int idTransportista) {
+        this.idTransportista = idTransportista;
     }
 
 }

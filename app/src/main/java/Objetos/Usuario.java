@@ -3,49 +3,34 @@ package Objetos;
 /**
  * Created by JD on 10/10/2014.
  */
-public class Usuario {
-
-    private String dni;
+public class Usuario {//*modificaaar para idUsuario*/
+    private int idUsuario;
     private String nombre;
     private String apellido;
-    private String direccion;
-    private int telf;
-    private String alias;
-    private String pss;
-    private tipoUsuario tipo;
+    private String Rol;
+    private String password;
     private Vehiculo vehiculo;
+    private Ruta ruta;
+    private Acuerdo acuerdo;
 
-    public Usuario (String dni, String pss, tipoUsuario tipo, Vehiculo vehiculo){ //son PK y FKs, pss no lo es pero deberia
-        this.dni = dni;
-        this.tipo = tipo;
-        this.vehiculo = vehiculo;
-        this.pss = pss;
-        direccion="";
-        nombre="";
-        apellido="";
-        telf=0;
-        alias="";
-    }
-    public Usuario getUsuario(){return this;}
-    public void setUsuario(String dni, String nombre, String apellido, String direccion, int telf,
-                           String alias, String pss,tipoUsuario tipo, Vehiculo vehiculo){
-        this.dni = dni;
+
+    public Usuario(int idUsuario, String nombre, String apellido, String rol, String password, Vehiculo vehiculo, Ruta ruta, Acuerdo acuerdo) {
+        this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.direccion = direccion;
-        this.telf = telf;
-        this.alias = alias;
-        this.pss = pss;
-        this.tipo = tipo;
+        Rol = rol;
+        this.password = password;
         this.vehiculo = vehiculo;
+        this.ruta = ruta;
+        this.acuerdo = acuerdo;
     }
 
-    public String getDni() {
-        return dni;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
@@ -64,44 +49,20 @@ public class Usuario {
         this.apellido = apellido;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getRol() {
+        return Rol;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setRol(String rol) {
+        Rol = rol;
     }
 
-    public int getTelf() {
-        return telf;
+    public String getPassword() {
+        return password;
     }
 
-    public void setTelf(int telf) {
-        this.telf = telf;
-    }
-
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
-    public String getPss() {
-        return pss;
-    }
-
-    public void setPss(String pss) {
-        this.pss = pss;
-    }
-
-    public tipoUsuario getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(tipoUsuario tipo) {
-        this.tipo = tipo;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Vehiculo getVehiculo() {
@@ -112,18 +73,33 @@ public class Usuario {
         this.vehiculo = vehiculo;
     }
 
+    public Ruta getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(Ruta ruta) {
+        this.ruta = ruta;
+    }
+
+    public Acuerdo getAcuerdo() {
+        return acuerdo;
+    }
+
+    public void setAcuerdo(Acuerdo acuerdo) {
+        this.acuerdo = acuerdo;
+    }
+
     @Override
-    public String toString() {
+    public String toString() {//modificar vehiculo.getid ruta y acuerdo (añadir id en cada una d las clases)
         return "Usuario{" +
-                "dni='" + dni + '\'' +
+                "idUsuario=" + idUsuario +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", telf=" + telf +
-                ", alias='" + alias + '\'' +
-                ", pss='" + pss + '\'' +
-                ", tipo=" + tipo +
+                ", Rol='" + Rol + '\'' +
+                ", password='" + password + '\'' +
                 ", vehiculo=" + vehiculo +
+                ", ruta=" + ruta +
+                ", acuerdo=" + acuerdo +
                 '}';
     }
 }
