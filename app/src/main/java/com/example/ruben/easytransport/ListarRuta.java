@@ -64,15 +64,15 @@ public class ListarRuta extends Activity {
         String _fecha_actual="";
         if(cur.moveToFirst()){
             do{
-                ruta = new Ruta(cur.getInt(0),cur.getString(1),cur.getString(2),cur.getString(3),cur.getString(4),
-                        cur.getString(5),cur.getString(6),cur.getInt(7));
-                dest= ruta.getDestino();
-                orig= ruta.getOrigen();
-                _fecha_actual=ruta.getFecha();
+               // ruta = new Ruta(cur.getInt(0),cur.getString(1),cur.getString(2),cur.getString(3),cur.getString(4),
+               //         cur.getString(5),cur.getString(6),cur.getInt(7));
+              //  dest= ruta.getDestino();
+              //  orig= ruta.getOrigen();
+              //  _fecha_actual=ruta.getFecha();
 
 
                 if(dest.equalsIgnoreCase(message) &&orig.equalsIgnoreCase(message1)&&_fecha_actual.compareTo(data1)>=0 && _fecha_actual.compareTo(data2)<=0){
-                listaRuta.add(ruta);
+               // listaRuta.add(ruta);
                 }
 
             }while(cur.moveToNext());
@@ -92,8 +92,8 @@ public class ListarRuta extends Activity {
                 intent.putExtra("Origen", origen_ruta);
                 String destino_ruta = rutaSelected.getDestino();
                 intent.putExtra("Destino", destino_ruta);
-                int Id_ruta = rutaSelected.getId();
-                intent.putExtra("IdRuta", Id_ruta);
+               // int Id_ruta = rutaSelected.getId();
+                //intent.putExtra("IdRuta", Id_ruta);
                 startActivity(intent);
 
 

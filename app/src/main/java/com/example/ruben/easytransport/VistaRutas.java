@@ -53,9 +53,9 @@ public class VistaRutas extends Fragment {
 
         if(cur.moveToFirst()){
             do{
-                ruta = new Ruta(cur.getInt(0),cur.getString(1),cur.getString(2),cur.getString(3),cur.getString(4),
-                        cur.getString(5),cur.getString(6),cur.getInt(7));
-                listaRuta.add(ruta);
+              //  ruta = new Ruta(cur.getInt(0),cur.getString(1),cur.getString(2),cur.getString(3),cur.getString(4),
+                 //       cur.getString(5),cur.getString(6),cur.getInt(7));
+              //  listaRuta.add(ruta);
             }while(cur.moveToNext());
         }
 
@@ -74,7 +74,7 @@ public class VistaRutas extends Fragment {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(view.getContext(), "administracion", null, 1);
                         Ruta rutaSelected = listaRuta.get(position);
-                        borrarRuta(rutaSelected.getId());
+                       // borrarRuta(rutaSelected.getId());
                     }
                 });
                 b.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -94,19 +94,26 @@ public class VistaRutas extends Fragment {
 
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //jdcc pa probar insertar en bbdd
-               /* try {
-                    JavaPHPMySQL insertarRuta = new JavaPHPMySQL();
-                    insertarRuta.sendPost();
-                    //insertarRuta.sendGet();
+
+
+                //jdcc pa probar insertar y recuperar en bbdd
+                try {
+
+                    JavaPHPMySQL bd = new JavaPHPMySQL();
+                    //para probar bbdd recuperar
+                    String json = bd.getAllRutas();
+                    //Lo mostramos
+                    bd.mostrarAllRutas(json);
+                   // insertarRuta.insertarRuta();
+
                 } catch (Exception e2) {
 
                     e2.printStackTrace();
                 }
 
-                Toast.makeText(VistaRutas.this.getActivity(), "Se acaba de enviar POST enviarRuta",Toast.LENGTH_LONG).show();*/
-                Intent intent = new Intent(VistaRutas.this.getActivity(),GestionDeRutas.class);
-                startActivity(intent);
+                Toast.makeText(VistaRutas.this.getActivity(), "Se acaba de enviar POST enviarRuta",Toast.LENGTH_LONG).show();
+                //Intent intent = new Intent(VistaRutas.this.getActivity(),GestionDeRutas.class);
+                //startActivity(intent);
             }
         });
     return rootView;

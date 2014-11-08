@@ -16,6 +16,7 @@ import java.util.List;
 //He tenido q descargarme la librería desde aqui
 // https://code.google.com/p/json-simple/downloads/detail?name=json-simple-1.1.1.jar&can=2&q=
 //luego meter el jar en la capeta de proyecto; Project Structure-> app (modules) Dependencis add (2da opcion y pones la ruta)
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -147,6 +148,89 @@ public class JavaPHPMySQL {
         }
     }
 
+
+
+       /* public static void main(String[] args) {
+            //Obtenemos el JSON
+            String json = getAllRutas();
+            //Lo mostramos
+            mostrarAllRutas(json);
+
+        }*/
+
+ public static String getAllRutas(){
+
+            StringBuffer response = null;
+
+            try {
+                //Generar la URL
+                String url = SERVER_PATH+"getAllRutas.php";
+                //Creamos un nuevo objeto URL con la url donde pedir el JSON
+                URL obj = new URL(url);
+                //Creamos un objeto de conexión
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+                //Añadimos la cabecera
+                con.setRequestMethod("POST");
+                con.setRequestProperty("User-Agent", USER_AGENT);
+                con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+                // Enviamos la petición por POST
+                con.setDoOutput(true);
+                //Capturamos la respuesta del servidor
+                int responseCode = con.getResponseCode();
+                System.out.println("\nSending 'POST' request to URL : " + url);
+                System.out.println("Response Code : " + responseCode);
+
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                //Mostramos la respuesta del servidor por consola
+                System.out.println("Respuesta del servidor: "+response);
+                System.out.println();
+                //cerramos la conexión
+                in.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return response.toString();
+        }
+
+    public static void mostrarAllRutas(String json){
+            System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
+            //Crear un Objeto JSON a partir del string JSON
+            Object jsonObject =JSONValue.parse(json.toString());
+            //Convertir el objeto JSON en un array
+            JSONArray array=(JSONArray)jsonObject;
+            //Iterar el array y extraer la información
+            for(int i=0;i<array.size();i++){
+                JSONObject row =(JSONObject)array.get(i);
+                String idRuta = row.get("idRuta").toString();
+                String Origen = row.get("Origen").toString();
+                String Destino = row.get("Destino").toString();
+                String Punto_entrega = row.get("Punto_entrega").toString();
+                String Punto_recogida = row.get("Punto_recogida").toString();
+                String HoraInicio = row.get("HoraInicio").toString();
+                String HoraFin = row.get("HoraFin").toString();
+                String Fecha = row.get("Fecha").toString();
+                String Comentario = row.get("Comentario").toString();
+                String idTransportista = row.get("idTransportista").toString();
+
+
+                //Mostrar la información en pantalla
+                System.out.println("idRuta: "+idRuta+" Origen: "+Origen+" Destino: "+Destino+" Punto de entrega: "
+                        +Punto_entrega+" Punto de recogida: "+Punto_recogida+" Hora de Inicio: "+HoraInicio+" Hora Fin: "+HoraFin+
+                        " Fecha: "+Fecha+" Comentario: "+Comentario+" idTransportista: "+idTransportista);
+            }
+        }
+    }
+
+
+
     /*
     public static void sendGet(){
         //Creamos un objeto JSON
@@ -207,4 +291,4 @@ public class JavaPHPMySQL {
         }
     }*/
 
-}
+
