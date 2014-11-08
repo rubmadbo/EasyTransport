@@ -9,6 +9,7 @@ import static java.lang.System.in;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
@@ -21,6 +22,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import Objetos.Acuerdo;
+import Objetos.Ruta;
 
 public class JavaPHPMySQL {
 
@@ -64,13 +66,12 @@ public class JavaPHPMySQL {
         jsonObj.put("idRuta", 0);
         jsonObj.put("Origen", Origen);
         jsonObj.put("Destino", Destino);
-        jsonObj.put("Punto_recogida", Punto_recogida);
-        jsonObj.put("Punto_entrega", Punto_entrega);
+        jsonObj.put("Punto_recogida", Punto_recogida);//hay que quitarlo
+        jsonObj.put("Punto_entrega", Punto_entrega);//hay que quitarlo
         jsonObj.put("HoraInicio", HoraInicio);
-        jsonObj.put("HoraFin", HoraFin);
+        jsonObj.put("HoraFin", HoraFin);//hay que quitarlo, para que vale esto????
         jsonObj.put("Fecha", Fecha);
         jsonObj.put("Comentario", Comentario);
-        jsonObj.put("idAcuerdo", 0);
         jsonObj.put("idTransportista", idTransportista);
 
         //Creamos una lista para almacenar el JSON
@@ -158,7 +159,7 @@ public class JavaPHPMySQL {
 
         }*/
 
- public static String getAllRutas(){
+    public static String getAllRutas(){
 
             StringBuffer response = null;
 
@@ -200,9 +201,10 @@ public class JavaPHPMySQL {
             return response.toString();
         }
 
-    public static void mostrarAllRutas(String json){
+    public static ArrayList<Ruta> mostrarAllRutas(String json){
             System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
             //Crear un Objeto JSON a partir del string JSON
+            ArrayList listaRutas = new ArrayList();
             Object jsonObject =JSONValue.parse(json.toString());
             //Convertir el objeto JSON en un array
             JSONArray array=(JSONArray)jsonObject;
@@ -220,13 +222,19 @@ public class JavaPHPMySQL {
                 String Comentario = row.get("Comentario").toString();
                 String idTransportista = row.get("idTransportista").toString();
 
+                Ruta ruta = new Ruta(Integer.parseInt(idRuta),Origen,Destino,Punto_recogida,Punto_entrega,HoraInicio,
+                        HoraFin,Fecha,Comentario);
+
+                listaRutas.add(ruta);
 
                 //Mostrar la información en pantalla
                 System.out.println("idRuta: "+idRuta+" Origen: "+Origen+" Destino: "+Destino+" Punto de entrega: "
                         +Punto_entrega+" Punto de recogida: "+Punto_recogida+" Hora de Inicio: "+HoraInicio+" Hora Fin: "+HoraFin+
                         " Fecha: "+Fecha+" Comentario: "+Comentario+" idTransportista: "+idTransportista);
             }
+        return listaRutas;
         }
+
     }
 
 

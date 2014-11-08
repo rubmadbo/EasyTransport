@@ -10,11 +10,17 @@ public class Ruta {
     private int idRuta;
     private String Origen;
     private String Destino ;
+
+
+
     private String Punto_recogida;
     private String Punto_entrega;
     private Date HoraInicio; //para guardar en bbdd tiene que tener ese formato "2012-09-25 19:47:00.000";
+    private String horaIniString;
     private Date HoraFin;
+    private String horaFinString;
     private Date Fecha; //para guardar en bbdd tiene que tener ese formato "2014-10-12";
+    private String fechaString;
     private String Comentario;
     private List<Acuerdo> acuerdos;
     private Usuario transportista;
@@ -33,6 +39,18 @@ public class Ruta {
         Comentario = comentario;
         this.acuerdos = acuerdos;
         this.transportista = transportista;
+    }
+
+    public Ruta(int idRuta, String origen, String destino, String punto_recogida, String punto_entrega, String horaInicio, String horaFin, String fecha, String comentario) {
+        this.idRuta = idRuta;
+        Origen = origen;
+        Destino = destino;
+        Punto_recogida = punto_recogida;
+        Punto_entrega = punto_entrega;
+        horaIniString = horaInicio;
+        horaFinString = horaFin;
+        fechaString = fecha;
+        Comentario = comentario;
     }
 
     public int getIdRuta() {
@@ -121,6 +139,27 @@ public class Ruta {
 
     public void setTransportista(Usuario transportista) {
         this.transportista = transportista;
+    }
+
+    public String getHoraIniString() {
+        return horaIniString;
+    }
+
+    public String getHoraFinString() {
+        return horaFinString;
+    }
+
+    public String getFechaString() {
+        return fechaString;
+    }
+
+    public String toString(){
+        return  "\n"+"Origen: " + Origen + "\n" +
+                "Destino: " + Destino + "\n" +
+                "Hora inicio: " + horaIniString + "\n" +
+                "Hora fin: " + getHoraFinString() + "\n" +
+                "Fecha: " + fechaString + "\n" +
+                "Comentario: " + Comentario +"\n";
     }
 
     //un poco raro este toString

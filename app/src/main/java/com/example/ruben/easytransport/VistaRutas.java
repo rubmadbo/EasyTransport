@@ -40,9 +40,13 @@ public class VistaRutas extends Fragment {
 
         //Insercion de las rutas en el listView
         ListView li = (ListView) rootView.findViewById(R.id.listViewRutas);
-        final ArrayList<Ruta> listaRuta = new ArrayList();
+        //ArrayList<Ruta> listaRuta = new ArrayList();
         Ruta ruta;
+        JavaPHPMySQL bd = new JavaPHPMySQL();
+        String json = bd.getAllRutas();
+        ArrayList<Ruta> listaRuta =  bd.mostrarAllRutas(json);
 
+        /*
         //Conexión a la base de datos
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(VistaRutas.this.getActivity(), "administracion", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
@@ -57,13 +61,15 @@ public class VistaRutas extends Fragment {
                  //       cur.getString(5),cur.getString(6),cur.getInt(7));
               //  listaRuta.add(ruta);
             }while(cur.moveToNext());
-        }
+        }*/
 
         //Inserción en el ListView
+
         ArrayAdapter<Ruta> adap = new ArrayAdapter<Ruta>(VistaRutas.this.getActivity(),android.R.layout.simple_list_item_1, listaRuta);
         adap.notifyDataSetChanged();
         li.setAdapter(adap);
 
+        final ArrayList<Ruta> finalListaRuta = listaRuta;
         li.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
@@ -73,7 +79,7 @@ public class VistaRutas extends Fragment {
                 b.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(view.getContext(), "administracion", null, 1);
-                        Ruta rutaSelected = listaRuta.get(position);
+                        Ruta rutaSelected = finalListaRuta.get(position);
                        // borrarRuta(rutaSelected.getId());
                     }
                 });
@@ -88,32 +94,15 @@ public class VistaRutas extends Fragment {
             }
         });
 
+        /*
         //Cerramos la conexion
         cur.close();
         admin.close();
-
+        */
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-
-                //jdcc pa probar insertar y recuperar en bbdd
-                try {
-
-                    JavaPHPMySQL bd = new JavaPHPMySQL();
-                    //para probar bbdd recuperar
-                    String json = bd.getAllRutas();
-                    //Lo mostramos
-                    bd.mostrarAllRutas(json);
-                   // insertarRuta.insertarRuta();
-
-                } catch (Exception e2) {
-
-                    e2.printStackTrace();
-                }
-
-                Toast.makeText(VistaRutas.this.getActivity(), "Se acaba de enviar POST enviarRuta",Toast.LENGTH_LONG).show();
-                //Intent intent = new Intent(VistaRutas.this.getActivity(),GestionDeRutas.class);
-                //startActivity(intent);
+                Intent intent = new Intent(VistaRutas.this.getActivity(),GestionDeRutas.class);
+                startActivity(intent);
             }
         });
     return rootView;

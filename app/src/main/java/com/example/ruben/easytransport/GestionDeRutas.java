@@ -20,6 +20,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import Objetos.Ruta;
@@ -77,11 +80,9 @@ public class GestionDeRutas extends ActionBarActivity {
         int year= dP.getYear();
         int dia = dP.getDayOfMonth();
         String fecha = String.format("%d/%d/%d", dia, mes, year);
-        if (year<2014 || (year>=2014 && mes<10 ) || (year>=2014 && mes>=10 && dia<28)){//supermierda de xapuza
 
-            Toast.makeText(this, "No se puede insertar una fecha anterior al día de hoy", Toast.LENGTH_SHORT).show();
-            finish();
-        }else {
+
+        if (year >= 2014 && mes >= 11 && dia >= 8) {
 
             tP = (TimePicker) findViewById(R.id.timePicker);
             int hora = tP.getCurrentHour();
@@ -92,7 +93,12 @@ public class GestionDeRutas extends ActionBarActivity {
             String com = comentario.getText().toString();
 
             if (!d.equals("") && !o.equals("")) {
-                // meterlos a la BBDD
+                JavaPHPMySQL bd = new JavaPHPMySQL();
+                bd.insertarRuta(o,d,"recogida","entrega1",horaInicio,"horaFin",fecha,com,1);
+                Toast.makeText(this, "La ruta se ha insertado correctamente", Toast.LENGTH_SHORT).show();
+                finish();
+
+                /*// meterlos a la BBDD
                 SQLiteDatabase db = admin.getWritableDatabase();
 
                 //el id de Ruta deberia de aumentar con dada ruta
@@ -123,15 +129,16 @@ public class GestionDeRutas extends ActionBarActivity {
 
                 //Fran: Justo antes del toast de deberia de hacer la actualización del ListView de VistaRutas, pero no consigo que vaya
                 //sin de un error.
-                Toast.makeText(this, "La ruta se ha insertado correctamente", Toast.LENGTH_SHORT).show();
-                finish();
+
 
             } else if (o.equals(d)) {
                 Toast.makeText(this, "El origen no puede ser igual al destino", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
             }
-        }//este borrarlo es de la xapuza supermierda
+        }else {
+            Toast.makeText(this, "Fecha inválida", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
