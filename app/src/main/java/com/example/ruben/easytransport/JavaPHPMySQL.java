@@ -19,8 +19,7 @@ import java.util.List;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-
-
+import Objetos.Acuerdo;
 
 public class JavaPHPMySQL {
 
@@ -33,6 +32,7 @@ public class JavaPHPMySQL {
 
 
     //mirar lo de date y dateTime
+    /*
     static int idRuta = 1;
     static String Origen = "Valencia";
     static String Destino = "Barcelona";
@@ -43,7 +43,7 @@ public class JavaPHPMySQL {
     static String Fecha = "2014-10-12";
     static String Comentario = "esto es un comentario";
     static int idAcuerdo = 0;
-    static int idTransportista = 1;
+    static int idTransportista = 1;*/
 
     /*public static void main(String[] args) {
         //Tenemos dos funciones, una para enviar por GET y otra para enviar por POST
@@ -53,12 +53,14 @@ public class JavaPHPMySQL {
 
     }*/
 
-    public static void sendPost(){
+
+    public static void insertarRuta(String Origen, String Destino, String Punto_recogida, String Punto_entrega,
+                                    String HoraInicio, String HoraFin, String Fecha, String Comentario, int idTransportista) {
         //Creamos un objeto JSON
         JSONObject jsonObj = new JSONObject();
         //Añadimos el nombre, apellidos y email del usuario
         //es IMPORTANTE que pongamos lo que esta entre comillas igual que la columna de la BBDD
-        jsonObj.put("idRuta",idRuta);
+        jsonObj.put("idRuta", 0);
         jsonObj.put("Origen", Origen);
         jsonObj.put("Destino", Destino);
         jsonObj.put("Punto_recogida", Punto_recogida);
@@ -67,11 +69,11 @@ public class JavaPHPMySQL {
         jsonObj.put("HoraFin", HoraFin);
         jsonObj.put("Fecha", Fecha);
         jsonObj.put("Comentario", Comentario);
-        jsonObj.put("idAcuerdo", idAcuerdo);
+        jsonObj.put("idAcuerdo", 0);
         jsonObj.put("idTransportista", idTransportista);
 
         //Creamos una lista para almacenar el JSON
-        List  l = new LinkedList();
+        List l = new LinkedList();
         l.addAll(Arrays.asList(jsonObj));
         //Generamos el String JSON
         String jsonString = JSONValue.toJSONString(l);
@@ -79,11 +81,31 @@ public class JavaPHPMySQL {
         System.out.println(jsonString);
         System.out.println("");
 
+        insercion(jsonString, "insertarRuta.php");
+    }
+
+    public static void insertarAcuerdo(double precio, String comentario, String estado ){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idAcuerdo", 0);
+        jsonObject.put("Precio", precio);
+        jsonObject.put("Comentario", comentario);
+        jsonObject.put("Estado", estado);
+
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+
+        insercion(jsonString, "insertarAcuerdo.php");
+
+    }
+
+    public static void insercion(String jsonString, String nombreScript) {
         try {
             //Codificar el json a URL
             jsonString = URLEncoder.encode(jsonString, "UTF-8");
             //Generar la URL
-            String url = SERVER_PATH+"listenPost.php";
+            String url = SERVER_PATH+nombreScript;
             //Creamos un nuevo objeto URL con la url donde queremos enviar el JSON
             URL obj = new URL(url);
             //Creamos un objeto de conexión
@@ -123,6 +145,7 @@ public class JavaPHPMySQL {
         }
     }
 
+    /*
     public static void sendGet(){
         //Creamos un objeto JSON
         JSONObject jsonObj = new JSONObject();
@@ -180,6 +203,6 @@ public class JavaPHPMySQL {
         }catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 }
