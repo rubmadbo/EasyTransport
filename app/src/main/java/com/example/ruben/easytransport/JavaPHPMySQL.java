@@ -90,6 +90,7 @@ public class JavaPHPMySQL {
         jsonObject.put("Precio", precio);
         jsonObject.put("Comentario", comentario);
         jsonObject.put("Estado", estado);
+        jsonObject.put("idRuta", idRuta);
 
         List l = new LinkedList();
         l.addAll(Arrays.asList(jsonObject));
