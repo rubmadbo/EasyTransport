@@ -84,13 +84,14 @@ public class JavaPHPMySQL {
         insercion(jsonString, "insertarRuta.php");
     }
 
-    public static void insertarAcuerdo(double precio, String comentario, String estado, int idRuta ){
+    public static void insertarAcuerdo(double precio, String comentario, String estado, int idRuta, int idUsuario ){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idAcuerdo", 0);
         jsonObject.put("Precio", precio);
         jsonObject.put("Comentario", comentario);
         jsonObject.put("Estado", estado);
         jsonObject.put("idRuta", idRuta);
+        jsonObject.put("idUsuario", idUsuario);
 
         List l = new LinkedList();
         l.addAll(Arrays.asList(jsonObject));
