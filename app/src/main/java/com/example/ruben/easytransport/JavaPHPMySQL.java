@@ -84,7 +84,7 @@ public class JavaPHPMySQL {
         insercion(jsonString, "insertarRuta.php");
     }
 
-    public static void insertarAcuerdo(double precio, String comentario, String estado ){
+    public static void insertarAcuerdo(double precio, String comentario, String estado, int idRuta ){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idAcuerdo", 0);
         jsonObject.put("Precio", precio);
