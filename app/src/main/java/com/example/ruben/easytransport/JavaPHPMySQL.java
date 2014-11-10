@@ -56,7 +56,9 @@ public class JavaPHPMySQL {
 
     }*/
 
-
+ //scripts php a crear (entre parentesis van los argumentos q se le pasa al php)
+    //borrarRuta.php (idRuta), getVehiculos.php, getUsuarios().php, getAcuerdosByRuta.php(idRuta), getRutasAnteriores.php (Date)
+    //getRutasFavoritas(idUsuario).
     public static void insertarRuta(String Origen, String Destino, String Punto_recogida, String Punto_entrega,
                                     String HoraInicio, String HoraFin, String Fecha, String Comentario, int idTransportista) {
         //Creamos un objeto JSON
