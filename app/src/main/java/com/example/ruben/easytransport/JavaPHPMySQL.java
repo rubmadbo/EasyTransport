@@ -23,6 +23,8 @@ import org.json.simple.JSONValue;
 
 import Objetos.Acuerdo;
 import Objetos.Ruta;
+import Objetos.Usuario;
+import Objetos.Vehiculo;
 
 public class JavaPHPMySQL {
 
@@ -57,7 +59,7 @@ public class JavaPHPMySQL {
     }*/
 
  //scripts php a crear (entre parentesis van los argumentos q se le pasa al php)
-    //borrarRuta.php (idRuta), getVehiculos.php, getUsuarios().php, getAcuerdosByRuta.php(idRuta), getRutasAnteriores.php (Date)
+    //borrarRuta.php (idRuta), getVehiculoByUserId.php(idUser), getUsuarios().php, getAcuerdosByRuta.php(idRuta), getRutasAnteriores.php (Date)
     //getRutasFavoritas(idUsuario).
     public static void insertarRuta(String Origen, String Destino, String Punto_recogida, String Punto_entrega,
                                     String HoraInicio, String HoraFin, String Fecha, String Comentario, int idTransportista) {
@@ -160,6 +162,89 @@ public class JavaPHPMySQL {
             mostrarAllRutas(json);
 
         }*/
+ //este necesita pasarle el idRuta
+    public static void borrarRuta(int idRuta){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idRuta", idRuta);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+
+        insercion(jsonString, "borrarRuta.php"); //puede usar insercion porque solo recibe una variable y ejecuta una query
+    }
+
+    public static void getVehiculoByUserId(int idUsuario){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idUsuario", idUsuario);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+       String json= getDataFromFilter(jsonString, " getVehiculoByUserId.php");
+        mostrarVehiculos(json);
+    }
+
+    //metodo que te devulve datos de la bbdd cuando le has pasado una variable para hacer filtro WHERE en la query
+    public static String getDataFromFilter(String jsonString, String nombreScript){
+    //jdcc primero enviamos las variables en el json
+        StringBuffer response = null;
+
+        try {
+            //Codificar el json a URL
+            jsonString = URLEncoder.encode(jsonString, "UTF-8");
+            //Generar la URL
+            String url = SERVER_PATH+nombreScript;
+            //Creamos un nuevo objeto URL con la url donde queremos enviar el JSON
+            URL obj = new URL(url);
+            //Creamos un objeto de conexión
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            //Añadimos la cabecera
+            con.setRequestMethod("POST");
+            con.setRequestProperty("User-Agent", USER_AGENT);
+            con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+            //Creamos los parametros para enviar
+            String urlParameters = "json="+jsonString;
+            // Enviamos los datos por POST
+            con.setDoOutput(true);
+            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+            wr.writeBytes(urlParameters);
+            wr.flush();
+            wr.close();
+
+
+    //jdcc: ahora recuperamos los datos
+            int responseCode = con.getResponseCode();
+            System.out.println("\nSending 'POST' request to URL : " + url);
+            System.out.println("Response Code : " + responseCode);
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            //Mostramos la respuesta del servidor por consola
+            System.out.println("Respuesta del servidor: "+response);
+            System.out.println();
+            //cerramos la conexión
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return response.toString();
+    }
+
+
+
+
+
+
+
 
     public static String getAllRutas(){
 
@@ -202,6 +287,38 @@ public class JavaPHPMySQL {
 
             return response.toString();
         }
+
+    public static ArrayList<Vehiculo> mostrarVehiculos(String json){
+        System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
+        //Crear un Objeto JSON a partir del string JSON
+        ArrayList listaAcuerdos = new ArrayList();
+        Object jsonObject =JSONValue.parse(json.toString());
+        //Convertir el objeto JSON en un array
+        JSONArray array=(JSONArray)jsonObject;
+        //Iterar el array y extraer la información
+        for(int i=0;i<array.size();i++){
+            JSONObject row =(JSONObject)array.get(i);
+            int idVehiculo = row.get("idVehiculo").toString();
+            String Matricula = row.get("Matricula").toString();
+            String Marca = row.get("Marca").toString();
+            String Modelo = row.get("Modelo").toString();
+            int idUsuario = row.get("idUsuario").toString();
+            int Capacidad = row.get("Capacidad").toString();
+
+            //aqui no se si es necesario crear un usuario o recuperar ya que lo que queremos es recuperar una lista de acuerdos
+            //Usuario u = getUserById(idUsuario); //falta crear metodo
+            //Usuario u=new Usuario(1,"prueba","preuba","Transportista","prueba123",null,null,null);
+            //Acuerdo acuerdo = new Acuerdo(idVehiculo,u,u,Modelo,u,Capacidad);
+            //crear un objeto nuevo parecido a acuerdo pero que no tenga Usuario.
+
+            //listaAcuerdos.add(acuerdo);
+
+            //Mostrar la información en pantalla
+            //for(int j=0;j<listaAcuerdos.size();j++){acuerdo.toString();}
+        }
+        return listaAcuerdos;
+    }
+
 
     public static ArrayList<Ruta> mostrarAllRutas(String json){
             System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");

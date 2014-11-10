@@ -101,13 +101,17 @@ public class VistaRutas extends Fragment {
         */
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(VistaRutas.this.getActivity(),GestionDeRutas.class);
-                startActivity(intent);
+                JavaPHPMySQL bd = new JavaPHPMySQL();
+               // bd.borrarRuta(1);
+                bd.getVehiculoByUserId(1);
+               /* Intent intent = new Intent(VistaRutas.this.getActivity(),GestionDeRutas.class);
+                startActivity(intent);*/
             }
         });
     return rootView;
     }
 
+    //metodo VIEJO
     public void borrarRuta(int rutaid) {
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(VistaRutas.this.getActivity(), "administracion", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
