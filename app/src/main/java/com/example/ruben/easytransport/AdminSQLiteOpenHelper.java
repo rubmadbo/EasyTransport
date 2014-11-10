@@ -96,7 +96,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         return vehiculos;
     }
 
-
+/*
     public List<Ruta> getRutas() {
 
         List<Ruta> rutas = new ArrayList<Ruta>();
@@ -139,5 +139,5 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         return acuerdos;
 
     }
-
+*/
 }

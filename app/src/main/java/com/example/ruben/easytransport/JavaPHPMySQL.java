@@ -291,32 +291,32 @@ public class JavaPHPMySQL {
     public static ArrayList<Vehiculo> mostrarVehiculos(String json){
         System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
         //Crear un Objeto JSON a partir del string JSON
-        ArrayList listaAcuerdos = new ArrayList();
+        ArrayList listaVehiculos = new ArrayList();
         Object jsonObject =JSONValue.parse(json.toString());
         //Convertir el objeto JSON en un array
         JSONArray array=(JSONArray)jsonObject;
         //Iterar el array y extraer la información
         for(int i=0;i<array.size();i++){
             JSONObject row =(JSONObject)array.get(i);
-            int idVehiculo = row.get("idVehiculo").toString();
+            String idVehiculo = row.get("idVehiculo").toString();
             String Matricula = row.get("Matricula").toString();
             String Marca = row.get("Marca").toString();
             String Modelo = row.get("Modelo").toString();
-            int idUsuario = row.get("idUsuario").toString();
-            int Capacidad = row.get("Capacidad").toString();
+            String idUsuario =row.get("idUsuario").toString();
+            String Capacidad = row.get("Capacidad").toString();
 
             //aqui no se si es necesario crear un usuario o recuperar ya que lo que queremos es recuperar una lista de acuerdos
             //Usuario u = getUserById(idUsuario); //falta crear metodo
-            //Usuario u=new Usuario(1,"prueba","preuba","Transportista","prueba123",null,null,null);
-            //Acuerdo acuerdo = new Acuerdo(idVehiculo,u,u,Modelo,u,Capacidad);
+           //Usuario u=new Usuario(1,"prueba","preuba","Transportista","prueba123",null,null,null);
+            Vehiculo vehiculo = new Vehiculo(Integer.parseInt(idVehiculo),Matricula,Marca ,Modelo,null,Integer.parseInt(Capacidad));
             //crear un objeto nuevo parecido a acuerdo pero que no tenga Usuario.
 
-            //listaAcuerdos.add(acuerdo);
+            listaVehiculos.add(vehiculo);
 
             //Mostrar la información en pantalla
             //for(int j=0;j<listaAcuerdos.size();j++){acuerdo.toString();}
         }
-        return listaAcuerdos;
+        return listaVehiculos;
     }
 
 
