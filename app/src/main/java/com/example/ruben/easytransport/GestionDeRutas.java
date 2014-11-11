@@ -195,64 +195,26 @@ public class GestionDeRutas extends ActionBarActivity {
         String fecha = String.format("%d/%d/%d", dia, mes, year);*/
 
 
-        if (year >= 2014 && month >= 11 && day >= 8) {
 
-            tP = (TimePicker) findViewById(R.id.timePicker);
-            int hora = tP.getCurrentHour();
-            int minutos = tP.getCurrentMinute();
-            String horaInicio = String.format("%d:%d", hora, minutos);
+        String horaInicio = textHora.getText().toString();
 
-            comentario = (EditText) findViewById(R.id.editTComentario);
-            String com = comentario.getText().toString();
+        comentario = (EditText) findViewById(R.id.editTComentario);
+        String com = comentario.getText().toString();
 
-            if (!d.equals("") && !o.equals("")) {
-                JavaPHPMySQL bd = new JavaPHPMySQL();
-                String fecha = String.format("%d/%d/%d", day, month+1, year);
-                bd.insertarRuta(o,d,"recogida","entrega1",horaInicio,"horaFin",fecha,com,1);
-                Toast.makeText(this, "La ruta se ha insertado correctamente", Toast.LENGTH_SHORT).show();
-                finish();
+        if (!d.equals("") && !o.equals("")) {
+            JavaPHPMySQL bd = new JavaPHPMySQL();
+            String fecha = String.format("%d/%d/%d", day, month+1, year);
+            bd.insertarRuta(o,d,horaInicio,fecha,com,1);
+            Toast.makeText(this, "La ruta se ha insertado correctamente", Toast.LENGTH_SHORT).show();
+            finish();
 
-                /*// meterlos a la BBDD
-                SQLiteDatabase db = admin.getWritableDatabase();
-
-                //el id de Ruta deberia de aumentar con dada ruta
-                String selectQuery = "SELECT * FROM Ruta";
-                Cursor cursor = db.rawQuery(selectQuery, null);
-                int id = 1;
-                int idTransportista = 1; //esto de momento hasta q tengamos usuario sino seria =u.getUsuario().id;
-                if (cursor.moveToFirst()) {
-                    id = cursor.getCount() + 1;
-                }
-
-
-                //db.delete("Ruta",null,null); //JD:se carga SOLO el contenido de la tabla
-                // db.delete("Acuerdo",null,null);
-                //JD:Ruta no guarda el vehiculo .. Donde lo inserto? horaFIN que cojones¿?¿? he puesto el comntario por no dejarlo vacio
-                try {
-                    db.execSQL("INSERT INTO Ruta VALUES('" + id + "','" + o + "','" + d + "','" + fecha + "','" + horaInicio + "','¿NUSE?','" + com + "','" + idTransportista + "')");
-                } catch (Exception e) {
-                    id += 10;
-                    db.execSQL("INSERT INTO Ruta VALUES('" + id + "','" + o + "','" + d + "','" + fecha + "','" + horaInicio + "','¿NUSE?','" + com + "','" + idTransportista + "')");
-
-                }
-                //JD:printa todas las rutas guardas en el log
-            /*List<Ruta> rutas= admin.getRutas();
-            for (int i=0; i<rutas.size();i++){
-                System.out.println(rutas.get(i).toString());
-            }*/
-
-                //Fran: Justo antes del toast de deberia de hacer la actualización del ListView de VistaRutas, pero no consigo que vaya
-                //sin de un error.
-
-
-            }  else {
-                Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
-            }
-        } else if (o.equals(d)) {
+        }  else if (o.equals(d)){
             Toast.makeText(this, "El origen no puede ser igual al destino", Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(this, "Fecha inválida", Toast.LENGTH_SHORT).show();
         }
+        else{
+            Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
