@@ -36,27 +36,7 @@ public class JavaPHPMySQL {
     private static final String SERVER_PATH = "http://easytransport1.esy.es/";
 
 
-    //mirar lo de date y dateTime
-    /*
-    static int idRuta = 1;
-    static String Origen = "Valencia";
-    static String Destino = "Barcelona";
-    static String Punto_recogida = "recogida";
-    static String Punto_entrega = "entrega";
-    static String HoraInicio = "2012-09-25 19:47:00.000";
-    static String HoraFin = "2012-09-25 19:47:00.000";
-    static String Fecha = "2014-10-12";
-    static String Comentario = "esto es un comentario";
-    static int idAcuerdo = 0;
-    static int idTransportista = 1;*/
 
-    /*public static void main(String[] args) {
-        //Tenemos dos funciones, una para enviar por GET y otra para enviar por POST
-
-        sendPost();
-        //sendGet();
-
-    }*/
 
  //scripts php a crear (entre parentesis van los argumentos q se le pasa al php)
     //borrarRuta.php (idRuta), getVehiculoByUserId.php(idUser), getUsuarios().php, getAcuerdosByRuta.php(idRuta), getRutasAnteriores.php (Date)
@@ -154,13 +134,6 @@ public class JavaPHPMySQL {
 
 
 
-       /* public static void main(String[] args) {
-            //Obtenemos el JSON
-            String json = getAllRutas();
-            //Lo mostramos
-            mostrarAllRutas(json);
-
-        }*/
  //este necesita pasarle el idRuta
     public static void borrarRuta(int idRuta){
         JSONObject jsonObject = new JSONObject();
@@ -304,9 +277,7 @@ public class JavaPHPMySQL {
             String idUsuario = row.get("idUsuario").toString();
             String Capacidad = row.get("Capacidad").toString();
 
-            //aqui no se si es necesario crear un usuario o recuperar ya que lo que queremos es recuperar una lista de acuerdos
-            //Usuario u = getUserById(idUsuario); //falta crear metodo
-           //Usuario u=new Usuario(1,"prueba","preuba","Transportista","prueba123",null,null,null);
+
             Vehiculo vehiculo = new Vehiculo(Integer.parseInt(idVehiculo),Matricula,Marca ,Modelo,null,Integer.parseInt(Capacidad));
             //crear un objeto nuevo parecido a acuerdo pero que no tenga Usuario.
 
@@ -355,66 +326,5 @@ public class JavaPHPMySQL {
 
     }
 
-
-
-    /*
-    public static void sendGet(){
-        //Creamos un objeto JSON
-        JSONObject jsonObj = new JSONObject();
-        //Añadimos el nombre, apellidos y email del usuario
-        jsonObj.put("idRuta",idRuta);
-        jsonObj.put("Origen", Origen);
-        jsonObj.put("Destino", Destino);
-        jsonObj.put("Punto_recogida", Punto_recogida);
-        jsonObj.put("Punto_entrega", Punto_entrega);
-        jsonObj.put("HoraInicio", HoraInicio);
-        jsonObj.put("HoraFin", HoraFin);
-        jsonObj.put("Fecha", Fecha);
-        jsonObj.put("Comentario", Comentario);
-        jsonObj.put("idAcuerdo", idAcuerdo);
-        jsonObj.put("idTransportista", idTransportista);
-        //Creamos una lista para almacenar el JSON
-        List  l = new LinkedList();
-        l.addAll(Arrays.asList(jsonObj));
-        //Generamos el String JSON
-        String jsonString = JSONValue.toJSONString(l);
-        System.out.println("JSON GENERADO:");
-        System.out.println(jsonString);
-        System.out.println("");
-
-        try{
-            //Codificar el json a URL
-            jsonString = URLEncoder.encode(jsonString, "UTF-8");
-            //Generar la URL
-            String url = SERVER_PATH+"listenGet.php?json="+jsonString;
-            URL obj = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-            // optional default is GET
-            con.setRequestMethod("GET");
-
-            //add request header
-            con.setRequestProperty("User-Agent", USER_AGENT);
-
-            int responseCode = con.getResponseCode();
-            System.out.println("\nSending 'GET' request to URL : " + url);
-            System.out.println("Response Code : " + responseCode);
-
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-
-            //print result
-            System.out.println(response.toString());
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
 
 
