@@ -32,12 +32,11 @@ public class Ruta {
         Comentario = comentario;
     }
 
-    public Ruta(int idRuta, String origen, String destino, String punto_recogida, String punto_entrega, String horaInicio, String horaFin, String fecha, String comentario) {
+    public Ruta(int idRuta, String origen, String destino, String horaInicio, String fecha, String comentario) {
         this.idRuta = idRuta;
         Origen = origen;
         Destino = destino;
         horaIniString = horaInicio;
-        horaFinString = horaFin;
         fechaString = fecha;
         Comentario = comentario;
     }

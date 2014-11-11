@@ -46,8 +46,6 @@ public class VistaRutas extends Fragment {
         String json = bd.getAllRutas();
         ArrayList<Ruta> listaRuta =  bd.mostrarAllRutas(json);
 
-
-
         //Inserción en el ListView
 
         ArrayAdapter<Ruta> adap = new ArrayAdapter<Ruta>(VistaRutas.this.getActivity(),android.R.layout.simple_list_item_1, listaRuta);
@@ -79,11 +77,7 @@ public class VistaRutas extends Fragment {
             }
         });
 
-        /*
-        //Cerramos la conexion
-        cur.close();
-        admin.close();
-        */
+
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(VistaRutas.this.getActivity(),GestionDeRutas.class);

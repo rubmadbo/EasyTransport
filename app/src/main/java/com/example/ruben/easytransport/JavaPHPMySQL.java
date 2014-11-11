@@ -303,23 +303,16 @@ public class JavaPHPMySQL {
                 String idRuta = row.get("idRuta").toString();
                 String Origen = row.get("Origen").toString();
                 String Destino = row.get("Destino").toString();
-                String Punto_entrega = row.get("Punto_entrega").toString();
-                String Punto_recogida = row.get("Punto_recogida").toString();
                 String HoraInicio = row.get("HoraInicio").toString();
-                String HoraFin = row.get("HoraFin").toString();
                 String Fecha = row.get("Fecha").toString();
                 String Comentario = row.get("Comentario").toString();
                 String idTransportista = row.get("idTransportista").toString();
 
-                Ruta ruta = new Ruta(Integer.parseInt(idRuta),Origen,Destino,Punto_recogida,Punto_entrega,HoraInicio,
-                        HoraFin,Fecha,Comentario);
+                Ruta ruta = new Ruta(Integer.parseInt(idRuta),Origen,Destino,HoraInicio,Fecha,Comentario);
 
                 listaRutas.add(ruta);
 
-                //Mostrar la información en pantalla
-                System.out.println("idRuta: "+idRuta+" Origen: "+Origen+" Destino: "+Destino+" Punto de entrega: "
-                        +Punto_entrega+" Punto de recogida: "+Punto_recogida+" Hora de Inicio: "+HoraInicio+" Hora Fin: "+HoraFin+
-                        " Fecha: "+Fecha+" Comentario: "+Comentario+" idTransportista: "+idTransportista);
+
             }
         return listaRutas;
         }
