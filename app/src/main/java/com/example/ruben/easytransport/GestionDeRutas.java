@@ -1,31 +1,25 @@
 package com.example.ruben.easytransport;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import Objetos.Ruta;
+import Objetos.Vehiculo;
 
 
 public class GestionDeRutas extends ActionBarActivity {
@@ -49,8 +43,16 @@ public class GestionDeRutas extends ActionBarActivity {
     public void rellenarSpinner(){
         try {
             spinner = (Spinner) findViewById(R.id.lista1);
-            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
-            List<String> vehiculos = admin.getVehiculos();
+            //AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
+            JavaPHPMySQL bd = new JavaPHPMySQL();
+            ArrayList<String> vehiculos = new ArrayList<String>();
+            ArrayList<Vehiculo> listaVehiculos = bd.getVehiculoByUserId(1);
+            Iterator<Vehiculo> iterator = listaVehiculos.iterator();
+            while(iterator.hasNext()){
+                vehiculos.add(listaVehiculos.toString());
+                iterator.next();
+            }
+
             ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, vehiculos);
             spinner.setAdapter(adapt);
 
@@ -131,11 +133,11 @@ public class GestionDeRutas extends ActionBarActivity {
                 //sin de un error.
 
 
-            } else if (o.equals(d)) {
-                Toast.makeText(this, "El origen no puede ser igual al destino", Toast.LENGTH_SHORT).show();
-            } else {
+            }  else {
                 Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
             }
+        } else if (o.equals(d)) {
+            Toast.makeText(this, "El origen no puede ser igual al destino", Toast.LENGTH_SHORT).show();
         }else {
             Toast.makeText(this, "Fecha inválida", Toast.LENGTH_SHORT).show();
         }

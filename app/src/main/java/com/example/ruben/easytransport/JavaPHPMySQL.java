@@ -174,7 +174,7 @@ public class JavaPHPMySQL {
         insercion(jsonString, "borrarRuta.php"); //puede usar insercion porque solo recibe una variable y ejecuta una query
     }
 
-    public static void getVehiculoByUserId(int idUsuario){
+    public static ArrayList<Vehiculo> getVehiculoByUserId(int idUsuario){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idUsuario", idUsuario);
         List l = new LinkedList();
@@ -182,8 +182,8 @@ public class JavaPHPMySQL {
 
         String jsonString = JSONValue.toJSONString(l);
         //el script obtiene la variable idUsuario hace consulta y recupera datos
-       String json= getDataFromFilter(jsonString, " getVehiculoByUserId.php");
-        mostrarVehiculos(json);
+       String json= getDataFromFilter(jsonString, "getVehiculoByUserId.php");
+       return mostrarVehiculos(json);
     }
 
     //metodo que te devulve datos de la bbdd cuando le has pasado una variable para hacer filtro WHERE en la query
@@ -302,7 +302,7 @@ public class JavaPHPMySQL {
             String Matricula = row.get("Matricula").toString();
             String Marca = row.get("Marca").toString();
             String Modelo = row.get("Modelo").toString();
-            String idUsuario =row.get("idUsuario").toString();
+            String idUsuario = row.get("idUsuario").toString();
             String Capacidad = row.get("Capacidad").toString();
 
             //aqui no se si es necesario crear un usuario o recuperar ya que lo que queremos es recuperar una lista de acuerdos
@@ -314,7 +314,7 @@ public class JavaPHPMySQL {
             listaVehiculos.add(vehiculo);
 
             //Mostrar la información en pantalla
-            //for(int j=0;j<listaAcuerdos.size();j++){acuerdo.toString();}
+            for(int j=0;j<listaVehiculos.size();j++){listaVehiculos.toString();}
         }
         return listaVehiculos;
     }

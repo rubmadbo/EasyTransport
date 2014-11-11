@@ -71,14 +71,6 @@ public class Vehiculo {
 
     @Override
     public String toString() {
-        return "Vehiculo{" +
-                "idVehiculo=" + idVehiculo +
-                ", matricula='" + matricula + '\'' +
-                ", marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", conductor=" + conductor.getNombre()+" "+conductor.getApellido()+
-                "IdConductor= "+conductor.getIdUsuario()+
-                ", Capacidad=" + Capacidad +
-                '}';
+        return marca + modelo;
     }
 }

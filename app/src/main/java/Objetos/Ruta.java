@@ -162,21 +162,4 @@ public class Ruta {
                 "Comentario: " + Comentario +"\n";
     }
 
-    //un poco raro este toString
-   /* @Override
-    public String toString() {
-        return "Ruta{" +
-                "idRuta=" + idRuta +
-                ", Origen='" + Origen + '\'' +
-                ", Destino='" + Destino + '\'' +
-                ", Punto_recogida='" + Punto_recogida + '\'' +
-                ", Punto_entrega='" + Punto_entrega + '\'' +
-                ", HoraInicio=" + HoraInicio +
-                ", HoraFin=" + HoraFin +
-                ", Fecha=" + Fecha +
-                ", Comentario='" + Comentario + '\'' +
-                ", acuerdos=" + acuerdos. +
-                ", transportista=" + transportista +
-                '}';
-    }*/
 }
