@@ -36,12 +36,13 @@ public class RutasFavoritas extends Fragment {
         ImageView aceptar=(ImageView) rootView.findViewById(R.id.Estado_acuerdo);
         ImageView rechazado=(ImageView) rootView.findViewById(R.id.Estado_acuerdo1);
         ImageView espera=(ImageView) rootView.findViewById(R.id.Estado_acuerdo2);
+        //Poner un imagen dentro un ImageView
         aceptar.setImageResource(R.drawable.acuerdo);
         rechazado.setImageResource(R.drawable.close);
         espera.setImageResource(R.drawable.espera);
 
         ListView li = (ListView) rootView.findViewById(R.id.listViewRutas);
-        ArrayList<Ruta> listaRuta = new ArrayList();
+        final ArrayList<Ruta> listaRuta = new ArrayList();
 
         //Crear una lista de rutas con el resultado de la consulta
          JavaPHPMySQL db = new JavaPHPMySQL();
@@ -65,9 +66,8 @@ public class RutasFavoritas extends Fragment {
                 b.setMessage("¿Desea borrar la ruta seleccionada de favoritos?");
                 b.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //db.borrarRutafavorita
                         Ruta rutaSelected = listaRuta.get(position);
-                       // borrarRuta(rutaSelected.getId());
+                        //db.borrarRutafavorita(rutaSelected.getIdRuta());
                     }
                 });
                 b.setNegativeButton("No", new DialogInterface.OnClickListener() {
