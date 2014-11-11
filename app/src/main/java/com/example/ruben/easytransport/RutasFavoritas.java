@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -32,25 +33,24 @@ public class RutasFavoritas extends Fragment {
         Button boton = (Button) rootView.findViewById(R.id.buttonAnyadir);
 
         //Insercion de las rutas en el listView
+        ImageView aceptar=(ImageView) rootView.findViewById(R.id.Estado_acuerdo);
+        ImageView rechazado=(ImageView) rootView.findViewById(R.id.Estado_acuerdo1);
+        ImageView espera=(ImageView) rootView.findViewById(R.id.Estado_acuerdo2);
+        aceptar.setImageResource(R.drawable.acuerdo);
+        rechazado.setImageResource(R.drawable.close);
+        espera.setImageResource(R.drawable.espera);
+
         ListView li = (ListView) rootView.findViewById(R.id.listViewRutas);
-        final ArrayList<Ruta> listaRuta = new ArrayList();
-        Ruta ruta;
-
-        //Conexión a la base de datos
-        /*AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(VistaRutas.this.getActivity(), "administracion", null, 1);
-        SQLiteDatabase db = admin.getWritableDatabase();*/
-
-        //Consulta a la base de datos
-        /*Cursor cur = db.rawQuery("SELECT * FROM Ruta", null);*/
+        ArrayList<Ruta> listaRuta = new ArrayList();
 
         //Crear una lista de rutas con el resultado de la consulta
-        /*if(cur.moveToFirst()){
-            do{
-                ruta = new Ruta(cur.getInt(0),cur.getString(1),cur.getString(2),cur.getString(3),cur.getString(4),
-                        cur.getString(5),cur.getString(6),cur.getInt(7));
-                listaRuta.add(ruta);
-            }while(cur.moveToNext());
-        }*/
+         JavaPHPMySQL db = new JavaPHPMySQL();
+        //String json = db.getRutasFavoritas(idUsuario);
+       // listaRuta = db.mostrarAllRutas(json);
+
+
+              //.equals("Aceptado"))
+                    aceptar.setVisibility(View.VISIBLE);
 
         //Inserción en el ListView
         ArrayAdapter<Ruta> adap = new ArrayAdapter<Ruta>(RutasFavoritas.this.getActivity(),android.R.layout.simple_list_item_1, listaRuta);
@@ -62,10 +62,10 @@ public class RutasFavoritas extends Fragment {
             public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
                 final AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
                 b.setIcon(android.R.drawable.ic_dialog_alert);
-                b.setMessage("¿Desea borrar la ruta seleccionada?");
+                b.setMessage("¿Desea borrar la ruta seleccionada de favoritos?");
                 b.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(view.getContext(), "administracion", null, 1);
+                        //db.borrarRutafavorita
                         Ruta rutaSelected = listaRuta.get(position);
                        // borrarRuta(rutaSelected.getId());
                     }
@@ -87,7 +87,7 @@ public class RutasFavoritas extends Fragment {
 
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-             //   Intent intent = new Intent(RutasFavoritas.this.getActivity(),HistoricoDeRutas.class);//Historico de rutas por crear
+              // Intent intent = new Intent(RutasFavoritas.this.getActivity(),HistoricoDeRutas.class);//Historico de rutas por crear
               //  startActivity(intent);
             }
         });
