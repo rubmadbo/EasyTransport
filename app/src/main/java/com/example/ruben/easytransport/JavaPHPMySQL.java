@@ -61,19 +61,16 @@ public class JavaPHPMySQL {
  //scripts php a crear (entre parentesis van los argumentos q se le pasa al php)
     //borrarRuta.php (idRuta), getVehiculoByUserId.php(idUser), getUsuarios().php, getAcuerdosByRuta.php(idRuta), getRutasAnteriores.php (Date)
     //getRutasFavoritas(idUsuario).
-    public static void insertarRuta(String Origen, String Destino, String Punto_recogida, String Punto_entrega,
-                                    String HoraInicio, String HoraFin, String Fecha, String Comentario, int idTransportista) {
+    public static void insertarRuta(String Origen, String Destino,String HoraInicio, String Fecha, String Comentario, int idTransportista) {
         //Creamos un objeto JSON
         JSONObject jsonObj = new JSONObject();
         //Añadimos el nombre, apellidos y email del usuario
         //es IMPORTANTE que pongamos lo que esta entre comillas igual que la columna de la BBDD
         jsonObj.put("idRuta", 0);
+        jsonObj.put("Favorita", false);
         jsonObj.put("Origen", Origen);
         jsonObj.put("Destino", Destino);
-        jsonObj.put("Punto_recogida", Punto_recogida);//hay que quitarlo
-        jsonObj.put("Punto_entrega", Punto_entrega);//hay que quitarlo
         jsonObj.put("HoraInicio", HoraInicio);
-        jsonObj.put("HoraFin", HoraFin);//hay que quitarlo, para que vale esto????
         jsonObj.put("Fecha", Fecha);
         jsonObj.put("Comentario", Comentario);
         jsonObj.put("idTransportista", idTransportista);
@@ -90,7 +87,7 @@ public class JavaPHPMySQL {
         insercion(jsonString, "insertarRuta.php");
     }
 
-    public static void insertarAcuerdo(double precio, String comentario, String estado, int idRuta, int idUsuario ){
+    public static void insertarAcuerdo(double precio, String comentario, String estado, int idRuta, int idUsuario, String Punto_recogida, String Punto_entrega ){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idAcuerdo", 0);
         jsonObject.put("Precio", precio);
@@ -98,6 +95,8 @@ public class JavaPHPMySQL {
         jsonObject.put("Estado", estado);
         jsonObject.put("idRuta", idRuta);
         jsonObject.put("idUsuario", idUsuario);
+        jsonObject.put("Punto_recogida", Punto_recogida);
+        jsonObject.put("Punto_entrega",Punto_entrega);
 
         List l = new LinkedList();
         l.addAll(Arrays.asList(jsonObject));

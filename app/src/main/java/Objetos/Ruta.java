@@ -10,43 +10,32 @@ public class Ruta {
     private int idRuta;
     private String Origen;
     private String Destino ;
-
-
-
-    private String Punto_recogida;
-    private String Punto_entrega;
     private Date HoraInicio; //para guardar en bbdd tiene que tener ese formato "2012-09-25 19:47:00.000";
     private String horaIniString;
-    private Date HoraFin;
     private String horaFinString;
     private Date Fecha; //para guardar en bbdd tiene que tener ese formato "2014-10-12";
     private String fechaString;
     private String Comentario;
     private List<Acuerdo> acuerdos;
     private Usuario transportista;
+    private boolean favorita;
     //en la base de datos la columna idACuerdo se pone a 0 si no se le pasa acuerdo porque no tiene
 
 
-    public Ruta(int idRuta, String origen, String destino, String punto_recogida, String punto_entrega, Date horaInicio, Date horaFin, Date fecha, String comentario, List<Acuerdo> acuerdos, Usuario transportista) {
+    public Ruta(int idRuta, boolean favorita, String origen, String destino, Date horaInicio, Date fecha, String comentario) {
         this.idRuta = idRuta;
-        Origen = origen;
-        Destino = destino;
-        Punto_recogida = punto_recogida;
-        Punto_entrega = punto_entrega;
+        this.favorita = favorita;
+        this.Origen = origen;
+        this.Destino = destino;
         HoraInicio = horaInicio;
-        HoraFin = horaFin;
         Fecha = fecha;
         Comentario = comentario;
-        this.acuerdos = acuerdos;
-        this.transportista = transportista;
     }
 
     public Ruta(int idRuta, String origen, String destino, String punto_recogida, String punto_entrega, String horaInicio, String horaFin, String fecha, String comentario) {
         this.idRuta = idRuta;
         Origen = origen;
         Destino = destino;
-        Punto_recogida = punto_recogida;
-        Punto_entrega = punto_entrega;
         horaIniString = horaInicio;
         horaFinString = horaFin;
         fechaString = fecha;
@@ -77,22 +66,6 @@ public class Ruta {
         Destino = destino;
     }
 
-    public String getPunto_recogida() {
-        return Punto_recogida;
-    }
-
-    public void setPunto_recogida(String punto_recogida) {
-        Punto_recogida = punto_recogida;
-    }
-
-    public String getPunto_entrega() {
-        return Punto_entrega;
-    }
-
-    public void setPunto_entrega(String punto_entrega) {
-        Punto_entrega = punto_entrega;
-    }
-
     public Date getHoraInicio() {
         return HoraInicio;
     }
@@ -101,13 +74,6 @@ public class Ruta {
         HoraInicio = horaInicio;
     }
 
-    public Date getHoraFin() {
-        return HoraFin;
-    }
-
-    public void setHoraFin(Date horaFin) {
-        HoraFin = horaFin;
-    }
 
     public Date getFecha() {
         return Fecha;

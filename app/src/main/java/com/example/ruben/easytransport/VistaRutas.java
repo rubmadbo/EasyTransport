@@ -46,22 +46,7 @@ public class VistaRutas extends Fragment {
         String json = bd.getAllRutas();
         ArrayList<Ruta> listaRuta =  bd.mostrarAllRutas(json);
 
-        /*
-        //Conexión a la base de datos
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(VistaRutas.this.getActivity(), "administracion", null, 1);
-        SQLiteDatabase db = admin.getWritableDatabase();
 
-        //Consulta a la base de datos
-        Cursor cur = db.rawQuery("SELECT * FROM Ruta", null);
-
-
-        if(cur.moveToFirst()){
-            do{
-              //  ruta = new Ruta(cur.getInt(0),cur.getString(1),cur.getString(2),cur.getString(3),cur.getString(4),
-                 //       cur.getString(5),cur.getString(6),cur.getInt(7));
-              //  listaRuta.add(ruta);
-            }while(cur.moveToNext());
-        }*/
 
         //Inserción en el ListView
 
