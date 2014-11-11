@@ -1,8 +1,6 @@
 package com.example.ruben.easytransport;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -39,8 +36,8 @@ public class ListarRuta extends Activity {
         setContentView(R.layout.activity_listar_ruta);
         //BOTON VOLVER?? JDCC
         boton=(Button)findViewById(R.id.button_volver);
-        origen=(EditText)findViewById(R.id.editText);
-        destino=(EditText)findViewById(R.id.editText2);
+        origen=(EditText)findViewById(R.id.TextFecha);
+        destino=(EditText)findViewById(R.id.TextHora);
 
         Intent intent = getIntent();
         String message = intent.getStringExtra("Des");
