@@ -3,6 +3,7 @@
     package="com.example.ruben.easytransport" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -43,6 +44,18 @@
         <activity
             android:name="com.example.ruben.easytransport.Anadir_acuerdo"
             android:label="@string/title_activity_anadir_acuerdo" >
+        </activity>
+        <activity
+            android:name="com.example.ruben.easytransport.MisRutas"
+            android:label="@string/title_activity_mis_rutas" >
+        </activity>
+        <activity
+            android:name="com.example.ruben.easytransport.NuevoAcuerdo"
+            android:label="@string/title_activity_nuevo_acuerdo" >
+        </activity>
+        <activity
+            android:name="com.example.ruben.easytransport.AcuerdoPropuesto"
+            android:label="@string/title_activity_acuerdo_propuesto" >
         </activity>
     </application>
 

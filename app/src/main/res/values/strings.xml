@@ -9,7 +9,6 @@
     <string name="title_activity_vista_rutas">vistaRutas</string>
     <string name="title_activity_anadir_acuerdo">anadir_acuerdo</string>
     <string name="title_activity_busqueda_ruta">BusquedaRuta</string>
-
     <string name="title_section1">Gestión de rutas</string>
     <string name="title_section2">Listado de rutas</string>
     <string name="title_section3">Ver acuerdos</string>
@@ -29,10 +28,8 @@
     <string name="Hora">Hora</string>
     <string name="Comentario">Comentarios adicionales</string>
 
-
     <!-- Fran: Strings de VistaRutas -->
     <string name="Anyadir">Añadir ruta</string>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Adr:Strings busqueda y listado -->
@@ -45,7 +42,6 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
-
     <!-- String Añadir acuerdo -->
     <string name="Remitente">Remitente</string>
     <string name="textoRemitente">Introduce el Remitente</string>
@@ -57,7 +53,9 @@
     <string name="textoRecogida">Introduce el punto Recogida</string>
     <string name="Dinero">Dinero</string>
     <string name="textoDinero">Introduce la cantidad de dinero</string>
-    <string name="historicoRutas">Histórico Rutas</string>
-
+    <string name="title_activity_mis_rutas">MisRutas</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_nuevo_acuerdo">NuevoAcuerdo</string>
+    <string name="title_activity_acuerdo_propuesto">AcuerdoPropuesto</string>
 
 </resources>

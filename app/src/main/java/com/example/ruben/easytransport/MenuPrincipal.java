@@ -57,6 +57,10 @@ public class MenuPrincipal extends ActionBarActivity
                 //Listar acuerdo
                 fragment = new ListarAcuerdos();
                 break;
+            case 3:
+                //Listar acuerdo
+                fragment = new MisRutas();
+                break;
 
         }
         fragmentManager.beginTransaction()
