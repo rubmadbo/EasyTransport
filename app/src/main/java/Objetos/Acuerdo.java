@@ -6,12 +6,13 @@ package Objetos;
 public class Acuerdo {
 
     private int id;
-    private Usuario transporstista;
-    private Usuario cliente;
+    private Usuario transporstista; //no esta en bbdd
+    private Usuario cliente; //no esta en bbdd
     private Ruta ruta;
     private Double precio;
     private String comentario; //puede ser null
     private String estado; //pendiente , aceptado, rechazado
+    //boolean leido
 
     public Acuerdo(int id, Usuario transporstista, Usuario cliente, Ruta ruta, Double precio, String comentario, String estado) {
         this.id = id;

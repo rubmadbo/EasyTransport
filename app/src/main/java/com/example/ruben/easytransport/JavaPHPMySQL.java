@@ -137,10 +137,7 @@ public class JavaPHPMySQL {
         return response.toString();
     }
 
- //scripts php a crear (entre parentesis van los argumentos q se le pasa al php)
-    //borrarRuta.php (idRuta), getVehiculoByUserId.php(idUser), getUsuarios().php, getAcuerdosByRuta.php(idRuta), getRutasAnteriores.php (Date)
-    //getRutasFavoritas(idUsuario).
-    public static void insertarRuta(String Origen, String Destino,String HoraInicio, String Fecha, String Comentario, int idTransportista) {
+      public static void insertarRuta(String Origen, String Destino,String HoraInicio, String Fecha, String Comentario, int idTransportista) {
         //Creamos un objeto JSON
         JSONObject jsonObj = new JSONObject();
         //Añadimos el nombre, apellidos y email del usuario
@@ -186,6 +183,7 @@ public class JavaPHPMySQL {
 
     }
 
+    //IMPORTANTE: tener en cuenta que no se puede borrar ruta si tiene acuerdo asociado!
     public static void borrarRuta(int idRuta){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idRuta", idRuta);
@@ -207,6 +205,18 @@ public class JavaPHPMySQL {
         //el script obtiene la variable idUsuario hace consulta y recupera datos
        String json= getDataFromFilter(jsonString, "getVehiculoByUserId.php");
        return mostrarVehiculos(json);
+    }
+
+    public static ArrayList<Acuerdo> getAcuerdosByRutaId(int idRuta){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idRuta", idRuta);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+        String json= getDataFromFilter(jsonString, "getAcuerdosByRutaId.php");
+        return mostrarAcuerdos(json);
     }
 
     public static String getAllRutas(){
@@ -247,9 +257,35 @@ public class JavaPHPMySQL {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return response.toString();
         }
+
+    public static ArrayList<Acuerdo> mostrarAcuerdos(String json){
+        System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
+        //Crear un Objeto JSON a partir del string JSON
+        ArrayList listaAcuerdos = new ArrayList();
+        Object jsonObject =JSONValue.parse(json.toString());
+        //Convertir el objeto JSON en un array
+        JSONArray array=(JSONArray)jsonObject;
+        //Iterar el array y extraer la información
+        for(int i=0;i<array.size();i++){
+            JSONObject row =(JSONObject)array.get(i);
+            String idAcuerdo = row.get("idAcuerdo").toString();
+            String Precio = row.get("Precio").toString();
+            String Comentario = row.get("Comentario").toString();
+            String Estado = row.get("Estado").toString();
+            String idRuta = row.get("idUsuario").toString(); //se mete a null porque se sabe de que ruta es
+            String Punto_recogida = row.get("Punto_recogida").toString();
+            String Punto_entrega = row.get("Punto_entrega").toString();
+            String Leido = row.get("Leido").toString();
+
+           // Acuerdo acuerdo = new Acuerdo(Integer.parseInt(idAcuerdo),Double.parseDouble(Precio),Comentario ,Estado,null,Punto_recogida,Punto_entrega,Leido);
+
+          //  listaAcuerdos.add(acuerdo);
+
+        }
+        return listaAcuerdos;
+    }
 
     public static ArrayList<Vehiculo> mostrarVehiculos(String json){
         System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
@@ -265,12 +301,10 @@ public class JavaPHPMySQL {
             String Matricula = row.get("Matricula").toString();
             String Marca = row.get("Marca").toString();
             String Modelo = row.get("Modelo").toString();
-            String idUsuario = row.get("idUsuario").toString();
+            String idUsuario = row.get("idUsuario").toString(); //se mete a null porque se sabe a que usuario pertenece
             String Capacidad = row.get("Capacidad").toString();
 
-
             Vehiculo vehiculo = new Vehiculo(Integer.parseInt(idVehiculo),Matricula,Marca ,Modelo,null,Integer.parseInt(Capacidad));
-            //crear un objeto nuevo parecido a acuerdo pero que no tenga Usuario.
 
             listaVehiculos.add(vehiculo);
 

@@ -67,17 +67,10 @@ public class Anadir_acuerdo extends ActionBarActivity {
                     String fecha = String.format("%d/%d/%d", dia, mes, year);*/
 
                     //conexion a bbdd
-                    AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(Anadir_acuerdo.this, "administracion", null, 1);
-                    SQLiteDatabase db = admin.getWritableDatabase();
-                    //sacamos el id que le corresponde a este acuerdo
-                    String selectQuery = "SELECT * FROM Acuerdo";
-                    Cursor cursor = db.rawQuery(selectQuery, null);
-                    int id=1;
-                    if (cursor.moveToFirst()){
-                        id =cursor.getCount()+1;}
-                    //insertamos datos
-                    // añadido rutaId, ahora se añaden con el Id de la ruta
-                    db.execSQL("INSERT INTO Acuerdo VALUES('"+id+"','"+t+"','"+r+"','"+rutaId+"','"+din+"','"+com+"')");
+                    JavaPHPMySQL bd = new JavaPHPMySQL();
+                    //JDCC: HAY QUE HABLAR PRIMERO COMO CAMBIAMOS LA CLASE ACUERDO
+                    //TMABIEN AQUI HABRIA QUE VER COMO COJER EL ID DEL USUARIO QUE QUIERE CREAR UN ACUERDO
+                    //db.insertarAcuerdo(r,t,e,din,com.rec);
 
                 /*List<Acuerdo> acuerdos= admin.getAcuerdos();
                 for (int i=0; i<acuerdos.size();i++){
@@ -90,14 +83,10 @@ public class Anadir_acuerdo extends ActionBarActivity {
                 else{
                     Toast.makeText(Anadir_acuerdo.this, "Rellene todos los campos", Toast.LENGTH_LONG).show();
                 }
-
-
             }
         });
 
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

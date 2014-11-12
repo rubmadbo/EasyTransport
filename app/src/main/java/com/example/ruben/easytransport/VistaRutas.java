@@ -71,7 +71,10 @@ public class VistaRutas extends Fragment {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         JavaPHPMySQL bd = new JavaPHPMySQL();
                         Ruta rutaSelected = finalListaRuta.get(position);
-                        bd.borrarRuta(rutaSelected.getIdRuta());
+                        //IMPORTANTE: tener en cuenta que no se puede borrar ruta si tiene acuerdo asociado!
+                        //getAcuerdosByRuta esta sin acabar
+                     if(bd.getAcuerdosByRutaId(rutaSelected.getIdRuta()) == null)   {
+                        bd.borrarRuta(rutaSelected.getIdRuta());}
                     }
                 });
                 b.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -81,10 +84,8 @@ public class VistaRutas extends Fragment {
 
                 b.show();
                 return true;
-
             }
         });
-
 
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -104,12 +105,9 @@ public class VistaRutas extends Fragment {
         //devuelve false si no hay ninguno que cumple la query
         if (cursor.moveToFirst()){
             Toast.makeText(VistaRutas.this.getActivity(), "No se puede borrar una ruta asociada a un Acuerdo", Toast.LENGTH_LONG).show();
-
         }else {db.execSQL("DELETE FROM Ruta WHERE idRuta="+rutaid+"");
             Toast.makeText(VistaRutas.this.getActivity(), "La ruta ha sido borrada", Toast.LENGTH_LONG).show();
 
         }
     }
-
-
 }

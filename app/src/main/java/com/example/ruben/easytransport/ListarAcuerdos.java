@@ -32,18 +32,16 @@ public class ListarAcuerdos extends Fragment {
        View rootView = inflater.inflate(R.layout.fragment_listar_acuerdos, container, false);
         ListView li = (ListView) rootView.findViewById(R.id.listViewAcuerdos);
 
-        Acuerdo acuerdo;
+       // HAY QUE PASARLE DE ALGUNA MANERA EL USERID
 
         //Conexión a la base de datos
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(ListarAcuerdos.this.getActivity(), "administracion", null, 1);
-        List<Acuerdo> listaAcuerdos = admin.getAcuerdos();
+        JavaPHPMySQL db = new JavaPHPMySQL();
+        //String json = db.getAcuerdosByRutaId();
+        //ArrayList<Acuerdo> listaAcuerdos = db.mostrarAcuerdos(json);
         //Inserción en el ListView
-        ArrayAdapter<Acuerdo> adap = new ArrayAdapter<Acuerdo>(ListarAcuerdos.this.getActivity(),android.R.layout.simple_list_item_1, listaAcuerdos);
-        adap.notifyDataSetChanged();
-        li.setAdapter(adap);
-
-        //Cerramos la conexion
-        admin.close();
+       // ArrayAdapter<Acuerdo> adap = new ArrayAdapter<Acuerdo>(ListarAcuerdos.this.getActivity(),android.R.layout.simple_list_item_1, listaAcuerdos);
+        //adap.notifyDataSetChanged();
+       // li.setAdapter(adap);
 
        /* boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
