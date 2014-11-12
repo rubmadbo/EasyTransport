@@ -1,6 +1,5 @@
 package com.example.ruben.easytransport;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,19 +15,23 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TableLayout;
 import android.widget.Toast;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
 
 import Objetos.Ruta;
 
 
 public class VistaRutas extends Fragment {
-
+    final Calendar c = Calendar.getInstance();
+    Date fecha = new Date();
+    private int year;
+    private int month;
+    private int day;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //si te sale error aqui ir a buil.gradle el de la carpera mas externa y donde pone minSdkVersion pones 9
@@ -45,6 +48,11 @@ public class VistaRutas extends Fragment {
         JavaPHPMySQL bd = new JavaPHPMySQL();
         String json = bd.getAllRutas();
         ArrayList<Ruta> listaRuta =  bd.mostrarAllRutas(json);
+        ArrayList<Ruta> listaRutasActuales = new ArrayList<Ruta>();
+
+
+        //Aqui agregar solo las rutas que no se hayan pasado.
+
 
         //Inserción en el ListView
 
@@ -61,9 +69,9 @@ public class VistaRutas extends Fragment {
                 b.setMessage("¿Desea borrar la ruta seleccionada?");
                 b.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(view.getContext(), "administracion", null, 1);
+                        JavaPHPMySQL bd = new JavaPHPMySQL();
                         Ruta rutaSelected = finalListaRuta.get(position);
-                       // borrarRuta(rutaSelected.getId());
+                        bd.borrarRuta(rutaSelected.getIdRuta());
                     }
                 });
                 b.setNegativeButton("No", new DialogInterface.OnClickListener() {
