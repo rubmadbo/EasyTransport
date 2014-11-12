@@ -155,7 +155,6 @@ public class JavaPHPMySQL {
         String jsonString = JSONValue.toJSONString(l);
         //el script obtiene la variable idUsuario hace consulta y recupera datos
        String json= getDataFromFilter(jsonString, "getVehiculoByUserId.php");
-       System.out.println("Esto es el json -----------> " + json);
        return mostrarVehiculos(json);
     }
 
@@ -179,7 +178,6 @@ public class JavaPHPMySQL {
             con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
             //Creamos los parametros para enviar
             String urlParameters = "json="+jsonString;
-            System.out.println("-------------------------- JsonString: ----->" + jsonString);
             // Enviamos los datos por POST
             con.setDoOutput(true);
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
@@ -211,10 +209,6 @@ public class JavaPHPMySQL {
         }
 
         return response.toString();
-
-
-
-
     }
 
 
