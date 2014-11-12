@@ -35,8 +35,107 @@ public class JavaPHPMySQL {
     private static final String USER_AGENT = "Mozilla/5.0";
     private static final String SERVER_PATH = "http://easytransport1.esy.es/";
 
+// ENVIA UN JSON CON LAS VARIABLES AL PHP Y EJECUTA UNA CONSULTA SQL , NO RECOGE VALORES
+    //SE PUEDE USAR PARA INSERTAR, DELETE, ...
+    public static void insercion(String jsonString, String nombreScript) {
+        try {
+            //Codificar el json a URL
+            jsonString = URLEncoder.encode(jsonString, "UTF-8");
+            //Generar la URL
+            String url = SERVER_PATH+nombreScript;
+            //Creamos un nuevo objeto URL con la url donde queremos enviar el JSON
+            URL obj = new URL(url);
+            //Creamos un objeto de conexión
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            //Añadimos la cabecera
+            con.setRequestMethod("POST");
+            con.setRequestProperty("User-Agent", USER_AGENT);
+            con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+            //Creamos los parametros para enviar
+            String urlParameters = "json="+jsonString;
+            // Enviamos los datos por POST
+            con.setDoOutput(true);
+            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+            wr.writeBytes(urlParameters);
+            wr.flush();
+            wr.close();
+            //Capturamos la respuesta del servidor
+            int responseCode = con.getResponseCode();
+            System.out.println("\nSending 'POST' request to URL : " + url);
+            System.out.println("Post parameters : " + urlParameters);
+            System.out.println("Response Code : " + responseCode);
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            //Mostramos la respuesta del servidor por consola
+            System.out.println(response);
+            //cerramos la conexión
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //ENVIA VARIABLES EN JSON, EJECUTA SCRIPT Y RECUPERA DATOS EN STRING
+    //CUANDO RECUPERA LOS DATOS HAY QUE LLAMAR A UN METODO MOSTRAR, EJEMPLO: getVehiculoByUserId
+    public static String getDataFromFilter(String jsonString, String nombreScript){
+        //jdcc primero enviamos las variables en el json
+        StringBuffer response = null;
+
+        try {
+            //Codificar el json a URL
+            jsonString = URLEncoder.encode(jsonString, "UTF-8");
+            //Generar la URL
+            String url = SERVER_PATH+nombreScript;
+            //Creamos un nuevo objeto URL con la url donde queremos enviar el JSON
+            URL obj = new URL(url);
+            //Creamos un objeto de conexión
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            //Añadimos la cabecera
+            con.setRequestMethod("POST");
+            con.setRequestProperty("User-Agent", USER_AGENT);
+            con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+            //Creamos los parametros para enviar
+            String urlParameters = "json="+jsonString;
+            // Enviamos los datos por POST
+            con.setDoOutput(true);
+            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+            wr.writeBytes(urlParameters);
+            wr.flush();
+            wr.close();
 
 
+            //jdcc: ahora recuperamos los datos
+            int responseCode = con.getResponseCode();
+            System.out.println("\nSending 'POST' request to URL : " + url);
+            System.out.println("Response Code : " + responseCode);
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            //Mostramos la respuesta del servidor por consola
+            System.out.println("Respuesta del servidor: "+response);
+            System.out.println();
+            //cerramos la conexión
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return response.toString();
+    }
 
  //scripts php a crear (entre parentesis van los argumentos q se le pasa al php)
     //borrarRuta.php (idRuta), getVehiculoByUserId.php(idUser), getUsuarios().php, getAcuerdosByRuta.php(idRuta), getRutasAnteriores.php (Date)
@@ -87,54 +186,6 @@ public class JavaPHPMySQL {
 
     }
 
-    public static void insercion(String jsonString, String nombreScript) {
-        try {
-            //Codificar el json a URL
-            jsonString = URLEncoder.encode(jsonString, "UTF-8");
-            //Generar la URL
-            String url = SERVER_PATH+nombreScript;
-            //Creamos un nuevo objeto URL con la url donde queremos enviar el JSON
-            URL obj = new URL(url);
-            //Creamos un objeto de conexión
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            //Añadimos la cabecera
-            con.setRequestMethod("POST");
-            con.setRequestProperty("User-Agent", USER_AGENT);
-            con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-            //Creamos los parametros para enviar
-            String urlParameters = "json="+jsonString;
-            // Enviamos los datos por POST
-            con.setDoOutput(true);
-            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-            wr.writeBytes(urlParameters);
-            wr.flush();
-            wr.close();
-            //Capturamos la respuesta del servidor
-            int responseCode = con.getResponseCode();
-            System.out.println("\nSending 'POST' request to URL : " + url);
-            System.out.println("Post parameters : " + urlParameters);
-            System.out.println("Response Code : " + responseCode);
-
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            //Mostramos la respuesta del servidor por consola
-            System.out.println(response);
-            //cerramos la conexión
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
- //este necesita pasarle el idRuta
     public static void borrarRuta(int idRuta){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idRuta", idRuta);
@@ -157,67 +208,6 @@ public class JavaPHPMySQL {
        String json= getDataFromFilter(jsonString, "getVehiculoByUserId.php");
        return mostrarVehiculos(json);
     }
-
-    //metodo que te devulve datos de la bbdd cuando le has pasado una variable para hacer filtro WHERE en la query
-    public static String getDataFromFilter(String jsonString, String nombreScript){
-    //jdcc primero enviamos las variables en el json
-        StringBuffer response = null;
-
-        try {
-            //Codificar el json a URL
-            jsonString = URLEncoder.encode(jsonString, "UTF-8");
-            //Generar la URL
-            String url = SERVER_PATH+nombreScript;
-            //Creamos un nuevo objeto URL con la url donde queremos enviar el JSON
-            URL obj = new URL(url);
-            //Creamos un objeto de conexión
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            //Añadimos la cabecera
-            con.setRequestMethod("POST");
-            con.setRequestProperty("User-Agent", USER_AGENT);
-            con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-            //Creamos los parametros para enviar
-            String urlParameters = "json="+jsonString;
-            // Enviamos los datos por POST
-            con.setDoOutput(true);
-            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-            wr.writeBytes(urlParameters);
-            wr.flush();
-            wr.close();
-
-
-    //jdcc: ahora recuperamos los datos
-            int responseCode = con.getResponseCode();
-            System.out.println("\nSending 'POST' request to URL : " + url);
-            System.out.println("Response Code : " + responseCode);
-
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            response = new StringBuffer();
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            //Mostramos la respuesta del servidor por consola
-            System.out.println("Respuesta del servidor: "+response);
-            System.out.println();
-            //cerramos la conexión
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        return response.toString();
-    }
-
-
-
-
-
-
-
 
     public static String getAllRutas(){
 
@@ -284,12 +274,12 @@ public class JavaPHPMySQL {
 
             listaVehiculos.add(vehiculo);
 
-            //Mostrar la información en pantalla
-            for(int j=0;j<listaVehiculos.size();j++){listaVehiculos.toString();}
+
         }
+        //Mostrar la información en pantalla
+        // for(int j=0;j<listaVehiculos.size();j++){listaVehiculos.toString();}
         return listaVehiculos;
     }
-
 
     public static ArrayList<Ruta> mostrarAllRutas(String json){
             System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
@@ -312,8 +302,6 @@ public class JavaPHPMySQL {
                 Ruta ruta = new Ruta(Integer.parseInt(idRuta),Origen,Destino,HoraInicio,Fecha,Comentario);
 
                 listaRutas.add(ruta);
-
-
             }
         return listaRutas;
         }
