@@ -5,55 +5,34 @@ package Objetos;
  */
 public class Acuerdo {
 
-    private int id;
-    private Usuario transporstista; //no esta en bbdd
-    private Usuario cliente; //no esta en bbdd
-    private Ruta ruta;
+    private int idAcuerdo;
     private Double precio;
     private String comentario; //puede ser null
     private String estado; //pendiente , aceptado, rechazado
-    //boolean leido
+    private Ruta ruta;
+    private String Punto_recogida;
+    private String Punto_entrega;
+    private Usuario remitente; //no esta en bbdd
+    private int leido;
 
-    public Acuerdo(int id, Usuario transporstista, Usuario cliente, Ruta ruta, Double precio, String comentario, String estado) {
-        this.id = id;
-        this.transporstista = transporstista;
-        this.cliente = cliente;
-        this.ruta = ruta;
+    public Acuerdo(int idAcuerdo, Double precio, String comentario, String estado, Ruta ruta, String punto_recogida, String punto_entrega, Usuario remitente, int leido) {
+        this.idAcuerdo = idAcuerdo;
         this.precio = precio;
         this.comentario = comentario;
         this.estado = estado;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Usuario getTransporstista() {
-        return transporstista;
-    }
-
-    public void setTransporstista(Usuario transporstista) {
-        this.transporstista = transporstista;
-    }
-
-    public Usuario getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Usuario cliente) {
-        this.cliente = cliente;
-    }
-
-    public Ruta getRuta() {
-        return ruta;
-    }
-
-    public void setRuta(Ruta ruta) {
         this.ruta = ruta;
+        Punto_recogida = punto_recogida;
+        Punto_entrega = punto_entrega;
+        this.remitente = remitente;
+        this.leido = leido;
+    }
+
+    public int getIdAcuerdo() {
+        return idAcuerdo;
+    }
+
+    public void setIdAcuerdo(int idAcuerdo) {
+        this.idAcuerdo = idAcuerdo;
     }
 
     public Double getPrecio() {
@@ -80,16 +59,43 @@ public class Acuerdo {
         this.estado = estado;
     }
 
-    @Override
-    public String toString() {
-        return "Acuerdo{" +
-                "id=" + id +
-                ", transporstista=" + transporstista +
-                ", cliente=" + cliente +
-                ", ruta=" + ruta +
-                ", precio=" + precio +
-                ", comentario='" + comentario + '\'' +
-                ", estado='" + estado + '\'' +
-                '}';
+    public Ruta getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(Ruta ruta) {
+        this.ruta = ruta;
+    }
+
+    public String getPunto_recogida() {
+        return Punto_recogida;
+    }
+
+    public void setPunto_recogida(String punto_recogida) {
+        Punto_recogida = punto_recogida;
+    }
+
+    public String getPunto_entrega() {
+        return Punto_entrega;
+    }
+
+    public void setPunto_entrega(String punto_entrega) {
+        Punto_entrega = punto_entrega;
+    }
+
+    public Usuario getRemitente() {
+        return remitente;
+    }
+
+    public void setRemitente(Usuario remitente) {
+        this.remitente = remitente;
+    }
+
+    public int getLeido() {
+        return leido;
+    }
+
+    public void setLeido(int leido) {
+        this.leido = leido;
     }
 }

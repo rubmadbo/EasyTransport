@@ -139,7 +139,8 @@
                 android:hint="@string/textoDinero"
                 android:id="@+id/editTDinero"
                 android:layout_marginTop="15dp"
-                android:background="#ffffffff" />
+                android:background="#ffffffff"
+                android:inputType="numberDecimal" />
 
             <TextView
                 android:text="@string/Fecha"

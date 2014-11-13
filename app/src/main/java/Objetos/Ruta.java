@@ -10,35 +10,23 @@ public class Ruta {
     private int idRuta;
     private String Origen;
     private String Destino ;
-    private Date HoraInicio; //para guardar en bbdd tiene que tener ese formato "2012-09-25 19:47:00.000";
-    private String horaIniString;
-    private String horaFinString;
-    private Date Fecha; //para guardar en bbdd tiene que tener ese formato "2014-10-12";
-    private String fechaString;
+    private String HoraInicio; //para guardar en bbdd tiene que tener ese formato "2012-09-25 19:47:00.000";
+    private String Fecha; //para guardar en bbdd tiene que tener ese formato "2014-10-12";
     private String Comentario;
-    private List<Acuerdo> acuerdos;
     private Usuario transportista;
-    private boolean favorita;
+    private int favorita; //0 = false
     //en la base de datos la columna idACuerdo se pone a 0 si no se le pasa acuerdo porque no tiene
 
 
-    public Ruta(int idRuta, boolean favorita, String origen, String destino, Date horaInicio, Date fecha, String comentario) {
-        this.idRuta = idRuta;
-        this.favorita = favorita;
-        this.Origen = origen;
-        this.Destino = destino;
-        HoraInicio = horaInicio;
-        Fecha = fecha;
-        Comentario = comentario;
-    }
-
-    public Ruta(int idRuta, String origen, String destino, String horaInicio, String fecha, String comentario) {
+    public Ruta(int idRuta, String origen, String destino, String horaInicio, String fecha, String comentario, Usuario transportista, int favorita) {
         this.idRuta = idRuta;
         Origen = origen;
         Destino = destino;
-        horaIniString = horaInicio;
-        fechaString = fecha;
+        HoraInicio = horaInicio;
+        Fecha = fecha;
         Comentario = comentario;
+        this.transportista = transportista;
+        this.favorita = favorita;
     }
 
     public int getIdRuta() {
@@ -65,20 +53,19 @@ public class Ruta {
         Destino = destino;
     }
 
-    public Date getHoraInicio() {
+    public String getHoraInicio() {
         return HoraInicio;
     }
 
-    public void setHoraInicio(Date horaInicio) {
+    public void setHoraInicio(String horaInicio) {
         HoraInicio = horaInicio;
     }
 
-
-    public Date getFecha() {
+    public String getFecha() {
         return Fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         Fecha = fecha;
     }
 
@@ -90,14 +77,6 @@ public class Ruta {
         Comentario = comentario;
     }
 
-    public List<Acuerdo> getAcuerdos() {
-        return acuerdos;
-    }
-
-    public void setAcuerdos(List<Acuerdo> acuerdos) {
-        this.acuerdos = acuerdos;
-    }
-
     public Usuario getTransportista() {
         return transportista;
     }
@@ -106,24 +85,20 @@ public class Ruta {
         this.transportista = transportista;
     }
 
-    public String getHoraIniString() {
-        return horaIniString;
+    public int getFavorita() {
+        return favorita;
     }
 
-    public String getHoraFinString() {
-        return horaFinString;
+    public void setFavorita(int favorita) {
+        this.favorita = favorita;
     }
 
-    public String getFechaString() {
-        return fechaString;
-    }
-
-    public String toString(){
-        return  "\n"+"Origen: " + Origen + "\n" +
+    @Override
+    public String toString() {
+        return  "Origen: " + Origen + "\n" +
                 "Destino: " + Destino + "\n" +
-                "Fecha: " + fechaString + "\n" +
-                "Hora salida: " + horaIniString + "\n" +
-                "Comentario: " + Comentario +"\n";
+                "Hora Salida: " + HoraInicio + "\n" +
+                "Fecha: " + Fecha + "\n" +
+                "Comentario: " + Comentario + "\n" ;
     }
-
 }

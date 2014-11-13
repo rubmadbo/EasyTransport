@@ -144,7 +144,7 @@ public class JavaPHPMySQL {
         //Añadimos el nombre, apellidos y email del usuario
         //es IMPORTANTE que pongamos lo que esta entre comillas igual que la columna de la BBDD
         jsonObj.put("idRuta", 0);
-        jsonObj.put("Favorita", false);
+        jsonObj.put("Favorita", 0);
         jsonObj.put("Origen", Origen);
         jsonObj.put("Destino", Destino);
         jsonObj.put("HoraInicio", HoraInicio);
@@ -164,7 +164,7 @@ public class JavaPHPMySQL {
         insercion(jsonString, "insertarRuta.php");
     }
 
-    public static void insertarAcuerdo(double precio, String comentario, String estado, int idRuta, int idUsuario, String Punto_recogida, String Punto_entrega ){
+    public static void insertarAcuerdo(double precio, String comentario, String estado, int idRuta, int idUsuario, String Punto_recogida, String Punto_entrega){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idAcuerdo", 0);
         jsonObject.put("Precio", precio);
@@ -174,6 +174,7 @@ public class JavaPHPMySQL {
         jsonObject.put("idUsuario", idUsuario);
         jsonObject.put("Punto_recogida", Punto_recogida);
         jsonObject.put("Punto_entrega",Punto_entrega);
+        jsonObject.put("Leido",0);
 
         List l = new LinkedList();
         l.addAll(Arrays.asList(jsonObject));
@@ -280,9 +281,8 @@ public class JavaPHPMySQL {
             String Punto_entrega = row.get("Punto_entrega").toString();
             String Leido = row.get("Leido").toString();
 
-           // Acuerdo acuerdo = new Acuerdo(Integer.parseInt(idAcuerdo),Double.parseDouble(Precio),Comentario ,Estado,null,Punto_recogida,Punto_entrega,Leido);
+           Acuerdo acuerdo = new Acuerdo(Integer.parseInt(idAcuerdo),Double.parseDouble(Precio),Comentario ,Estado,null,Punto_recogida,Punto_entrega,null,Integer.parseInt(Leido));
 
-          //  listaAcuerdos.add(acuerdo);
 
         }
         return listaAcuerdos;
@@ -333,8 +333,9 @@ public class JavaPHPMySQL {
                 String Fecha = row.get("Fecha").toString();
                 String Comentario = row.get("Comentario").toString();
                 String idTransportista = row.get("idTransportista").toString();
+                String Favorita = row.get("Favorita").toString();
 
-                Ruta ruta = new Ruta(Integer.parseInt(idRuta),Origen,Destino,HoraInicio,Fecha,Comentario);
+                Ruta ruta = new Ruta(Integer.parseInt(idRuta),Origen,Destino,HoraInicio,Fecha,Comentario,null,Integer.parseInt(Favorita));
 
                 listaRutas.add(ruta);
             }

@@ -30,8 +30,8 @@ public class Anadir_acuerdo extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anadir_acuerdo2);
 
-        destino = (EditText)findViewById(R.id.editTDestinoAcuerdo);
-        origen = (EditText)findViewById(R.id.editTOrigenAcuerdo);
+        //destino = (EditText)findViewById(R.id.editTDestinoAcuerdo);
+        //origen = (EditText)findViewById(R.id.editTOrigenAcuerdo);
         remitente = (EditText)findViewById(R.id.editTRemitente);
         transportista = (EditText)findViewById(R.id.editTTransportista);
         entrega = (EditText)findViewById(R.id.editTEntrega);
@@ -70,12 +70,10 @@ public class Anadir_acuerdo extends ActionBarActivity {
                     JavaPHPMySQL bd = new JavaPHPMySQL();
                     //JDCC: HAY QUE HABLAR PRIMERO COMO CAMBIAMOS LA CLASE ACUERDO
                     //TMABIEN AQUI HABRIA QUE VER COMO COJER EL ID DEL USUARIO QUE QUIERE CREAR UN ACUERDO
-                    //db.insertarAcuerdo(r,t,e,din,com.rec);
+                    bd.insertarAcuerdo(Double.parseDouble(din),com,"pendiente",rutaId,2,e,rec);
 
-                /*List<Acuerdo> acuerdos= admin.getAcuerdos();
-                for (int i=0; i<acuerdos.size();i++){
-                    System.out.println(acuerdos.get(i).toString());
-                }*/
+
+
                     Toast.makeText(Anadir_acuerdo.this, "Se ha enviado el acuerdo", Toast.LENGTH_LONG).show();
 
                     finish();
