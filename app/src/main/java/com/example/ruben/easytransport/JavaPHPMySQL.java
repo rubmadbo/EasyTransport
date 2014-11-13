@@ -9,6 +9,7 @@ import static java.lang.System.in;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -35,58 +36,8 @@ public class JavaPHPMySQL {
     private static final String USER_AGENT = "Mozilla/5.0";
     private static final String SERVER_PATH = "http://easytransport1.esy.es/";
 
-
-
-
- //scripts php a crear (entre parentesis van los argumentos q se le pasa al php)
-    //borrarRuta.php (idRuta), getVehiculoByUserId.php(idUser), getUsuarios().php, getAcuerdosByRuta.php(idRuta), getRutasAnteriores.php (Date)
-    //getRutasFavoritas(idUsuario).
-    public static void insertarRuta(String Origen, String Destino,String HoraInicio, String Fecha, String Comentario, int idTransportista) {
-        //Creamos un objeto JSON
-        JSONObject jsonObj = new JSONObject();
-        //Añadimos el nombre, apellidos y email del usuario
-        //es IMPORTANTE que pongamos lo que esta entre comillas igual que la columna de la BBDD
-        jsonObj.put("idRuta", 0);
-        jsonObj.put("Favorita", false);
-        jsonObj.put("Origen", Origen);
-        jsonObj.put("Destino", Destino);
-        jsonObj.put("HoraInicio", HoraInicio);
-        jsonObj.put("Fecha", Fecha);
-        jsonObj.put("Comentario", Comentario);
-        jsonObj.put("idTransportista", idTransportista);
-
-        //Creamos una lista para almacenar el JSON
-        List l = new LinkedList();
-        l.addAll(Arrays.asList(jsonObj));
-        //Generamos el String JSON
-        String jsonString = JSONValue.toJSONString(l);
-        System.out.println("JSON GENERADO:");
-        System.out.println(jsonString);
-        System.out.println("");
-
-        insercion(jsonString, "insertarRuta.php");
-    }
-
-    public static void insertarAcuerdo(double precio, String comentario, String estado, int idRuta, int idUsuario, String Punto_recogida, String Punto_entrega ){
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("idAcuerdo", 0);
-        jsonObject.put("Precio", precio);
-        jsonObject.put("Comentario", comentario);
-        jsonObject.put("Estado", estado);
-        jsonObject.put("idRuta", idRuta);
-        jsonObject.put("idUsuario", idUsuario);
-        jsonObject.put("Punto_recogida", Punto_recogida);
-        jsonObject.put("Punto_entrega",Punto_entrega);
-
-        List l = new LinkedList();
-        l.addAll(Arrays.asList(jsonObject));
-
-        String jsonString = JSONValue.toJSONString(l);
-
-        insercion(jsonString, "insertarAcuerdo.php");
-
-    }
-
+// ENVIA UN JSON CON LAS VARIABLES AL PHP Y EJECUTA UNA CONSULTA SQL , NO RECOGE VALORES
+    //SE PUEDE USAR PARA INSERTAR, DELETE, ...
     public static void insercion(String jsonString, String nombreScript) {
         try {
             //Codificar el json a URL
@@ -132,35 +83,10 @@ public class JavaPHPMySQL {
         }
     }
 
-
-
- //este necesita pasarle el idRuta
-    public static void borrarRuta(int idRuta){
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("idRuta", idRuta);
-        List l = new LinkedList();
-        l.addAll(Arrays.asList(jsonObject));
-
-        String jsonString = JSONValue.toJSONString(l);
-
-        insercion(jsonString, "borrarRuta.php"); //puede usar insercion porque solo recibe una variable y ejecuta una query
-    }
-
-    public static ArrayList<Vehiculo> getVehiculoByUserId(int idUsuario){
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("idUsuario", idUsuario);
-        List l = new LinkedList();
-        l.addAll(Arrays.asList(jsonObject));
-
-        String jsonString = JSONValue.toJSONString(l);
-        //el script obtiene la variable idUsuario hace consulta y recupera datos
-       String json= getDataFromFilter(jsonString, "getVehiculoByUserId.php");
-       return mostrarVehiculos(json);
-    }
-
-    //metodo que te devulve datos de la bbdd cuando le has pasado una variable para hacer filtro WHERE en la query
+    //ENVIA VARIABLES EN JSON, EJECUTA SCRIPT Y RECUPERA DATOS EN STRING
+    //CUANDO RECUPERA LOS DATOS HAY QUE LLAMAR A UN METODO MOSTRAR, EJEMPLO: getVehiculoByUserId
     public static String getDataFromFilter(String jsonString, String nombreScript){
-    //jdcc primero enviamos las variables en el json
+        //jdcc primero enviamos las variables en el json
         StringBuffer response = null;
 
         try {
@@ -186,7 +112,7 @@ public class JavaPHPMySQL {
             wr.close();
 
 
-    //jdcc: ahora recuperamos los datos
+            //jdcc: ahora recuperamos los datos
             int responseCode = con.getResponseCode();
             System.out.println("\nSending 'POST' request to URL : " + url);
             System.out.println("Response Code : " + responseCode);
@@ -208,15 +134,91 @@ public class JavaPHPMySQL {
             e.printStackTrace();
         }
 
+
         return response.toString();
     }
 
+      public static void insertarRuta(String Origen, String Destino,String HoraInicio, String Fecha, String Comentario, int idTransportista) {
+        //Creamos un objeto JSON
+        JSONObject jsonObj = new JSONObject();
+        //Añadimos el nombre, apellidos y email del usuario
+        //es IMPORTANTE que pongamos lo que esta entre comillas igual que la columna de la BBDD
+        jsonObj.put("idRuta", 0);
+        jsonObj.put("Favorita", false);
+        jsonObj.put("Origen", Origen);
+        jsonObj.put("Destino", Destino);
+        jsonObj.put("HoraInicio", HoraInicio);
+        jsonObj.put("Fecha", Fecha);
+        jsonObj.put("Comentario", Comentario);
+        jsonObj.put("idTransportista", idTransportista);
 
+        //Creamos una lista para almacenar el JSON
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObj));
+        //Generamos el String JSON
+        String jsonString = JSONValue.toJSONString(l);
+        System.out.println("JSON GENERADO:");
+        System.out.println(jsonString);
+        System.out.println("");
 
+        insercion(jsonString, "insertarRuta.php");
+    }
 
+    public static void insertarAcuerdo(double precio, String comentario, String estado, int idRuta, int idUsuario, String Punto_recogida, String Punto_entrega ){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idAcuerdo", 0);
+        jsonObject.put("Precio", precio);
+        jsonObject.put("Comentario", comentario);
+        jsonObject.put("Estado", estado);
+        jsonObject.put("idRuta", idRuta);
+        jsonObject.put("idUsuario", idUsuario);
+        jsonObject.put("Punto_recogida", Punto_recogida);
+        jsonObject.put("Punto_entrega",Punto_entrega);
 
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
 
+        String jsonString = JSONValue.toJSONString(l);
 
+        insercion(jsonString, "insertarAcuerdo.php");
+
+    }
+
+    //IMPORTANTE: tener en cuenta que no se puede borrar ruta si tiene acuerdo asociado!
+    public static void borrarRuta(int idRuta){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idRuta", idRuta);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+
+        insercion(jsonString, "borrarRuta.php"); //puede usar insercion porque solo recibe una variable y ejecuta una query
+    }
+
+    public static ArrayList<Vehiculo> getVehiculoByUserId(int idUsuario){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idUsuario", idUsuario);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+       String json= getDataFromFilter(jsonString, "getVehiculoByUserId.php");
+       return mostrarVehiculos(json);
+    }
+
+    public static ArrayList<Acuerdo> getAcuerdosByRutaId(int idRuta){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idRuta", idRuta);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+        String json= getDataFromFilter(jsonString, "getAcuerdosByRutaId.php");
+        return mostrarAcuerdos(json);
+    }
 
     public static String getAllRutas(){
 
@@ -256,9 +258,35 @@ public class JavaPHPMySQL {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return response.toString();
         }
+
+    public static ArrayList<Acuerdo> mostrarAcuerdos(String json){
+        System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
+        //Crear un Objeto JSON a partir del string JSON
+        ArrayList listaAcuerdos = new ArrayList();
+        Object jsonObject =JSONValue.parse(json.toString());
+        //Convertir el objeto JSON en un array
+        JSONArray array=(JSONArray)jsonObject;
+        //Iterar el array y extraer la información
+        for(int i=0;i<array.size();i++){
+            JSONObject row =(JSONObject)array.get(i);
+            String idAcuerdo = row.get("idAcuerdo").toString();
+            String Precio = row.get("Precio").toString();
+            String Comentario = row.get("Comentario").toString();
+            String Estado = row.get("Estado").toString();
+            String idRuta = row.get("idUsuario").toString(); //se mete a null porque se sabe de que ruta es
+            String Punto_recogida = row.get("Punto_recogida").toString();
+            String Punto_entrega = row.get("Punto_entrega").toString();
+            String Leido = row.get("Leido").toString();
+
+           // Acuerdo acuerdo = new Acuerdo(Integer.parseInt(idAcuerdo),Double.parseDouble(Precio),Comentario ,Estado,null,Punto_recogida,Punto_entrega,Leido);
+
+          //  listaAcuerdos.add(acuerdo);
+
+        }
+        return listaAcuerdos;
+    }
 
     public static ArrayList<Vehiculo> mostrarVehiculos(String json){
         System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
@@ -274,21 +302,19 @@ public class JavaPHPMySQL {
             String Matricula = row.get("Matricula").toString();
             String Marca = row.get("Marca").toString();
             String Modelo = row.get("Modelo").toString();
-            String idUsuario = row.get("idUsuario").toString();
+            String idUsuario = row.get("idUsuario").toString(); //se mete a null porque se sabe a que usuario pertenece
             String Capacidad = row.get("Capacidad").toString();
 
-
             Vehiculo vehiculo = new Vehiculo(Integer.parseInt(idVehiculo),Matricula,Marca ,Modelo,null,Integer.parseInt(Capacidad));
-            //crear un objeto nuevo parecido a acuerdo pero que no tenga Usuario.
 
             listaVehiculos.add(vehiculo);
 
-            //Mostrar la información en pantalla
-            for(int j=0;j<listaVehiculos.size();j++){listaVehiculos.toString();}
+
         }
+        //Mostrar la información en pantalla
+        // for(int j=0;j<listaVehiculos.size();j++){listaVehiculos.toString();}
         return listaVehiculos;
     }
-
 
     public static ArrayList<Ruta> mostrarAllRutas(String json){
             System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
@@ -311,8 +337,6 @@ public class JavaPHPMySQL {
                 Ruta ruta = new Ruta(Integer.parseInt(idRuta),Origen,Destino,HoraInicio,Fecha,Comentario);
 
                 listaRutas.add(ruta);
-
-
             }
         return listaRutas;
         }

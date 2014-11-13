@@ -109,7 +109,7 @@
            android:text="@string/Hora"
            android:layout_width="fill_parent"
            android:layout_height="wrap_content"
-           android:id="@+id/textHora"
+           android:id="@+id/textHoraLab"
            android:layout_marginTop="15dp"
            android:layout_below="@+id/datePicker"
            android:layout_alignParentLeft="true"

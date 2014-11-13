@@ -121,9 +121,8 @@ public class Ruta {
     public String toString(){
         return  "\n"+"Origen: " + Origen + "\n" +
                 "Destino: " + Destino + "\n" +
-                "Hora inicio: " + horaIniString + "\n" +
-                "Hora fin: " + getHoraFinString() + "\n" +
                 "Fecha: " + fechaString + "\n" +
+                "Hora salida: " + horaIniString + "\n" +
                 "Comentario: " + Comentario +"\n";
     }
 

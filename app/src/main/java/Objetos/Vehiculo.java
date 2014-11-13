@@ -71,6 +71,6 @@ public class Vehiculo {
 
     @Override
     public String toString() {
-        return marca + modelo;
+        return getMarca() + " "+ getModelo();
     }
 }

@@ -1,6 +1,5 @@
 package com.example.ruben.easytransport;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,19 +15,23 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TableLayout;
 import android.widget.Toast;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
 
 import Objetos.Ruta;
 
 
 public class VistaRutas extends Fragment {
-
+    final Calendar c = Calendar.getInstance();
+    Date fecha = new Date();
+    private int year;
+    private int month;
+    private int day;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //si te sale error aqui ir a buil.gradle el de la carpera mas externa y donde pone minSdkVersion pones 9
@@ -45,6 +48,11 @@ public class VistaRutas extends Fragment {
         JavaPHPMySQL bd = new JavaPHPMySQL();
         String json = bd.getAllRutas();
         ArrayList<Ruta> listaRuta =  bd.mostrarAllRutas(json);
+        ArrayList<Ruta> listaRutasActuales = new ArrayList<Ruta>();
+
+
+        //Aqui agregar solo las rutas que no se hayan pasado.
+
 
         //Inserción en el ListView
 
@@ -61,9 +69,12 @@ public class VistaRutas extends Fragment {
                 b.setMessage("¿Desea borrar la ruta seleccionada?");
                 b.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(view.getContext(), "administracion", null, 1);
+                        JavaPHPMySQL bd = new JavaPHPMySQL();
                         Ruta rutaSelected = finalListaRuta.get(position);
-                       // borrarRuta(rutaSelected.getId());
+                        //IMPORTANTE: tener en cuenta que no se puede borrar ruta si tiene acuerdo asociado!
+                        //getAcuerdosByRuta esta sin acabar
+                     if(bd.getAcuerdosByRutaId(rutaSelected.getIdRuta()) == null)   {
+                        bd.borrarRuta(rutaSelected.getIdRuta());}
                     }
                 });
                 b.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -73,10 +84,8 @@ public class VistaRutas extends Fragment {
 
                 b.show();
                 return true;
-
             }
         });
-
 
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -96,12 +105,9 @@ public class VistaRutas extends Fragment {
         //devuelve false si no hay ninguno que cumple la query
         if (cursor.moveToFirst()){
             Toast.makeText(VistaRutas.this.getActivity(), "No se puede borrar una ruta asociada a un Acuerdo", Toast.LENGTH_LONG).show();
-
         }else {db.execSQL("DELETE FROM Ruta WHERE idRuta="+rutaid+"");
             Toast.makeText(VistaRutas.this.getActivity(), "La ruta ha sido borrada", Toast.LENGTH_LONG).show();
 
         }
     }
-
-
 }
