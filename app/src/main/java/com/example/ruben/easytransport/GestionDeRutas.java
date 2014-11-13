@@ -18,8 +18,12 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -84,7 +88,7 @@ public class GestionDeRutas extends ActionBarActivity {
     }
 
     private void updateTime() {
-        textHora.setText(new StringBuilder().append(pad(hour)).append(":").append(pad(min)));
+        textHora.setText(new StringBuilder().append(pad(hour)).append(":").append(pad(min)).append(":").append("00"));
     }
 
     private void updateDate(){
@@ -154,16 +158,13 @@ public class GestionDeRutas extends ActionBarActivity {
     public void rellenarSpinner(){
         try {
             spinner = (Spinner) findViewById(R.id.lista1);
-            //AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
             JavaPHPMySQL bd = new JavaPHPMySQL();
             ArrayList<String> vehiculos = new ArrayList<String>();
             ArrayList<Vehiculo> listaVehiculos = bd.getVehiculoByUserId(1);
-            Iterator<Vehiculo> iterator = listaVehiculos.iterator();
-            while(iterator.hasNext()){
-                vehiculos.add(listaVehiculos.toString());
-                iterator.next();
-            }
 
+            for(int i=0; i < listaVehiculos.size(); i++){
+                vehiculos.add(listaVehiculos.get(i).toString());
+            }
             ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, vehiculos);
             spinner.setAdapter(adapt);
 
@@ -172,15 +173,15 @@ public class GestionDeRutas extends ActionBarActivity {
             e.printStackTrace();
         }
     }
-    public void buttonOnClick(View v){
-        // Toast.makeText(this, "Has pulsado el botón",Toast.LENGTH_SHORT).show();
+    public void buttonOnClick(View v) throws ParseException {
+        JavaPHPMySQL bd = new JavaPHPMySQL();
 
-        //Button btAceptar = (Button) v;
-        // ((Button) v).setText("Clicked");
-        //JD: siguientes 2 lineas ,codigo duplicado mejor ponerlo explicitamente ne el onCreate
-        //Fran: No, es mejor hacerlo solo donde toca
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
-        List<String> vehiculos = admin.getVehiculos();
+        ArrayList<String> vehiculos = new ArrayList<String>();
+        ArrayList<Vehiculo> listaVehiculos = bd.getVehiculoByUserId(1);
+
+        for(int i=0; i < listaVehiculos.size(); i++){
+            vehiculos.add(listaVehiculos.get(i).toString());
+        }
         String vehiculo = vehiculos.get(spinner.getSelectedItemPosition());
 
         destino = (EditText)findViewById(R.id.TextDestino);
@@ -188,27 +189,18 @@ public class GestionDeRutas extends ActionBarActivity {
         String d = destino.getText().toString();
         String o = origen.getText().toString();
 
-        /*dP= (DatePicker)findViewById(R.id.datePicker);
-        int mes = dP.getMonth()+1;
-        int year= dP.getYear();
-        int dia = dP.getDayOfMonth();
-        String fecha = String.format("%d/%d/%d", dia, mes, year);*/
-
-
-
-        String horaInicio = textHora.getText().toString();
-
         comentario = (EditText) findViewById(R.id.editTComentario);
-        String com = comentario.getText().toString();
 
         if (!d.equals("") && !o.equals("")) {
-            JavaPHPMySQL bd = new JavaPHPMySQL();
-            String fecha = String.format("%d/%d/%d", day, month+1, year);
+            String fecha = textFecha.getText().toString();
+            String horaInicio = textHora.getText().toString();
+            String com = comentario.getText().toString();
+
             bd.insertarRuta(o,d,horaInicio,fecha,com,1);
             Toast.makeText(this, "La ruta se ha insertado correctamente", Toast.LENGTH_SHORT).show();
             finish();
 
-        }  else if (o.equals(d)){
+        }  else if ((!d.equals("") && !o.equals("")) && o.equals(d)){
             Toast.makeText(this, "El origen no puede ser igual al destino", Toast.LENGTH_SHORT).show();
         }
         else{
