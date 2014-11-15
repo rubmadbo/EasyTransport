@@ -197,6 +197,18 @@ public class JavaPHPMySQL {
         insercion(jsonString, "borrarRuta.php"); //puede usar insercion porque solo recibe una variable y ejecuta una query
     }
 
+    public static ArrayList<Acuerdo> getAcuerdosByUserId(int idUsuario){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idUsuario", idUsuario);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+        String json= getDataFromFilter(jsonString, "getAcuerdosByUserId.php");
+        return mostrarAcuerdos(json);
+    }
+
     public static ArrayList<Vehiculo> getVehiculoByUserId(int idUsuario){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idUsuario", idUsuario);
