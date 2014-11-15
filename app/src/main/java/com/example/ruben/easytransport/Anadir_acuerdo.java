@@ -72,8 +72,6 @@ public class Anadir_acuerdo extends ActionBarActivity {
                     //TMABIEN AQUI HABRIA QUE VER COMO COJER EL ID DEL USUARIO QUE QUIERE CREAR UN ACUERDO
                     bd.insertarAcuerdo(Double.parseDouble(din),com,"pendiente",rutaId,2,e,rec);
 
-
-
                     Toast.makeText(Anadir_acuerdo.this, "Se ha enviado el acuerdo", Toast.LENGTH_LONG).show();
 
                     finish();
