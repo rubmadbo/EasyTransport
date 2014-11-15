@@ -4,8 +4,8 @@ package com.example.ruben.easytransport;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,21 +13,13 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.sql.Time;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
 
-import Objetos.Ruta;
 import Objetos.Vehiculo;
 
 
@@ -82,6 +74,7 @@ public class GestionDeRutas extends ActionBarActivity {
         hour = c.get(Calendar.HOUR_OF_DAY);
         min = c.get(Calendar.MINUTE);
 
+
         updateDate();
         updateTime();
 
@@ -98,9 +91,16 @@ public class GestionDeRutas extends ActionBarActivity {
     private TimePickerDialog.OnTimeSetListener mTimeSetListener =
             new TimePickerDialog.OnTimeSetListener() {
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                    Calendar rightNow = Calendar.getInstance();
+                    hour = rightNow.get(Calendar.HOUR_OF_DAY);
+                    min = rightNow.get(Calendar.MINUTE);
+
                     hour = hourOfDay;
                     min = minute;
+                    if(hourOfDay>=hour && minute>=min)
                     updateTime();
+                    else showToastMinutes();
+
                 }
             };
 
@@ -114,24 +114,23 @@ public class GestionDeRutas extends ActionBarActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener =
             new DatePickerDialog.OnDateSetListener(){
                 public void onDateSet(DatePicker view, int yearOf, int monthOfYear, int dayOfMonth){
-                    if(yearOf > c.get(Calendar.YEAR)) {
+                    Calendar rightNow = Calendar.getInstance();
+                    int year = c.get(Calendar.YEAR);
+                    int month= c.get(Calendar.MONTH);
+                    int day= c.get(Calendar.DAY_OF_MONTH);
+                    if(yearOf > year) {
                         year = yearOf;
                         month = monthOfYear;
                         day = dayOfMonth;
                         updateDate();
                     }
-                    else if(yearOf == c.get(Calendar.YEAR) && monthOfYear >= (c.get(Calendar.MONTH))){
+                    else if(yearOf == year && monthOfYear >= month && dayOfMonth >= day){
                         year = yearOf;
                         month = monthOfYear;
                         day = dayOfMonth;
                         updateDate();
                     }
-                    else if (yearOf == c.get(Calendar.YEAR) && monthOfYear == (c.get(Calendar.MONTH))+1 && dayOfMonth > c.get(Calendar.DAY_OF_MONTH)){
-                        year = yearOf;
-                        month = monthOfYear;
-                        day = dayOfMonth;
-                        updateDate();
-                    }
+
                     else showToast();
                     }
 
@@ -141,6 +140,9 @@ public class GestionDeRutas extends ActionBarActivity {
 
     public void showToast(){
         Toast.makeText(this, "La fecha no puede ser anterior a la actual", Toast.LENGTH_SHORT).show();
+    }
+    public void showToastMinutes(){
+        Toast.makeText(this, "EL tiempo no puede ser anterior a la actual", Toast.LENGTH_SHORT).show();
     }
 
     protected Dialog onCreateDialog(int id){
@@ -189,9 +191,27 @@ public class GestionDeRutas extends ActionBarActivity {
         String d = destino.getText().toString();
         String o = origen.getText().toString();
 
+        /*SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String dateInStringOrigen = d;
+        String dateInStringFin = o;
+
+        try {
+
+            Date dateori = formatter.parse(dateInStringOrigen);
+            System.out.println(dateori);
+            System.out.println(formatter.format(dateori));
+
+            Date datefin = formatter.parse(dateInStringOrigen);
+            System.out.println(datefin);
+            System.out.println(formatter.format(datefin));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+
         comentario = (EditText) findViewById(R.id.editTComentario);
 
-        if (!d.equals("") && !o.equals("")) {
+        if (!d.equals("") && !o.equals("") && !d.equalsIgnoreCase(o)) {
             String fecha = textFecha.getText().toString();
             String horaInicio = textHora.getText().toString();
             String com = comentario.getText().toString();
@@ -200,11 +220,13 @@ public class GestionDeRutas extends ActionBarActivity {
             Toast.makeText(this, "La ruta se ha insertado correctamente", Toast.LENGTH_SHORT).show();
             finish();
 
-        }  else if ((!d.equals("") && !o.equals("")) && o.equals(d)){
+        }  else if ((!d.equals("") && !o.equals("")) && o.equalsIgnoreCase(d)){
             Toast.makeText(this, "El origen no puede ser igual al destino", Toast.LENGTH_SHORT).show();
+            finish();
         }
         else{
             Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
+            finish();
         }
 
 
