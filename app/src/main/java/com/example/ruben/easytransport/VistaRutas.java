@@ -90,11 +90,11 @@ public class VistaRutas extends Fragment {
 
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                JavaPHPMySQL bd = new JavaPHPMySQL();
-                bd.getVehiculoByUserId(1);
-                /*
+               /* JavaPHPMySQL bd = new JavaPHPMySQL();
+                bd.getVehiculoByUserId(1);*/
+
                 Intent intent = new Intent(VistaRutas.this.getActivity(),GestionDeRutas.class);
-                startActivity(intent);*/
+                startActivity(intent);
             }
         });
     return rootView;
