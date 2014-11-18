@@ -73,7 +73,8 @@ public class VistaRutas extends Fragment {
                         Ruta rutaSelected = finalListaRuta.get(position);
                         //IMPORTANTE: tener en cuenta que no se puede borrar ruta si tiene acuerdo asociado!
                         //getAcuerdosByRuta esta sin acabar
-                     if(bd.getAcuerdosByRutaId(rutaSelected.getIdRuta()) == null)   {
+
+                     if(bd.getAcuerdosByRutaId(rutaSelected.getIdRuta()).size() == 0)   {
                         bd.borrarRuta(rutaSelected.getIdRuta());}
                     }
                 });
@@ -89,25 +90,13 @@ public class VistaRutas extends Fragment {
 
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+               /* JavaPHPMySQL bd = new JavaPHPMySQL();
+                bd.getVehiculoByUserId(1);*/
+
                 Intent intent = new Intent(VistaRutas.this.getActivity(),GestionDeRutas.class);
                 startActivity(intent);
             }
         });
     return rootView;
-    }
-
-    //metodo VIEJO
-    public void borrarRuta(int rutaid) {
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(VistaRutas.this.getActivity(), "administracion", null, 1);
-        SQLiteDatabase db = admin.getWritableDatabase();
-        String selectQuery = "SELECT * FROM Acuerdo WHERE ruta="+rutaid+"";
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        //devuelve false si no hay ninguno que cumple la query
-        if (cursor.moveToFirst()){
-            Toast.makeText(VistaRutas.this.getActivity(), "No se puede borrar una ruta asociada a un Acuerdo", Toast.LENGTH_LONG).show();
-        }else {db.execSQL("DELETE FROM Ruta WHERE idRuta="+rutaid+"");
-            Toast.makeText(VistaRutas.this.getActivity(), "La ruta ha sido borrada", Toast.LENGTH_LONG).show();
-
-        }
     }
 }

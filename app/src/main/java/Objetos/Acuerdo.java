@@ -98,4 +98,16 @@ public class Acuerdo {
     public void setLeido(int leido) {
         this.leido = leido;
     }
+
+
+    @Override
+    public String toString() {
+        return  "idAcuerdo=" + idAcuerdo +
+                ", Precio=" + precio +
+                ", Comentario='" + comentario + '\'' +
+                ", Estado='" + estado + '\'' +
+                ", Punto_recogida='" + Punto_recogida + '\'' +
+                ", Punto_entrega='" + Punto_entrega + '\'' +
+                ", Leido=" + leido;
+    }
 }

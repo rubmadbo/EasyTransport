@@ -69,10 +69,9 @@ public class Anadir_acuerdo extends ActionBarActivity {
                     //conexion a bbdd
                     JavaPHPMySQL bd = new JavaPHPMySQL();
                     //JDCC: HAY QUE HABLAR PRIMERO COMO CAMBIAMOS LA CLASE ACUERDO
+                    int IdUsuario = 3;
                     //TMABIEN AQUI HABRIA QUE VER COMO COJER EL ID DEL USUARIO QUE QUIERE CREAR UN ACUERDO
-                    bd.insertarAcuerdo(Double.parseDouble(din),com,"pendiente",rutaId,2,e,rec);
-
-
+                    bd.insertarAcuerdo(Double.parseDouble(din),com,"pendiente",rutaId,IdUsuario,e,rec);
 
                     Toast.makeText(Anadir_acuerdo.this, "Se ha enviado el acuerdo", Toast.LENGTH_LONG).show();
 

@@ -197,6 +197,18 @@ public class JavaPHPMySQL {
         insercion(jsonString, "borrarRuta.php"); //puede usar insercion porque solo recibe una variable y ejecuta una query
     }
 
+    public static ArrayList<Acuerdo> getAcuerdosByUserId(int idUsuario){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idUsuario", idUsuario);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+        String json= getDataFromFilter(jsonString, "getAcuedosByUserId.php");
+        return mostrarAcuerdos(json);
+    }
+
     public static ArrayList<Vehiculo> getVehiculoByUserId(int idUsuario){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idUsuario", idUsuario);
@@ -276,13 +288,13 @@ public class JavaPHPMySQL {
             String Precio = row.get("Precio").toString();
             String Comentario = row.get("Comentario").toString();
             String Estado = row.get("Estado").toString();
-            String idRuta = row.get("idUsuario").toString(); //se mete a null porque se sabe de que ruta es
+            //String idRuta = row.get("idRuta").toString(); //se mete a null porque se sabe de que ruta es
             String Punto_recogida = row.get("Punto_recogida").toString();
             String Punto_entrega = row.get("Punto_entrega").toString();
             String Leido = row.get("Leido").toString();
 
            Acuerdo acuerdo = new Acuerdo(Integer.parseInt(idAcuerdo),Double.parseDouble(Precio),Comentario ,Estado,null,Punto_recogida,Punto_entrega,null,Integer.parseInt(Leido));
-
+           listaAcuerdos.add(acuerdo);
 
         }
         return listaAcuerdos;

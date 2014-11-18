@@ -33,15 +33,13 @@ public class ListarAcuerdos extends Fragment {
         ListView li = (ListView) rootView.findViewById(R.id.listViewAcuerdos);
 
        // HAY QUE PASARLE DE ALGUNA MANERA EL USERID
-
+        int UserId = 1; // habría que cargarlo de la session de userlogeado
         //Conexión a la base de datos
         JavaPHPMySQL db = new JavaPHPMySQL();
-        //String json = db.getAcuerdosByRutaId();
-        //ArrayList<Acuerdo> listaAcuerdos = db.mostrarAcuerdos(json);
-        //Inserción en el ListView
-       // ArrayAdapter<Acuerdo> adap = new ArrayAdapter<Acuerdo>(ListarAcuerdos.this.getActivity(),android.R.layout.simple_list_item_1, listaAcuerdos);
-        //adap.notifyDataSetChanged();
-       // li.setAdapter(adap);
+        ArrayList<Acuerdo> listaAcuerdos = db.getAcuerdosByUserId(UserId);
+        ArrayAdapter<Acuerdo> adap = new ArrayAdapter<Acuerdo>(ListarAcuerdos.this.getActivity(),android.R.layout.simple_list_item_1, listaAcuerdos);
+        adap.notifyDataSetChanged();
+        li.setAdapter(adap);
 
        /* boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
