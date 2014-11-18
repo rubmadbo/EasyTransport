@@ -2,8 +2,6 @@ package com.example.ruben.easytransport;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,6 +36,7 @@ public class ListarRuta extends Activity {
         origen=(EditText)findViewById(R.id.TextFecha);
         destino=(EditText)findViewById(R.id.TextHora);
 
+
         Intent intent = getIntent();
         String message = intent.getStringExtra("Des");
         String message1 = intent.getStringExtra("Ori");
@@ -58,7 +57,9 @@ public class ListarRuta extends Activity {
         String _fecha_actual= d.toString();
         JavaPHPMySQL db = new JavaPHPMySQL();
         String json = db.getAllRutas();
+
         ArrayList<Ruta> rutas = db.mostrarAllRutas(json);
+
         //se copia rutas en listaRuta, porque listaRuta tiene que ser final para estar en el OnItemClickListener
        for (int i=0; i<rutas.size();i++){
             listaRuta.set(i,rutas.get(i));

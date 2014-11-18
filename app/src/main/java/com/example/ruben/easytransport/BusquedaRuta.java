@@ -49,6 +49,7 @@ public class BusquedaRuta extends Fragment {
 
 
 
+
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -94,13 +95,14 @@ public class BusquedaRuta extends Fragment {
 
                     if (_date != null && _date2 != null && _fecha.compareTo(_fecha2) <= 0 && _dest.length() > 0 && _orig.length() > 0 && year <= year_2) {
                         //Toast.makeText(this, "Realizando la búsqueda", Toast.LENGTH_SHORT).show();
-
-                        Intent intent = new Intent(getActivity().getBaseContext(), ListarRuta.class);
-                        intent.putExtra("Des", _dest);
-                        intent.putExtra("Ori", _orig);
-                        intent.putExtra("Dat1", _fecha);
-                        intent.putExtra("Dat2", _fecha2);
-                        getActivity().startActivity(intent);
+                        Intent intent = new Intent(getActivity(), ListarRuta.class);
+                        startActivity(intent);
+                       // Intent intent = new Intent(getActivity().getBaseContext(), ListarRuta.class);
+                      //  intent.putExtra("Des", _dest);
+                        //  intent.putExtra("Ori", _orig);
+                        //  intent.putExtra("Dat1", _fecha);
+                       // intent.putExtra("Dat2", _fecha2);
+                       // getActivity().startActivity(intent);
 
                     }
                     if (_date == null || _date2 == null || _fecha == null || _fecha2 == null || _dest.length() <= 0 || _orig.length() <= 0) {
