@@ -1,21 +1,17 @@
 package com.example.ruben.easytransport;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -41,109 +37,65 @@ public class ListarRuta extends Activity {
         destino=(EditText)findViewById(R.id.dest);
 
         Intent intent = getIntent();
-        String message = intent.getStringExtra("Des");
         String message1 = intent.getStringExtra("Ori");
+        String message = intent.getStringExtra("Des");
         String data1= intent.getStringExtra("Dat1");
         String data2= intent.getStringExtra("Dat2");
-        origen.setText(message, TextView.BufferType.EDITABLE);
-        destino.setText(message1, TextView.BufferType.EDITABLE);
+        origen.setText(message1, TextView.BufferType.EDITABLE);
+        destino.setText(message, TextView.BufferType.EDITABLE);
 
         //Insercion de las rutas en el listView
         ListView li = (ListView)findViewById(R.id.listView_rutas);
-        final ArrayList<Ruta> listaRuta = new ArrayList();
+        ArrayList<Ruta> listaRuta = new ArrayList();
+
         Ruta ruta;
+        JavaPHPMySQL bd = new JavaPHPMySQL();
+        String json = bd.getAllRutas();
+        ArrayList<Ruta> listaRutas =  bd.mostrarAllRutas(json);
+       for(int i=0; i<listaRutas.size();i++) {
 
-        //Conexión a la base de datos
-     /*   AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(ListarRuta.this, "administracion", null, 1);
-        SQLiteDatabase db = admin.getWritableDatabase();
+           if (listaRutas.get(i).getDestino().equalsIgnoreCase(message) && listaRutas.get(i).getOrigen().equalsIgnoreCase(message1)
+                   ) {
+               Ruta r = listaRutas.get(i);
+               listaRuta.add(r);
 
-        //Sacamos todo a pelo y luego se mejora
-        Cursor cur = db.rawQuery("SELECT * FROM Ruta", null);
-        String _fecha_actual="";
-        if(cur.moveToFirst()){
-            do{
-                ruta = new Ruta(cur.getInt(0),cur.getString(1),cur.getString(2),cur.getString(3),cur.getString(4),
-                        cur.getString(5),cur.getString(6),cur.getInt(7));
-                dest= ruta.getDestino();
-                orig= ruta.getOrigen();
-                _fecha_actual=ruta.getFecha();
+           }
+       }
+          final ArrayList<Ruta> final_list = listaRuta;
 
 
-                if(dest.equalsIgnoreCase(message) &&orig.equalsIgnoreCase(message1)&&_fecha_actual.compareTo(data1)>=0 && _fecha_actual.compareTo(data2)<=0){
-                    listaRuta.add(ruta);
-                }
-
-            }while(cur.moveToNext());
-        }
         ArrayAdapter<Ruta> adap = new ArrayAdapter<Ruta>(ListarRuta.this,android.R.layout.simple_list_item_1, listaRuta);
         adap.notifyDataSetChanged();
-        li.setAdapter(adap);*/
+        li.setAdapter(adap);
         li.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-
-                Ruta rutaSelected = listaRuta.get(position);
+                Ruta rutaSelected = final_list.get(position);
                 Intent intent = new Intent(ListarRuta.this, Anadir_acuerdo.class);
                 String origen_ruta = rutaSelected.getOrigen();
                 intent.putExtra("Origen", origen_ruta);
                 String destino_ruta = rutaSelected.getDestino();
                 intent.putExtra("Destino", destino_ruta);
-               // int Id_ruta = rutaSelected.getId();
-               // intent.putExtra("IdRuta", Id_ruta);
+                int Id_ruta = rutaSelected.getIdRuta();
+                intent.putExtra("IdRuta", Id_ruta);
                 startActivity(intent);
 
 
+
+
             }
 
         });
 
-        li.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                final AlertDialog.Builder b = new AlertDialog.Builder(ListarRuta.this);
-                b.setIcon(android.R.drawable.ic_dialog_alert);
-                b.setMessage("¿Desea borrar la ruta seleccionada?");
-                b.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(ListarRuta.this, "administracion", null, 1);
-                        Ruta rutaSelected = listaRuta.get(position);
-                        //borrarRuta(rutaSelected.getId());
-                    }
-                });
-                b.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                    }
-                });
-
-                b.show();
-                return true;
-
-            }
-        });
 
 
 
 
     }
 
-    public void borrarRuta(int rutaid) {
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(ListarRuta.this, "administracion", null, 1);
-        SQLiteDatabase db = admin.getWritableDatabase();
-        String selectQuery = "SELECT * FROM Acuerdo WHERE ruta="+rutaid+"";
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        //devuelve false si no hay ninguno que cumple la query
-        if (cursor.moveToFirst()){
-            Toast.makeText(ListarRuta.this, "No se puede borrar una ruta asociada a un Acuerdo", Toast.LENGTH_LONG).show();
 
-        }else {db.execSQL("DELETE FROM Ruta WHERE idRuta="+rutaid+"");
-            Toast.makeText(ListarRuta.this, "La ruta ha sido borrada", Toast.LENGTH_LONG).show();
-
-        }
-
-
-    }
 
 
     @Override

@@ -1,8 +1,6 @@
 package com.example.ruben.easytransport;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -30,8 +28,8 @@ public class Anadir_acuerdo extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anadir_acuerdo2);
 
-        //destino = (EditText)findViewById(R.id.editTDestinoAcuerdo);
-        //origen = (EditText)findViewById(R.id.editTOrigenAcuerdo);
+        destino = (EditText)findViewById(R.id.editTDestinoAcuerdo);
+        origen = (EditText)findViewById(R.id.editTOrigenAcuerdo);
         remitente = (EditText)findViewById(R.id.editTRemitente);
         transportista = (EditText)findViewById(R.id.editTTransportista);
         entrega = (EditText)findViewById(R.id.editTEntrega);
@@ -44,6 +42,7 @@ public class Anadir_acuerdo extends ActionBarActivity {
         String dest_ = intent.getStringExtra("Destino");
         String orig_ = intent.getStringExtra("Origen");
         final int rutaId= intent.getIntExtra("IdRuta",0);
+
         destino.setText(dest_);
         origen.setText(orig_);
 

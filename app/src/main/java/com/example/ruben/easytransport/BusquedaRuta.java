@@ -57,7 +57,7 @@ public class BusquedaRuta extends Fragment {
 
 
 
-                if(_date!=null && _date2!=null && _fecha.compareTo(_fecha2)<=0 && _dest.length()>0 && _orig.length()>0 && year<=year_2) {
+                if(_date!=null && _date2!=null && _orig.length()>0 && year<=year_2) {
                     //Toast.makeText(this, "Realizando la búsqueda", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getActivity().getBaseContext(),ListarRuta.class);
@@ -84,6 +84,17 @@ public class BusquedaRuta extends Fragment {
                     dialog.setCancelable(true);
                     dialog.show();
                 }
+                //hay que arreglar el equals del origen destino
+                if(_date!=null && _date2!=null && _fecha.compareTo(_fecha2)>0 && _dest.length()>0 && _orig.length()>0 && year>year_2 && _dest.equalsIgnoreCase(_orig)) {
+
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
+                    dialog.setMessage("El destino no puede ser igual al destino");
+                    dialog.setCancelable(true);
+                    dialog.show();
+                }
+
+
+
             }
 
 
