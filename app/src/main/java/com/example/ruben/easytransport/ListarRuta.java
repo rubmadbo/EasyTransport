@@ -1,20 +1,23 @@
 package com.example.ruben.easytransport;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import Objetos.Ruta;
 
@@ -33,18 +36,17 @@ public class ListarRuta extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_ruta);
-        origen=(EditText)findViewById(R.id.TextFecha);
-        destino=(EditText)findViewById(R.id.TextHora);
-
+        boton=(Button)findViewById(R.id.button_volver);
+        origen=(EditText)findViewById(R.id.origen);
+        destino=(EditText)findViewById(R.id.dest);
 
         Intent intent = getIntent();
         String message = intent.getStringExtra("Des");
         String message1 = intent.getStringExtra("Ori");
         String data1= intent.getStringExtra("Dat1");
         String data2= intent.getStringExtra("Dat2");
-        //lo de destino.setText estaba para origen message y destino message2, NOLO HE PROBADO PERO SUPONGO QUE AHORA ESTA BIEN
-        destino.setText(message, TextView.BufferType.EDITABLE);
-        origen.setText(message1, TextView.BufferType.EDITABLE);
+        origen.setText(message, TextView.BufferType.EDITABLE);
+        destino.setText(message1, TextView.BufferType.EDITABLE);
 
         //Insercion de las rutas en el listView
         ListView li = (ListView)findViewById(R.id.listView_rutas);
@@ -52,52 +54,97 @@ public class ListarRuta extends Activity {
         Ruta ruta;
 
         //Conexión a la base de datos
-        Date d = new Date();
-        //JDCC: IMPORTANTE LA FECHA ACTUAL ESTABA COMO "";
-        String _fecha_actual= d.toString();
-        JavaPHPMySQL db = new JavaPHPMySQL();
-        String json = db.getAllRutas();
+     /*   AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(ListarRuta.this, "administracion", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();
 
-        ArrayList<Ruta> rutas = db.mostrarAllRutas(json);
+        //Sacamos todo a pelo y luego se mejora
+        Cursor cur = db.rawQuery("SELECT * FROM Ruta", null);
+        String _fecha_actual="";
+        if(cur.moveToFirst()){
+            do{
+                ruta = new Ruta(cur.getInt(0),cur.getString(1),cur.getString(2),cur.getString(3),cur.getString(4),
+                        cur.getString(5),cur.getString(6),cur.getInt(7));
+                dest= ruta.getDestino();
+                orig= ruta.getOrigen();
+                _fecha_actual=ruta.getFecha();
 
-        //se copia rutas en listaRuta, porque listaRuta tiene que ser final para estar en el OnItemClickListener
-       for (int i=0; i<rutas.size();i++){
-            listaRuta.set(i,rutas.get(i));
+
+                if(dest.equalsIgnoreCase(message) &&orig.equalsIgnoreCase(message1)&&_fecha_actual.compareTo(data1)>=0 && _fecha_actual.compareTo(data2)<=0){
+                    listaRuta.add(ruta);
+                }
+
+            }while(cur.moveToNext());
         }
-
-        // REVISAR PARA QUE HAGA LA BUSQUEDA BIEN TIENE QUE SER ALGO ASI
-        rutas = new ArrayList<Ruta>(); //creo q esto la borra sino pues crear otro arraylist
-        for (int j = 0; j<listaRuta.size();j++) {
-            //poner if para que se cumpla las cosas del filtro.he añadido el primer if, el segundo ya estaba(tomar de ejemplo)
-           // if (listaRuta.get(j).getDestino().equalsIgnoreCase(message)&& listaRuta.get(j).getOrigen().equalsIgnoreCase(message1)){}
-            // if(dest.equalsIgnoreCase(message) &&orig.equalsIgnoreCase(message1)&&_fecha_actual.compareTo(data1)>=0 && _fecha_actual.compareTo(data2)<=0){
-            rutas.add(listaRuta.get(j));
-             //}
-        }
-
-
         ArrayAdapter<Ruta> adap = new ArrayAdapter<Ruta>(ListarRuta.this,android.R.layout.simple_list_item_1, listaRuta);
         adap.notifyDataSetChanged();
-        li.setAdapter(adap);
+        li.setAdapter(adap);*/
         li.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                ArrayList<Ruta> rutas = new ArrayList();
-                Ruta rutaSelected = rutas.get(position);
+
+                Ruta rutaSelected = listaRuta.get(position);
                 Intent intent = new Intent(ListarRuta.this, Anadir_acuerdo.class);
                 String origen_ruta = rutaSelected.getOrigen();
                 intent.putExtra("Origen", origen_ruta);
                 String destino_ruta = rutaSelected.getDestino();
                 intent.putExtra("Destino", destino_ruta);
                // int Id_ruta = rutaSelected.getId();
-                //intent.putExtra("IdRuta", Id_ruta);
+               // intent.putExtra("IdRuta", Id_ruta);
                 startActivity(intent);
+
+
+            }
+
+        });
+
+        li.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                final AlertDialog.Builder b = new AlertDialog.Builder(ListarRuta.this);
+                b.setIcon(android.R.drawable.ic_dialog_alert);
+                b.setMessage("¿Desea borrar la ruta seleccionada?");
+                b.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(ListarRuta.this, "administracion", null, 1);
+                        Ruta rutaSelected = listaRuta.get(position);
+                        //borrarRuta(rutaSelected.getId());
+                    }
+                });
+                b.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+
+                b.show();
+                return true;
+
             }
         });
 
+
+
+
     }
+
+    public void borrarRuta(int rutaid) {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(ListarRuta.this, "administracion", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();
+        String selectQuery = "SELECT * FROM Acuerdo WHERE ruta="+rutaid+"";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        //devuelve false si no hay ninguno que cumple la query
+        if (cursor.moveToFirst()){
+            Toast.makeText(ListarRuta.this, "No se puede borrar una ruta asociada a un Acuerdo", Toast.LENGTH_LONG).show();
+
+        }else {db.execSQL("DELETE FROM Ruta WHERE idRuta="+rutaid+"");
+            Toast.makeText(ListarRuta.this, "La ruta ha sido borrada", Toast.LENGTH_LONG).show();
+
+        }
+
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -115,6 +162,7 @@ public class ListarRuta extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+
 
         return super.onOptionsItemSelected(item);
     }

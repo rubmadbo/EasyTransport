@@ -50,8 +50,8 @@ public class GestionDeRutas extends ActionBarActivity {
         setContentView(R.layout.activity_gestion_de_rutas);
         rellenarSpinner();
 
-        textFecha = (EditText)findViewById(R.id.TextFecha);
-        textHora = (EditText)findViewById(R.id.TextHora);
+        textFecha = (EditText)findViewById(R.id.dest);
+        textHora = (EditText)findViewById(R.id.origen);
 
         textHora.setOnClickListener(new View.OnClickListener() {
             @Override
