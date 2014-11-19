@@ -17,8 +17,11 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import Objetos.Vehiculo;
 
@@ -114,29 +117,23 @@ public class GestionDeRutas extends ActionBarActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener =
             new DatePickerDialog.OnDateSetListener(){
                 public void onDateSet(DatePicker view, int yearOf, int monthOfYear, int dayOfMonth){
-                    Calendar rightNow = Calendar.getInstance();
-                    int year = c.get(Calendar.YEAR);
-                    int month= c.get(Calendar.MONTH);
-                    int day= c.get(Calendar.DAY_OF_MONTH);
-                    if(yearOf > year) {
+                    year = c.get(Calendar.YEAR);
+                    month = c.get(Calendar.MONTH);
+                    day = c.get(Calendar.DAY_OF_MONTH);
+                    GregorianCalendar calendarHoy = new GregorianCalendar(year,month,day);
+                    GregorianCalendar calendarSeleccionada = new GregorianCalendar(yearOf,monthOfYear,dayOfMonth);
+                    Date fechaActual = calendarHoy.getTime();
+                    Date fechaSeleccionada = calendarSeleccionada.getTime();
+                    if(fechaActual.getTime() <= fechaSeleccionada.getTime()) {
                         year = yearOf;
                         month = monthOfYear;
                         day = dayOfMonth;
                         updateDate();
                     }
-                    else if(yearOf == year && monthOfYear >= month && dayOfMonth >= day){
-                        year = yearOf;
-                        month = monthOfYear;
-                        day = dayOfMonth;
-                        updateDate();
-                    }
-
                     else showToast();
+
                     }
-
-
-
-            };
+    };
 
     public void showToast(){
         Toast.makeText(this, "La fecha no puede ser anterior a la actual", Toast.LENGTH_SHORT).show();

@@ -14,9 +14,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import Objetos.Ruta;
 
@@ -43,6 +46,30 @@ public class VistaRutas extends Fragment {
         JavaPHPMySQL bd = new JavaPHPMySQL();
         String json = bd.getAllRutas();
         ArrayList<Ruta> listaRuta =  bd.mostrarAllRutas(json);
+        ArrayList<Ruta> rutasActuales = new ArrayList<Ruta>();
+        final Calendar c = Calendar.getInstance();
+
+        int year,month,day;
+
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DAY_OF_MONTH);
+
+        GregorianCalendar calendar = new GregorianCalendar(year,month,day);
+
+        for (int i=0; i < listaRuta.size();i++){
+            String sFechaRuta = listaRuta.get(i).getFecha();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                Date fechaRuta = formatter.parse(sFechaRuta);
+                Date fechaActual = calendar.getTime();
+                if(fechaActual.getTime() <= fechaRuta.getTime()){
+                    rutasActuales.add(listaRuta.get(i));
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
 
 
 
@@ -51,7 +78,7 @@ public class VistaRutas extends Fragment {
 
         //Inserción en el ListView
 
-        ArrayAdapter<Ruta> adap = new ArrayAdapter<Ruta>(VistaRutas.this.getActivity(),android.R.layout.simple_list_item_1, listaRuta);
+        ArrayAdapter<Ruta> adap = new ArrayAdapter<Ruta>(VistaRutas.this.getActivity(),android.R.layout.simple_list_item_1, rutasActuales);
         adap.notifyDataSetChanged();
         li.setAdapter(adap);
 

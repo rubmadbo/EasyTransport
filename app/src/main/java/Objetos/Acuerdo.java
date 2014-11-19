@@ -102,12 +102,11 @@ public class Acuerdo {
 
     @Override
     public String toString() {
-        return  "idAcuerdo=" + idAcuerdo +
-                ", Precio=" + precio +
-                ", Comentario='" + comentario + '\'' +
-                ", Estado='" + estado + '\'' +
-                ", Punto_recogida='" + Punto_recogida + '\'' +
-                ", Punto_entrega='" + Punto_entrega + '\'' +
-                ", Leido=" + leido;
+        return  //"\n" + "Ruta: "+ getRuta().getOrigen() +" - " + getRuta().getDestino() + "\n" +
+                "\n" +"Punto de recogida: " + Punto_recogida + "\n" +
+                "Punto de entrega: " + Punto_entrega + "\n" +
+                "Precio: " + precio + "\n" +
+                "Comentario: " + comentario + "\n" +
+                "Estado: " + estado + "\n";
     }
 }
