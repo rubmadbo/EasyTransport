@@ -76,22 +76,18 @@ public class Anadir_acuerdo extends ActionBarActivity {
                 String com = comentario.getText().toString();
                 String rec = recogida.getText().toString();
 
-                if(!r.equals("") && !t.equals("") && !e.equals("") && !rec.equals("") && !din.equals("")){
-                   /* dP= (DatePicker)findViewById(R.id.datePickerAcuerdo);
-                    int mes = dP.getMonth()+1;
-                    int year= dP.getYear();
-                    int dia = dP.getDayOfMonth();
-                    String fecha = String.format("%d/%d/%d", dia, mes, year);*/
+                if (!r.equals("") && !t.equals("") && !e.equals("") && !rec.equals("") && !din.equals("") && !rec.equalsIgnoreCase(e)) {
 
                     //este seria el usuario logeado que quiere crear el acuerdo(remitente)
                     JavaPHPMySQL bd = new JavaPHPMySQL();
-                    bd.insertarAcuerdo(Double.parseDouble(din),com,"pendiente",rutaId,usuarioLogeado.getIdUsuario(),e,rec);
+                    bd.insertarAcuerdo(Double.parseDouble(din), com, "pendiente", rutaId, usuarioLogeado.getIdUsuario(), e, rec);
 
                     Toast.makeText(Anadir_acuerdo.this, "Se ha enviado el acuerdo", Toast.LENGTH_LONG).show();
 
                     finish();
-                }
-                else{
+                } else if (!rec.equalsIgnoreCase(e)) {
+                    Toast.makeText(Anadir_acuerdo.this, "El punto de recogida y punto de entrega no pueden ser iguales", Toast.LENGTH_LONG).show();
+                }else{
                     Toast.makeText(Anadir_acuerdo.this, "Rellene todos los campos", Toast.LENGTH_LONG).show();
                 }
             }
