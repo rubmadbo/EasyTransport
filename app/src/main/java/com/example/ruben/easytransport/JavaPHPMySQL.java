@@ -197,6 +197,18 @@ public class JavaPHPMySQL {
         insercion(jsonString, "borrarRuta.php"); //puede usar insercion porque solo recibe una variable y ejecuta una query
     }
 
+    public static Usuario getUsuarioByUserId(int idUsuario){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idUsuario", idUsuario);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+        String json= getDataFromFilter(jsonString, "getUsuarioByUserId.php");
+        return mostrarUsuario(json);
+    }
+
     public static ArrayList<Acuerdo> getAcuerdosByUserId(int idUsuario){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idUsuario", idUsuario);
@@ -274,6 +286,27 @@ public class JavaPHPMySQL {
             return response.toString();
         }
 
+    public static Usuario mostrarUsuario(String json){
+        System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
+        //Crear un Objeto JSON a partir del string JSON
+        Object jsonObject =JSONValue.parse(json.toString());
+        //Convertir el objeto JSON en un array
+        JSONArray array=(JSONArray)jsonObject;
+        Usuario usuario=null;
+        //Iterar el array y extraer la información
+        for(int i=0;i<array.size();i++){
+            JSONObject row =(JSONObject)array.get(i);
+            String idUsuario = row.get("idUsuario").toString();
+            String Nombre = row.get("Nombre").toString();
+            String Apellido = row.get("Apellido").toString();
+            String Rol = row.get("Rol").toString();
+            String Password = row.get("Password").toString();
+
+            usuario = new Usuario(Integer.parseInt(idUsuario), Nombre,Apellido,Rol,Password,null,null,null);
+        }
+        return usuario;
+    }
+
     public static ArrayList<Acuerdo> mostrarAcuerdos(String json){
         System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
         //Crear un Objeto JSON a partir del string JSON
@@ -347,7 +380,8 @@ public class JavaPHPMySQL {
                 String idTransportista = row.get("idTransportista").toString();
                 String Favorita = row.get("Favorita").toString();
 
-                Ruta ruta = new Ruta(Integer.parseInt(idRuta),Origen,Destino,HoraInicio,Fecha,Comentario,null,Integer.parseInt(Favorita));
+                Usuario transportista = getUsuarioByUserId(Integer.parseInt(idTransportista));
+                Ruta ruta = new Ruta(Integer.parseInt(idRuta),Origen,Destino,HoraInicio,Fecha,Comentario,transportista,Integer.parseInt(Favorita));
 
                 listaRutas.add(ruta);
             }

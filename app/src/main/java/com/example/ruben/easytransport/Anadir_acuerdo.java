@@ -11,6 +11,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import Objetos.Ruta;
+import Objetos.Usuario;
+
 
 public class Anadir_acuerdo extends ActionBarActivity {
     private EditText origen;
@@ -43,9 +48,22 @@ public class Anadir_acuerdo extends ActionBarActivity {
         String orig_ = intent.getStringExtra("Origen");
         final int rutaId= intent.getIntExtra("IdRuta",0);
 
+        JavaPHPMySQL bd = new JavaPHPMySQL();
+        final Usuario usuarioLogeado = bd.getUsuarioByUserId(2); //remitente es el usuario2 en bbdd
+        String json = bd.getAllRutas();
+        ArrayList<Ruta> rutas = bd.mostrarAllRutas(json);
+        Usuario transportista1=null;
+
+        for (int i=0; i<rutas.size();i++){
+            if (rutas.get(i).getIdRuta()== rutaId){
+                transportista1 = bd.getUsuarioByUserId(rutas.get(i).getTransportista().getIdUsuario());
+            }
+        }
+
         destino.setText(dest_);
         origen.setText(orig_);
-
+        remitente.setText(usuarioLogeado.getNombre()+" "+usuarioLogeado.getApellido());
+        transportista.setText(transportista1.getNombre()+" "+transportista1.getApellido());
         Button botonAnadirAcuerdo = (Button)findViewById(R.id.buttonAnyadirAcuerdo);
         botonAnadirAcuerdo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -65,12 +83,9 @@ public class Anadir_acuerdo extends ActionBarActivity {
                     int dia = dP.getDayOfMonth();
                     String fecha = String.format("%d/%d/%d", dia, mes, year);*/
 
-                    //conexion a bbdd
+                    //este seria el usuario logeado que quiere crear el acuerdo(remitente)
                     JavaPHPMySQL bd = new JavaPHPMySQL();
-                    //JDCC: HAY QUE HABLAR PRIMERO COMO CAMBIAMOS LA CLASE ACUERDO
-                    int IdUsuario = 3;
-                    //TMABIEN AQUI HABRIA QUE VER COMO COJER EL ID DEL USUARIO QUE QUIERE CREAR UN ACUERDO
-                    bd.insertarAcuerdo(Double.parseDouble(din),com,"pendiente",rutaId,IdUsuario,e,rec);
+                    bd.insertarAcuerdo(Double.parseDouble(din),com,"pendiente",rutaId,usuarioLogeado.getIdUsuario(),e,rec);
 
                     Toast.makeText(Anadir_acuerdo.this, "Se ha enviado el acuerdo", Toast.LENGTH_LONG).show();
 
