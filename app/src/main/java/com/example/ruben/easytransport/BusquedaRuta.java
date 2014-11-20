@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class BusquedaRuta extends Fragment {
 
@@ -69,28 +70,15 @@ public class BusquedaRuta extends Fragment {
 
                 }
                 if(_date==null || _date2==null || _fecha==null || _fecha2==null  || _dest.length()<=0 || _orig.length()<=0) {
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
-                    dialog.setMessage("Completa todos los campos");
-                    dialog.setCancelable(true);
-                    dialog.show();
-
-
-
+                    Toast.makeText(getActivity(), "Rellene todos los campos", Toast.LENGTH_SHORT).show();
                 }
-                if(_date!=null && _date2!=null && _fecha.compareTo(_fecha2)>0 && _dest.length()>0 && _orig.length()>0 && year>year_2) {
 
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
-                    dialog.setMessage("La fecha de inicio no puede ser mayor que la final");
-                    dialog.setCancelable(true);
-                    dialog.show();
+                if(_date!=null && _date2!=null && _fecha.compareTo(_fecha2)>0 && _dest.length()>0 && _orig.length()>0 && year>year_2) {
+                    Toast.makeText(getActivity(), "La fecha de inicio no puede ser mayor que la de fin", Toast.LENGTH_SHORT).show();
                 }
                 //hay que arreglar el equals del origen destino
                 if(_date!=null && _date2!=null && _fecha.compareTo(_fecha2)>0 && _dest.length()>0 && _orig.length()>0 && year>year_2 && _dest.equalsIgnoreCase(_orig)) {
-
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
-                    dialog.setMessage("El destino no puede ser igual al destino");
-                    dialog.setCancelable(true);
-                    dialog.show();
+                    Toast.makeText(getActivity(), "El origen no puede ser igual al destino", Toast.LENGTH_SHORT).show();
                 }
 
 

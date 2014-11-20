@@ -95,7 +95,7 @@ public class Ruta {
 
     @Override
     public String toString() {
-        return  "Origen: " + Origen + "\n" +
+        return  "\nOrigen: " + Origen + "\n" +
                 "Destino: " + Destino + "\n" +
                 "Hora Salida: " + HoraInicio + "\n" +
                 "Fecha: " + Fecha + "\n" +

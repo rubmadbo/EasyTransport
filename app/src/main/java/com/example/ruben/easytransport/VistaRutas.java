@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -56,25 +57,21 @@ public class VistaRutas extends Fragment {
         day = c.get(Calendar.DAY_OF_MONTH);
 
         GregorianCalendar calendar = new GregorianCalendar(year,month,day);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaActual = calendar.getTime();
 
         for (int i=0; i < listaRuta.size();i++){
             String sFechaRuta = listaRuta.get(i).getFecha();
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            Ruta rutaActual = listaRuta.get(i);
             try {
                 Date fechaRuta = formatter.parse(sFechaRuta);
-                Date fechaActual = calendar.getTime();
                 if(fechaActual.getTime() <= fechaRuta.getTime()){
-                    rutasActuales.add(listaRuta.get(i));
+                    rutasActuales.add(rutaActual);
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
-
-
-
-        //Aqui agregar solo las rutas que no se hayan pasado.
-
 
         //Inserción en el ListView
 
@@ -82,7 +79,7 @@ public class VistaRutas extends Fragment {
         adap.notifyDataSetChanged();
         li.setAdapter(adap);
 
-        final ArrayList<Ruta> finalListaRuta = listaRuta;
+        final ArrayList<Ruta> finalListaRuta = rutasActuales;
         li.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
@@ -97,11 +94,15 @@ public class VistaRutas extends Fragment {
                         //getAcuerdosByRuta esta sin acabar
 
                      if(bd.getAcuerdosByRutaId(rutaSelected.getIdRuta()).size() == 0)   {
-                        bd.borrarRuta(rutaSelected.getIdRuta());}
+                        bd.borrarRuta(rutaSelected.getIdRuta());
+                        Toast.makeText(getActivity(), "La ruta ha sido borrada correctamente", Toast.LENGTH_SHORT).show();
+                     }
+                     else Toast.makeText(getActivity(), "No se puede eliminar una ruta con un acuerdo asociado", Toast.LENGTH_SHORT).show();
                     }
                 });
                 b.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
+
                     }
                 });
 
