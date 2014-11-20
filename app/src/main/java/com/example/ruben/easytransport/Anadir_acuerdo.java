@@ -81,11 +81,12 @@ public class Anadir_acuerdo extends ActionBarActivity {
                     //este seria el usuario logeado que quiere crear el acuerdo(remitente)
                     JavaPHPMySQL bd = new JavaPHPMySQL();
                     //xapuzaaa JDCC, he quitado el autoincremente tamb de acuerdo en la bbdd
-                    //int j =Integer.parseInt(bd.getNumeroAcuerdos());
-                    int i=1;
-                    bd.insertarAcuerdo(i,Double.parseDouble(din), com, "pendiente", rutaId, usuarioLogeado.getIdUsuario(), e, rec);
-                    bd.insertarAcuerdoenUsuariohasAcuerdo(i,usuarioLogeado.getIdUsuario());
-                    i++;
+                    String a = bd.getNumeroAcuerdos();
+                    int j = Integer.parseInt(bd.mostrarNumeroAcuerdos(a));
+                    //int i=1;
+                    bd.insertarAcuerdo(j+1,Double.parseDouble(din), com, "pendiente", rutaId, usuarioLogeado.getIdUsuario(), e, rec);
+                    bd.insertarAcuerdoenUsuariohasAcuerdo(j+1,usuarioLogeado.getIdUsuario());
+                    //i++;
 
                     Toast.makeText(Anadir_acuerdo.this, "Se ha enviado el acuerdo", Toast.LENGTH_LONG).show();
 

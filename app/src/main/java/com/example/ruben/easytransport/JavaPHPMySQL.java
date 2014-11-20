@@ -430,6 +430,20 @@ public class JavaPHPMySQL {
         return listaVehiculos;
     }
 
+    public static String mostrarNumeroAcuerdos(String json){ System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
+        //Crear un Objeto JSON a partir del string JSON
+        Object jsonObject =JSONValue.parse(json.toString());
+        //Convertir el objeto JSON en un array
+        JSONArray array=(JSONArray)jsonObject;
+        String cuenta="";
+        //Iterar el array y extraer la información
+        for(int i=0;i<array.size();i++){
+            JSONObject row =(JSONObject)array.get(i);
+            cuenta = row.get("COUNT(*)").toString();
+
+        }
+        return cuenta;
+    }
     public static ArrayList<Ruta> mostrarAllRutas(String json){
             System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
             //Crear un Objeto JSON a partir del string JSON
