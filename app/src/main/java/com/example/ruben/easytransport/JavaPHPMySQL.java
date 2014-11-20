@@ -209,6 +209,18 @@ public class JavaPHPMySQL {
         return mostrarUsuario(json);
     }
 
+    public static Ruta getRutaByRutaId(int idRuta){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idRuta", idRuta);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+        String json= getDataFromFilter(jsonString, "getRutaById.php");
+        return mostrarRuta(json);
+    }
+
     public static ArrayList<Acuerdo> getAcuerdosByUserId(int idUsuario){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idUsuario", idUsuario);
@@ -321,12 +333,13 @@ public class JavaPHPMySQL {
             String Precio = row.get("Precio").toString();
             String Comentario = row.get("Comentario").toString();
             String Estado = row.get("Estado").toString();
-            //String idRuta = row.get("idRuta").toString(); //se mete a null porque se sabe de que ruta es
+            String idRuta = row.get("idRuta").toString(); //se mete a null porque se sabe de que ruta es
             String Punto_recogida = row.get("Punto_recogida").toString();
             String Punto_entrega = row.get("Punto_entrega").toString();
             String Leido = row.get("Leido").toString();
 
-           Acuerdo acuerdo = new Acuerdo(Integer.parseInt(idAcuerdo),Double.parseDouble(Precio),Comentario ,Estado,null,Punto_recogida,Punto_entrega,null,Integer.parseInt(Leido));
+           Ruta ruta = getRutaByRutaId(Integer.parseInt(idRuta));
+           Acuerdo acuerdo = new Acuerdo(Integer.parseInt(idAcuerdo),Double.parseDouble(Precio),Comentario ,Estado,ruta,Punto_recogida,Punto_entrega,null,Integer.parseInt(Leido));
            listaAcuerdos.add(acuerdo);
 
         }
@@ -347,7 +360,7 @@ public class JavaPHPMySQL {
             String Matricula = row.get("Matricula").toString();
             String Marca = row.get("Marca").toString();
             String Modelo = row.get("Modelo").toString();
-            String idUsuario = row.get("idUsuario").toString(); //se mete a null porque se sabe a que usuario pertenece
+            //String idUsuario = row.get("idUsuario").toString(); //se mete a null porque se sabe a que usuario pertenece
             String Capacidad = row.get("Capacidad").toString();
 
             Vehiculo vehiculo = new Vehiculo(Integer.parseInt(idVehiculo),Matricula,Marca ,Modelo,null,Integer.parseInt(Capacidad));
@@ -387,6 +400,31 @@ public class JavaPHPMySQL {
             }
         return listaRutas;
         }
+
+    public static Ruta mostrarRuta(String json){
+        System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
+        //Crear un Objeto JSON a partir del string JSON
+        Ruta ruta = null;
+        Object jsonObject =JSONValue.parse(json.toString());
+        //Convertir el objeto JSON en un array
+        JSONArray array=(JSONArray)jsonObject;
+        //Iterar el array y extraer la información
+        if(!array.isEmpty()){
+            JSONObject row =(JSONObject)array.get(0);
+            String idRuta = row.get("idRuta").toString();
+            String Origen = row.get("Origen").toString();
+            String Destino = row.get("Destino").toString();
+            String HoraInicio = row.get("HoraInicio").toString();
+            String Fecha = row.get("Fecha").toString();
+            String Comentario = row.get("Comentario").toString();
+            String idTransportista = row.get("idTransportista").toString();
+            String Favorita = row.get("Favorita").toString();
+
+            Usuario transportista = getUsuarioByUserId(Integer.parseInt(idTransportista));
+            ruta = new Ruta(Integer.parseInt(idRuta),Origen,Destino,HoraInicio,Fecha,Comentario,transportista,Integer.parseInt(Favorita));
+        }
+        return ruta;
+    }
 
     }
 

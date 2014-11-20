@@ -219,11 +219,9 @@ public class GestionDeRutas extends ActionBarActivity {
 
         }  else if ((!d.equals("") && !o.equals("")) && o.equalsIgnoreCase(d)){
             Toast.makeText(this, "El origen no puede ser igual al destino", Toast.LENGTH_SHORT).show();
-
         }
         else{
             Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
-
         }
 
 

@@ -57,19 +57,10 @@ public class ListarRuta extends Activity {
         ListView li = (ListView)findViewById(R.id.listView_rutas);
         ArrayList<Ruta> listaRuta = new ArrayList();
 
-        Ruta ruta;
         JavaPHPMySQL bd = new JavaPHPMySQL();
         String json = bd.getAllRutas();
         ArrayList<Ruta> listaRutas =  bd.mostrarAllRutas(json);
 
-        final Calendar c = Calendar.getInstance();
-        int year,month,day;
-
-        year = c.get(Calendar.YEAR);
-        month = c.get(Calendar.MONTH);
-        day = c.get(Calendar.DAY_OF_MONTH);
-
-        GregorianCalendar calendar = new GregorianCalendar(year,month,day);
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
         for(int i=0; i<listaRutas.size();i++) {
