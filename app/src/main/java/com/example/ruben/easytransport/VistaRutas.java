@@ -26,11 +26,6 @@ import Objetos.Ruta;
 
 
 public class VistaRutas extends Fragment {
-    final Calendar c = Calendar.getInstance();
-    Date fecha = new Date();
-    private int year;
-    private int month;
-    private int day;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //si te sale error aqui ir a buil.gradle el de la carpera mas externa y donde pone minSdkVersion pones 9
@@ -48,8 +43,8 @@ public class VistaRutas extends Fragment {
         String json = bd.getAllRutas();
         ArrayList<Ruta> listaRuta =  bd.mostrarAllRutas(json);
         ArrayList<Ruta> rutasActuales = new ArrayList<Ruta>();
-        final Calendar c = Calendar.getInstance();
 
+        final Calendar c = Calendar.getInstance();
         int year,month,day;
 
         year = c.get(Calendar.YEAR);

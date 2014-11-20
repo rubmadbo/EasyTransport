@@ -12,8 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import Objetos.Ruta;
 
@@ -24,6 +30,7 @@ public class ListarRuta extends Activity {
     private Button boton;
     private EditText origen;
     private EditText destino;
+    private EditText fechas;
     private String dest;
     private String orig;
     private String fecha;
@@ -35,6 +42,7 @@ public class ListarRuta extends Activity {
         boton=(Button)findViewById(R.id.button_volver);
         origen=(EditText)findViewById(R.id.origen);
         destino=(EditText)findViewById(R.id.dest);
+        fechas = (EditText)findViewById(R.id.fechasEntre);
 
         Intent intent = getIntent();
         String message1 = intent.getStringExtra("Ori");
@@ -43,6 +51,7 @@ public class ListarRuta extends Activity {
         String data2= intent.getStringExtra("Dat2");
         origen.setText(message1, TextView.BufferType.EDITABLE);
         destino.setText(message, TextView.BufferType.EDITABLE);
+        fechas.setText(data1 + " - " + data2);
 
         //Insercion de las rutas en el listView
         ListView li = (ListView)findViewById(R.id.listView_rutas);
@@ -52,17 +61,39 @@ public class ListarRuta extends Activity {
         JavaPHPMySQL bd = new JavaPHPMySQL();
         String json = bd.getAllRutas();
         ArrayList<Ruta> listaRutas =  bd.mostrarAllRutas(json);
-       for(int i=0; i<listaRutas.size();i++) {
 
-           if (listaRutas.get(i).getDestino().equalsIgnoreCase(message) && listaRutas.get(i).getOrigen().equalsIgnoreCase(message1)
-                   ) {
-               Ruta r = listaRutas.get(i);
-               listaRuta.add(r);
+        final Calendar c = Calendar.getInstance();
+        int year,month,day;
 
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DAY_OF_MONTH);
+
+        GregorianCalendar calendar = new GregorianCalendar(year,month,day);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+        for(int i=0; i<listaRutas.size();i++) {
+           Ruta rutaActual = listaRutas.get(i);
+           String sFechaRuta = rutaActual.getFecha();
+           try {
+               Date fechaRuta = formatter.parse(sFechaRuta);
+               Date fechaDesde = formatter.parse(data1);
+               Date fechaHasta = formatter.parse(data2);
+               if (listaRutas.get(i).getDestino().equalsIgnoreCase(message) && listaRutas.get(i).getOrigen().equalsIgnoreCase(message1)
+                       && fechaRuta.getTime() >= fechaDesde.getTime() && fechaRuta.getTime() <= fechaHasta.getTime()) {
+                   listaRuta.add(rutaActual);
+
+               }
+           } catch (ParseException e) {
+               e.printStackTrace();
            }
-       }
-          final ArrayList<Ruta> final_list = listaRuta;
 
+       }
+
+        if(listaRuta.isEmpty())
+            Toast.makeText(this, "No hay ninguna ruta que se ajuste a la busqueda especificada", Toast.LENGTH_LONG).show();
+
+        final ArrayList<Ruta> final_list = listaRuta;
 
         ArrayAdapter<Ruta> adap = new ArrayAdapter<Ruta>(ListarRuta.this,android.R.layout.simple_list_item_1, listaRuta);
         adap.notifyDataSetChanged();
@@ -81,24 +112,11 @@ public class ListarRuta extends Activity {
                 int Id_ruta = rutaSelected.getIdRuta();
                 intent.putExtra("IdRuta", Id_ruta);
                 startActivity(intent);
-
-
-
-
             }
 
         });
-
-
-
-
-
     }
-
-
-
-
-    @Override
+@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.listar_ruta, menu);
