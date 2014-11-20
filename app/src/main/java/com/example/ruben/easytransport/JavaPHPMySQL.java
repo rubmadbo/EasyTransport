@@ -163,10 +163,23 @@ public class JavaPHPMySQL {
 
         insercion(jsonString, "insertarRuta.php");
     }
-
-    public static void insertarAcuerdo(double precio, String comentario, String estado, int idRuta, int idUsuario, String Punto_recogida, String Punto_entrega){
+    public static void insertarAcuerdoenUsuariohasAcuerdo(int idAcuerdo, int idUsuario){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("idAcuerdo", 0);
+        jsonObject.put("idAcuerdo", idAcuerdo);
+        jsonObject.put("idUsuario", idUsuario);
+
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+
+        insercion(jsonString, "insertarAcuerdoenUsuariohasAcuerdo.php");
+    }
+
+
+    public static void insertarAcuerdo(int idAcuerdo,double precio, String comentario, String estado, int idRuta, int idUsuario, String Punto_recogida, String Punto_entrega){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idAcuerdo", idAcuerdo);
         jsonObject.put("Precio", precio);
         jsonObject.put("Comentario", comentario);
         jsonObject.put("Estado", estado);
@@ -256,6 +269,49 @@ public class JavaPHPMySQL {
         String json= getDataFromFilter(jsonString, "getAcuerdosByRutaId.php");
         return mostrarAcuerdos(json);
     }
+
+    public static String getNumeroAcuerdos(){
+
+        StringBuffer response = null;
+
+        try {
+            //Generar la URL
+            String url = SERVER_PATH+"getNumeroAcuerdos.php";
+            //Creamos un nuevo objeto URL con la url donde pedir el JSON
+            URL obj = new URL(url);
+            //Creamos un objeto de conexión
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            //Añadimos la cabecera
+            con.setRequestMethod("POST");
+            con.setRequestProperty("User-Agent", USER_AGENT);
+            con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+            // Enviamos la petición por POST
+            con.setDoOutput(true);
+            //Capturamos la respuesta del servidor
+            int responseCode = con.getResponseCode();
+            System.out.println("\nSending 'POST' request to URL : " + url);
+            System.out.println("Response Code : " + responseCode);
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            //Mostramos la respuesta del servidor por consola
+            System.out.println("Respuesta del servidor: "+response);
+            System.out.println();
+            //cerramos la conexión
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response.toString();
+    }
+
+
 
     public static String getAllRutas(){
 
