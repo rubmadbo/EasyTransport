@@ -27,6 +27,7 @@ import Objetos.Ruta;
 
 public class VistaRutas extends Fragment {
 
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //si te sale error aqui ir a buil.gradle el de la carpera mas externa y donde pone minSdkVersion pones 9
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -116,5 +117,10 @@ public class VistaRutas extends Fragment {
             }
         });
     return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 }

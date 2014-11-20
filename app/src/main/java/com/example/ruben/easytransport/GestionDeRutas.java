@@ -247,5 +247,4 @@ public class GestionDeRutas extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
 }
