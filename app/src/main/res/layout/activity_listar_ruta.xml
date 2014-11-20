@@ -50,7 +50,7 @@
                 android:layout_alignRight="@+id/listView_rutas"
                 android:layout_alignEnd="@+id/listView_rutas"
                 android:layout_gravity="center_horizontal"
-                android:textColor="#ffa194ff"
+                android:textColor="#ffff6863"
                 android:capitalize="words"
                 android:singleLine="false"
                 android:textSize="20dp" />
@@ -85,7 +85,7 @@
                 android:layout_below="@+id/dest"
                 android:layout_alignRight="@+id/listView_rutas"
                 android:layout_alignEnd="@+id/listView_rutas"
-                android:textColor="#ff56ff62"
+                android:textColor="#ffff6863"
                 android:capitalize="words"
                 android:textSize="20dp" />
 
@@ -119,7 +119,7 @@
                 android:layout_below="@+id/dest"
                 android:layout_alignRight="@+id/listView_rutas"
                 android:layout_alignEnd="@+id/listView_rutas"
-                android:textColor="#ff56ff62"
+                android:textColor="#ffff6863"
                 android:capitalize="words"
                 android:textSize="20dp" />
 

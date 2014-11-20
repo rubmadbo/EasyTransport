@@ -85,9 +85,9 @@ public class Anadir_acuerdo extends ActionBarActivity {
                     Toast.makeText(Anadir_acuerdo.this, "Se ha enviado el acuerdo", Toast.LENGTH_LONG).show();
 
                     finish();
-                } else if (!rec.equalsIgnoreCase(e)) {
+                } else if (rec.equalsIgnoreCase(e)) {
                     Toast.makeText(Anadir_acuerdo.this, "El punto de recogida y punto de entrega no pueden ser iguales", Toast.LENGTH_LONG).show();
-                }else{
+                }else if (r.equals("") || t.equals("") || e.equals("") || rec.equals("") || din.equals("")){
                     Toast.makeText(Anadir_acuerdo.this, "Rellene todos los campos", Toast.LENGTH_LONG).show();
                 }
             }
