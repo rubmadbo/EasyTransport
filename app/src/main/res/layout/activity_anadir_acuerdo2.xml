@@ -29,11 +29,11 @@
 
             <EditText
                 android:layout_width="327dp"
-                android:hint="@string/textoRemitente"
                 android:layout_height="wrap_content"
                 android:id="@+id/editTRemitente"
                 android:layout_marginTop="15dp"
-                android:background="#ffffffff" />
+                android:editable="false"
+                android:background="#e3a9a952" />
 
             <TextView
                 android:text="@string/Transportista"
@@ -46,11 +46,11 @@
 
             <EditText
                 android:layout_width="327dp"
-                android:hint="@string/textoTransportista"
                 android:layout_height="wrap_content"
                 android:id="@+id/editTTransportista"
                 android:layout_marginTop="15dp"
-                android:background="#ffffffff" />
+                android:editable="false"
+                android:background="#e3a9a952" />
 
             <TextView
                 android:text="@string/Origen"
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editTOrigenAcuerdo"
                 android:layout_marginTop="15dp"
-                android:background="#d600af91"
+                android:background="#e3a9a952"
                 android:editable="false"
                 android:enabled="true" />
 
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editTDestinoAcuerdo"
                 android:layout_marginTop="15dp"
-                android:background="#d600af91"
+                android:background="#e3a9a952"
                 android:enabled="true"
                 android:editable="false"
                 android:clickable="true" />
@@ -139,17 +139,8 @@
                 android:hint="@string/textoDinero"
                 android:id="@+id/editTDinero"
                 android:layout_marginTop="15dp"
-                android:background="#ffffffff" />
-
-            <TextView
-                android:text="@string/Fecha"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textFecha"
-                android:layout_marginTop="15dp"
-                android:textColor="#610B0B"
-                android:textSize="20sp" />
-
+                android:background="#ffffffff"
+                android:inputType="numberDecimal" />
 
             <TextView
                 android:text="@string/Comentario"

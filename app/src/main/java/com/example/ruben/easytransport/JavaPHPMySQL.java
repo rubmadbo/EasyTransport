@@ -144,7 +144,7 @@ public class JavaPHPMySQL {
         //Añadimos el nombre, apellidos y email del usuario
         //es IMPORTANTE que pongamos lo que esta entre comillas igual que la columna de la BBDD
         jsonObj.put("idRuta", 0);
-        jsonObj.put("Favorita", false);
+        jsonObj.put("Favorita", 0);
         jsonObj.put("Origen", Origen);
         jsonObj.put("Destino", Destino);
         jsonObj.put("HoraInicio", HoraInicio);
@@ -163,10 +163,23 @@ public class JavaPHPMySQL {
 
         insercion(jsonString, "insertarRuta.php");
     }
-
-    public static void insertarAcuerdo(double precio, String comentario, String estado, int idRuta, int idUsuario, String Punto_recogida, String Punto_entrega ){
+    public static void insertarAcuerdoenUsuariohasAcuerdo(int idAcuerdo, int idUsuario){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("idAcuerdo", 0);
+        jsonObject.put("idAcuerdo", idAcuerdo);
+        jsonObject.put("idUsuario", idUsuario);
+
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+
+        insercion(jsonString, "insertarAcuerdoenUsuariohasAcuerdo.php");
+    }
+
+
+    public static void insertarAcuerdo(int idAcuerdo,double precio, String comentario, String estado, int idRuta, int idUsuario, String Punto_recogida, String Punto_entrega){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idAcuerdo", idAcuerdo);
         jsonObject.put("Precio", precio);
         jsonObject.put("Comentario", comentario);
         jsonObject.put("Estado", estado);
@@ -174,6 +187,7 @@ public class JavaPHPMySQL {
         jsonObject.put("idUsuario", idUsuario);
         jsonObject.put("Punto_recogida", Punto_recogida);
         jsonObject.put("Punto_entrega",Punto_entrega);
+        jsonObject.put("Leido",0);
 
         List l = new LinkedList();
         l.addAll(Arrays.asList(jsonObject));
@@ -194,6 +208,42 @@ public class JavaPHPMySQL {
         String jsonString = JSONValue.toJSONString(l);
 
         insercion(jsonString, "borrarRuta.php"); //puede usar insercion porque solo recibe una variable y ejecuta una query
+    }
+
+    public static Usuario getUsuarioByUserId(int idUsuario){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idUsuario", idUsuario);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+        String json= getDataFromFilter(jsonString, "getUsuarioByUserId.php");
+        return mostrarUsuario(json);
+    }
+
+    public static Ruta getRutaByRutaId(int idRuta){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idRuta", idRuta);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+        String json= getDataFromFilter(jsonString, "getRutaById.php");
+        return mostrarRuta(json);
+    }
+
+    public static ArrayList<Acuerdo> getAcuerdosByUserId(int idUsuario){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idUsuario", idUsuario);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+        String json= getDataFromFilter(jsonString, "getAcuedosByUserId.php");
+        return mostrarAcuerdos(json);
     }
 
     public static ArrayList<Vehiculo> getVehiculoByUserId(int idUsuario){
@@ -219,6 +269,49 @@ public class JavaPHPMySQL {
         String json= getDataFromFilter(jsonString, "getAcuerdosByRutaId.php");
         return mostrarAcuerdos(json);
     }
+
+    public static String getNumeroAcuerdos(){
+
+        StringBuffer response = null;
+
+        try {
+            //Generar la URL
+            String url = SERVER_PATH+"getNumeroAcuerdos.php";
+            //Creamos un nuevo objeto URL con la url donde pedir el JSON
+            URL obj = new URL(url);
+            //Creamos un objeto de conexión
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            //Añadimos la cabecera
+            con.setRequestMethod("POST");
+            con.setRequestProperty("User-Agent", USER_AGENT);
+            con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+            // Enviamos la petición por POST
+            con.setDoOutput(true);
+            //Capturamos la respuesta del servidor
+            int responseCode = con.getResponseCode();
+            System.out.println("\nSending 'POST' request to URL : " + url);
+            System.out.println("Response Code : " + responseCode);
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            //Mostramos la respuesta del servidor por consola
+            System.out.println("Respuesta del servidor: "+response);
+            System.out.println();
+            //cerramos la conexión
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response.toString();
+    }
+
+
 
     public static String getAllRutas(){
 
@@ -261,6 +354,27 @@ public class JavaPHPMySQL {
             return response.toString();
         }
 
+    public static Usuario mostrarUsuario(String json){
+        System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
+        //Crear un Objeto JSON a partir del string JSON
+        Object jsonObject =JSONValue.parse(json.toString());
+        //Convertir el objeto JSON en un array
+        JSONArray array=(JSONArray)jsonObject;
+        Usuario usuario=null;
+        //Iterar el array y extraer la información
+        for(int i=0;i<array.size();i++){
+            JSONObject row =(JSONObject)array.get(i);
+            String idUsuario = row.get("idUsuario").toString();
+            String Nombre = row.get("Nombre").toString();
+            String Apellido = row.get("Apellido").toString();
+            String Rol = row.get("Rol").toString();
+            String Password = row.get("Password").toString();
+
+            usuario = new Usuario(Integer.parseInt(idUsuario), Nombre,Apellido,Rol,Password,null,null,null);
+        }
+        return usuario;
+    }
+
     public static ArrayList<Acuerdo> mostrarAcuerdos(String json){
         System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
         //Crear un Objeto JSON a partir del string JSON
@@ -275,14 +389,14 @@ public class JavaPHPMySQL {
             String Precio = row.get("Precio").toString();
             String Comentario = row.get("Comentario").toString();
             String Estado = row.get("Estado").toString();
-            String idRuta = row.get("idUsuario").toString(); //se mete a null porque se sabe de que ruta es
+            String idRuta = row.get("idRuta").toString(); //se mete a null porque se sabe de que ruta es
             String Punto_recogida = row.get("Punto_recogida").toString();
             String Punto_entrega = row.get("Punto_entrega").toString();
             String Leido = row.get("Leido").toString();
 
-           // Acuerdo acuerdo = new Acuerdo(Integer.parseInt(idAcuerdo),Double.parseDouble(Precio),Comentario ,Estado,null,Punto_recogida,Punto_entrega,Leido);
-
-          //  listaAcuerdos.add(acuerdo);
+           Ruta ruta = getRutaByRutaId(Integer.parseInt(idRuta));
+           Acuerdo acuerdo = new Acuerdo(Integer.parseInt(idAcuerdo),Double.parseDouble(Precio),Comentario ,Estado,ruta,Punto_recogida,Punto_entrega,null,Integer.parseInt(Leido));
+           listaAcuerdos.add(acuerdo);
 
         }
         return listaAcuerdos;
@@ -302,7 +416,7 @@ public class JavaPHPMySQL {
             String Matricula = row.get("Matricula").toString();
             String Marca = row.get("Marca").toString();
             String Modelo = row.get("Modelo").toString();
-            String idUsuario = row.get("idUsuario").toString(); //se mete a null porque se sabe a que usuario pertenece
+            //String idUsuario = row.get("idUsuario").toString(); //se mete a null porque se sabe a que usuario pertenece
             String Capacidad = row.get("Capacidad").toString();
 
             Vehiculo vehiculo = new Vehiculo(Integer.parseInt(idVehiculo),Matricula,Marca ,Modelo,null,Integer.parseInt(Capacidad));
@@ -316,6 +430,20 @@ public class JavaPHPMySQL {
         return listaVehiculos;
     }
 
+    public static String mostrarNumeroAcuerdos(String json){ System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
+        //Crear un Objeto JSON a partir del string JSON
+        Object jsonObject =JSONValue.parse(json.toString());
+        //Convertir el objeto JSON en un array
+        JSONArray array=(JSONArray)jsonObject;
+        String cuenta="";
+        //Iterar el array y extraer la información
+        for(int i=0;i<array.size();i++){
+            JSONObject row =(JSONObject)array.get(i);
+            cuenta = row.get("COUNT(*)").toString();
+
+        }
+        return cuenta;
+    }
     public static ArrayList<Ruta> mostrarAllRutas(String json){
             System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
             //Crear un Objeto JSON a partir del string JSON
@@ -333,13 +461,40 @@ public class JavaPHPMySQL {
                 String Fecha = row.get("Fecha").toString();
                 String Comentario = row.get("Comentario").toString();
                 String idTransportista = row.get("idTransportista").toString();
+                String Favorita = row.get("Favorita").toString();
 
-                Ruta ruta = new Ruta(Integer.parseInt(idRuta),Origen,Destino,HoraInicio,Fecha,Comentario);
+                Usuario transportista = getUsuarioByUserId(Integer.parseInt(idTransportista));
+                Ruta ruta = new Ruta(Integer.parseInt(idRuta),Origen,Destino,HoraInicio,Fecha,Comentario,transportista,Integer.parseInt(Favorita));
 
                 listaRutas.add(ruta);
             }
         return listaRutas;
         }
+
+    public static Ruta mostrarRuta(String json){
+        System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
+        //Crear un Objeto JSON a partir del string JSON
+        Ruta ruta = null;
+        Object jsonObject =JSONValue.parse(json.toString());
+        //Convertir el objeto JSON en un array
+        JSONArray array=(JSONArray)jsonObject;
+        //Iterar el array y extraer la información
+        if(!array.isEmpty()){
+            JSONObject row =(JSONObject)array.get(0);
+            String idRuta = row.get("idRuta").toString();
+            String Origen = row.get("Origen").toString();
+            String Destino = row.get("Destino").toString();
+            String HoraInicio = row.get("HoraInicio").toString();
+            String Fecha = row.get("Fecha").toString();
+            String Comentario = row.get("Comentario").toString();
+            String idTransportista = row.get("idTransportista").toString();
+            String Favorita = row.get("Favorita").toString();
+
+            Usuario transportista = getUsuarioByUserId(Integer.parseInt(idTransportista));
+            ruta = new Ruta(Integer.parseInt(idRuta),Origen,Destino,HoraInicio,Fecha,Comentario,transportista,Integer.parseInt(Favorita));
+        }
+        return ruta;
+    }
 
     }
 

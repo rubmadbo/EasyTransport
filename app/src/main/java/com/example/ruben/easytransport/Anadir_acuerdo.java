@@ -1,8 +1,6 @@
 package com.example.ruben.easytransport;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -12,6 +10,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+
+import Objetos.Ruta;
+import Objetos.Usuario;
 
 
 public class Anadir_acuerdo extends ActionBarActivity {
@@ -44,9 +47,23 @@ public class Anadir_acuerdo extends ActionBarActivity {
         String dest_ = intent.getStringExtra("Destino");
         String orig_ = intent.getStringExtra("Origen");
         final int rutaId= intent.getIntExtra("IdRuta",0);
+
+        JavaPHPMySQL bd = new JavaPHPMySQL();
+        final Usuario usuarioLogeado = bd.getUsuarioByUserId(2); //remitente es el usuario2 en bbdd
+        String json = bd.getAllRutas();
+        ArrayList<Ruta> rutas = bd.mostrarAllRutas(json);
+        Usuario transportista1=null;
+
+        for (int i=0; i<rutas.size();i++){
+            if (rutas.get(i).getIdRuta()== rutaId){
+                transportista1 = bd.getUsuarioByUserId(rutas.get(i).getTransportista().getIdUsuario());
+            }
+        }
+
         destino.setText(dest_);
         origen.setText(orig_);
-
+        remitente.setText(usuarioLogeado.getNombre()+" "+usuarioLogeado.getApellido());
+        transportista.setText(transportista1.getNombre()+" "+transportista1.getApellido());
         Button botonAnadirAcuerdo = (Button)findViewById(R.id.buttonAnyadirAcuerdo);
         botonAnadirAcuerdo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -59,28 +76,24 @@ public class Anadir_acuerdo extends ActionBarActivity {
                 String com = comentario.getText().toString();
                 String rec = recogida.getText().toString();
 
-                if(!r.equals("") && !t.equals("") && !e.equals("") && !rec.equals("") && !din.equals("")){
-                   /* dP= (DatePicker)findViewById(R.id.datePickerAcuerdo);
-                    int mes = dP.getMonth()+1;
-                    int year= dP.getYear();
-                    int dia = dP.getDayOfMonth();
-                    String fecha = String.format("%d/%d/%d", dia, mes, year);*/
+                if (!r.equals("") && !t.equals("") && !e.equals("") && !rec.equals("") && !din.equals("") && !rec.equalsIgnoreCase(e)) {
 
-                    //conexion a bbdd
+                    //este seria el usuario logeado que quiere crear el acuerdo(remitente)
                     JavaPHPMySQL bd = new JavaPHPMySQL();
-                    //JDCC: HAY QUE HABLAR PRIMERO COMO CAMBIAMOS LA CLASE ACUERDO
-                    //TMABIEN AQUI HABRIA QUE VER COMO COJER EL ID DEL USUARIO QUE QUIERE CREAR UN ACUERDO
-                    //db.insertarAcuerdo(r,t,e,din,com.rec);
+                    //xapuzaaa JDCC, he quitado el autoincremente tamb de acuerdo en la bbdd
+                    String a = bd.getNumeroAcuerdos();
+                    int j = Integer.parseInt(bd.mostrarNumeroAcuerdos(a));
+                    //int i=1;
+                    bd.insertarAcuerdo(j+1,Double.parseDouble(din), com, "pendiente", rutaId, usuarioLogeado.getIdUsuario(), e, rec);
+                    bd.insertarAcuerdoenUsuariohasAcuerdo(j+1,usuarioLogeado.getIdUsuario());
+                    //i++;
 
-                /*List<Acuerdo> acuerdos= admin.getAcuerdos();
-                for (int i=0; i<acuerdos.size();i++){
-                    System.out.println(acuerdos.get(i).toString());
-                }*/
                     Toast.makeText(Anadir_acuerdo.this, "Se ha enviado el acuerdo", Toast.LENGTH_LONG).show();
 
                     finish();
-                }
-                else{
+                } else if (rec.equalsIgnoreCase(e)) {
+                    Toast.makeText(Anadir_acuerdo.this, "El punto de recogida y punto de entrega no pueden ser iguales", Toast.LENGTH_LONG).show();
+                }else if (r.equals("") || t.equals("") || e.equals("") || rec.equals("") || din.equals("")){
                     Toast.makeText(Anadir_acuerdo.this, "Rellene todos los campos", Toast.LENGTH_LONG).show();
                 }
             }

@@ -3,8 +3,6 @@ package com.example.ruben.easytransport;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
@@ -17,21 +15,18 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.json.JSONException;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import Objetos.Ruta;
 
 
 public class VistaRutas extends Fragment {
-    final Calendar c = Calendar.getInstance();
-    Date fecha = new Date();
-    private int year;
-    private int month;
-    private int day;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //si te sale error aqui ir a buil.gradle el de la carpera mas externa y donde pone minSdkVersion pones 9
@@ -48,19 +43,39 @@ public class VistaRutas extends Fragment {
         JavaPHPMySQL bd = new JavaPHPMySQL();
         String json = bd.getAllRutas();
         ArrayList<Ruta> listaRuta =  bd.mostrarAllRutas(json);
-        ArrayList<Ruta> listaRutasActuales = new ArrayList<Ruta>();
+        ArrayList<Ruta> rutasActuales = new ArrayList<Ruta>();
 
+        final Calendar c = Calendar.getInstance();
+        int year,month,day;
 
-        //Aqui agregar solo las rutas que no se hayan pasado.
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DAY_OF_MONTH);
 
+        GregorianCalendar calendar = new GregorianCalendar(year,month,day);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaActual = calendar.getTime();
+
+        for (int i=0; i < listaRuta.size();i++){
+            String sFechaRuta = listaRuta.get(i).getFecha();
+            Ruta rutaActual = listaRuta.get(i);
+            try {
+                Date fechaRuta = formatter.parse(sFechaRuta);
+                if(fechaActual.getTime() <= fechaRuta.getTime()){
+                    rutasActuales.add(rutaActual);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
 
         //Inserción en el ListView
 
-        ArrayAdapter<Ruta> adap = new ArrayAdapter<Ruta>(VistaRutas.this.getActivity(),android.R.layout.simple_list_item_1, listaRuta);
+        ArrayAdapter<Ruta> adap = new ArrayAdapter<Ruta>(VistaRutas.this.getActivity(),android.R.layout.simple_list_item_1, rutasActuales);
         adap.notifyDataSetChanged();
         li.setAdapter(adap);
 
-        final ArrayList<Ruta> finalListaRuta = listaRuta;
+        final ArrayList<Ruta> finalListaRuta = rutasActuales;
         li.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
@@ -73,12 +88,17 @@ public class VistaRutas extends Fragment {
                         Ruta rutaSelected = finalListaRuta.get(position);
                         //IMPORTANTE: tener en cuenta que no se puede borrar ruta si tiene acuerdo asociado!
                         //getAcuerdosByRuta esta sin acabar
-                     if(bd.getAcuerdosByRutaId(rutaSelected.getIdRuta()) == null)   {
-                        bd.borrarRuta(rutaSelected.getIdRuta());}
+
+                     if(bd.getAcuerdosByRutaId(rutaSelected.getIdRuta()).size() == 0)   {
+                        bd.borrarRuta(rutaSelected.getIdRuta());
+                        Toast.makeText(getActivity(), "La ruta ha sido borrada correctamente", Toast.LENGTH_SHORT).show();
+                     }
+                     else Toast.makeText(getActivity(), "No se puede eliminar una ruta con un acuerdo asociado", Toast.LENGTH_SHORT).show();
                     }
                 });
                 b.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
+
                     }
                 });
 
@@ -89,6 +109,9 @@ public class VistaRutas extends Fragment {
 
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+               /* JavaPHPMySQL bd = new JavaPHPMySQL();
+                bd.getVehiculoByUserId(1);*/
+
                 Intent intent = new Intent(VistaRutas.this.getActivity(),GestionDeRutas.class);
                 startActivity(intent);
             }
@@ -96,18 +119,8 @@ public class VistaRutas extends Fragment {
     return rootView;
     }
 
-    //metodo VIEJO
-    public void borrarRuta(int rutaid) {
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(VistaRutas.this.getActivity(), "administracion", null, 1);
-        SQLiteDatabase db = admin.getWritableDatabase();
-        String selectQuery = "SELECT * FROM Acuerdo WHERE ruta="+rutaid+"";
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        //devuelve false si no hay ninguno que cumple la query
-        if (cursor.moveToFirst()){
-            Toast.makeText(VistaRutas.this.getActivity(), "No se puede borrar una ruta asociada a un Acuerdo", Toast.LENGTH_LONG).show();
-        }else {db.execSQL("DELETE FROM Ruta WHERE idRuta="+rutaid+"");
-            Toast.makeText(VistaRutas.this.getActivity(), "La ruta ha sido borrada", Toast.LENGTH_LONG).show();
-
-        }
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 }
