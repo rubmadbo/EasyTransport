@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,6 @@ import Objetos.Ruta;
 
 
 public class HistoricoRutas extends Fragment {
-
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //si te sale error aqui ir a buil.gradle el de la carpera mas externa y donde pone minSdkVersion pones 9
@@ -75,13 +75,24 @@ public class HistoricoRutas extends Fragment {
 
         final ArrayList<Ruta> finalListaRuta = rutasActuales;
 
-        //creo q es setOnItemClickListener
-      //  li.setOnClickListener(new View.OnClickListener() {
-        //    public void onClick(View v) {
-               /* Intent intent = new Intent(HistoricoRutas.this.getActivity(),GestionDeRutas.class);
-                startActivity(intent);*/
-          //  }
-        //});
+        li.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
+                Ruta rutaSelected = finalListaRuta.get(position);
+                //Intent intent = new Intent(getActivity(), ListarAcuerdos.class);
+                String Id_ruta =String.valueOf(rutaSelected.getIdRuta());
+
+                Bundle arguments = new Bundle();
+                arguments.putString("idRuta", Id_ruta);
+                ListarAcuerdos fragment = ListarAcuerdos.newInstance(arguments);
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                //esto es lo q hace q se muestre encima de loq habia en vez de cargar el xml
+                ft.replace(android.R.id.content, fragment);
+                ft.commit();
+
+            }
+        });
         return rootView;
     }
 

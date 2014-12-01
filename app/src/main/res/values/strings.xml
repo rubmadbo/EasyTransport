@@ -9,6 +9,7 @@
     <string name="title_activity_vista_rutas">vistaRutas</string>
     <string name="title_activity_anadir_acuerdo">anadir_acuerdo</string>
     <string name="title_activity_busqueda_ruta">BusquedaRuta</string>
+    <string name="title_activity_ListarAcuerdo">ListarAcuerdo</string>
     <string name="title_section1">Gestión de rutas</string>
     <string name="title_section2">Listado de rutas</string>
     <string name="title_section3">Ver acuerdos</string>
