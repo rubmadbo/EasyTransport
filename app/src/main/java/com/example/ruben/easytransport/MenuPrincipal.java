@@ -58,8 +58,9 @@ public class MenuPrincipal extends ActionBarActivity
                 fragment = new ListarAcuerdos();
                 break;
             case 3:
-                //Listar acuerdo
-                fragment = new MisRutas();
+                //Historico Rutas
+                fragment = new HistoricoRutas();
+                //fragment = new MisRutas();
                 break;
 
         }
@@ -79,6 +80,9 @@ public class MenuPrincipal extends ActionBarActivity
             case 3:
                 //mTitle = getString(R.string.title_section4);
                 mTitle = getString(R.string.title_section3);
+                break;
+            case 4:
+                mTitle = getString(R.string.title_section4);
                 break;
         }
     }

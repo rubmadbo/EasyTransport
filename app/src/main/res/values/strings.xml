@@ -12,6 +12,7 @@
     <string name="title_section1">Gestión de rutas</string>
     <string name="title_section2">Listado de rutas</string>
     <string name="title_section3">Ver acuerdos</string>
+    <string name="title_section4">Historico Rutas</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example"></string>
