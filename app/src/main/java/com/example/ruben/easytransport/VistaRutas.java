@@ -86,8 +86,6 @@ public class VistaRutas extends Fragment {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         JavaPHPMySQL bd = new JavaPHPMySQL();
                         Ruta rutaSelected = finalListaRuta.get(position);
-                        //IMPORTANTE: tener en cuenta que no se puede borrar ruta si tiene acuerdo asociado!
-                        //getAcuerdosByRuta esta sin acabar
 
                      if(bd.getAcuerdosByRutaId(rutaSelected.getIdRuta()).size() == 0)   {
                         bd.borrarRuta(rutaSelected.getIdRuta());

@@ -32,6 +32,11 @@
             android:label="@string/title_activity_anadir_acuerdo" >
         </fragment>
 
+        <fragment
+            android:name="ListarAcuerdos"
+            android:label="@string/title_activity_ListarAcuerdo" >
+        </fragment>
+
         <activity
             android:name="com.example.ruben.easytransport.BusquedaRuta"
             android:label="@string/title_activity_busqueda_ruta" >
