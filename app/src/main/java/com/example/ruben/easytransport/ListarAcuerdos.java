@@ -27,20 +27,45 @@ import Objetos.Ruta;
 
 public class ListarAcuerdos extends Fragment {
 
+    public static ListarAcuerdos newInstance(Bundle arguments){
+        ListarAcuerdos f = new ListarAcuerdos();
+        if(arguments != null){
+            f.setArguments(arguments);
+        }
+        return f;
+    }
+
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
        View rootView = inflater.inflate(R.layout.fragment_listar_acuerdos, container, false);
         ListView li = (ListView) rootView.findViewById(R.id.listViewAcuerdos);
 
-       // HAY QUE PASARLE DE ALGUNA MANERA EL USERID
-        int UserId = 2; // habría que cargarlo de la session de userlogeado
-        //Conexión a la base de datos
+        int idRuta=0;
         JavaPHPMySQL db = new JavaPHPMySQL();
-        ArrayList<Acuerdo> listaAcuerdos = db.getAcuerdosByUserId(UserId);
+        ArrayList<Acuerdo> listaAcuerdos;
+        int UserId = 2; // habría que cargarlo de la session de userlogeado en caso que se quieran ver los acuerdos por usuario
 
-        ArrayAdapter<Acuerdo> adap = new ArrayAdapter<Acuerdo>(ListarAcuerdos.this.getActivity(),android.R.layout.simple_list_item_1, listaAcuerdos);
-        adap.notifyDataSetChanged();
-        li.setAdapter(adap);
+        //jdcc, cuando viene de historico de rutas, lista los acuerdos de esa ruta
+        Bundle args = getArguments();
+        if (args  != null && args.containsKey("idRuta"))
+            idRuta =Integer.parseInt(args.getString("idRuta"));
+
+       /* if (getArguments() != null) {
+            Bundle b = getActivity().getIntent().getExtras();
+            idRuta =Integer.parseInt(b.getString("idRuta"));
+        }*/
+
+        if(idRuta!=0) {
+            listaAcuerdos = db.getAcuerdosByRutaId(idRuta);
+
+        }else {
+            listaAcuerdos = db.getAcuerdosByUserId(UserId);
+
+        }
+            ArrayAdapter<Acuerdo> adap = new ArrayAdapter<Acuerdo>(ListarAcuerdos.this.getActivity(), android.R.layout.simple_list_item_1, listaAcuerdos);
+            adap.notifyDataSetChanged();
+            li.setAdapter(adap);
 
         return rootView;
     }
