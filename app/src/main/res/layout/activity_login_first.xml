@@ -47,7 +47,7 @@
             android:layout_margin="20dp"
             android:text="Entrar"
             android:background="@drawable/button_default_bg"
-            android:onClick="Button_log" />
+            android:onClick="buttonOnClickLogin" />
     </LinearLayout>
 
 </RelativeLayout>

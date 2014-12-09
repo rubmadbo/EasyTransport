@@ -17,9 +17,7 @@ import android.widget.Toast;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import Objetos.Ruta;
 
@@ -30,10 +28,12 @@ public class ListarRuta extends Activity {
     private Button boton;
     private EditText origen;
     private EditText destino;
-    private EditText fechas;
     private String dest;
     private String orig;
     private String fecha;
+    Date fechaRuta = null;
+    Date fecha_ini= null;
+    Date fecha_fin= null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,6 @@ public class ListarRuta extends Activity {
         boton=(Button)findViewById(R.id.button_volver);
         origen=(EditText)findViewById(R.id.origen);
         destino=(EditText)findViewById(R.id.dest);
-        fechas = (EditText)findViewById(R.id.fechasEntre);
 
         Intent intent = getIntent();
         String message1 = intent.getStringExtra("Ori");
@@ -51,44 +50,65 @@ public class ListarRuta extends Activity {
         String data2= intent.getStringExtra("Dat2");
         origen.setText(message1, TextView.BufferType.EDITABLE);
         destino.setText(message, TextView.BufferType.EDITABLE);
-        fechas.setText(data1 + " - " + data2);
+
+
+
+
+
 
         //Insercion de las rutas en el listView
         ListView li = (ListView)findViewById(R.id.listView_rutas);
         ArrayList<Ruta> listaRuta = new ArrayList();
 
+        Ruta ruta;
         JavaPHPMySQL bd = new JavaPHPMySQL();
         String json = bd.getAllRutas();
         ArrayList<Ruta> listaRutas =  bd.mostrarAllRutas(json);
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
-        for(int i=0; i<listaRutas.size();i++) {
-           Ruta rutaActual = listaRutas.get(i);
-           String sFechaRuta = rutaActual.getFecha();
+
+
+
+
+
+       for(int i=0; i<listaRutas.size();i++) {
+
+           String fechabd = listaRuta.get(i).getFecha();
+           SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
            try {
-               Date fechaRuta = formatter.parse(sFechaRuta);
-               Date fechaDesde = formatter.parse(data1);
-               Date fechaHasta = formatter.parse(data2);
-               if (listaRutas.get(i).getDestino().equalsIgnoreCase(message) && listaRutas.get(i).getOrigen().equalsIgnoreCase(message1)
-                       && fechaRuta.getTime() >= fechaDesde.getTime() && fechaRuta.getTime() <= fechaHasta.getTime()) {
-                   listaRuta.add(rutaActual);
+                fechaRuta = formatter.parse(fechabd);
+                fecha_ini= formatter.parse(data1);
+                fecha_fin= formatter.parse(data2);
 
-               }
+
+
            } catch (ParseException e) {
                e.printStackTrace();
            }
 
+
+           //listaRutas.get(i).getFecha();
+           if (listaRutas.get(i).getDestino().equalsIgnoreCase(message) && listaRutas.get(i).getOrigen().equalsIgnoreCase(message1)
+                && fechaRuta.getTime()<=fecha_fin.getTime() && fechaRuta.getTime()>= fecha_ini.getTime()) {
+               Ruta r = listaRutas.get(i);
+               listaRuta.add(r);
+
+           }
        }
 
-        if(listaRuta.isEmpty())
-            Toast.makeText(this, "No hay ninguna ruta que se ajuste a la busqueda especificada", Toast.LENGTH_LONG).show();
 
-        final ArrayList<Ruta> final_list = listaRuta;
+          final ArrayList<Ruta> final_list = listaRuta;
+
 
         ArrayAdapter<Ruta> adap = new ArrayAdapter<Ruta>(ListarRuta.this,android.R.layout.simple_list_item_1, listaRuta);
         adap.notifyDataSetChanged();
         li.setAdapter(adap);
+
+        if(listaRuta.size()<1){
+            Toast.makeText(this, "No hay rutas disponibles", Toast.LENGTH_SHORT).show();
+
+        }
+
         li.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -103,11 +123,24 @@ public class ListarRuta extends Activity {
                 int Id_ruta = rutaSelected.getIdRuta();
                 intent.putExtra("IdRuta", Id_ruta);
                 startActivity(intent);
+
+
+
+
             }
 
         });
+
+
+
+
+
     }
-@Override
+
+
+
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.listar_ruta, menu);
