@@ -14,8 +14,9 @@ public class Acuerdo {
     private String Punto_entrega;
     private Usuario remitente; //no esta en bbdd
     private int leido;
+    private String MotivoRechazo;
 
-    public Acuerdo(int idAcuerdo, Double precio, String comentario, String estado, Ruta ruta, String punto_recogida, String punto_entrega, Usuario remitente, int leido) {
+    public Acuerdo(int idAcuerdo, Double precio, String comentario, String estado, Ruta ruta, String punto_recogida, String punto_entrega, Usuario remitente, int leido, String motivoRechazo) {
         this.idAcuerdo = idAcuerdo;
         this.precio = precio;
         this.comentario = comentario;
@@ -25,6 +26,7 @@ public class Acuerdo {
         Punto_entrega = punto_entrega;
         this.remitente = remitente;
         this.leido = leido;
+        MotivoRechazo = motivoRechazo;
     }
 
     public int getIdAcuerdo() {
@@ -99,6 +101,13 @@ public class Acuerdo {
         this.leido = leido;
     }
 
+    public String getMotivoRechazo() {
+        return MotivoRechazo;
+    }
+
+    public void setMotivoRechazo(String motivoRechazo) {
+        MotivoRechazo = motivoRechazo;
+    }
 
     @Override
     public String toString() {
@@ -107,6 +116,7 @@ public class Acuerdo {
                 "\t\tPunto de entrega: " + Punto_entrega + "\n" +
                 "\t\tPrecio: " + precio + " €\n" +
                 "\t\tComentario: " + comentario + "\n" +
-                "\t\tEstado: " + estado + "\n";
+                "\t\tEstado: " + estado + "\n"+
+                "\t\tMotivo del Rechazo: " + MotivoRechazo +"\n";
     }
 }

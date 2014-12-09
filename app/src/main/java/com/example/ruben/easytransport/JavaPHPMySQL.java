@@ -163,6 +163,31 @@ public class JavaPHPMySQL {
 
         insercion(jsonString, "insertarRuta.php");
     }
+
+    public static void insertarUsuario(String nombre, String apellido, String rol, String pass, String email) {
+        //Creamos un objeto JSON
+        JSONObject jsonObj = new JSONObject();
+        //Añadimos el nombre, apellidos y email del usuario
+        //es IMPORTANTE que pongamos lo que esta entre comillas igual que la columna de la BBDD
+        jsonObj.put("idUsuario", 0);
+        jsonObj.put("Nombre", nombre);
+        jsonObj.put("Apellido", apellido);
+        jsonObj.put("Rol", rol);
+        jsonObj.put("email", email);
+        jsonObj.put("Password", pass);
+
+        //Creamos una lista para almacenar el JSON
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObj));
+        //Generamos el String JSON
+        String jsonString = JSONValue.toJSONString(l);
+        System.out.println("JSON GENERADO:");
+        System.out.println(jsonString);
+        System.out.println("");
+
+        insercion(jsonString, "insertarUsuario.php");
+    }
+
     public static void insertarAcuerdoenUsuariohasAcuerdo(int idAcuerdo, int idUsuario){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idAcuerdo", idAcuerdo);
@@ -177,7 +202,7 @@ public class JavaPHPMySQL {
     }
 
 
-    public static void insertarAcuerdo(int idAcuerdo,double precio, String comentario, String estado, int idRuta, int idUsuario, String Punto_recogida, String Punto_entrega){
+    public static void insertarAcuerdo(int idAcuerdo,double precio, String comentario, String estado, int idRuta, int idUsuario, String Punto_recogida, String Punto_entrega, String mRechazo){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idAcuerdo", idAcuerdo);
         jsonObject.put("Precio", precio);
@@ -188,6 +213,7 @@ public class JavaPHPMySQL {
         jsonObject.put("Punto_recogida", Punto_recogida);
         jsonObject.put("Punto_entrega",Punto_entrega);
         jsonObject.put("Leido",0);
+        jsonObject.put("MotivoRechazo",mRechazo);
 
         List l = new LinkedList();
         l.addAll(Arrays.asList(jsonObject));
@@ -369,8 +395,9 @@ public class JavaPHPMySQL {
             String Apellido = row.get("Apellido").toString();
             String Rol = row.get("Rol").toString();
             String Password = row.get("Password").toString();
+            String email = row.get("email").toString();
 
-            usuario = new Usuario(Integer.parseInt(idUsuario), Nombre,Apellido,Rol,Password,null,null,null);
+            usuario = new Usuario(Integer.parseInt(idUsuario), Nombre,Apellido,Rol,Password,null,null,null,email);
         }
         return usuario;
     }
@@ -393,9 +420,10 @@ public class JavaPHPMySQL {
             String Punto_recogida = row.get("Punto_recogida").toString();
             String Punto_entrega = row.get("Punto_entrega").toString();
             String Leido = row.get("Leido").toString();
+            String MotivoRechazo = row.get("MotivoRechazo").toString();
 
-           Ruta ruta = getRutaByRutaId(Integer.parseInt(idRuta));
-           Acuerdo acuerdo = new Acuerdo(Integer.parseInt(idAcuerdo),Double.parseDouble(Precio),Comentario ,Estado,ruta,Punto_recogida,Punto_entrega,null,Integer.parseInt(Leido));
+            Ruta ruta = getRutaByRutaId(Integer.parseInt(idRuta));
+           Acuerdo acuerdo = new Acuerdo(Integer.parseInt(idAcuerdo),Double.parseDouble(Precio),Comentario ,Estado,ruta,Punto_recogida,Punto_entrega,null,Integer.parseInt(Leido), MotivoRechazo);
            listaAcuerdos.add(acuerdo);
 
         }

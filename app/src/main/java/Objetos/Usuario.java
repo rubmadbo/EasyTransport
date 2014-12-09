@@ -11,12 +11,22 @@ public class Usuario {//*modificaaar para idUsuario*/
     private String apellido;
     private String Rol;
     private String password;
+    private String email;
     private List<Vehiculo> vehiculos;
     private List<Ruta> ruta;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     private List<Acuerdo> acuerdos;
 
     public Usuario(int idUsuario, String nombre, String apellido, String rol, String password, List<Vehiculo> vehiculos,
-                 List<Ruta> ruta, List<Acuerdo> acuerdos) {
+                 List<Ruta> ruta, List<Acuerdo> acuerdos, String email) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -25,6 +35,7 @@ public class Usuario {//*modificaaar para idUsuario*/
         this.vehiculos = vehiculos;
         this.ruta = ruta;
         this.acuerdos = acuerdos;
+        this.email=email;
     }
 
     public int getIdUsuario() {

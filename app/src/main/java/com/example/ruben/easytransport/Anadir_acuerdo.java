@@ -84,7 +84,7 @@ public class Anadir_acuerdo extends ActionBarActivity {
                     String a = bd.getNumeroAcuerdos();
                     int j = Integer.parseInt(bd.mostrarNumeroAcuerdos(a));
                     //int i=1;
-                    bd.insertarAcuerdo(j+1,Double.parseDouble(din), com, "pendiente", rutaId, usuarioLogeado.getIdUsuario(), e, rec);
+                    bd.insertarAcuerdo(j+1,Double.parseDouble(din), com, "pendiente", rutaId, usuarioLogeado.getIdUsuario(), e, rec,"");
                     bd.insertarAcuerdoenUsuariohasAcuerdo(j+1,usuarioLogeado.getIdUsuario());
                     //i++;
 
