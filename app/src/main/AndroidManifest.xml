@@ -65,6 +65,10 @@
             android:name="com.example.ruben.easytransport.MainMenu"
             android:label="@string/title_activity_main_menu" >
         </activity>
+        <activity
+            android:name="com.example.ruben.easytransport.MailActivty"
+            android:label="@string/title_activity_mail_activty" >
+        </activity>
     </application>
 
 </manifest>

@@ -22,12 +22,24 @@ public class LoginFirst extends ActionBarActivity {
         final Button button = (Button) findViewById(R.id.btnSingIn);
 
 
-    }
 
-    public void buttonOnClickLogin(View v)
+    }
+    public void buttonOnClickLoginOlvido(View v) {
+
+        Intent a = new Intent(this, MailActivty.class);
+        startActivity(a);
+
+    }
+    public void buttonOnClickLogin(View v) {
+
+        Intent a = new Intent(this, MenuPrincipal.class);
+        startActivity(a);
+
+    }
+    public void buttonOnClickLoginNuevoUser(View v)
     {
 
-        Intent a =new Intent(this,MainMenu.class);
+        Intent a =new Intent(this,registrar.class);
         startActivity(a);
 
     }
