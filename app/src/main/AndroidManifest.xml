@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.ruben.easytransport.MenuPrincipal"
+            android:name="com.example.ruben.easytransport.LoginFirst"
             android:label="@string/title_activity_menu_principal" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,6 @@
             android:name="AnadirAcuerdo"
             android:label="@string/title_activity_anadir_acuerdo" >
         </fragment>
-
         <fragment
             android:name="ListarAcuerdos"
             android:label="@string/title_activity_ListarAcuerdo" >
@@ -61,6 +60,10 @@
         <activity
             android:name="com.example.ruben.easytransport.AcuerdoPropuesto"
             android:label="@string/title_activity_acuerdo_propuesto" >
+        </activity>
+        <activity
+            android:name="com.example.ruben.easytransport.MainMenu"
+            android:label="@string/title_activity_main_menu" >
         </activity>
     </application>
 

@@ -59,5 +59,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_nuevo_acuerdo">NuevoAcuerdo</string>
     <string name="title_activity_acuerdo_propuesto">AcuerdoPropuesto</string>
+    <string name="title_activity_main_menu">MainMenu</string>
 
 </resources>

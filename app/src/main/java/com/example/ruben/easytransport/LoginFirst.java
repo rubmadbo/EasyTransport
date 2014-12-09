@@ -1,5 +1,6 @@
 package com.example.ruben.easytransport;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -19,15 +20,15 @@ public class LoginFirst extends ActionBarActivity {
         setContentView(R.layout.activity_login_first);
 
         final Button button = (Button) findViewById(R.id.btnSingIn);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-               /* Intent intent = new Intent(this,MenuPrincipal.class);
-                startActivity(intent);*/
 
 
-            }
-        });
+    }
 
+    public void buttonOnClickLogin(View v)
+    {
+
+        Intent a =new Intent(this,MainMenu.class);
+        startActivity(a);
 
     }
 
