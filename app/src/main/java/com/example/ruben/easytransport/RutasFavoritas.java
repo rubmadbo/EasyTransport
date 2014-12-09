@@ -50,8 +50,27 @@ public class RutasFavoritas extends Fragment {
        // listaRuta = db.mostrarAllRutas(json);
 
 
-              //.equals("Aceptado"))
-                    aceptar.setVisibility(View.VISIBLE);
+        /*Tenemos que poner el campo de la base de datos "estadoAcuerdo"
+
+           if(estadoAcuerdo.equals("Aceptado"))
+        {
+            aceptar.setVisibility(View.VISIBLE);
+            rechazado.setVisibility(View.INVISIBLE);
+            espera.setVisibility(View.INVISIBLE);
+        }
+        if(estadoAcuerdo.equals("Rechazado"))
+        {
+            aceptar.setVisibility(View.INVISIBLE);
+            rechazado.setVisibility(View.VISIBLE);
+            espera.setVisibility(View.INVISIBLE);
+        }
+        if(estadoAcuerdo.equals("Rechazado"))
+        {
+            aceptar.setVisibility(View.INVISIBLE);
+            rechazado.setVisibility(View.INVISIBLE);
+            espera.setVisibility(View.VISIBLE);
+        }
+        */
 
         //Inserción en el ListView
         ArrayAdapter<Ruta> adap = new ArrayAdapter<Ruta>(RutasFavoritas.this.getActivity(),android.R.layout.simple_list_item_1, listaRuta);
