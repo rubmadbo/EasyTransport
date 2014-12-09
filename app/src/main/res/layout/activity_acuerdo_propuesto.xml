@@ -6,7 +6,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.ruben.easytransport.AcuerdoPropuesto">
+    tools:context="com.example.ruben.easytransport.AcuerdoPropuesto"
+    android:background="#49fffa8c">
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -17,7 +18,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="#49fffa8c"
-            android:baselineAligned="true">
+            android:baselineAligned="true"
+            android:weightSum="1">
 
             <TextView
                 android:text="Acuerdo propuesto por :"
@@ -33,13 +35,13 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editTRemitente_acuerdo"
                 android:layout_marginTop="15dp"
-                android:background="#4f00af91" />
+                android:background="#5c696969" />
 
             <TextView
                 android:text="Origen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textTransportista"
+                android:id="@+id/textFecha"
                 android:layout_marginTop="15dp"
                 android:textColor="#610B0B"
                 android:textSize="20sp" />
@@ -47,15 +49,15 @@
             <EditText
                 android:layout_width="327dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editTTransportista_acuerdo"
+                android:id="@+id/editTOrigen"
                 android:layout_marginTop="15dp"
-                android:background="#4f00af91" />
+                android:background="#5c696969" />
 
             <TextView
                 android:text="Destino"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textOrigen"
+                android:id="@+id/textFecha"
                 android:layout_marginTop="15dp"
                 android:textColor="#610B0B"
                 android:textSize="20sp" />
@@ -63,17 +65,17 @@
             <EditText
                 android:layout_width="327dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editTOrigenAcuerdo_acuerdo"
+                android:id="@+id/editTDestino"
                 android:layout_marginTop="15dp"
-                android:background="#4f00af91"
+                android:background="#5c696969"
                 android:editable="false"
                 android:enabled="true" />
 
             <TextView
-                android:text="Día"
+                android:text="Fecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textDestino"
+                android:id="@+id/textFecha"
                 android:layout_marginTop="15dp"
                 android:textSize="20sp"
                 android:textColor="#610B0B" />
@@ -81,9 +83,9 @@
             <EditText
                 android:layout_width="327dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editTDestinoAcuerdo_acuerdo"
+                android:id="@+id/editTFecha"
                 android:layout_marginTop="15dp"
-                android:background="#4f00af91"
+                android:background="#5c696969"
                 android:enabled="true"
                 android:editable="false"
                 android:clickable="true" />
@@ -92,7 +94,7 @@
                 android:text="Dinero propuesto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textEntrega"
+                android:id="@+id/textDinero"
                 android:layout_marginTop="15dp"
                 android:textSize="20sp"
                 android:textColor="#610B0B"
@@ -102,9 +104,9 @@
                 android:layout_width="327dp"
                 android:layout_height="wrap_content"
                 android:hint="€"
-                android:id="@+id/editTEntrega_acuerdo"
+                android:id="@+id/editTDinero"
                 android:layout_marginTop="15dp"
-                android:background="#4f00af91" />
+                android:background="#5c696969" />
 
 
             <TextView
@@ -118,76 +120,87 @@
             <EditText
                 android:layout_width="327dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editTEntrega_acuerdo"
+                android:id="@+id/editTComentarios"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
-                android:background="#4f00af91" />
+                android:background="#ffffffff" />
 
 
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="4dp"
                 android:background="@android:color/darker_gray"/>
-         <TextView
+
+
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aceptar"
+                    android:id="@+id/radioAceptar"
+                    android:checked="false"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="15dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rechazar"
+                    android:id="@+id/radioRechazar"
+                    android:checked="false"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/radioAceptar"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="100dp" />
+
+            </RadioGroup>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirmar"
+                android:textAlignment="center"
+                android:paddingLeft="50dip"
+                android:paddingRight="26dip"
+                android:id="@+id/buttonAceptar"
+                android:background="#680b0303"
+                android:clickable="true"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+
+            <TextView
                 android:text="Motivo del Rechazo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView"
+                android:id="@+id/textMotivoRechazo"
                 android:layout_marginTop="15dp"
                 android:textSize="20sp"
                 android:textColor="#610B0B"
+                android:visibility="invisible"
                 android:singleLine="false" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText"
+                android:id="@+id/editTRechazo"
                 android:layout_marginTop="15dp"
-                android:background="#4f00af91"
-                android:enabled="true"
-                android:editable="false"
-                android:clickable="true"
+                android:background="#ffffffff"
+                android:visibility="invisible"
                 android:layout_gravity="center_horizontal" />
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rechazar"
-                    android:id="@+id/button2"
-                    android:textAlignment="center"
-                    android:paddingLeft="50dip"
-                    android:paddingRight="26dip"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:background="#ff06eaff" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Aceptar"
-                    android:textAlignment="center"
-                    android:paddingLeft="50dip"
-                    android:paddingRight="26dip"
-                    android:id="@+id/button3"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:background="#ff06eaff" />
-
-            </RelativeLayout>
-
-
 
 
         </LinearLayout>
     </ScrollView>
+
 
 </RelativeLayout>
