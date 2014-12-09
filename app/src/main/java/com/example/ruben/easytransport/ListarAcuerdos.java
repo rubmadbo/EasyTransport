@@ -1,6 +1,8 @@
 package com.example.ruben.easytransport;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,9 +12,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.ruben.easytransport.AdminSQLiteOpenHelper;
 import com.example.ruben.easytransport.GestionDeRutas;
@@ -66,6 +70,36 @@ public class ListarAcuerdos extends Fragment {
             ArrayAdapter<Acuerdo> adap = new ArrayAdapter<Acuerdo>(ListarAcuerdos.this.getActivity(), android.R.layout.simple_list_item_1, listaAcuerdos);
             adap.notifyDataSetChanged();
             li.setAdapter(adap);
+
+        final ArrayList<Acuerdo> finalListaAcuerdo = listaAcuerdos;
+        li.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
+                final AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
+                b.setIcon(android.R.drawable.ic_dialog_alert);
+                b.setMessage("¿Revisar acuerdo?");
+                b.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        JavaPHPMySQL bd = new JavaPHPMySQL();
+                        Acuerdo acuerdoSelected = finalListaAcuerdo.get(position);
+
+                        if(acuerdoSelected.getEstado().equals("pendiente"))   {
+                            Intent intent = new Intent(getActivity(),AcuerdoPropuesto.class);
+                            startActivity(intent);
+                        }
+                        else Toast.makeText(getActivity(), "En construcción", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                b.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                    }
+                });
+
+                b.show();
+                return true;
+            }
+        });
 
         return rootView;
     }
