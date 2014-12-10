@@ -1,12 +1,8 @@
 package com.example.ruben.easytransport;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,25 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.ruben.easytransport.AdminSQLiteOpenHelper;
-import com.example.ruben.easytransport.GestionDeRutas;
-import com.example.ruben.easytransport.R;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import Objetos.Acuerdo;
 import Objetos.Ruta;
 
 
-public class ListarAcuerdos extends Fragment {
+public class ListarAcuerdosTransportista extends Fragment {
 
-    public static ListarAcuerdos newInstance(Bundle arguments){
-        ListarAcuerdos f = new ListarAcuerdos();
+    public static ListarAcuerdosTransportista newInstance(Bundle arguments){
+        ListarAcuerdosTransportista f = new ListarAcuerdosTransportista();
         if(arguments != null){
             f.setArguments(arguments);
         }
@@ -47,8 +37,9 @@ public class ListarAcuerdos extends Fragment {
 
         int idRuta=0;
         JavaPHPMySQL db = new JavaPHPMySQL();
-        ArrayList<Acuerdo> listaAcuerdos;
-        int UserId = 2; // habría que cargarlo de la session de userlogeado en caso que se quieran ver los acuerdos por usuario
+        ArrayList<Acuerdo> listaAcuerdosTemp;
+        ArrayList<Acuerdo> listaAcuerdos = null;
+        int UserId = 1; // habría que cargarlo de la session de userlogeado en caso que se quieran ver los acuerdos por usuario
 
         //jdcc, cuando viene de historico de rutas, lista los acuerdos de esa ruta
         Bundle args = getArguments();
@@ -60,14 +51,30 @@ public class ListarAcuerdos extends Fragment {
             idRuta =Integer.parseInt(b.getString("idRuta"));
         }*/
 
+        ArrayList<Ruta> listaRutas;
+        listaRutas = db.getRutasByUserId(UserId);
+
+        for (int i=0;i < listaRutas.size(); i++){
+            listaAcuerdosTemp = db.getAcuerdosByRutaId(listaRutas.get(i).getIdRuta());
+
+            for (int j = 0; j < listaAcuerdosTemp.size(); j++){
+                listaAcuerdos.add(listaAcuerdosTemp.get(j));
+            }
+
+        }
+
+
+
+
+        /*
         if(idRuta!=0) {
             listaAcuerdos = db.getAcuerdosByRutaId(idRuta);
 
         }else {
             listaAcuerdos = db.getAcuerdosByUserId(UserId);
 
-        }
-            ArrayAdapter<Acuerdo> adap = new ArrayAdapter<Acuerdo>(ListarAcuerdos.this.getActivity(), android.R.layout.simple_list_item_1, listaAcuerdos);
+        }*/
+            ArrayAdapter<Acuerdo> adap = new ArrayAdapter<Acuerdo>(ListarAcuerdosTransportista.this.getActivity(), android.R.layout.simple_list_item_1, listaAcuerdos);
             adap.notifyDataSetChanged();
             li.setAdapter(adap);
 

@@ -55,7 +55,7 @@ public class MenuPrincipal extends ActionBarActivity
                 break;
             case 2:
                 //Listar acuerdo
-                fragment = new ListarAcuerdos();
+                fragment = new ListarAcuerdosTransportista();
                 break;
             case 3:
                 //Historico Rutas
