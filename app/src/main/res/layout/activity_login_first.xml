@@ -22,6 +22,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/Usuario"
             android:padding="10dp"
             android:hint="Usuario"
             android:textColorHint="#cccccc"
@@ -34,6 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:padding="10dp"
+            android:id="@+id/Contraseña"
             android:hint="Contraseña"
             android:textColorHint="#cccccc"
             android:password="true"
