@@ -28,7 +28,7 @@ import Objetos.Ruta;
 
 public class HistoricoRutas extends Fragment {
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //si te sale error aqui ir a buil.gradle el de la carpera mas externa y donde pone minSdkVersion pones 9
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -80,10 +80,12 @@ public class HistoricoRutas extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
                 Ruta rutaSelected = finalListaRuta.get(position);
+
+
                 Intent intent = new Intent(getActivity().getBaseContext(),ListarAcuerdosRuta.class);
                 int idRuta = rutaSelected.getIdRuta();
                 intent.putExtra("idRuta", idRuta);
-                startActivity(intent);
+                getActivity().startActivity(intent);
 
 
 

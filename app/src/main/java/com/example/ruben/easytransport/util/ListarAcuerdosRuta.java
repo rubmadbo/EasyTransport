@@ -30,7 +30,7 @@ public class ListarAcuerdosRuta extends ActionBarActivity {
         lista = (ListView) findViewById(R.id.listAcuerdosRuta);
         JavaPHPMySQL db = new JavaPHPMySQL();
         Intent intent = getIntent();
-        final int rutaId= intent.getIntExtra("IdRuta",0);
+        final int rutaId = intent.getIntExtra("idRuta",0);
         System.out.println("El id de ruta es -------------------> " +rutaId);
         listaAcuerdos = db.getAcuerdosByRutaId(rutaId);
 
