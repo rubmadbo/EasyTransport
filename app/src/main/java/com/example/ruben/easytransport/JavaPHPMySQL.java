@@ -236,6 +236,18 @@ public class JavaPHPMySQL {
         insercion(jsonString, "borrarRuta.php"); //puede usar insercion porque solo recibe una variable y ejecuta una query
     }
 
+    public static Usuario getUsuarioByEmail(String email){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("email", email);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+        String json= getDataFromFilter(jsonString, "getUsuarioByUserId.php");
+        return mostrarUsuario(json);
+    }
+
     public static Usuario getUsuarioByUserId(int idUsuario){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idUsuario", idUsuario);
@@ -396,7 +408,10 @@ public class JavaPHPMySQL {
         return response.toString();
     }
 
-
+  public static boolean loginSuccess(String email, String pass){
+     Usuario u=  getUsuarioByEmail(email);
+      return u.getPassword().equals(pass);
+  }
 
     public static String getAllRutas(){
 

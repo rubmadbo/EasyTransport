@@ -7,12 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class LoginFirst extends ActionBarActivity {
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +19,17 @@ public class LoginFirst extends ActionBarActivity {
         setContentView(R.layout.activity_login_first);
 
         final Button button = (Button) findViewById(R.id.btnSingIn);
+        EditText usuario = (EditText) findViewById(R.id.Usuario);
+        EditText contr = (EditText) findViewById(R.id.Contraseña);
 
-
-
+       /* button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (JavaPHPMySQL.loginSuccess(usuario.getText().toString(), contr.getText().toString())) {
+                    Intent a = new Intent(this, MenuPrincipal.class);
+                    startActivity(a);
+                }
+            }
+        });*/
     }
     public void buttonOnClickLoginOlvido(View v) {
 
