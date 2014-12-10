@@ -34,6 +34,7 @@ public class ListarRuta extends Activity {
     private String dest;
     private String orig;
     private String fecha;
+    private int idUsuarioLogeado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class ListarRuta extends Activity {
                 Date fechaDesde = formatter.parse(data1);
                 Date fechaHasta = formatter.parse(data2);
                 if (listaRutas.get(i).getDestino().equalsIgnoreCase(message) && listaRutas.get(i).getOrigen().equalsIgnoreCase(message1)
-                        && fechaRuta.getTime() >= fechaDesde.getTime() && fechaRuta.getTime() <= fechaHasta.getTime()) {
+                        && fechaRuta.getTime() >= fechaDesde.getTime() && fechaRuta.getTime() <= fechaHasta.getTime() && listaRutas.get(i).getTransportista().getIdUsuario()!= idUsuarioLogeado) {
                     listaRuta.add(rutaActual);
 
                 }

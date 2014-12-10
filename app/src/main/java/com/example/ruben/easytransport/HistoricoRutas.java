@@ -1,7 +1,5 @@
 package com.example.ruben.easytransport;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -15,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.ruben.easytransport.util.ListarAcuerdosRuta;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -80,18 +80,20 @@ public class HistoricoRutas extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
                 Ruta rutaSelected = finalListaRuta.get(position);
-                //Intent intent = new Intent(getActivity(), ListarAcuerdos.class);
-                String Id_ruta =String.valueOf(rutaSelected.getIdRuta());
+                Intent intent = new Intent(getActivity().getBaseContext(),ListarAcuerdosRuta.class);
+                int idRuta = rutaSelected.getIdRuta();
+                intent.putExtra("idRuta", idRuta);
+                startActivity(intent);
 
 
 
-               // Bundle arguments = new Bundle();
-               // arguments.putString("idRuta", Id_ruta);
-                //ListarAcuerdos fragment = ListarAcuerdos.newInstance(arguments);
-                //FragmentTransaction ft = getFragmentManager().beginTransaction();
+               /* Bundle arguments = new Bundle();
+                arguments.putString("idRuta", Id_ruta);
+                ListarAcuerdosTransportista fragment = ListarAcuerdosTransportista.newInstance(arguments);
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
                 //esto es lo q hace q se muestre encima de loq habia en vez de cargar el xml
-               // ft.replace(android.R.id.content, fragment);
-              //  ft.commit();
+                ft.replace(android.R.id.content, fragment);
+                ft.commit();*/
 
             }
         });

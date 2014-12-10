@@ -62,5 +62,6 @@
     <string name="title_activity_main_menu">MainMenu</string>
     <string name="title_activity_mail_activty">MailActivty</string>
     <string name="title_activity_acuerdos_transportista">Listar acuerdos transportista</string>
+    <string name="title_activity_listar_acuerdos_ruta">ListarAcuerdosRuta</string>
 
 </resources>
