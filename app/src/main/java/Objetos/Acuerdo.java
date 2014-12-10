@@ -111,12 +111,23 @@ public class Acuerdo {
 
     @Override
     public String toString() {
-        return  "\n" + "*********  "+ getRuta().getOrigen() +" - " + getRuta().getDestino() + "  *********\n" +
-                "\t\tPunto de recogida: " + Punto_recogida + "\n" +
-                "\t\tPunto de entrega: " + Punto_entrega + "\n" +
-                "\t\tPrecio: " + precio + " €\n" +
-                "\t\tComentario: " + comentario + "\n" +
-                "\t\tEstado: " + estado + "\n"+
-                "\t\tMotivo del Rechazo: " + MotivoRechazo +"\n";
+        if(estado.equals("rechazado")){
+            return  "\n" + "*********  "+ getRuta().getOrigen() +" - " + getRuta().getDestino() + "  *********\n" +
+                    "\t\tPunto de recogida: " + Punto_recogida + "\n" +
+                    "\t\tPunto de entrega: " + Punto_entrega + "\n" +
+                    "\t\tPrecio: " + precio + " €\n" +
+                    "\t\tComentario: " + comentario + "\n" +
+                    "\t\tEstado: " + estado + "\n"+
+                    "\t\tMotivo del Rechazo: " + MotivoRechazo +"\n";
+        }
+        else{
+            return  "\n" + "*********  "+ getRuta().getOrigen() +" - " + getRuta().getDestino() + "  *********\n" +
+                    "\t\tPunto de recogida: " + Punto_recogida + "\n" +
+                    "\t\tPunto de entrega: " + Punto_entrega + "\n" +
+                    "\t\tPrecio: " + precio + " €\n" +
+                    "\t\tComentario: " + comentario + "\n" +
+                    "\t\tEstado: " + estado + "\n";
+        }
+
     }
 }

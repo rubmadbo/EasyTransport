@@ -72,19 +72,33 @@ public class ListarAcuerdos extends Fragment {
             li.setAdapter(adap);
 
         final ArrayList<Acuerdo> finalListaAcuerdo = listaAcuerdos;
-        li.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+        li.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
                 final AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
                 b.setIcon(android.R.drawable.ic_dialog_alert);
                 b.setMessage("¿Revisar acuerdo?");
                 b.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        JavaPHPMySQL bd = new JavaPHPMySQL();
+
                         Acuerdo acuerdoSelected = finalListaAcuerdo.get(position);
 
                         if(acuerdoSelected.getEstado().equals("pendiente"))   {
-                            Intent intent = new Intent(getActivity(),AcuerdoPropuesto.class);
+                            //Fran: No me pilla el remitente, hay que revisarlo.
+                            Intent intent = new Intent(getActivity().getBaseContext(),AcuerdoPropuesto.class);
+                            String remitente = "Juanito";
+                            intent.putExtra("Remitente", remitente);
+                            String origen_ruta = acuerdoSelected.getRuta().getOrigen();
+                            intent.putExtra("Origen", origen_ruta);
+                            String destino_ruta = acuerdoSelected.getRuta().getDestino();
+                            intent.putExtra("Destino", destino_ruta);
+                            String fecha = acuerdoSelected.getRuta().getFecha();
+                            intent.putExtra("Fecha", fecha);
+                            String dinero = acuerdoSelected.getPrecio().toString();
+                            intent.putExtra("Dinero" ,dinero);
+                            String comentario = acuerdoSelected.getComentario();
+                            intent.putExtra("Comentario", comentario);
                             startActivity(intent);
                         }
                         else Toast.makeText(getActivity(), "En construcción", Toast.LENGTH_SHORT).show();
@@ -97,9 +111,9 @@ public class ListarAcuerdos extends Fragment {
                 });
 
                 b.show();
-                return true;
             }
         });
+
 
         return rootView;
     }

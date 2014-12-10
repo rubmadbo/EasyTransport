@@ -101,4 +101,8 @@ public class Usuario {//*modificaaar para idUsuario*/
     public void setAcuerdos(List<Acuerdo> acuerdos) {
         this.acuerdos = acuerdos;
     }
+
+    public String toString(){
+        return getNombre() + " " + getApellido();
+    }
 }

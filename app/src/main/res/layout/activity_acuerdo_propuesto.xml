@@ -35,7 +35,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editTRemitente_acuerdo"
                 android:layout_marginTop="15dp"
-                android:background="#5c696969" />
+                android:background="#5c696969"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusableInTouchMode="false"
+                android:focusable="false" />
 
             <TextView
                 android:text="Origen"
@@ -51,6 +55,10 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editTOrigen"
                 android:layout_marginTop="15dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:background="#5c696969" />
 
             <TextView
@@ -69,6 +77,10 @@
                 android:layout_marginTop="15dp"
                 android:background="#5c696969"
                 android:editable="false"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:enabled="true" />
 
             <TextView
@@ -88,7 +100,10 @@
                 android:background="#5c696969"
                 android:enabled="true"
                 android:editable="false"
-                android:clickable="true" />
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"/>
 
             <TextView
                 android:text="Dinero propuesto"
@@ -106,7 +121,11 @@
                 android:hint="€"
                 android:id="@+id/editTDinero"
                 android:layout_marginTop="15dp"
-                android:background="#5c696969" />
+                android:background="#5c696969"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"/>
 
 
             <TextView
@@ -123,7 +142,11 @@
                 android:id="@+id/editTComentarios"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
-                android:background="#ffffffff" />
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:background="#5c696969" />
 
 
             <View
