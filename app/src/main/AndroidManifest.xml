@@ -24,7 +24,7 @@
         </activity>
 
         <fragment
-            android:name=".VistaRutas"
+            android:name="VistaRutas"
             android:label="@string/title_activity_vista_rutas" >
         </fragment>
         <fragment
@@ -36,10 +36,10 @@
             android:label="@string/title_activity_ListarAcuerdo" >
         </fragment>
 
-        <activity
-            android:name="com.example.ruben.easytransport.BusquedaRuta"
+        <fragment
+            android:name="BusquedaRuta"
             android:label="@string/title_activity_busqueda_ruta" >
-        </activity>
+        </fragment>
         <activity
             android:name="com.example.ruben.easytransport.ListarRuta"
             android:label="@string/title_activity_listar_ruta"
@@ -49,10 +49,10 @@
             android:name="com.example.ruben.easytransport.Anadir_acuerdo"
             android:label="@string/title_activity_anadir_acuerdo" >
         </activity>
-        <activity
+        <fragment
             android:name="com.example.ruben.easytransport.MisRutas"
             android:label="@string/title_activity_mis_rutas" >
-        </activity>
+        </fragment>
         <activity
             android:name="com.example.ruben.easytransport.NuevoAcuerdo"
             android:label="@string/title_activity_nuevo_acuerdo" >
@@ -62,7 +62,7 @@
             android:label="@string/title_activity_acuerdo_propuesto" >
         </activity>
         <activity
-            android:name="com.example.ruben.easytransport.MainMenu"
+            android:name="com.example.ruben.easytransport.MenuPrincipal"
             android:label="@string/title_activity_main_menu" >
         </activity>
         <activity

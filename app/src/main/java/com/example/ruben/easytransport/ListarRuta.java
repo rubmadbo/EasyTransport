@@ -51,11 +51,6 @@ public class ListarRuta extends Activity {
         origen.setText(message1, TextView.BufferType.EDITABLE);
         destino.setText(message, TextView.BufferType.EDITABLE);
 
-
-
-
-
-
         //Insercion de las rutas en el listView
         ListView li = (ListView)findViewById(R.id.listView_rutas);
         ArrayList<Ruta> listaRuta = new ArrayList();
@@ -64,10 +59,6 @@ public class ListarRuta extends Activity {
         JavaPHPMySQL bd = new JavaPHPMySQL();
         String json = bd.getAllRutas();
         ArrayList<Ruta> listaRutas =  bd.mostrarAllRutas(json);
-
-
-
-
 
 
 
