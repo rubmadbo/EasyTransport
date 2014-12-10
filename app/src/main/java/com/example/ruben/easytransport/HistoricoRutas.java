@@ -84,7 +84,7 @@ public class HistoricoRutas extends Fragment {
 
                 Intent intent = new Intent(getActivity().getBaseContext(),ListarAcuerdosRuta.class);
                 int idRuta = rutaSelected.getIdRuta();
-                intent.putExtra("idRuta", idRuta);
+                intent.putExtra("IdRuta", idRuta);
                 getActivity().startActivity(intent);
 
 

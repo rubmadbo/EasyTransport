@@ -25,17 +25,17 @@ public class ListarAcuerdosRuta extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_acuerdos_ruta);
 
-        ArrayList<Acuerdo> listaAcuerdos = new ArrayList<Acuerdo>();
+        ArrayList<Acuerdo> listaAcuerdos;
 
         lista = (ListView) findViewById(R.id.listAcuerdosRuta);
         JavaPHPMySQL db = new JavaPHPMySQL();
+
         Intent intent = getIntent();
-        final int rutaId = intent.getIntExtra("idRuta",0);
-        System.out.println("El id de ruta es -------------------> " +rutaId);
+        final int rutaId = intent.getIntExtra("IdRuta",0);
         listaAcuerdos = db.getAcuerdosByRutaId(rutaId);
 
 
-        ArrayAdapter<Acuerdo> adap = new ArrayAdapter<Acuerdo>(ListarAcuerdosRuta.this.getApplicationContext(), android.R.layout.simple_list_item_1, listaAcuerdos);
+        ArrayAdapter<Acuerdo> adap = new ArrayAdapter<Acuerdo>(ListarAcuerdosRuta.this, android.R.layout.simple_list_item_1, listaAcuerdos);
         adap.notifyDataSetChanged();
         lista.setAdapter(adap);
     }
