@@ -272,6 +272,22 @@ public class JavaPHPMySQL {
         return mostrarAcuerdos(json);
     }
 
+    /**
+     * Devuelve los acuerdos del transportista
+     * @param idUsuario
+     * @return ArrayList<Acuerdo>
+     */
+    public static ArrayList<Acuerdo> getAcuerdosByTransId(int idUsuario){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idUsuario", idUsuario);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+        String json= getDataFromFilter(jsonString, "getAcuerdosByTransId.php");
+        return mostrarAcuerdos(json);
+    }
     public static void updateUsuario(int idUsuario, String nombre, String apellido, String rol, String pass, String email){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idUsuario", idUsuario);
@@ -465,7 +481,7 @@ public class JavaPHPMySQL {
             String Leido = row.get("Leido").toString();
             String MotivoRechazo = row.get("MotivoRechazo").toString();
 
-            Ruta ruta = getRutaByRutaId(Integer.parseInt(idRuta));
+           Ruta ruta = getRutaByRutaId(Integer.parseInt(idRuta));
            Acuerdo acuerdo = new Acuerdo(Integer.parseInt(idAcuerdo),Double.parseDouble(Precio),Comentario ,Estado,ruta,Punto_recogida,Punto_entrega,null,Integer.parseInt(Leido), MotivoRechazo);
            listaAcuerdos.add(acuerdo);
 

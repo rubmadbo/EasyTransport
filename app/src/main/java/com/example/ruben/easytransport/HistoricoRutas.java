@@ -1,5 +1,8 @@
 package com.example.ruben.easytransport;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
@@ -9,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -75,16 +80,18 @@ public class HistoricoRutas extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
                 Ruta rutaSelected = finalListaRuta.get(position);
-                //Intent intent = new Intent(getActivity(), ListarAcuerdosTransportista.class);
+                //Intent intent = new Intent(getActivity(), ListarAcuerdos.class);
                 String Id_ruta =String.valueOf(rutaSelected.getIdRuta());
 
-                Bundle arguments = new Bundle();
-                arguments.putString("idRuta", Id_ruta);
-                ListarAcuerdosTransportista fragment = ListarAcuerdosTransportista.newInstance(arguments);
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+
+               // Bundle arguments = new Bundle();
+               // arguments.putString("idRuta", Id_ruta);
+                //ListarAcuerdos fragment = ListarAcuerdos.newInstance(arguments);
+                //FragmentTransaction ft = getFragmentManager().beginTransaction();
                 //esto es lo q hace q se muestre encima de loq habia en vez de cargar el xml
-                ft.replace(android.R.id.content, fragment);
-                ft.commit();
+               // ft.replace(android.R.id.content, fragment);
+              //  ft.commit();
 
             }
         });

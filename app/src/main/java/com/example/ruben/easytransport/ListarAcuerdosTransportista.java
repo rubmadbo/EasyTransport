@@ -21,59 +21,17 @@ import Objetos.Ruta;
 
 public class ListarAcuerdosTransportista extends Fragment {
 
-    public static ListarAcuerdosTransportista newInstance(Bundle arguments){
-        ListarAcuerdosTransportista f = new ListarAcuerdosTransportista();
-        if(arguments != null){
-            f.setArguments(arguments);
-        }
-        return f;
-    }
-
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
        View rootView = inflater.inflate(R.layout.fragment_listar_acuerdos, container, false);
         ListView li = (ListView) rootView.findViewById(R.id.listViewAcuerdos);
 
-        int idRuta=0;
         JavaPHPMySQL db = new JavaPHPMySQL();
-        ArrayList<Acuerdo> listaAcuerdosTemp;
-        ArrayList<Acuerdo> listaAcuerdos = null;
-        int UserId = 1; // habría que cargarlo de la session de userlogeado en caso que se quieran ver los acuerdos por usuario
+        ArrayList<Acuerdo> listaAcuerdos;
+        int UsuarioLogeado = 1; // habría que cargarlo de la session de userlogeado en caso que se quieran ver los acuerdos por usuario
 
-        //jdcc, cuando viene de historico de rutas, lista los acuerdos de esa ruta
-        Bundle args = getArguments();
-        if (args  != null && args.containsKey("idRuta"))
-            idRuta =Integer.parseInt(args.getString("idRuta"));
+       listaAcuerdos= db.getAcuerdosByTransId(UsuarioLogeado);
 
-       /* if (getArguments() != null) {
-            Bundle b = getActivity().getIntent().getExtras();
-            idRuta =Integer.parseInt(b.getString("idRuta"));
-        }*/
-
-        ArrayList<Ruta> listaRutas;
-        listaRutas = db.getRutasByUserId(UserId);
-
-        for (int i=0;i < listaRutas.size(); i++){
-            listaAcuerdosTemp = db.getAcuerdosByRutaId(listaRutas.get(i).getIdRuta());
-
-            for (int j = 0; j < listaAcuerdosTemp.size(); j++){
-                listaAcuerdos.add(listaAcuerdosTemp.get(j));
-            }
-
-        }
-
-
-
-
-        /*
-        if(idRuta!=0) {
-            listaAcuerdos = db.getAcuerdosByRutaId(idRuta);
-
-        }else {
-            listaAcuerdos = db.getAcuerdosByUserId(UserId);
-
-        }*/
             ArrayAdapter<Acuerdo> adap = new ArrayAdapter<Acuerdo>(ListarAcuerdosTransportista.this.getActivity(), android.R.layout.simple_list_item_1, listaAcuerdos);
             adap.notifyDataSetChanged();
             li.setAdapter(adap);

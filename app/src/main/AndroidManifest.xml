@@ -32,8 +32,8 @@
             android:label="@string/title_activity_anadir_acuerdo" >
         </fragment>
         <fragment
-            android:name="ListarAcuerdos"
-            android:label="@string/title_activity_ListarAcuerdo" >
+            android:name="ListarAcuerdosTransportista"
+            android:label="@string/title_activity_ListarAcuerdoTransportista" >
         </fragment>
 
         <fragment
