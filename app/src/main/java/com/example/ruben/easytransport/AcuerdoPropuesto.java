@@ -1,5 +1,6 @@
 package com.example.ruben.easytransport;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,6 +19,14 @@ public class AcuerdoPropuesto extends ActionBarActivity {
     private RadioButton radioAceptar;
     private TextView TmotivoRechazo;
     private EditText ETmotivoRechazo;
+    private EditText ETRemitente;
+    private EditText Origen;
+    private EditText Destino;
+    private EditText Fecha;
+    private EditText Dinero;
+    private EditText Comentario;
+    private Button Confirmar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +37,27 @@ public class AcuerdoPropuesto extends ActionBarActivity {
         radioAceptar = (RadioButton) findViewById(R.id.radioAceptar);
         TmotivoRechazo = (TextView) findViewById(R.id.textMotivoRechazo);
         ETmotivoRechazo = (EditText) findViewById(R.id.editTRechazo);
+        ETRemitente = (EditText) findViewById(R.id.editTRemitente_acuerdo);
+        Origen = (EditText) findViewById(R.id.editTOrigen);
+        Destino = (EditText) findViewById(R.id.editTDestino);
+        Fecha = (EditText) findViewById(R.id.editTFecha);
+        Dinero = (EditText) findViewById(R.id.editTDinero) ;
+        Comentario = (EditText) findViewById(R.id.editTComentarios);
+        Confirmar = (Button) findViewById(R.id.buttonAceptar);
+
+
+        Intent intent = getIntent();
+        ETRemitente.setText(intent.getStringExtra("Remitente"));
+        Destino.setText(intent.getStringExtra("Destino"));
+        Origen.setText(intent.getStringExtra("Origen"));
+        Fecha.setText(intent.getStringExtra("Fecha"));
+        Dinero.setText(intent.getStringExtra("Dinero"));
+        Comentario.setText(intent.getStringExtra("Comentario"));
 
         radioRechazar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 TmotivoRechazo.setVisibility(View.VISIBLE);
                 ETmotivoRechazo.setVisibility(View.VISIBLE);
-                Toast.makeText(AcuerdoPropuesto.this, "Botón rechazar", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -41,7 +65,18 @@ public class AcuerdoPropuesto extends ActionBarActivity {
             public void onClick(View v) {
                 TmotivoRechazo.setVisibility(View.INVISIBLE);
                 ETmotivoRechazo.setVisibility(View.INVISIBLE);
-               Toast.makeText(AcuerdoPropuesto.this, "Botón aceptar", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Confirmar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(radioAceptar.isChecked()){
+                    //acciones al aceptar acuerdo.
+
+                }
+                else if(radioRechazar.isChecked()){
+                    //acciones al rechazar acuerdo-
+                }
             }
         });
     }
