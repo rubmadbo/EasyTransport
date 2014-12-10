@@ -272,6 +272,36 @@ public class JavaPHPMySQL {
         return mostrarAcuerdos(json);
     }
 
+    public static void updateUsuario(int idUsuario, String nombre, String apellido, String rol, String pass, String email){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idUsuario", idUsuario);
+        jsonObject.put("Nombre", nombre);
+        jsonObject.put("Apellido", apellido);
+        jsonObject.put("Rol", rol);
+        jsonObject.put("email", email);
+        jsonObject.put("Password", pass);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+        insercion(jsonString, "updateUsuario.php");
+    }
+
+
+
+    public static void updateEstadoAcuerdo(String estado, int idAcuerdo){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("Estado", estado);
+        jsonObject.put("idAcuerdo", idAcuerdo);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+        insercion(jsonString, "updateEstadoAcuerdo.php");
+    }
+
     public static ArrayList<Ruta> getRutasByUserId(int idUsuario){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idUsuario", idUsuario);
