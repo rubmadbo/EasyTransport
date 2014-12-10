@@ -28,4 +28,5 @@
         android:name="com.example.ruben.easytransport.NavigationDrawerFragment"
         tools:layout="@layout/fragment_navigation_drawer" />
 
+
 </android.support.v4.widget.DrawerLayout>

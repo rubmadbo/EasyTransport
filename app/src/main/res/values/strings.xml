@@ -4,6 +4,7 @@
     <string name="app_name">Menu</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_menu_principal">EasyTransport</string>
+    <string name="title_activity_menu_principalogin">Login</string>
     <string name="title_activity_listar_ruta">Ver acuerdos</string>
     <string name="title_activity_gestion_de_rutas">Añadir ruta</string>
     <string name="title_activity_vista_rutas">vistaRutas</string>

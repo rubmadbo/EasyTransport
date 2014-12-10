@@ -1,5 +1,6 @@
 package com.example.ruben.easytransport;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -113,9 +114,18 @@ public class MenuPrincipal extends ActionBarActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent a = new Intent(this, LoginFirst.class);
+                startActivity(a);
+                return true;
 
-        return super.onOptionsItemSelected(item);
+            case R.id.action_exit:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /**

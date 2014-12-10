@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="10dp"
-        >
+        android:id="@+id/linearLayout">
 
         <EditText
 
@@ -46,35 +46,42 @@
 
         <Button
             android:id="@+id/btnSingIn"
-            android:layout_width="match_parent"
+            android:layout_width="289dp"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_margin="20dp"
             android:text="Entrar"
-            android:background="@drawable/button_default_bg"
+            android:background="#b1e7bdff"
             android:onClick="buttonOnClickLogin" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btnSingInOlvido"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_margin="20dp"
-            android:text="Olvidado Contraseña?"
-            android:background="@drawable/button_default_bg"
-            android:onClick="buttonOnClickLoginOlvido" />
-        <Button
-            android:id="@+id/btnSingIn"
-            android:layout_width="111dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_margin="20dp"
-            android:text="Nuevo Usuario"
-            android:background="@drawable/button_default_bg"
-            android:onClick="buttonOnClickLoginNuevoUser" />
-        </LinearLayout>
+            android:layout_height="wrap_content"></LinearLayout>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSingIn"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:text="Nuevo usuario?"
+        android:textSize="14dp"
+        android:background="@drawable/button_default_bg"
+        android:onClick="buttonOnClickLoginNuevoUser"
+        android:layout_below="@+id/linearLayout" />
+
+    <Button
+        android:id="@+id/btnSingInOlvido"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textSize="14dp"
+        android:text=" Recuperar Contraseña"
+        android:background="@drawable/button_default_bg"
+        android:onClick="buttonOnClickLoginOlvido"
+        android:layout_toEndOf="@+id/btnSingIn"
+        android:layout_alignBottom="@+id/btnSingIn"
+        android:layout_toRightOf="@+id/btnSingIn"
+        android:layout_alignTop="@+id/btnSingIn" />
 
 </RelativeLayout>
