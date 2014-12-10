@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.ruben.easytransport.LoginFirst"
+            android:name=".LoginFirst"
             android:label="@string/title_activity_menu_principal" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.ruben.easytransport.GestionDeRutas"
+            android:name=".GestionDeRutas"
             android:label="@string/title_activity_gestion_de_rutas" >
         </activity>
 
@@ -35,39 +35,51 @@
             android:name="ListarAcuerdosTransportista"
             android:label="@string/title_activity_ListarAcuerdoTransportista" >
         </fragment>
-
         <fragment
             android:name="BusquedaRuta"
             android:label="@string/title_activity_busqueda_ruta" >
         </fragment>
+
         <activity
-            android:name="com.example.ruben.easytransport.ListarRuta"
+            android:name=".ListarRuta"
             android:label="@string/title_activity_listar_ruta"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.ruben.easytransport.Anadir_acuerdo"
+            android:name=".Anadir_acuerdo"
             android:label="@string/title_activity_anadir_acuerdo" >
         </activity>
+
         <fragment
             android:name="com.example.ruben.easytransport.MisRutas"
             android:label="@string/title_activity_mis_rutas" >
         </fragment>
+
         <activity
-            android:name="com.example.ruben.easytransport.NuevoAcuerdo"
+            android:name=".NuevoAcuerdo"
             android:label="@string/title_activity_nuevo_acuerdo" >
         </activity>
         <activity
-            android:name="com.example.ruben.easytransport.AcuerdoPropuesto"
+            android:name=".AcuerdoPropuesto"
             android:label="@string/title_activity_acuerdo_propuesto" >
         </activity>
         <activity
-            android:name="com.example.ruben.easytransport.MenuPrincipal"
+            android:name=".MenuPrincipal"
             android:label="@string/title_activity_main_menu" >
         </activity>
         <activity
-            android:name="com.example.ruben.easytransport.MailActivty"
+            android:name=".MailActivty"
             android:label="@string/title_activity_mail_activty" >
+        </activity>
+
+        <fragment
+            android:name="com.example.ruben.easytransport.ListarAcuerdosTransportista"
+            android:label="@string/title_activity_acuerdos_transportista" >
+        </fragment>
+
+        <activity
+            android:name=".util.ListarAcuerdosRuta"
+            android:label="@string/title_activity_listar_acuerdos_ruta" >
         </activity>
     </application>
 
