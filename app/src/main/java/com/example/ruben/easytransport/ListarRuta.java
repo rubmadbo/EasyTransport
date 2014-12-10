@@ -71,8 +71,6 @@ public class ListarRuta extends Activity {
                 fecha_ini= formatter.parse(data1);
                 fecha_fin= formatter.parse(data2);
 
-
-
            } catch (ParseException e) {
                e.printStackTrace();
            }

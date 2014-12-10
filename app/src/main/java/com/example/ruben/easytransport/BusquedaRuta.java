@@ -55,10 +55,6 @@ public class BusquedaRuta extends Fragment {
 
 
 
-
-
-
-
                 if(_date!=null && _date2!=null && _orig.length()>0 && year<=year_2) {
                     //Toast.makeText(this, "Realizando la búsqueda", Toast.LENGTH_SHORT).show();
 

@@ -272,6 +272,19 @@ public class JavaPHPMySQL {
         return mostrarAcuerdos(json);
     }
 
+    public static ArrayList<Ruta> getRutasByUserId(int idUsuario){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idUsuario", idUsuario);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+        String json= getDataFromFilter(jsonString, "getRutasByUserId.php");
+        return mostrarAllRutas(json);
+    }
+
+
     public static ArrayList<Vehiculo> getVehiculoByUserId(int idUsuario){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idUsuario", idUsuario);
