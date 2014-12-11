@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 
 public class LoginFirst extends ActionBarActivity {
@@ -46,7 +45,7 @@ public class LoginFirst extends ActionBarActivity {
     public void buttonOnClickLoginNuevoUser(View v)
     {
 
-        Intent a =new Intent(this,registrar.class);
+        Intent a =new Intent(this,MailActivty.class);
         startActivity(a);
 
     }

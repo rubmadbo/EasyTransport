@@ -1,16 +1,9 @@
 package com.example.ruben.easytransport;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.os.StrictMode;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -38,10 +31,10 @@ public class registrar extends ActionBarActivity {
         StrictMode.setThreadPolicy(policy);
 
         final Context context = getApplicationContext();
-
+        botonRegistrar = (Button)findViewById(R.id.ButtonRegistrar);
         // Si pusemos el boton :
-        botonRegistrar.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+
+
 
 
                 Nombre = (EditText) findViewById(R.id.EntrarNombre);
@@ -57,11 +50,14 @@ public class registrar extends ActionBarActivity {
                 String _Contrasena = Contrasena.getText().toString();
                 String _RepContrasena = RepContrasena.getText().toString();
 
+
                 if(_Nom!=null && _Apell!=null && _Email!=null && _Contrasena!=null && _RepContrasena!=null) {
+
+
 
                     // A ver lo que es el intent
                     /// Cambiar el intent
-                   /* Intent intent = new Intent(this,LoginFirst.class);
+                    /*Intent intent = new Intent(this,LoginFirst.class);
                     intent.putExtra("Nom",_Nom );
                     intent.putExtra("Apell",_Apell );
                     intent.putExtra("Email",_Email );
@@ -78,12 +74,14 @@ public class registrar extends ActionBarActivity {
 
 
 
-            }
 
-        });
+
+
 
 
     }
+
+
 
 
 
