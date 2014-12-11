@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ public class VistaRutas extends Fragment {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        final View rootView = inflater.inflate(R.layout.activity_vista_rutas, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_vista_rutas, container, false);
         Button boton = (Button) rootView.findViewById(R.id.buttonAnyadir);
 
         //Insercion de las rutas en el listView
@@ -89,6 +90,7 @@ public class VistaRutas extends Fragment {
 
                      if(bd.getAcuerdosByRutaId(rutaSelected.getIdRuta()).size() == 0)   {
                         bd.borrarRuta(rutaSelected.getIdRuta());
+                        refresh();
                         Toast.makeText(getActivity(), "La ruta ha sido borrada correctamente", Toast.LENGTH_SHORT).show();
                      }
                      else Toast.makeText(getActivity(), "No se puede eliminar una ruta con un acuerdo asociado", Toast.LENGTH_SHORT).show();
@@ -107,9 +109,6 @@ public class VistaRutas extends Fragment {
 
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-               /* JavaPHPMySQL bd = new JavaPHPMySQL();
-                bd.getVehiculoByUserId(1);*/
-
                 Intent intent = new Intent(VistaRutas.this.getActivity(),GestionDeRutas.class);
                 startActivity(intent);
             }
@@ -120,5 +119,20 @@ public class VistaRutas extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+    }
+
+    public void refresh(){
+
+        // Create new fragment and transaction
+        Fragment newFragment = new VistaRutas();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack
+        transaction.replace(this.getId(), newFragment);
+        transaction.addToBackStack(null);
+
+        // Commit the transaction
+        transaction.commit();
     }
 }

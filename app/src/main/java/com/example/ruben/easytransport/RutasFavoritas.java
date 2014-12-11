@@ -3,9 +3,6 @@ package com.example.ruben.easytransport;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,7 +26,7 @@ public class RutasFavoritas extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootView = inflater.inflate(R.layout.activity_vista_rutas, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_vista_rutas, container, false);
         Button boton = (Button) rootView.findViewById(R.id.buttonAnyadir);
 
         //Insercion de las rutas en el listView
