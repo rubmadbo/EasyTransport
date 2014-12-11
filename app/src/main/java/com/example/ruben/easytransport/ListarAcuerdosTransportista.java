@@ -28,9 +28,9 @@ public class ListarAcuerdosTransportista extends Fragment {
 
         JavaPHPMySQL db = new JavaPHPMySQL();
         ArrayList<Acuerdo> listaAcuerdos;
-        int UsuarioLogeado = 1; // habría que cargarlo de la session de userlogeado en caso que se quieran ver los acuerdos por usuario
+        int UsuarioLogeado = 3; // habría que cargarlo de la session de userlogeado en caso que se quieran ver los acuerdos por usuario
 
-       listaAcuerdos= db.getAcuerdosByTransId(UsuarioLogeado);
+       listaAcuerdos = db.getAcuerdosByTransId(UsuarioLogeado);
 
             ArrayAdapter<Acuerdo> adap = new ArrayAdapter<Acuerdo>(ListarAcuerdosTransportista.this.getActivity(), android.R.layout.simple_list_item_1, listaAcuerdos);
             adap.notifyDataSetChanged();

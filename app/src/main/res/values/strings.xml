@@ -11,10 +11,12 @@
     <string name="title_activity_anadir_acuerdo">anadir_acuerdo</string>
     <string name="title_activity_busqueda_ruta">BusquedaRuta</string>
     <string name="title_activity_ListarAcuerdoTransportista">ListarAcuerdoTransportista</string>
-    <string name="title_section1">Gestión de rutas</string>
-    <string name="title_section2">Listado de rutas</string>
-    <string name="title_section3">Ver acuerdos recibidos</string>
+    <string name="title_section1">Gestionar mis rutas</string>
+    <string name="title_section2">Buscar rutas</string>
+    <string name="title_section3">Ver acuerdos transportista</string>
     <string name="title_section4">Historico Rutas</string>
+    <string name="title_section5">Ver acuerdos remitente</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example"></string>

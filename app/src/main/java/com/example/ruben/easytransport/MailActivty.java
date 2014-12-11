@@ -13,7 +13,8 @@ import android.widget.Toast;
 
 import java.util.Random;
 
-
+//enviarEmail(email, password){
+//}
 public class MailActivty extends ActionBarActivity {
 
     private EditText email;

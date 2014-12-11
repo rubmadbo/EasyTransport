@@ -24,7 +24,7 @@
         </activity>
 
         <fragment
-            android:name="VistaRutas"
+            android:name=".VistaRutas"
             android:label="@string/title_activity_vista_rutas" >
         </fragment>
         <fragment

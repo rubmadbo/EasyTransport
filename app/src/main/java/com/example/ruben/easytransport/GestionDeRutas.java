@@ -5,9 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -198,9 +196,10 @@ public class GestionDeRutas extends ActionBarActivity {
 
             bd.insertarRuta(o,d,horaInicio,fecha,com,1);
 
-            /*VistaRutas fragment = (VistaRutas)getSupportFragmentManager().findFragmentById(R.id.VistaRutas);
-            fragment.refresh();*/
+            /*FragmentManager fm= getSupportFragmentManager();
 
+            fragment.refresh();
+*/
             Toast.makeText(this, "La ruta se ha insertado correctamente", Toast.LENGTH_SHORT).show();
 
 

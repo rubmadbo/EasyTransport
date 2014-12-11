@@ -63,7 +63,9 @@ public class MenuPrincipal extends ActionBarActivity
                 fragment = new HistoricoRutas();
                 //fragment = new MisRutas();
                 break;
-
+            case 4:
+                fragment = new ListarAcuerdosRemitente();
+                break;
         }
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
