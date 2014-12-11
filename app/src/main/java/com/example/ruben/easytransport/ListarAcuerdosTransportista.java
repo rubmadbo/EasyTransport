@@ -50,9 +50,11 @@ public class ListarAcuerdosTransportista extends Fragment {
                         Acuerdo acuerdoSelected = finalListaAcuerdo.get(position);
 
                         if(acuerdoSelected.getEstado().equals("pendiente"))   {
-                            //Fran: No me pilla el remitente, hay que revisarlo.
+
                             Intent intent = new Intent(getActivity().getBaseContext(),AcuerdoPropuesto.class);
-                            String remitente = "Juanito";
+                            int idRuta = acuerdoSelected.getIdAcuerdo();
+                            intent.putExtra("IdRuta", idRuta);
+                            String remitente = "Juanito";//Fran: No me pilla el remitente, hay que revisarlo.
                             intent.putExtra("Remitente", remitente);
                             String origen_ruta = acuerdoSelected.getRuta().getOrigen();
                             intent.putExtra("Origen", origen_ruta);
@@ -66,7 +68,7 @@ public class ListarAcuerdosTransportista extends Fragment {
                             intent.putExtra("Comentario", comentario);
                             startActivity(intent);
                         }
-                        else Toast.makeText(getActivity(), "En construcción", Toast.LENGTH_SHORT).show();
+                        else Toast.makeText(getActivity(), "Ya has aceptado/rechazado este acuerdo.", Toast.LENGTH_SHORT).show();
                     }
                 });
                 b.setNegativeButton("No", new DialogInterface.OnClickListener() {

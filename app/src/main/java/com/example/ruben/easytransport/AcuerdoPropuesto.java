@@ -47,6 +47,7 @@ public class AcuerdoPropuesto extends ActionBarActivity {
 
 
         Intent intent = getIntent();
+        final int rutaId = intent.getIntExtra("IdRuta",0);
         ETRemitente.setText(intent.getStringExtra("Remitente"));
         Destino.setText(intent.getStringExtra("Destino"));
         Origen.setText(intent.getStringExtra("Origen"));
@@ -72,10 +73,17 @@ public class AcuerdoPropuesto extends ActionBarActivity {
             public void onClick(View v) {
                 if(radioAceptar.isChecked()){
                     //acciones al aceptar acuerdo.
-
+                    JavaPHPMySQL db = new JavaPHPMySQL();
+                    db.updateEstadoAcuerdo("aceptado", rutaId);
+                    Toast.makeText(getApplicationContext(), "El acuerdo ha sido aceptado", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
                 else if(radioRechazar.isChecked()){
-                    //acciones al rechazar acuerdo-
+                    //acciones al rechazar acuerdo
+                    JavaPHPMySQL db = new JavaPHPMySQL();
+                    db.updateEstadoAcuerdo("rechazado", rutaId);
+                    Toast.makeText(getApplicationContext(), "El acuerdo ha sido rechazado", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
         });

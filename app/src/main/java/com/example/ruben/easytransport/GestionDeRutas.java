@@ -5,9 +5,10 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -17,7 +18,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -188,23 +188,6 @@ public class GestionDeRutas extends ActionBarActivity {
         String d = destino.getText().toString();
         String o = origen.getText().toString();
 
-        /*SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String dateInStringOrigen = d;
-        String dateInStringFin = o;
-
-        try {
-
-            Date dateori = formatter.parse(dateInStringOrigen);
-            System.out.println(dateori);
-            System.out.println(formatter.format(dateori));
-
-            Date datefin = formatter.parse(dateInStringOrigen);
-            System.out.println(datefin);
-            System.out.println(formatter.format(datefin));
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
 
         comentario = (EditText) findViewById(R.id.editTComentario);
 
@@ -214,7 +197,14 @@ public class GestionDeRutas extends ActionBarActivity {
             String com = comentario.getText().toString();
 
             bd.insertarRuta(o,d,horaInicio,fecha,com,1);
+
+            /*VistaRutas fragment = (VistaRutas)getSupportFragmentManager().findFragmentById(R.id.VistaRutas);
+            fragment.refresh();*/
+
             Toast.makeText(this, "La ruta se ha insertado correctamente", Toast.LENGTH_SHORT).show();
+
+
+
             finish();
 
         }  else if ((!d.equals("") && !o.equals("")) && o.equalsIgnoreCase(d)){
@@ -226,25 +216,4 @@ public class GestionDeRutas extends ActionBarActivity {
 
 
     }
-
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.gestion_de_rutas, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        return super.onOptionsItemSelected(item);
-    }
-
 }

@@ -18,7 +18,7 @@ public class MisRutas extends Fragment {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        final View rootView = inflater.inflate(R.layout.activity_vista_rutas, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_vista_rutas, container, false);
         Button boton = (Button) rootView.findViewById(R.id.buttonAnyadir);
       
         boton.setOnClickListener(new View.OnClickListener() {
