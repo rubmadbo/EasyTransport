@@ -136,6 +136,7 @@
         android:layout_height="wrap_content"
         android:text="Registrar"
         android:id="@+id/ButtonRegistrar"
+        android:onClick="buttonOnClickLoginOlvido"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="55dp" />
