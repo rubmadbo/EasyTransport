@@ -41,7 +41,7 @@ public class MailActivty extends ActionBarActivity {
         //aqui se supone qu ese trae el usuario del email que se ha introducido
         try{
         u=JavaPHPMySQL.getUsuarioByEmail(_mail);
-        }catch(Exception e){}
+        }catch(Exception e){e.printStackTrace();}
 
         if (u!=null){
             Random r = new Random();
@@ -49,6 +49,7 @@ public class MailActivty extends ActionBarActivity {
 
         JavaPHPMySQL.cambiarPass(u.getIdUsuario(),String.valueOf(i1));
         JavaPHPMySQL.enviarEmail(_mail,String.valueOf(i1));
+        Toast.makeText(this, "Se ha cambiado tu contraseña y se te ha enviado un email", Toast.LENGTH_LONG).show();
         }else {
             Toast.makeText(this, "No existe el usuario en la Base de Datos", Toast.LENGTH_LONG).show();
         }
