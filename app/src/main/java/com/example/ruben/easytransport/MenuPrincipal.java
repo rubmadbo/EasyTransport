@@ -2,7 +2,6 @@ package com.example.ruben.easytransport;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +11,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import Helpers.LoginSesion;
 
 
 //cambio
@@ -28,10 +29,17 @@ public class MenuPrincipal extends ActionBarActivity
      */
     private CharSequence mTitle;
 
+    private  LoginSesion session;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
+        //for the preferences in the menu
+        session = new LoginSesion(getApplicationContext());
+        //check if login continue else login activity
+        session.checkLogin();
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -122,8 +130,7 @@ public class MenuPrincipal extends ActionBarActivity
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.action_settings:
-                Intent a = new Intent(this, LoginFirst.class);
-                startActivity(a);
+                session.logoutUser();
                 return true;
 
             case R.id.action_exit:

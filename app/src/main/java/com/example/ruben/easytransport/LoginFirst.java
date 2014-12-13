@@ -9,8 +9,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import Helpers.LoginSesion;
+
 
 public class LoginFirst extends ActionBarActivity {
+
+    Boolean resgistro= false;
+
+
+    LoginSesion session;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,15 +29,30 @@ public class LoginFirst extends ActionBarActivity {
         EditText usuario = (EditText) findViewById(R.id.Usuario);
         EditText contr = (EditText) findViewById(R.id.Contraseña);
 
-       /* button.setOnClickListener(new View.OnClickListener() {
+        /*button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (JavaPHPMySQL.loginSuccess(usuario.getText().toString(), contr.getText().toString())) {
+                    Sessions.setUsuarioLogeado(getUsuarioByEmail(usuario.getText().toString()));
+
                     Intent a = new Intent(this, MenuPrincipal.class);
                     startActivity(a);
                 }
             }
         });*/
+        //user en Bd
+        if(resgistro)
+        {
+
+
+           session.createLoginSession(usuario.getText().toString(),contr.getText().toString());
+
+
+
+        }
+
+
     }
+
     public void buttonOnClickLoginOlvido(View v) {
 
         Intent a = new Intent(this, MailActivty.class);
