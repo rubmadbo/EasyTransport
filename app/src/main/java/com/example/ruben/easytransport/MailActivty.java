@@ -38,6 +38,7 @@ public class MailActivty extends ActionBarActivity {
 
         String _mail = email.getText().toString();
         Usuario u = null;
+        //aqui se supone qu ese trae el usuario del email que se ha introducido
         try{
         u=JavaPHPMySQL.getUsuarioByEmail(_mail);
         }catch(Exception e){}
