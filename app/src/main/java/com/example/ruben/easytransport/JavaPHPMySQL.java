@@ -164,6 +164,48 @@ public class JavaPHPMySQL {
         insercion(jsonString, "insertarRuta.php");
     }
 
+    public static void cambiarPass(int idUsuario, String pass) {
+        //Creamos un objeto JSON
+        JSONObject jsonObj = new JSONObject();
+        //Añadimos el nombre, apellidos y email del usuario
+        //es IMPORTANTE que pongamos lo que esta entre comillas igual que la columna de la BBDD
+        jsonObj.put("idUsuario", idUsuario);
+        jsonObj.put("Password", pass);
+
+
+        //Creamos una lista para almacenar el JSON
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObj));
+        //Generamos el String JSON
+        String jsonString = JSONValue.toJSONString(l);
+        System.out.println("JSON GENERADO:");
+        System.out.println(jsonString);
+        System.out.println("");
+
+        insercion(jsonString, "cambiarPass.php");
+    }
+    public static void enviarEmail(String email, String pass) {
+        //Creamos un objeto JSON
+        JSONObject jsonObj = new JSONObject();
+        //Añadimos el nombre, apellidos y email del usuario
+        //es IMPORTANTE que pongamos lo que esta entre comillas igual que la columna de la BBDD
+        jsonObj.put("email", email);
+        jsonObj.put("Password", pass);
+
+
+        //Creamos una lista para almacenar el JSON
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObj));
+        //Generamos el String JSON
+        String jsonString = JSONValue.toJSONString(l);
+        System.out.println("JSON GENERADO:");
+        System.out.println(jsonString);
+        System.out.println("");
+
+        insercion(jsonString, "enviarEmail.php");
+    }
+
+
     public static void insertarUsuario(String nombre, String apellido, String rol, String pass, String email) {
         //Creamos un objeto JSON
         JSONObject jsonObj = new JSONObject();
@@ -243,8 +285,7 @@ public class JavaPHPMySQL {
         l.addAll(Arrays.asList(jsonObject));
 
         String jsonString = JSONValue.toJSONString(l);
-        //el script obtiene la variable idUsuario hace consulta y recupera datos
-        String json= getDataFromFilter(jsonString, "getUsuarioByUserId.php");
+        String json= getDataFromFilter(jsonString, "getUsuarioByEmail.php");
         return mostrarUsuario(json);
     }
 

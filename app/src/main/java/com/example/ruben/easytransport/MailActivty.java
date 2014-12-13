@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import java.util.Random;
 
-//enviarEmail(email, password){
-//}
+import Objetos.Usuario;
+
 public class MailActivty extends ActionBarActivity {
 
     private EditText email;
@@ -36,22 +36,31 @@ public class MailActivty extends ActionBarActivity {
 
     public void buttonOnClickLogin(View v)
     {
-        Random r = new Random();
-
-        int i1 = r.nextInt(100000 - 65) + 65;
-
         email = (EditText)findViewById(R.id.Mail);
 
         String _mail = email.getText().toString();
+        Usuario u = null;
+        try{
+        u=JavaPHPMySQL.getUsuarioByEmail(_mail);
+        }catch(Exception e){}
 
-        Intent intent = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
+        if (u!=null){
+            Random r = new Random();
+            int i1 = r.nextInt(100000 - 65) + 65;
+
+        JavaPHPMySQL.cambiarPass(u.getIdUsuario(),String.valueOf(i1));
+        JavaPHPMySQL.enviarEmail(_mail,String.valueOf(i1));
+        }else {
+            Toast.makeText(this, "No existe el usuario en la Base de Datos", Toast.LENGTH_LONG).show();
+        }
+        /*Intent intent = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "Tu contraseña será restablecida cuando envies este email");
         intent.putExtra(Intent.EXTRA_TEXT, "Tu nueva contraseña es "+""+i1);
         intent.setData(Uri.parse("mailto:" + _mail)); // or just "mailto:" for blank
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
         startActivity(intent);
-        Toast.makeText(this, "Tu contraseña ha sido restablecida .", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Tu contraseña ha sido restablecida .", Toast.LENGTH_SHORT).show();*/
 
 //codigo muy nazi no se puede no poner visible
         /*Intent i = new Intent(Intent.ACTION_SEND);

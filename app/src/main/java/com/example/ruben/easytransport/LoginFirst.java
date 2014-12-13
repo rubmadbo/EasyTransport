@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.ruben.easytransport.util.Sessions;
+
 
 public class LoginFirst extends ActionBarActivity {
 
@@ -21,9 +23,11 @@ public class LoginFirst extends ActionBarActivity {
         EditText usuario = (EditText) findViewById(R.id.Usuario);
         EditText contr = (EditText) findViewById(R.id.Contraseña);
 
-       /* button.setOnClickListener(new View.OnClickListener() {
+        /*button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (JavaPHPMySQL.loginSuccess(usuario.getText().toString(), contr.getText().toString())) {
+                    Sessions.setUsuarioLogeado(getUsuarioByEmail(usuario.getText().toString()));
+
                     Intent a = new Intent(this, MenuPrincipal.class);
                     startActivity(a);
                 }
@@ -37,6 +41,15 @@ public class LoginFirst extends ActionBarActivity {
 
     }
     public void buttonOnClickLogin(View v) {
+
+        //jdcc hay que poner algo asi parecido, adrian terminalo, estoy probando aún los metodos para saber si van.
+        /*if (JavaPHPMySQL.loginSuccess(usuario.getText().toString(), contr.getText().toString())) {
+            Sessions.setUsuarioLogeado(getUsuarioByEmail(usuario.getText().toString()));
+
+            Intent a = new Intent(this, MenuPrincipal.class);
+            startActivity(a);
+        }*/
+
 
         Intent a = new Intent(this, MenuPrincipal.class);
         startActivity(a);
