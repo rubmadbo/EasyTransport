@@ -1,10 +1,12 @@
 package com.example.ruben.easytransport;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -116,11 +118,6 @@ public class VistaRutas extends Fragment {
     return rootView;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
     public void refresh(){
 
         // Create new fragment and transaction
@@ -135,4 +132,6 @@ public class VistaRutas extends Fragment {
         // Commit the transaction
         transaction.commit();
     }
+
+
 }

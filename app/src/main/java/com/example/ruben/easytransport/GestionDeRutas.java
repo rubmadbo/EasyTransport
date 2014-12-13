@@ -5,7 +5,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -26,11 +25,8 @@ import Objetos.Vehiculo;
 
 public class GestionDeRutas extends ActionBarActivity {
     private Spinner spinner;
-    private String[] datos; //= {"Ferrari","Coupe","Lamborginhi"};
     private EditText origen;
     private EditText destino;
-    private DatePicker dP;
-    private TimePicker tP;
     private EditText comentario;
 
     private EditText textFecha;
@@ -82,7 +78,7 @@ public class GestionDeRutas extends ActionBarActivity {
     }
 
     private void updateTime() {
-        textHora.setText(new StringBuilder().append(pad(hour)).append(":").append(pad(min)).append(":").append("00"));
+        textHora.setText(new StringBuilder().append(pad(hour)).append(":").append(pad(min)));
     }
 
     private void updateDate(){
@@ -166,7 +162,6 @@ public class GestionDeRutas extends ActionBarActivity {
             spinner.setAdapter(adapt);
 
         }catch (Exception e){
-            System.out.println("MENSAJE DE ERROR ----------------------------------------> ");
             e.printStackTrace();
         }
     }
@@ -196,15 +191,9 @@ public class GestionDeRutas extends ActionBarActivity {
 
             bd.insertarRuta(o,d,horaInicio,fecha,com,1);
 
-            /*FragmentManager fm= getSupportFragmentManager();
-
-            fragment.refresh();
-*/
             Toast.makeText(this, "La ruta se ha insertado correctamente", Toast.LENGTH_SHORT).show();
 
-
-
-            finish();
+             finish();
 
         }  else if ((!d.equals("") && !o.equals("")) && o.equalsIgnoreCase(d)){
             Toast.makeText(this, "El origen no puede ser igual al destino", Toast.LENGTH_SHORT).show();
@@ -215,4 +204,6 @@ public class GestionDeRutas extends ActionBarActivity {
 
 
     }
+
+
 }

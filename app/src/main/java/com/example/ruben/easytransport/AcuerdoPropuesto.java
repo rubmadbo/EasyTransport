@@ -75,16 +75,23 @@ public class AcuerdoPropuesto extends ActionBarActivity {
                     //acciones al aceptar acuerdo.
                     String motRech = ETmotivoRechazo.getText().toString();
                     JavaPHPMySQL db = new JavaPHPMySQL();
-                    db.updateEstadoAcuerdo("aceptado", rutaId, motRech);
+                    db.updateEstadoAcuerdo("aceptado", rutaId, "");
                     Toast.makeText(getApplicationContext(), "El acuerdo ha sido aceptado", Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 else if(radioRechazar.isChecked()){
                     //acciones al rechazar acuerdo
-                    JavaPHPMySQL db = new JavaPHPMySQL();
-                    db.updateEstadoAcuerdo("rechazado", rutaId, "");
-                    Toast.makeText(getApplicationContext(), "El acuerdo ha sido rechazado", Toast.LENGTH_SHORT).show();
-                    finish();
+                    String motRech = ETmotivoRechazo.getText().toString();
+                    if(motRech.equals("")){
+                        Toast.makeText(getApplicationContext(), "El motivo del rechazo no puede estar vacío", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        JavaPHPMySQL db = new JavaPHPMySQL();
+                        db.updateEstadoAcuerdo("rechazado", rutaId, motRech);
+                        Toast.makeText(getApplicationContext(), "El acuerdo ha sido rechazado", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+
                 }
             }
         });

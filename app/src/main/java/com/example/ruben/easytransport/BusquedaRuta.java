@@ -77,7 +77,6 @@ public class BusquedaRuta extends Fragment {
 
                 if(_date!=null && _date2!=null && fechaDesde.getTime() <= fechaHasta.getTime() &&
                         fechaActual.getTime() <= fechaDesde.getTime() && fechaActual.getTime() <= fechaHasta.getTime()) {
-
                     Intent intent = new Intent(getActivity().getBaseContext(),ListarRuta.class);
                     intent.putExtra("Des",_dest );
                     intent.putExtra("Ori",_orig );
