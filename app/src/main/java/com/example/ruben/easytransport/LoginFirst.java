@@ -9,18 +9,17 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import Helpers.LoginSesion;
 
 
 public class LoginFirst extends ActionBarActivity {
 
+    Boolean resgistro= false;
 
 
-    EditText usuario;
-    EditText contr ;
     LoginSesion session;
 
 
@@ -29,13 +28,33 @@ public class LoginFirst extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_first);
 
+        final Button button = (Button) findViewById(R.id.btnSingIn);
+        EditText usuario = (EditText) findViewById(R.id.Usuario);
+        EditText contr = (EditText) findViewById(R.id.Contraseña);
 
-         usuario = (EditText) findViewById(R.id.Usuario);
-         contr = (EditText) findViewById(R.id.Contraseña);
-         session= new LoginSesion(getApplicationContext());
+        /*button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (JavaPHPMySQL.loginSuccess(usuario.getText().toString(), contr.getText().toString())) {
+                    Sessions.setUsuarioLogeado(getUsuarioByEmail(usuario.getText().toString()));
+
+                    Intent a = new Intent(this, MenuPrincipal.class);
+                    startActivity(a);
+                }
+            }
+        });*/
+        //user en Bd
+        if(resgistro)
+        {
+
+
+           session.createLoginSession(usuario.getText().toString(),contr.getText().toString());
+
+
 
         }
 
+
+    }
 
     public void buttonOnClickLoginOlvido(View v) {
 
@@ -45,35 +64,14 @@ public class LoginFirst extends ActionBarActivity {
     }
     public void buttonOnClickLogin(View v) {
 
-    boolean resultado = false;
-        try {
-            resultado=JavaPHPMySQL.loginSuccess(usuario.getText().toString(), contr.getText().toString());
-        }catch (Exception e){
-
-
-
-        }
-
-        if (resultado) {
-
-            session.createLoginSession(usuario.getText().toString(), contr.getText().toString());
-
-            Intent a = new Intent(this, MenuPrincipal.class);
-
-            startActivity(a);
-
-        }
-        else
-        {
-            Toast.makeText(this, "Usuario o Contraseña incorrecta", Toast.LENGTH_SHORT).show();
-
-        }
+        Intent a = new Intent(this, MenuPrincipal.class);
+        startActivity(a);
 
     }
     public void buttonOnClickLoginNuevoUser(View v)
     {
 
-        Intent a =new Intent(this,registrar.class);
+        Intent a =new Intent(this,MailActivty.class);
         startActivity(a);
 
     }
@@ -101,29 +99,5 @@ public class LoginFirst extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("¿Seguro que quieres cerrar la aplicación?")
-                    .setCancelable(false)
-                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            //do finish
-                            finish();
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            //do nothing
-                            return;
-                        }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
-
-
-        }
-        return super.onKeyDown(keyCode, event);
-    }
 }
