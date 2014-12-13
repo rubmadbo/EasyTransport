@@ -64,7 +64,7 @@
         android:layout_height="50dp"
         android:padding="10dp"
         android:layout_margin="10dp"
-        android:text="Nuevo usuario?"
+        android:text="Registrarse"
         android:textSize="14dp"
         android:background="@drawable/button_default_bg"
         android:onClick="buttonOnClickLoginNuevoUser"

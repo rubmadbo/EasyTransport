@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ruben.easytransport.util.ItemFragment">
+    tools:context="com.example.ruben.easytransport.util.ItemFragment"
+    android:background="#49fffa8c">
 
     <ListView
         android:id="@+id/listAcuerdosRuta"
