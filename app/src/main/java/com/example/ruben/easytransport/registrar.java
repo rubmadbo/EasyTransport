@@ -1,9 +1,11 @@
 package com.example.ruben.easytransport;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -12,14 +14,13 @@ import android.widget.Toast;
 
 public class registrar extends ActionBarActivity {
 
-    //Faire la meme chose que busquedaRuta
     private Button botonRegistrar;
     private EditText Nombre=null;
     private EditText Apellidos=null;
     private EditText Email=null;
     private EditText Contrasena=null;
     private EditText RepContrasena=null;
-    private CheckBox VerContrasena=null;
+    private CheckBox terminos=null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,22 +28,18 @@ public class registrar extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar);
 
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        final Context context = getApplicationContext();
-        botonRegistrar = (Button)findViewById(R.id.ButtonRegistrar);
-        // Si pusemos el boton :
-
-
-
-
+        botonRegistrar = (Button)findViewById(R.id.btnregistrar);
                 Nombre = (EditText) findViewById(R.id.EntrarNombre);
                 Apellidos = (EditText) findViewById(R.id.EntrarApellidos);
                 Email = (EditText) findViewById(R.id.EntrarEmail);
                 Contrasena = (EditText) findViewById(R.id.EntrarContrasena);
                 RepContrasena = (EditText) findViewById(R.id.RepetirContrasena);
-                VerContrasena = (CheckBox) findViewById(R.id.ContrasenaVisible);
+                terminos = (CheckBox) findViewById(R.id.checkBox);
+
+
+
+        botonRegistrar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
 
                 String _Nom = Nombre.getText().toString();
                 String _Apell = Apellidos.getText().toString();
@@ -50,39 +47,30 @@ public class registrar extends ActionBarActivity {
                 String _Contrasena = Contrasena.getText().toString();
                 String _RepContrasena = RepContrasena.getText().toString();
 
+                if(terminos.isChecked()) {
 
-                if(_Nom!=null && _Apell!=null && _Email!=null && _Contrasena!=null && _RepContrasena!=null) {
+                    if (_Nom !="" && _Apell !="" && _Email != "" && _Contrasena != "" && _RepContrasena != "") {
 
+                        if(_Contrasena.equals(_RepContrasena)){
+                    //REVISAR INTENT QUE NO SE CUAL PONER QUEel base context lo puse porque this no iba.
+                            JavaPHPMySQL.insertarUsuario(_Nom,_Apell,"no importa",_Contrasena,_Email);
+                            Intent a = new Intent(getBaseContext(), MenuPrincipal.class);
+                            startActivity(a);
 
+                        }else {
+                            Toast.makeText(getApplicationContext(), "No coinciden las contraseñas", Toast.LENGTH_LONG).show();
+                        }
 
-                    // A ver lo que es el intent
-                    /// Cambiar el intent
-                    /*Intent intent = new Intent(this,LoginFirst.class);
-                    intent.putExtra("Nom",_Nom );
-                    intent.putExtra("Apell",_Apell );
-                    intent.putExtra("Email",_Email );
-                    intent.putExtra("Cont",_Contrasena );
-                    intent.putExtra("RepCont",_RepContrasena );
-                    getActivity().startActivity(intent);*/
+                    } else if (_Nom == null || _Apell == null || _Email == null || _Contrasena == null || _RepContrasena == null) {
+                        Toast.makeText(getApplicationContext(), "Rellene todos los campos", Toast.LENGTH_LONG).show();
 
+                    }
+
+                }else {
+                    Toast.makeText(getApplicationContext(), "Tienes que aceptar nuestos terminos y condiciones.", Toast.LENGTH_LONG).show();
                 }
-                else if(_Nom==null || _Apell==null || _Email==null || _Contrasena==null || _RepContrasena==null) {
-                    Toast.makeText(context, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
-
-
-                }
-
-
-
-
-
-
-
+            }
+        });
 
     }
-
-
-
-
-
 }

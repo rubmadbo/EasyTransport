@@ -16,7 +16,6 @@
     <string name="title_section3">Ver acuerdos transportista</string>
     <string name="title_section4">Historico Rutas</string>
     <string name="title_section5">Ver acuerdos remitente</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example"></string>
@@ -66,5 +65,6 @@
     <string name="title_activity_mail_activty">MailActivty</string>
     <string name="title_activity_acuerdos_transportista">Listar acuerdos transportista</string>
     <string name="title_activity_listar_acuerdos_ruta">ListarAcuerdosRuta</string>
+    <string name="title_activity_modificar_datos_usuario">ModificarDatosUsuario</string>
 
 </resources>

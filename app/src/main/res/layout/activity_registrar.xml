@@ -9,136 +9,124 @@
     tools:context="com.example.ruben.easytransport.registrar"
     android:id="@+id/nombre">
 
-    <TextView
-        android:text="Nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/nombre"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:textSize="20dp" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/EntrarNombre"
-        android:layout_below="@+id/nombre"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:background="#BDBDBD" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Apellidos"
-        android:id="@+id/TextViewApellidos"
-        android:layout_below="@+id/EntrarNombre"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="20dp" />
+            <TextView
+                android:text="Nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textRemitente"
+                android:textColor="#610B0B"
+                android:textSize="20dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/EntrarApellidos"
-        android:layout_below="@+id/TextViewApellidos"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/EntrarNombre"
-        android:layout_alignEnd="@+id/EntrarNombre"
-        android:background="#BDBDBD" />
+            <EditText
+                android:layout_width="327dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/EntrarNombre"
+                android:layout_marginTop="15dp"
+                android:background="#5c696969" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email"
-        android:id="@+id/TextViewEmail"
-        android:layout_below="@+id/EntrarApellidos"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="20dp" />
+            <TextView
+                android:text="Apellidos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/apellido"
+                android:layout_marginTop="15dp"
+                android:textColor="#610B0B"
+                android:textSize="20sp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/EntrarEmail"
-        android:layout_below="@+id/TextViewEmail"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/EntrarApellidos"
-        android:layout_alignEnd="@+id/EntrarApellidos"
-        android:background="#BDBDBD"
-        android:focusable="false"
-        android:focusableInTouchMode="false" />
+            <EditText
+                android:layout_width="327dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/EntrarApellidos"
+                android:layout_marginTop="15dp"
+                android:background="#5c696969" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contraseña"
-        android:id="@+id/TextViewContrasena"
-        android:layout_below="@+id/EntrarEmail"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="20dp" />
+            <TextView
+                android:text="Password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textFecha"
+                android:layout_marginTop="15dp"
+                android:textColor="#610B0B"
+                android:textSize="20sp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/EntrarContrasena"
-        android:layout_below="@+id/TextViewContrasena"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/EntrarEmail"
-        android:layout_alignEnd="@+id/EntrarEmail"
-        android:background="#BDBDBD" />
+            <EditText
+                android:layout_width="327dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/EntrarContrasena"
+                android:layout_marginTop="15dp"
+                android:background="#5c696969"
+                android:enabled="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Repetir contraseña"
-        android:id="@+id/TextViewRepContra"
-        android:layout_below="@+id/EntrarContrasena"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="20dp" />
+            <TextView
+                android:text="Repita Password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textFecha"
+                android:layout_marginTop="15dp"
+                android:textSize="20sp"
+                android:textColor="#610B0B" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/RepetirContrasena"
-        android:layout_below="@+id/TextViewRepContra"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/EntrarContrasena"
-        android:layout_alignEnd="@+id/EntrarContrasena"
-        android:background="#BDBDBD" />
+            <EditText
+                android:layout_width="327dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/RepetirContrasena"
+                android:layout_marginTop="15dp"
+                android:background="#5c696969"
+                android:enabled="true"
+                android:clickable="true" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contraseña visible"
-        android:id="@+id/ContrasenaVisible"
-        android:layout_below="@+id/RepetirContrasena"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="20dp" />
+            <TextView
+                android:text="Email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tVemail"
+                android:layout_marginTop="15dp"
+                android:textSize="20sp"
+                android:textColor="#610B0B" />
+
+            <EditText
+                android:layout_width="327dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/EntrarEmail"
+                android:layout_marginTop="15dp"
+                android:background="#5c696969"
+                android:enabled="true"
+                android:clickable="true" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Acepto terminos y condiciones de uso."
+                android:id="@+id/checkBox"
+                android:layout_marginTop="15dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="30dp"
+                android:layout_alignRight="@+id/scrollView"
+                android:layout_alignEnd="@+id/scrollView" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registrar"
-        android:id="@+id/ButtonRegistrar"
-        android:onClick="@string/Anyadir"
+        android:text="Registrarme"
+        android:id="@+id/btnregistrar"
+        android:layout_gravity="center_horizontal"
+        android:onClick="buttonOnClick"
+        android:background="@drawable/border_button"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="55dp" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

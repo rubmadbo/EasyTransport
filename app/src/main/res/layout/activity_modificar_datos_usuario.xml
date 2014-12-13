@@ -1,0 +1,123 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.ruben.easytransport.ModificarDatosUsuario">
+
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/linearLayout"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+                <TextView
+                    android:text="Nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textRemitente"
+                    android:textColor="#610B0B"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:layout_width="327dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/EntrarNombre"
+                    android:layout_marginTop="15dp"
+                    android:editable="false"
+                    android:background="#5c696969" />
+
+                <TextView
+                    android:text="Apellidos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/apellido"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#610B0B"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:layout_width="327dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/EntrarApellidos"
+                    android:layout_marginTop="15dp"
+                    android:editable="false"
+                    android:background="#5c696969" />
+
+                <TextView
+                    android:text="Password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textFecha"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#610B0B"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:layout_width="327dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/EntrarContrasena"
+                    android:layout_marginTop="15dp"
+                    android:background="#5c696969"
+                    android:editable="false"
+                    android:enabled="true" />
+
+                <TextView
+                    android:text="Repita Password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textFecha"
+                    android:layout_marginTop="15dp"
+                    android:textSize="20sp"
+                    android:textColor="#610B0B" />
+
+                <EditText
+                    android:layout_width="327dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/RepetirContrasena"
+                    android:layout_marginTop="15dp"
+                    android:background="#5c696969"
+                    android:enabled="true"
+                    android:editable="false"
+                    android:clickable="true" />
+
+                <TextView
+                    android:text="Email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tVemail"
+                    android:layout_marginTop="15dp"
+                    android:textSize="20sp"
+                    android:textColor="#610B0B" />
+
+                <EditText
+                    android:layout_width="327dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/EntrarEmail"
+                    android:layout_marginTop="15dp"
+                    android:background="#5c696969"
+                    android:enabled="true"
+                    android:editable="false"
+                    android:clickable="true" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Guardar Cambios"
+                    android:layout_marginTop="35dp"
+                    android:id="@+id/btnregistrar"
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="buttonOnClick"
+                    android:background="@drawable/border_button"
+                     />
+
+            </LinearLayout>
+
+</RelativeLayout>
