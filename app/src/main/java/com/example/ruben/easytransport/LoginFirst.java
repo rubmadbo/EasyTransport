@@ -9,10 +9,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.ruben.easytransport.util.Sessions;
+import Helpers.LoginSesion;
 
 
 public class LoginFirst extends ActionBarActivity {
+
+    Boolean resgistro= false;
+
+
+    LoginSesion session;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +39,20 @@ public class LoginFirst extends ActionBarActivity {
                 }
             }
         });*/
+        //user en Bd
+        if(resgistro)
+        {
+
+
+           session.createLoginSession(usuario.getText().toString(),contr.getText().toString());
+
+
+
+        }
+
+
     }
+
     public void buttonOnClickLoginOlvido(View v) {
 
         Intent a = new Intent(this, MailActivty.class);
@@ -41,15 +60,6 @@ public class LoginFirst extends ActionBarActivity {
 
     }
     public void buttonOnClickLogin(View v) {
-
-        //jdcc hay que poner algo asi parecido, adrian terminalo, estoy probando aún los metodos para saber si van.
-        /*if (JavaPHPMySQL.loginSuccess(usuario.getText().toString(), contr.getText().toString())) {
-            Sessions.setUsuarioLogeado(getUsuarioByEmail(usuario.getText().toString()));
-
-            Intent a = new Intent(this, MenuPrincipal.class);
-            startActivity(a);
-        }*/
-
 
         Intent a = new Intent(this, MenuPrincipal.class);
         startActivity(a);

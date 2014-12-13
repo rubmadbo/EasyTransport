@@ -1,7 +1,5 @@
 package com.example.ruben.easytransport;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -60,7 +58,7 @@ public class MailActivty extends ActionBarActivity {
         intent.setData(Uri.parse("mailto:" + _mail)); // or just "mailto:" for blank
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
         startActivity(intent);
-        Toast.makeText(this, "Tu contraseña ha sido restablecida .", Toast.LENGTH_SHORT).show();*/
+        Toast.makeText(this, "Tu contraseña ha sido restablecida .", Toast.LENGTH_SHORT).show();
 
 //codigo muy nazi no se puede no poner visible
         /*Intent i = new Intent(Intent.ACTION_SEND);
