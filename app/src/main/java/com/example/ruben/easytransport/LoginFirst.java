@@ -1,8 +1,11 @@
 package com.example.ruben.easytransport;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -95,4 +98,6 @@ public class LoginFirst extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

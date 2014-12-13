@@ -191,8 +191,10 @@ public class GestionDeRutas extends ActionBarActivity {
 
             bd.insertarRuta(o,d,horaInicio,fecha,com,1);
 
-            Toast.makeText(this, "La ruta se ha insertado correctamente", Toast.LENGTH_SHORT).show();
 
+
+            Toast.makeText(this, "La ruta se ha insertado correctamente", Toast.LENGTH_SHORT).show();
+            yourMethod();
              finish();
 
         }  else if ((!d.equals("") && !o.equals("")) && o.equalsIgnoreCase(d)){
@@ -203,6 +205,12 @@ public class GestionDeRutas extends ActionBarActivity {
         }
 
 
+    }
+
+    public void yourMethod() {
+
+        int resultCode = 2;
+        setResult(resultCode);    // goback to your fragment with your data
     }
 
 

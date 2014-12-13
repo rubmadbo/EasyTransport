@@ -111,12 +111,31 @@ public class VistaRutas extends Fragment {
 
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(VistaRutas.this.getActivity(),GestionDeRutas.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(VistaRutas.this.getActivity(),GestionDeRutas.class);
+                startActivity(intent);*/
+                throwActivity();
             }
         });
     return rootView;
     }
+
+    public void throwActivity() {
+        // start activity
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), GestionDeRutas.class);
+        int requestCode = 1;
+        startActivityForResult(intent,requestCode);
+    }
+
+    // callback
+    @Override
+    public void onActivityResult (int requestCode, int resultCode, Intent data) {
+
+        refresh();
+
+    }
+
+
 
     public void refresh(){
 
