@@ -48,32 +48,11 @@ public class MailActivty extends ActionBarActivity {
             int i1 = r.nextInt(100000 - 65) + 65;
 
         JavaPHPMySQL.cambiarPass(u.getIdUsuario(),String.valueOf(i1));
-        JavaPHPMySQL.enviarEmail(_mail,String.valueOf(i1));
+        JavaPHPMySQL.enviarEmailCambioPass(_mail,String.valueOf(i1));
         Toast.makeText(this, "Se ha cambiado tu contraseña y se te ha enviado un email", Toast.LENGTH_LONG).show();
         }else {
             Toast.makeText(this, "No existe el usuario en la Base de Datos", Toast.LENGTH_LONG).show();
         }
-        /*Intent intent = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Tu contraseña será restablecida cuando envies este email");
-        intent.putExtra(Intent.EXTRA_TEXT, "Tu nueva contraseña es "+""+i1);
-        intent.setData(Uri.parse("mailto:" + _mail)); // or just "mailto:" for blank
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
-        startActivity(intent);
-        Toast.makeText(this, "Tu contraseña ha sido restablecida .", Toast.LENGTH_SHORT).show();
-
-//codigo muy nazi no se puede no poner visible
-        /*Intent i = new Intent(Intent.ACTION_SEND);
-        i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"adrian4192@gmail.com"});
-        i.putExtra(Intent.EXTRA_SUBJECT, "Restablecer Contraseña");
-        i.putExtra(Intent.EXTRA_TEXT   , "4ndx90m");
-        try {
-            startActivity(Intent.createChooser(i, "Send mail..."));
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-        }
-*/
     }
 
     @Override

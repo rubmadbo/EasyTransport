@@ -184,7 +184,7 @@ public class JavaPHPMySQL {
 
         insercion(jsonString, "cambiarPass.php");
     }
-    public static void enviarEmail(String email, String pass) {
+    public static void enviarEmailCambioPass(String email, String pass) {
         //Creamos un objeto JSON
         JSONObject jsonObj = new JSONObject();
         //Añadimos el nombre, apellidos y email del usuario
@@ -192,6 +192,27 @@ public class JavaPHPMySQL {
         jsonObj.put("email", email);
         jsonObj.put("Password", pass);
 
+
+        //Creamos una lista para almacenar el JSON
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObj));
+        //Generamos el String JSON
+        String jsonString = JSONValue.toJSONString(l);
+        System.out.println("JSON GENERADO:");
+        System.out.println(jsonString);
+        System.out.println("");
+
+        insercion(jsonString, "enviarEmailCambioPass.php");
+    }
+
+    public static void enviarEmail(String email, String Mensaje, String Asunto) {
+        //Creamos un objeto JSON
+        JSONObject jsonObj = new JSONObject();
+        //Añadimos el nombre, apellidos y email del usuario
+        //es IMPORTANTE que pongamos lo que esta entre comillas igual que la columna de la BBDD
+        jsonObj.put("email", email);
+        jsonObj.put("Mensaje", Mensaje);
+        jsonObj.put("Asunto", Asunto);
 
         //Creamos una lista para almacenar el JSON
         List l = new LinkedList();
