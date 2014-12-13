@@ -1,31 +1,28 @@
 package com.example.ruben.easytransport;
 
-import android.os.StrictMode;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
-import static java.lang.System.in;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-//He tenido q descargarme la librería desde aqui
-// https://code.google.com/p/json-simple/downloads/detail?name=json-simple-1.1.1.jar&can=2&q=
-//luego meter el jar en la capeta de proyecto; Project Structure-> app (modules) Dependencis add (2da opcion y pones la ruta)
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 
 import Objetos.Acuerdo;
 import Objetos.Ruta;
 import Objetos.Usuario;
 import Objetos.Vehiculo;
+
+//He tenido q descargarme la librería desde aqui
+// https://code.google.com/p/json-simple/downloads/detail?name=json-simple-1.1.1.jar&can=2&q=
+//luego meter el jar en la capeta de proyecto; Project Structure-> app (modules) Dependencis add (2da opcion y pones la ruta)
 
 public class JavaPHPMySQL {
 
@@ -472,7 +469,7 @@ public class JavaPHPMySQL {
     }
 
   public static boolean loginSuccess(String email, String pass){
-     Usuario u=  getUsuarioByEmail(email);
+      Usuario u=  getUsuarioByEmail(email);
       return u.getPassword().equals(pass);
   }
 
