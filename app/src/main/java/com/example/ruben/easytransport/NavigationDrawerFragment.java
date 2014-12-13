@@ -1,6 +1,8 @@
 package com.example.ruben.easytransport;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -106,8 +109,8 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section2),
                         getString(R.string.title_section3),
                         //jdcc, añadido para el nuevo fragment
-                        getString(R.string.title_section4),
-                        getString(R.string.title_section5)
+                        getString(R.string.title_section5),
+                        getString(R.string.title_section4)
 
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
@@ -281,4 +284,6 @@ public class NavigationDrawerFragment extends Fragment {
          */
         void onNavigationDrawerItemSelected(int position);
     }
+
+
 }

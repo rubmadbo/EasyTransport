@@ -318,10 +318,11 @@ public class JavaPHPMySQL {
 
 
 
-    public static void updateEstadoAcuerdo(String estado, int idAcuerdo){
+    public static void updateEstadoAcuerdo(String estado, int idAcuerdo, String motivoRechazo){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Estado", estado);
         jsonObject.put("idAcuerdo", idAcuerdo);
+        jsonObject.put("MotivoRechazo", motivoRechazo);
         List l = new LinkedList();
         l.addAll(Arrays.asList(jsonObject));
 

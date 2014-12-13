@@ -28,7 +28,7 @@ public class ListarAcuerdosTransportista extends Fragment {
 
         JavaPHPMySQL db = new JavaPHPMySQL();
         ArrayList<Acuerdo> listaAcuerdos;
-        int UsuarioLogeado = 3; // habría que cargarlo de la session de userlogeado en caso que se quieran ver los acuerdos por usuario
+        int UsuarioLogeado = 1; // habría que cargarlo de la session de userlogeado en caso que se quieran ver los acuerdos por usuario
 
        listaAcuerdos = db.getAcuerdosByTransId(UsuarioLogeado);
 

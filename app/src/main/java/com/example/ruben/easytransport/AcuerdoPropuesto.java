@@ -73,15 +73,16 @@ public class AcuerdoPropuesto extends ActionBarActivity {
             public void onClick(View v) {
                 if(radioAceptar.isChecked()){
                     //acciones al aceptar acuerdo.
+                    String motRech = ETmotivoRechazo.getText().toString();
                     JavaPHPMySQL db = new JavaPHPMySQL();
-                    db.updateEstadoAcuerdo("aceptado", rutaId);
+                    db.updateEstadoAcuerdo("aceptado", rutaId, motRech);
                     Toast.makeText(getApplicationContext(), "El acuerdo ha sido aceptado", Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 else if(radioRechazar.isChecked()){
                     //acciones al rechazar acuerdo
                     JavaPHPMySQL db = new JavaPHPMySQL();
-                    db.updateEstadoAcuerdo("rechazado", rutaId);
+                    db.updateEstadoAcuerdo("rechazado", rutaId, "");
                     Toast.makeText(getApplicationContext(), "El acuerdo ha sido rechazado", Toast.LENGTH_SHORT).show();
                     finish();
                 }

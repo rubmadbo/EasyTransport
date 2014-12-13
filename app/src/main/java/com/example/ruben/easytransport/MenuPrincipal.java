@@ -1,5 +1,7 @@
 package com.example.ruben.easytransport;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -60,11 +63,13 @@ public class MenuPrincipal extends ActionBarActivity
                 break;
             case 3:
                 //Historico Rutas
-                fragment = new HistoricoRutas();
+                fragment = new ListarAcuerdosRemitente();
+                //fragment = new HistoricoRutas();
                 //fragment = new MisRutas();
                 break;
             case 4:
-                fragment = new ListarAcuerdosRemitente();
+                fragment = new HistoricoRutas();
+               // fragment = new ListarAcuerdosRemitente();
                 break;
         }
         fragmentManager.beginTransaction()
@@ -81,7 +86,6 @@ public class MenuPrincipal extends ActionBarActivity
                 mTitle = getString(R.string.title_section2);
                 break;
             case 3:
-                //mTitle = getString(R.string.title_section4);
                 mTitle = getString(R.string.title_section3);
                 break;
             case 4:
@@ -133,6 +137,33 @@ public class MenuPrincipal extends ActionBarActivity
     /**
      * A placeholder fragment containing a simple view.
      */
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("¿Seguro que quieres cerrar la aplicación?")
+                    .setCancelable(false)
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //do finish
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //do nothing
+                            return;
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+
+
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 
 }
