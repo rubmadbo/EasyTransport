@@ -77,6 +77,7 @@ public class AcuerdoPropuesto extends ActionBarActivity {
                     JavaPHPMySQL db = new JavaPHPMySQL();
                     db.updateEstadoAcuerdo("aceptado", rutaId, "");
                     Toast.makeText(getApplicationContext(), "El acuerdo ha sido aceptado", Toast.LENGTH_SHORT).show();
+                    yourMethod();
                     finish();
                 }
                 else if(radioRechazar.isChecked()){
@@ -89,12 +90,19 @@ public class AcuerdoPropuesto extends ActionBarActivity {
                         JavaPHPMySQL db = new JavaPHPMySQL();
                         db.updateEstadoAcuerdo("rechazado", rutaId, motRech);
                         Toast.makeText(getApplicationContext(), "El acuerdo ha sido rechazado", Toast.LENGTH_SHORT).show();
+                        yourMethod();
                         finish();
                     }
 
                 }
             }
         });
+    }
+
+    public void yourMethod() {
+
+        int resultCode = 2;
+        setResult(resultCode);    // goback to your fragment with your data
     }
 
 

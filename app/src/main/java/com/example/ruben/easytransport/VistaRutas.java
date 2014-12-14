@@ -111,8 +111,6 @@ public class VistaRutas extends Fragment {
 
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                /*Intent intent = new Intent(VistaRutas.this.getActivity(),GestionDeRutas.class);
-                startActivity(intent);*/
                 throwActivity();
             }
         });

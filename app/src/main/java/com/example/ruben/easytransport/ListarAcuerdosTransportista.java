@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,9 @@ public class ListarAcuerdosTransportista extends Fragment {
 
                         if(acuerdoSelected.getEstado().equals("pendiente"))   {
 
-                            Intent intent = new Intent(getActivity().getBaseContext(),AcuerdoPropuesto.class);
+                            Intent intent = new Intent();
+                            intent.setClass(getActivity(), AcuerdoPropuesto.class);
+                            int requestCode = 1;
                             int idRuta = acuerdoSelected.getIdAcuerdo();
                             intent.putExtra("IdRuta", idRuta);
                             String remitente = "Juanito";//Fran: No me pilla el remitente, hay que revisarlo.
@@ -66,7 +69,7 @@ public class ListarAcuerdosTransportista extends Fragment {
                             intent.putExtra("Dinero" ,dinero);
                             String comentario = acuerdoSelected.getComentario();
                             intent.putExtra("Comentario", comentario);
-                            startActivity(intent);
+                            startActivityForResult(intent,requestCode);
                         }
                         else Toast.makeText(getActivity(), "Ya has aceptado/rechazado este acuerdo.", Toast.LENGTH_SHORT).show();
                     }
@@ -83,6 +86,31 @@ public class ListarAcuerdosTransportista extends Fragment {
 
 
         return rootView;
+    }
+
+   // callback
+    @Override
+    public void onActivityResult (int requestCode, int resultCode, Intent data) {
+
+        refresh();
+
+    }
+
+
+
+    public void refresh(){
+
+        // Create new fragment and transaction
+        Fragment newFragment = new ListarAcuerdosTransportista();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack
+        transaction.replace(this.getId(), newFragment);
+        transaction.addToBackStack(null);
+
+        // Commit the transaction
+        transaction.commit();
     }
 
 }
