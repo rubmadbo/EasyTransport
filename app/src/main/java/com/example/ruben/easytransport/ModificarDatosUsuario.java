@@ -67,13 +67,14 @@ public class ModificarDatosUsuario extends ActionBarActivity {
     Usuario u = Sessions.getUsuarioLogeado();  o si adrían lo hizo de otra manera pues de la otra manera.
 
  */
+        //copiar estas lineas ******* para obtener email
         HashMap<String, String> usuario = session.getUserDetails();
 
         // email
         email = usuario.get(LoginSesion.KEY_EMAIL);
 
 
-
+// CON ESTO OBTINES EL EMAIL
         try{user=JavaPHPMySQL.getUsuarioByEmail(email);}
         catch (Exception e){
             e.printStackTrace();
