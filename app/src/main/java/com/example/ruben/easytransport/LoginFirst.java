@@ -1,8 +1,11 @@
 package com.example.ruben.easytransport;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -96,6 +99,33 @@ public class LoginFirst extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("¿Seguro que quieres cerrar la aplicación?")
+                    .setCancelable(false)
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+                            finish();
+                            System.exit(0);
+
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //do nothing
+                            return;
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+
+
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 
