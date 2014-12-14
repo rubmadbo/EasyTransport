@@ -156,7 +156,7 @@ public class MenuPrincipal extends ActionBarActivity
                         public void onClick(DialogInterface dialog, int id) {
 
                             finish();
-                            android.os.Process.killProcess(android.os.Process.myPid());
+                            System.exit(0);
 
                         }
                     })
