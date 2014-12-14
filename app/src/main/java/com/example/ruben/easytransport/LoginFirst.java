@@ -1,7 +1,5 @@
 package com.example.ruben.easytransport;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -72,7 +70,7 @@ public class LoginFirst extends ActionBarActivity {
             //no puedes pasar objetos por intent solo tipos primitivos
             Intent a = new Intent(this, MenuPrincipal.class);
 
-            a.putExtra("email",usuario.getText().toString());
+
 
             startActivity(a);
 

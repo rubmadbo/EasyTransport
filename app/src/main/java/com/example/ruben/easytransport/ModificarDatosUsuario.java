@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import Helpers.LoginSesion;
 import Objetos.Usuario;
 
 
@@ -21,6 +22,7 @@ public class ModificarDatosUsuario extends ActionBarActivity {
     private EditText Email=null;
     private EditText Contrasena=null;
     private EditText RepContrasena=null;
+    LoginSesion session;
 
     Usuario user;
     String email;
@@ -37,14 +39,15 @@ public class ModificarDatosUsuario extends ActionBarActivity {
         Contrasena = (EditText) findViewById(R.id.EntrarContrasena);
         RepContrasena = (EditText) findViewById(R.id.RepetirContrasena);
 
-        Intent a= getIntent();
-        Bundle b = a.getExtras();
+//esto va pero si se mantiene sesion casca.... por eso SharedPreferences
+      /*  Bundle b = getIntent().getExtras();
 
         if(b!=null)
         {
             email =(String) b.get("user");
 
-        }
+        }*/
+
 
         String _Nom;
         String _Apell;
@@ -63,6 +66,7 @@ public class ModificarDatosUsuario extends ActionBarActivity {
         _Apell = intent.getExtras("Aqui va el Apellido");
         _Email = intent.getExtras("Aqui va el email");*/
 
+        email= session.EmailRetrieve();
 
         try{user=JavaPHPMySQL.getUsuarioByEmail(email);}
         catch (Exception e){

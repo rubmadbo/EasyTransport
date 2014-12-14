@@ -31,6 +31,8 @@ public class LoginSesion {
         private static final String IS_LOGIN = "IsLoggedIn";
 
 
+
+
         public static final String KEY_NAME = "name";
 
 
@@ -119,5 +121,11 @@ public class LoginSesion {
 
             return pref.getBoolean(IS_LOGIN, false);
         }
+    public String EmailRetrieve(){
+
+        return pref.getString(KEY_EMAIL, KEY_EMAIL);
+
+
+    }
     }
 
