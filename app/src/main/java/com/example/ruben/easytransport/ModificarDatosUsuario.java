@@ -1,20 +1,16 @@
 package com.example.ruben.easytransport;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.File;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import Objetos.Usuario;
 
 
 public class ModificarDatosUsuario extends ActionBarActivity {
@@ -25,6 +21,9 @@ public class ModificarDatosUsuario extends ActionBarActivity {
     private EditText Email=null;
     private EditText Contrasena=null;
     private EditText RepContrasena=null;
+
+    Usuario user;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +36,15 @@ public class ModificarDatosUsuario extends ActionBarActivity {
         Email = (EditText) findViewById(R.id.EntrarEmail);
         Contrasena = (EditText) findViewById(R.id.EntrarContrasena);
         RepContrasena = (EditText) findViewById(R.id.RepetirContrasena);
+
+        Intent a= getIntent();
+        Bundle b = a.getExtras();
+
+        if(b!=null)
+        {
+            email =(String) b.get("user");
+
+        }
 
         String _Nom;
         String _Apell;
@@ -55,9 +63,17 @@ public class ModificarDatosUsuario extends ActionBarActivity {
         _Apell = intent.getExtras("Aqui va el Apellido");
         _Email = intent.getExtras("Aqui va el email");*/
 
-        Nombre.setText("");
-        Apellidos.setText("Pepe");
-        Email.setText("Pepe");
+
+        try{user=JavaPHPMySQL.getUsuarioByEmail(email);}
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        Email.setText(user.getEmail());
+        Nombre.setText(user.getNombre());
+        Apellidos.setText(user.getApellido());
+        Contrasena.setText(user.getPassword());
+        RepContrasena.setText(user.getPassword());
 
 
         botonGuardarCambios.setOnClickListener(new View.OnClickListener() {

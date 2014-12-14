@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import Helpers.LoginSesion;
+import Objetos.Usuario;
 
 
 public class LoginFirst extends ActionBarActivity {
@@ -22,6 +23,7 @@ public class LoginFirst extends ActionBarActivity {
     EditText usuario;
     EditText contr ;
     LoginSesion session;
+    Usuario user;
 
 
     @Override
@@ -58,7 +60,19 @@ public class LoginFirst extends ActionBarActivity {
 
             session.createLoginSession(usuario.getText().toString(), contr.getText().toString());
 
+            try {
+
+              user=JavaPHPMySQL.getUsuarioByEmail(usuario.getText().toString());
+
+            }catch (Exception e){
+
+
+
+            }
+            //no puedes pasar objetos por intent solo tipos primitivos
             Intent a = new Intent(this, MenuPrincipal.class);
+
+            a.putExtra("email",usuario.getText().toString());
 
             startActivity(a);
 

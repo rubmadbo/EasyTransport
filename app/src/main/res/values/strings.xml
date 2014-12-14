@@ -66,5 +66,6 @@
     <string name="title_activity_acuerdos_transportista">Listar acuerdos transportista</string>
     <string name="title_activity_listar_acuerdos_ruta">ListarAcuerdosRuta</string>
     <string name="title_activity_modificar_datos_usuario">ModificarDatosUsuario</string>
+    <string name="title_activity_editar_perfil">EditarPerfil</string>
 
 </resources>

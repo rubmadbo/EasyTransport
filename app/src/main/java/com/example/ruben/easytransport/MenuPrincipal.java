@@ -2,6 +2,7 @@ package com.example.ruben.easytransport;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -34,11 +35,16 @@ public class MenuPrincipal extends ActionBarActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_menu_principal);
         //for the preferences in the menu
-        session = new LoginSesion(getApplicationContext());
+
         //check if login continue else login activity
+
+        session = new LoginSesion(getApplicationContext());
+
         session.checkLogin();
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -131,6 +137,11 @@ public class MenuPrincipal extends ActionBarActivity
         switch (item.getItemId()) {
             case R.id.action_settings:
                 session.logoutUser();
+                return true;
+
+            case R.id.action_editar:
+                Intent a = new Intent(this,ModificarDatosUsuario.class);
+                startActivity(a);
                 return true;
 
             case R.id.action_exit:

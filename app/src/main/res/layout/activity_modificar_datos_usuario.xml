@@ -6,7 +6,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.ruben.easytransport.ModificarDatosUsuario">
+    tools:context="com.example.ruben.easytransport.ModificarDatosUsuario"
+    android:background="#734b3c49">
 
 
 
@@ -18,105 +19,96 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true">
 
-                <TextView
-                    android:text="Nombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textRemitente"
-                    android:textColor="#610B0B"
-                    android:textSize="20dp" />
 
                 <EditText
-                    android:layout_width="327dp"
+
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/EntrarNombre"
-                    android:layout_marginTop="15dp"
-                    android:editable="false"
-                    android:background="#5c696969" />
+                    android:padding="10dp"
+                    android:hint="Nombre"
+                    android:layout_margin="10dp"
+                    android:textColorHint="#cccccc"
+                    android:drawableLeft="@drawable/user"
+                    android:background="#ffffffff"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="10dp" />
 
-                <TextView
-                    android:text="Apellidos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/apellido"
-                    android:layout_marginTop="15dp"
-                    android:textColor="#610B0B"
-                    android:textSize="20sp" />
+
 
                 <EditText
-                    android:layout_width="327dp"
+
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/EntrarApellidos"
-                    android:layout_marginTop="15dp"
-                    android:editable="false"
-                    android:background="#5c696969" />
+                    android:padding="10dp"
+                    android:hint="Apellidos"
+                    android:textColorHint="#cccccc"
+                    android:layout_margin="10dp"
+                    android:drawableLeft="@drawable/user"
+                    android:background="#ffffffff"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="10dp" />
 
-                <TextView
-                    android:text="Password"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textFecha"
-                    android:layout_marginTop="15dp"
-                    android:textColor="#610B0B"
-                    android:textSize="20sp" />
 
                 <EditText
-                    android:layout_width="327dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    android:layout_margin="10dp"
                     android:id="@+id/EntrarContrasena"
-                    android:layout_marginTop="15dp"
-                    android:background="#5c696969"
-                    android:editable="false"
-                    android:enabled="true" />
+                    android:hint="Contraseña"
+                    android:textColorHint="#cccccc"
+                    android:password="true"
+                    android:drawableLeft="@drawable/password"
+                    android:background="#ffffffff" />
 
-                <TextView
-                    android:text="Repita Password"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textFecha"
-                    android:layout_marginTop="15dp"
-                    android:textSize="20sp"
-                    android:textColor="#610B0B" />
 
                 <EditText
-                    android:layout_width="327dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
                     android:id="@+id/RepetirContrasena"
-                    android:layout_marginTop="15dp"
-                    android:background="#5c696969"
-                    android:enabled="true"
-                    android:editable="false"
-                    android:clickable="true" />
-
-                <TextView
-                    android:text="Email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tVemail"
-                    android:layout_marginTop="15dp"
-                    android:textSize="20sp"
-                    android:textColor="#610B0B" />
+                    android:hint="Repetir Contraseña"
+                    android:textColorHint="#cccccc"
+                    android:password="true"
+                    android:drawableLeft="@drawable/password"
+                    android:background="#ffffffff" />
 
                 <EditText
-                    android:layout_width="327dp"
-                    android:layout_height="wrap_content"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="47dp"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:hint="Email"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:background="#ffffffff"
+                    android:textColorHint="#cccccc"
+                    android:drawableLeft="@drawable/icon_email"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="10dp"
                     android:id="@+id/EntrarEmail"
-                    android:layout_marginTop="15dp"
-                    android:background="#5c696969"
-                    android:enabled="true"
-                    android:editable="false"
-                    android:clickable="true" />
+                    android:editable="false" />
+
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Guardar Cambios"
-                    android:layout_marginTop="35dp"
                     android:id="@+id/btnregistrar"
                     android:layout_gravity="center_horizontal"
-                    android:onClick="buttonOnClick"
-                    android:background="@drawable/border_button"
-                     />
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:padding="10dp"
+                    android:layout_margin="10dp"
+                    android:text="Guardar Cambios"
+                    android:background="#b1e7bdff"
+                    android:textSize="14dp"
+                    android:layout_below="@+id/linearLayout" />
+
 
             </LinearLayout>
 
