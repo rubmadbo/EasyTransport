@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 import Helpers.LoginSesion;
 import Objetos.Usuario;
 
@@ -31,6 +33,9 @@ public class ModificarDatosUsuario extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modificar_datos_usuario);
+
+
+        session = new LoginSesion(getApplicationContext());
 
         botonGuardarCambios = (Button)findViewById(R.id.btnregistrar);
         Nombre = (EditText) findViewById(R.id.EntrarNombre);
@@ -61,12 +66,13 @@ public class ModificarDatosUsuario extends ActionBarActivity {
     /* Si es de sesion pillar el usuario de sesion
     Usuario u = Sessions.getUsuarioLogeado();  o si adrían lo hizo de otra manera pues de la otra manera.
 
-    Si se pasa desde otro intent
-        _Nom = intent.getExtras("Aqui va el Nombre");
-        _Apell = intent.getExtras("Aqui va el Apellido");
-        _Email = intent.getExtras("Aqui va el email");*/
+ */
+        HashMap<String, String> usuario = session.getUserDetails();
 
-        email= session.EmailRetrieve();
+        // email
+        email = usuario.get(LoginSesion.KEY_EMAIL);
+
+
 
         try{user=JavaPHPMySQL.getUsuarioByEmail(email);}
         catch (Exception e){

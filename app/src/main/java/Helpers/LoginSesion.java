@@ -123,7 +123,10 @@ public class LoginSesion {
         }
     public String EmailRetrieve(){
 
-        return pref.getString(KEY_EMAIL, KEY_EMAIL);
+        String a;
+        a=pref.getString(KEY_EMAIL, KEY_EMAIL);
+        return a;
+
 
 
     }
