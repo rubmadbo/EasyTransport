@@ -105,6 +105,7 @@ public class ModificarDatosUsuario extends ActionBarActivity {
 
                 if(pass.equals(repass)){
                     JavaPHPMySQL.updateUsuario(id,n,a,rol,pass,e);
+                    Toast.makeText(getBaseContext(), "Se han guardado los cambios", Toast.LENGTH_LONG).show();
 
                 }else {
                     Toast.makeText(getBaseContext(), "No coinciden las contraseñas", Toast.LENGTH_LONG).show();                }
