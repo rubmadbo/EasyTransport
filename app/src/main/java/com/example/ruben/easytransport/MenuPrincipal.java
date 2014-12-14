@@ -2,7 +2,6 @@ package com.example.ruben.easytransport;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -155,8 +154,10 @@ public class MenuPrincipal extends ActionBarActivity
                     .setCancelable(false)
                     .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            //do finish
+
                             finish();
+                            android.os.Process.killProcess(android.os.Process.myPid());
+
                         }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {

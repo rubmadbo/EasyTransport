@@ -84,7 +84,7 @@
 
         <activity
             android:name=".registrar"
-            android:label="Registrar" >
+            android:label="Registro" >
         </activity>
 
         <activity
