@@ -100,30 +100,12 @@ public class LoginFirst extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
+   public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("¿Seguro que quieres cerrar la aplicación?")
-                    .setCancelable(false)
-                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-
-                            finish();
-                            System.exit(0);
-
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            //do nothing
-                            return;
-                        }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
-
-
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
         return super.onKeyDown(keyCode, event);
     }
