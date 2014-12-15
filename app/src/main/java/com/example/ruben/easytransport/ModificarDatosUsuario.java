@@ -115,6 +115,7 @@ public class ModificarDatosUsuario extends ActionBarActivity {
                 String pass;
                 String repass;
                 int id= getUsuarioLog().getIdUsuario();
+
                 String rol = "No se usa";
 
                 n = Nombre.getText().toString();
