@@ -37,7 +37,7 @@ public class AcuerdoPropuesto extends ActionBarActivity {
         radioAceptar = (RadioButton) findViewById(R.id.radioAceptar);
         TmotivoRechazo = (TextView) findViewById(R.id.textMotivoRechazo);
         ETmotivoRechazo = (EditText) findViewById(R.id.editTRechazo);
-        ETRemitente = (EditText) findViewById(R.id.editTRemitente_acuerdo);
+        //ETRemitente = (EditText) findViewById(R.id.editTRemitente_acuerdo);
         Origen = (EditText) findViewById(R.id.editTOrigen);
         Destino = (EditText) findViewById(R.id.editTDestino);
         Fecha = (EditText) findViewById(R.id.editTFecha);
@@ -48,7 +48,7 @@ public class AcuerdoPropuesto extends ActionBarActivity {
 
         Intent intent = getIntent();
         final int rutaId = intent.getIntExtra("IdRuta",0);
-        ETRemitente.setText(intent.getStringExtra("Remitente"));
+        //ETRemitente.setText(intent.getStringExtra("Remitente"));
         Destino.setText(intent.getStringExtra("Destino"));
         Origen.setText(intent.getStringExtra("Origen"));
         Fecha.setText(intent.getStringExtra("Fecha"));

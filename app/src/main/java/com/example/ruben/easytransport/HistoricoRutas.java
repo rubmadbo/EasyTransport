@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,11 +18,34 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
+import Helpers.LoginSesion;
 import Objetos.Ruta;
+import Objetos.Usuario;
 
 
 public class HistoricoRutas extends Fragment {
+
+    public Usuario getUsuarioLog(){
+        LoginSesion session;
+
+        Usuario user = new Usuario(0,"","","","tuviejaa",null,null,null,"");
+        String email;
+
+        session = new LoginSesion(getActivity().getApplicationContext());
+
+        HashMap<String, String> usuario = session.getUserDetails();
+
+        // email
+        email = usuario.get(LoginSesion.KEY_EMAIL);
+        // CON ESTO OBTINES EL EMAIL
+        try{user=JavaPHPMySQL.getUsuarioByEmail(email);}
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return user;
+    }
 
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //si te sale error aqui ir a buil.gradle el de la carpera mas externa y donde pone minSdkVersion pones 9
@@ -34,8 +58,12 @@ public class HistoricoRutas extends Fragment {
         ListView li = (ListView) rootView.findViewById(R.id.LVHistoricas);
 
         JavaPHPMySQL bd = new JavaPHPMySQL();
-        String json = bd.getAllRutas();
-        ArrayList<Ruta> listaRuta =  bd.mostrarAllRutas(json);
+        ArrayList<Ruta> listaRuta=null;
+        try {
+            listaRuta = bd.getRutasByUserId(getUsuarioLog().getIdUsuario());
+        }catch (Exception e){e.printStackTrace();}
+        if(listaRuta.isEmpty())
+            Toast.makeText(getActivity(), "No tienes rutas caducadas", Toast.LENGTH_LONG).show();
         ArrayList<Ruta> rutasActuales = new ArrayList<Ruta>();
 
         final Calendar c = Calendar.getInstance();

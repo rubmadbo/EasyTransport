@@ -23,6 +23,8 @@ public class registrar extends ActionBarActivity {
     private CheckBox terminos=null;
 
     @Override
+
+
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -50,18 +52,27 @@ public class registrar extends ActionBarActivity {
                 if(terminos.isChecked()) {
 
                     if (_Nom !="" && _Apell !="" && _Email != "" && _Contrasena != "" && _RepContrasena != "") {
+                        if(_Contrasena.length() < 3){
+                            Toast.makeText(getApplicationContext(), "La contraseña debe ser mayor a 3 caracteres", Toast.LENGTH_LONG).show();
+                        }else{
+                            if (!_Email.matches("^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[a-zA-Z]{2,4}$")){
+                                Toast.makeText(getApplicationContext(), "El formato de email no es correcto.", Toast.LENGTH_LONG).show();
+                            }else {
 
-                        if(_Contrasena.equals(_RepContrasena)){
-                    //REVISAR INTENT QUE NO SE CUAL PONER QUEel base context lo puse porque this no iba.
-                            JavaPHPMySQL.insertarUsuario(_Nom,_Apell,"no importa",_Contrasena,_Email);
-                            Intent a = new Intent(getBaseContext(), MenuPrincipal.class);
-                            startActivity(a);
 
-                        }else {
-                            Toast.makeText(getApplicationContext(), "No coinciden las contraseñas", Toast.LENGTH_LONG).show();
+                                if (_Contrasena.equals(_RepContrasena)) {
+                                    //REVISAR INTENT QUE NO SE CUAL PONER QUEel base context lo puse porque this no iba.
+                                    JavaPHPMySQL.insertarUsuario(_Nom, _Apell, "no importa", _Contrasena, _Email);
+                                    Intent a = new Intent(getBaseContext(), MenuPrincipal.class);
+                                    startActivity(a);
+
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "No coinciden las contraseñas", Toast.LENGTH_LONG).show();
+                                }
+                            }
                         }
-
-                    } else if (_Nom == null || _Apell == null || _Email == null || _Contrasena == null || _RepContrasena == null) {
+                    }
+                    else if (_Nom == null || _Apell == null || _Email == null || _Contrasena == null || _RepContrasena == null) {
                         Toast.makeText(getApplicationContext(), "Rellene todos los campos", Toast.LENGTH_LONG).show();
 
                     }

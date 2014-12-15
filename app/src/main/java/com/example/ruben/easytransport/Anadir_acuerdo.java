@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import Helpers.LoginSesion;
 import Objetos.Ruta;
 import Objetos.Usuario;
 
@@ -27,6 +29,26 @@ public class Anadir_acuerdo extends ActionBarActivity {
     private EditText recogida;
     private DatePicker dP;
     private EditText comentario;
+
+    public Usuario getUsuarioLog(){
+        LoginSesion session;
+
+        Usuario user = new Usuario(0,"","","","tuviejaa",null,null,null,"");
+        String email;
+
+        session = new LoginSesion(getApplicationContext());
+
+        HashMap<String, String> usuario = session.getUserDetails();
+
+        // email
+        email = usuario.get(LoginSesion.KEY_EMAIL);
+        // CON ESTO OBTINES EL EMAIL
+        try{user=JavaPHPMySQL.getUsuarioByEmail(email);}
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return user;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +71,7 @@ public class Anadir_acuerdo extends ActionBarActivity {
         final int rutaId= intent.getIntExtra("IdRuta",0);
 
         JavaPHPMySQL bd = new JavaPHPMySQL();
-        final Usuario usuarioLogeado = bd.getUsuarioByUserId(2); //remitente es el usuario2 en bbdd
+        final Usuario usuarioLogeado = bd.getUsuarioByUserId(getUsuarioLog().getIdUsuario()); //remitente es el usuario2 en bbdd
         String json = bd.getAllRutas();
         ArrayList<Ruta> rutas = bd.mostrarAllRutas(json);
         Usuario transportista1=null;

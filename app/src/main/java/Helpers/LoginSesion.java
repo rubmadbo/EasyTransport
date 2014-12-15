@@ -48,13 +48,11 @@ public class LoginSesion {
         }
 
 
-        public void createLoginSession(String name, String email){
+        public void createLoginSession(String email, String name){
 
             editor.putBoolean(IS_LOGIN, true);
 
-
             editor.putString(KEY_NAME, name);
-
 
             editor.putString(KEY_EMAIL, email);
 
@@ -86,7 +84,6 @@ public class LoginSesion {
             HashMap<String, String> user = new HashMap<String, String>();
 
             user.put(KEY_NAME, pref.getString(KEY_NAME, null));
-
 
             user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
 

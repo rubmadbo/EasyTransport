@@ -54,16 +54,16 @@ public class LoginFirst extends ActionBarActivity {
 
         if (resultado) {
 
-           // session.createLoginSession(usuario.getText().toString(), contr.getText().toString());
+            session.createLoginSession(usuario.getText().toString(), contr.getText().toString());
             try {
 
               user=JavaPHPMySQL.getUsuarioByEmail(usuario.getText().toString());
 
             }catch (Exception e){
 
-            if (user != null){
+            /*if (user != null){
                 Sessions.setUsuarioLogeado(user);
-            }
+            }*/
 
             }
             //no puedes pasar objetos por intent solo tipos primitivos

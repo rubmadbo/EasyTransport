@@ -22,6 +22,7 @@ public class MailActivty extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mail_activty);
         final Button button = (Button) findViewById(R.id.btnSingIn);
+        email = (EditText)findViewById(R.id.Mail);
     }
 
 
@@ -34,8 +35,6 @@ public class MailActivty extends ActionBarActivity {
 
     public void buttonOnClickLogin(View v)
     {
-        email = (EditText)findViewById(R.id.Mail);
-
         String _mail = email.getText().toString();
         Usuario u = null;
         //aqui se supone qu ese trae el usuario del email que se ha introducido

@@ -22,26 +22,6 @@
             android:weightSum="1">
 
             <TextView
-                android:text="Acuerdo propuesto por :"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textRemitente"
-                android:textColor="#610B0B"
-                android:textSize="20dp" />
-
-            <EditText
-                android:layout_width="327dp"
-                android:editable="false"
-                android:layout_height="wrap_content"
-                android:id="@+id/editTRemitente_acuerdo"
-                android:layout_marginTop="15dp"
-                android:background="#5c696969"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusableInTouchMode="false"
-                android:focusable="false" />
-
-            <TextView
                 android:text="Origen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

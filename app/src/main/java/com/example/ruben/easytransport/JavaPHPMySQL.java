@@ -470,12 +470,13 @@ public class JavaPHPMySQL {
 
   public static boolean loginSuccess(String email, String pass){
       boolean result;
-      Usuario u = new Usuario(0,"","","","tuviejaa",null,null,null,"");
+      //Usuario u = new Usuario(0,"","","","tuviejaa",null,null,null,"");
+      String correoUsuario="";
       try {
-          u = getUsuarioByEmail(email);
+          correoUsuario = getUsuarioByEmail(email).getPassword();
       }catch (Exception e){}
 
-      result =  u.getPassword().equals(pass);
+      result =  correoUsuario.equals(pass);
       return result;
   }
 
@@ -663,6 +664,8 @@ public class JavaPHPMySQL {
         }
         return ruta;
     }
+
+
 
     }
 

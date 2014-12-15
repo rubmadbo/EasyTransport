@@ -29,6 +29,26 @@ public class ModificarDatosUsuario extends ActionBarActivity {
     Usuario user;
     String email;
 
+
+    public Usuario getUsuarioLog(){
+        LoginSesion session;
+
+        Usuario user = new Usuario(0,"","","","tuviejaa",null,null,null,"");
+        String email;
+
+        session = new LoginSesion(getApplicationContext());
+
+        HashMap<String, String> usuario = session.getUserDetails();
+
+        // email
+        email = usuario.get(LoginSesion.KEY_EMAIL);
+        // CON ESTO OBTINES EL EMAIL
+        try{user=JavaPHPMySQL.getUsuarioByEmail(email);}
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return user;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +90,7 @@ public class ModificarDatosUsuario extends ActionBarActivity {
         //copiar estas lineas ******* para obtener email
         HashMap<String, String> usuario = session.getUserDetails();
 
-        // email
+        // email, aunque ponga KEY_NAME pilla el email, chapuzas by Adrian.
         email = usuario.get(LoginSesion.KEY_EMAIL);
 
 
@@ -94,7 +114,7 @@ public class ModificarDatosUsuario extends ActionBarActivity {
                 String e;
                 String pass;
                 String repass;
-                int id= 1; //el del usuario a modificar seria session
+                int id= getUsuarioLog().getIdUsuario();
                 String rol = "No se usa";
 
                 n = Nombre.getText().toString();
@@ -102,15 +122,23 @@ public class ModificarDatosUsuario extends ActionBarActivity {
                 e = Email.getText().toString();
                 pass = Contrasena.getText().toString();
                 repass = RepContrasena.getText().toString();
-
-                if(pass.equals(repass)){
-                    JavaPHPMySQL.updateUsuario(id,n,a,rol,pass,e);
-                    Toast.makeText(getBaseContext(), "Se han guardado los cambios", Toast.LENGTH_LONG).show();
-
+                if(pass.length() < 3){
+                    Toast.makeText(getApplicationContext(), "La contraseña debe ser mayor a 3 caracteres", Toast.LENGTH_LONG).show();
                 }else {
-                    Toast.makeText(getBaseContext(), "No coinciden las contraseñas", Toast.LENGTH_LONG).show();                }
-            }
+                    if (!e.matches("^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[a-zA-Z]{2,4}$")) {
+                        Toast.makeText(getApplicationContext(), "El formato de email no es correcto.", Toast.LENGTH_LONG).show();
+                    } else {
 
+                        if (pass.equals(repass)) {
+                            JavaPHPMySQL.updateUsuario(id, n, a, rol, pass, e);
+                            Toast.makeText(getBaseContext(), "Se han guardado los cambios", Toast.LENGTH_LONG).show();
+                            finish();
+
+                        } else {
+                            Toast.makeText(getBaseContext(), "No coinciden las contraseñas", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }}
         });
     }
 

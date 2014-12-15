@@ -19,11 +19,36 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
+import Helpers.LoginSesion;
+import Objetos.Usuario;
 import Objetos.Vehiculo;
 
 
 public class GestionDeRutas extends ActionBarActivity {
+
+    public Usuario getUsuarioLog(){
+        LoginSesion session;
+
+        Usuario user = new Usuario(0,"","","","tuviejaa",null,null,null,"");
+        String email;
+
+        session = new LoginSesion(getApplicationContext());
+
+        HashMap<String, String> usuario = session.getUserDetails();
+
+        // email
+        email = usuario.get(LoginSesion.KEY_EMAIL);
+        // CON ESTO OBTINES EL EMAIL
+        try{user=JavaPHPMySQL.getUsuarioByEmail(email);}
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+
     private Spinner spinner;
     private EditText origen;
     private EditText destino;
@@ -45,7 +70,7 @@ public class GestionDeRutas extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gestion_de_rutas);
-        rellenarSpinner();
+        //rellenarSpinner();
 
         textFecha = (EditText)findViewById(R.id.dest);
         textHora = (EditText)findViewById(R.id.origen);
@@ -148,7 +173,7 @@ public class GestionDeRutas extends ActionBarActivity {
     }
 
 
-    public void rellenarSpinner(){
+   /* public void rellenarSpinner(){
         try {
             spinner = (Spinner) findViewById(R.id.lista1);
             JavaPHPMySQL bd = new JavaPHPMySQL();
@@ -164,17 +189,18 @@ public class GestionDeRutas extends ActionBarActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-    }
+    }*/
     public void buttonOnClick(View v) throws ParseException {
         JavaPHPMySQL bd = new JavaPHPMySQL();
 
-        ArrayList<String> vehiculos = new ArrayList<String>();
+       /* ArrayList<String> vehiculos = new ArrayList<String>();
         ArrayList<Vehiculo> listaVehiculos = bd.getVehiculoByUserId(1);
 
         for(int i=0; i < listaVehiculos.size(); i++){
             vehiculos.add(listaVehiculos.get(i).toString());
-        }
-        String vehiculo = vehiculos.get(spinner.getSelectedItemPosition());
+        }*/
+        //String vehiculo = vehiculos.get(spinner.getSelectedItemPosition());
+        //String vehiculo = "coche";
 
         destino = (EditText)findViewById(R.id.TextDestino);
         origen = (EditText)findViewById(R.id.TextOrigen);
@@ -189,7 +215,7 @@ public class GestionDeRutas extends ActionBarActivity {
             String horaInicio = textHora.getText().toString();
             String com = comentario.getText().toString();
 
-            bd.insertarRuta(o,d,horaInicio,fecha,com,1);
+            bd.insertarRuta(o,d,horaInicio,fecha,com,getUsuarioLog().getIdUsuario());
 
 
 
