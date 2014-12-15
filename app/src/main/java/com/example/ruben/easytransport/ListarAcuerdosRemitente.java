@@ -18,6 +18,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import Objetos.Acuerdo;
+import Objetos.Usuario;
 
 
 public class ListarAcuerdosRemitente extends Fragment {
@@ -29,9 +30,9 @@ public class ListarAcuerdosRemitente extends Fragment {
 
         JavaPHPMySQL db = new JavaPHPMySQL();
         ArrayList<Acuerdo> listaAcuerdos;
-        int UsuarioLogeado = 2; // habría que cargarlo de la session de userlogeado en caso que se quieran ver los acuerdos por usuario
+        Usuario UsuarioLogeado = Sessions.getUsuarioLogeado(); // habría que cargarlo de la session de userlogeado en caso que se quieran ver los acuerdos por usuario
 
-        listaAcuerdos = db.getAcuerdosByUserId(UsuarioLogeado);
+        listaAcuerdos = db.getAcuerdosByUserId(UsuarioLogeado.getIdUsuario());
 
         ArrayAdapter<Acuerdo> adap = new ArrayAdapter<Acuerdo>(ListarAcuerdosRemitente.this.getActivity(), android.R.layout.simple_list_item_1, listaAcuerdos);
         adap.notifyDataSetChanged();
