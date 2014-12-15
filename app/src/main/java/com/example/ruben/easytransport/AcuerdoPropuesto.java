@@ -12,6 +12,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import Objetos.Usuario;
+
 
 public class AcuerdoPropuesto extends ActionBarActivity {
 
@@ -47,7 +49,7 @@ public class AcuerdoPropuesto extends ActionBarActivity {
 
 
         Intent intent = getIntent();
-        final int rutaId = intent.getIntExtra("IdRuta",0);
+        final int IdAcuerdo = intent.getIntExtra("IdAcuerdo",0);
         //ETRemitente.setText(intent.getStringExtra("Remitente"));
         Destino.setText(intent.getStringExtra("Destino"));
         Origen.setText(intent.getStringExtra("Origen"));
@@ -75,8 +77,11 @@ public class AcuerdoPropuesto extends ActionBarActivity {
                     //acciones al aceptar acuerdo.
                     String motRech = ETmotivoRechazo.getText().toString();
                     JavaPHPMySQL db = new JavaPHPMySQL();
-                    db.updateEstadoAcuerdo("aceptado", rutaId, "");
+                    db.updateEstadoAcuerdo("aceptado", IdAcuerdo, "");
                     Toast.makeText(getApplicationContext(), "El acuerdo ha sido aceptado", Toast.LENGTH_SHORT).show();
+                    int idRemitente = JavaPHPMySQL.getRemitenteByAcuerdoId(IdAcuerdo);
+                    Usuario rem = JavaPHPMySQL.getUsuarioByUserId(idRemitente);
+                    JavaPHPMySQL.enviarEmail(rem.getEmail(), "Se ha modificado el estado de un acuerdo", "Acuerdo Aceptado");
                     yourMethod();
                     finish();
                 }
@@ -88,7 +93,7 @@ public class AcuerdoPropuesto extends ActionBarActivity {
                     }
                     else{
                         JavaPHPMySQL db = new JavaPHPMySQL();
-                        db.updateEstadoAcuerdo("rechazado", rutaId, motRech);
+                        db.updateEstadoAcuerdo("rechazado", IdAcuerdo, motRech);
                         Toast.makeText(getApplicationContext(), "El acuerdo ha sido rechazado", Toast.LENGTH_SHORT).show();
                         yourMethod();
                         finish();

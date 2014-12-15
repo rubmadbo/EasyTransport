@@ -359,6 +359,28 @@ public class JavaPHPMySQL {
         String json= getDataFromFilter(jsonString, "getAcuerdosByTransId.php");
         return mostrarAcuerdos(json);
     }
+
+    public static int getRemitenteByAcuerdoId(int idAcuerdo){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("idAcuerdo", idAcuerdo);
+        List l = new LinkedList();
+        l.addAll(Arrays.asList(jsonObject));
+
+        String jsonString = JSONValue.toJSONString(l);
+        //el script obtiene la variable idUsuario hace consulta y recupera datos
+        String json= getDataFromFilter(jsonString, "getRemitenteByAcuerdoId.php");
+
+        System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
+        Object jsonObject1 =JSONValue.parse(json.toString());
+        JSONArray array=(JSONArray)jsonObject1;
+        String idUsuario="";
+        for(int i=0;i<array.size();i++) {
+            JSONObject row = (JSONObject) array.get(i);
+            idUsuario = row.get("idUsuario").toString();
+        }
+        return Integer.parseInt(idUsuario);
+    }
+
     public static void updateUsuario(int idUsuario, String nombre, String apellido, String rol, String pass, String email){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("idUsuario", idUsuario);

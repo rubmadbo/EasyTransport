@@ -69,6 +69,7 @@ public class Anadir_acuerdo extends ActionBarActivity {
         String dest_ = intent.getStringExtra("Destino");
         String orig_ = intent.getStringExtra("Origen");
         final int rutaId= intent.getIntExtra("IdRuta",0);
+        final int transportistaId = intent.getIntExtra("Id_trans",0);
 
         JavaPHPMySQL bd = new JavaPHPMySQL();
         final Usuario usuarioLogeado = bd.getUsuarioByUserId(getUsuarioLog().getIdUsuario()); //remitente es el usuario2 en bbdd
@@ -109,7 +110,10 @@ public class Anadir_acuerdo extends ActionBarActivity {
                     bd.insertarAcuerdo(j+1,Double.parseDouble(din), com, "pendiente", rutaId, usuarioLogeado.getIdUsuario(), e, rec,"");
                     bd.insertarAcuerdoenUsuariohasAcuerdo(j+1,usuarioLogeado.getIdUsuario());
                     //i++;
-
+                    Usuario transportista = JavaPHPMySQL.getUsuarioByUserId(transportistaId);
+                    String Mensaje = "Hola "+transportista.getNombre()+" "+transportista.getApellido()+"! "
+                            +"Se ha añadido un nuevo acuerdo a una ruta en la que usted figura como transportista."+ "\\n"+"Entre a la aplicación para conocer más detalles.";
+                    JavaPHPMySQL.enviarEmail(transportista.getEmail(),Mensaje,"Nuevo Acuerdo Creado");
                     Toast.makeText(Anadir_acuerdo.this, "Se ha enviado el acuerdo", Toast.LENGTH_LONG).show();
 
                     finish();

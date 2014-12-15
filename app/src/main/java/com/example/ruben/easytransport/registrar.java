@@ -63,6 +63,7 @@ public class registrar extends ActionBarActivity {
                                 if (_Contrasena.equals(_RepContrasena)) {
                                     //REVISAR INTENT QUE NO SE CUAL PONER QUEel base context lo puse porque this no iba.
                                     JavaPHPMySQL.insertarUsuario(_Nom, _Apell, "no importa", _Contrasena, _Email);
+                                    JavaPHPMySQL.enviarEmail(_Email,"Bienvenido a EasyTransport "+_Nom+"!","Bienvenido");
                                     Intent a = new Intent(getBaseContext(), MenuPrincipal.class);
                                     startActivity(a);
 

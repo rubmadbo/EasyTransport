@@ -128,6 +128,9 @@ public class ListarRuta extends Activity {
                 intent.putExtra("Destino", destino_ruta);
                 int Id_ruta = rutaSelected.getIdRuta();
                 intent.putExtra("IdRuta", Id_ruta);
+                int Id_trans = rutaSelected.getTransportista().getIdUsuario();
+                intent.putExtra("Id_trans", Id_trans);
+
                 startActivity(intent);
             }
 

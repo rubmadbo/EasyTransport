@@ -75,8 +75,8 @@ public class ListarAcuerdosTransportista extends Fragment {
                     Intent intent = new Intent();
                     intent.setClass(getActivity(), AcuerdoPropuesto.class);
                     int requestCode = 1;
-                    int idRuta = acuerdoSelected.getIdAcuerdo();
-                    intent.putExtra("IdRuta", idRuta);
+                    int IdAcuerdo = acuerdoSelected.getIdAcuerdo();
+                    intent.putExtra("IdAcuerdo", IdAcuerdo);
                     String remitente = "Juanito";//Fran: No me pilla el remitente, hay que revisarlo.
                     intent.putExtra("Remitente", remitente);
                     String origen_ruta = acuerdoSelected.getRuta().getOrigen();

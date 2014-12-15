@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
 
-    android:background="#734b3c49">
+    android:background="#49fffa8c">
 
     <LinearLayout
         android:orientation="vertical"
