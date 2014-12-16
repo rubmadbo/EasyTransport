@@ -22,6 +22,8 @@ public class LoginFirst extends ActionBarActivity {
     EditText contr ;
     LoginSesion session;
     Usuario user;
+    String usu;
+    String con;
 
 
     @Override
@@ -34,6 +36,8 @@ public class LoginFirst extends ActionBarActivity {
          contr = (EditText) findViewById(R.id.Contraseña);
          session= new LoginSesion(getApplicationContext());
 
+
+
         }
 
 
@@ -44,40 +48,42 @@ public class LoginFirst extends ActionBarActivity {
 
     }
     public void buttonOnClickLogin(View v) {
+        usu = usuario.getText().toString();
+        con = contr.getText().toString();
 
-    boolean resultado = false;
-        try {
-            resultado=JavaPHPMySQL.loginSuccess(usuario.getText().toString(), contr.getText().toString());
-        }catch (Exception e){
-
+        if(usu.equals("") || con.equals("")){
+            Toast.makeText(this, "Rellene los campos.", Toast.LENGTH_SHORT).show();
         }
+        else {
 
-        if (resultado) {
-
-            session.createLoginSession(usuario.getText().toString(), contr.getText().toString());
+            boolean resultado = false;
             try {
+                resultado = JavaPHPMySQL.loginSuccess(usuario.getText().toString(), contr.getText().toString());
+            } catch (Exception e) {
 
-              user=JavaPHPMySQL.getUsuarioByEmail(usuario.getText().toString());
+            }
 
-            }catch (Exception e){
+            if (resultado) {
+
+                session.createLoginSession(usuario.getText().toString(), contr.getText().toString());
+                try {
+
+                    user = JavaPHPMySQL.getUsuarioByEmail(usuario.getText().toString());
+
+                } catch (Exception e) {
 
             /*if (user != null){
                 Sessions.setUsuarioLogeado(user);
             }*/
 
+                }
+                //no puedes pasar objetos por intent solo tipos primitivos
+                Intent a = new Intent(this, MenuPrincipal.class);
+                startActivity(a);
+            } else {
+                Toast.makeText(this, "Usuario o Contraseña incorrecta", Toast.LENGTH_SHORT).show();
+
             }
-            //no puedes pasar objetos por intent solo tipos primitivos
-            Intent a = new Intent(this, MenuPrincipal.class);
-
-
-
-            startActivity(a);
-
-        }
-        else
-        {
-            Toast.makeText(this, "Usuario o Contraseña incorrecta", Toast.LENGTH_SHORT).show();
-
         }
 
     }
