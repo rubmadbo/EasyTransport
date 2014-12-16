@@ -12,6 +12,9 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
+import Helpers.LoginSesion;
 import Objetos.Usuario;
 
 
@@ -29,7 +32,25 @@ public class AcuerdoPropuesto extends ActionBarActivity {
     private EditText Comentario;
     private Button Confirmar;
 
+    public Usuario getUsuarioLog(){
+        LoginSesion session;
 
+        Usuario user = new Usuario(0,"","","","tuviejaa",null,null,null,"");
+        String email;
+
+        session = new LoginSesion(getApplicationContext());
+
+        HashMap<String, String> usuario = session.getUserDetails();
+
+        // email
+        email = usuario.get(LoginSesion.KEY_EMAIL);
+        // CON ESTO OBTINES EL EMAIL
+        try{user=JavaPHPMySQL.getUsuarioByEmail(email);}
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return user;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,9 +100,9 @@ public class AcuerdoPropuesto extends ActionBarActivity {
                     JavaPHPMySQL db = new JavaPHPMySQL();
                     db.updateEstadoAcuerdo("aceptado", IdAcuerdo, "");
                     Toast.makeText(getApplicationContext(), "El acuerdo ha sido aceptado", Toast.LENGTH_SHORT).show();
-                    int idRemitente = JavaPHPMySQL.getRemitenteByAcuerdoId(IdAcuerdo);
-                    Usuario rem = JavaPHPMySQL.getUsuarioByUserId(idRemitente);
-                    JavaPHPMySQL.enviarEmail(rem.getEmail(), "Se ha modificado el estado de un acuerdo", "Acuerdo Aceptado");
+                    //int idRemitente = JavaPHPMySQL.getRemitenteByAcuerdoId(IdAcuerdo);
+                    //Usuario rem = JavaPHPMySQL.getUsuarioByUserId(getUsuarioLog());
+                    JavaPHPMySQL.enviarEmail(getUsuarioLog().getEmail(), "Se ha modificado el estado de un acuerdo", "Acuerdo Aceptado");
                     yourMethod();
                     finish();
                 }

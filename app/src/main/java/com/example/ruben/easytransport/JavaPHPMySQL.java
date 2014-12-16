@@ -373,11 +373,10 @@ public class JavaPHPMySQL {
         System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
         Object jsonObject1 =JSONValue.parse(json.toString());
         JSONArray array=(JSONArray)jsonObject1;
-        String idUsuario="";
-        for(int i=0;i<array.size();i++) {
-            JSONObject row = (JSONObject) array.get(i);
+        String idUsuario;
+            JSONObject row = (JSONObject) array.get(0);
             idUsuario = row.get("idUsuario").toString();
-        }
+
         return Integer.parseInt(idUsuario);
     }
 
@@ -493,7 +492,7 @@ public class JavaPHPMySQL {
   public static boolean loginSuccess(String email, String pass){
       boolean result;
       //Usuario u = new Usuario(0,"","","","tuviejaa",null,null,null,"");
-      String correoUsuario="";
+      String correoUsuario="tuvieja";
       try {
           correoUsuario = getUsuarioByEmail(email).getPassword();
       }catch (Exception e){}
