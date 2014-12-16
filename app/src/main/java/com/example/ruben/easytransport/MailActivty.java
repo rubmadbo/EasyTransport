@@ -21,7 +21,7 @@ public class MailActivty extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mail_activty);
-        final Button button = (Button) findViewById(R.id.btnSingIn);
+        final Button button = (Button) findViewById(R.id.btnReg);
         email = (EditText)findViewById(R.id.Mail);
     }
 
