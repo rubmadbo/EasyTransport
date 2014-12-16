@@ -118,6 +118,7 @@ public class AcuerdoPropuesto extends ActionBarActivity {
                         Toast.makeText(getApplicationContext(), "El acuerdo ha sido rechazado", Toast.LENGTH_SHORT).show();
                         yourMethod();
                         finish();
+                        //sad
                     }
 
                 }
