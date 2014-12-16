@@ -68,7 +68,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnSingIn"
+        android:id="@+id/btnReg"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:padding="10dp"
@@ -88,9 +88,9 @@
         android:text=" Recuperar Contraseña"
         android:background="@drawable/button_default_bg"
         android:onClick="buttonOnClickLoginOlvido"
-        android:layout_toEndOf="@+id/btnSingIn"
-        android:layout_alignBottom="@+id/btnSingIn"
-        android:layout_toRightOf="@+id/btnSingIn"
-        android:layout_alignTop="@+id/btnSingIn" />
+        android:layout_toEndOf="@+id/btnReg"
+        android:layout_alignBottom="@+id/btnReg"
+        android:layout_toRightOf="@+id/btnReg"
+        android:layout_alignTop="@+id/btnReg" />
 
 </RelativeLayout>
